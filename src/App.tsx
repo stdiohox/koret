@@ -1,5 +1,4 @@
 import Hero from './components/Hero';
-import LogoStrip from './components/LogoStrip';
 import ServicesTabs from './components/ServicesTabs';
 import AIServicesGrid from './components/AIServicesGrid';
 import WhyKoret from './components/WhyKoret';
@@ -13,7 +12,6 @@ export default function App() {
   return (
     <>
       <Hero />
-      <LogoStrip />
       <ServicesTabs />
       <AIServicesGrid />
       <WhyKoret />
