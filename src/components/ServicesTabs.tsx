@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import MotionSection from './MotionSection';
 
 const tracks = {
@@ -19,39 +19,34 @@ const tracks = {
 
 export default function ServicesTabs() {
   const [active, setActive] = useState<keyof typeof tracks>('Brand & Marketing');
-  const reduceMotion = !!useReducedMotion();
 
   return (
-    <MotionSection id="services" className="bg-[var(--color-pure-white)] py-[100px]">
+    <MotionSection id="services" className="py-[80px]">
       <div className="mx-auto max-w-[1200px] px-6">
-        <div className="flex justify-center gap-10" style={{ borderBottom: '1px solid var(--color-hairline)' }}>
+        <div className="flex justify-center gap-2">
           {(Object.keys(tracks) as (keyof typeof tracks)[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActive(tab)}
-              className="relative pb-4 text-[16px] font-normal"
-              style={{
-                fontFamily: 'var(--font-inter-display)',
-                color: active === tab ? 'var(--color-charcoal-ink)' : 'var(--color-slate-mid)',
-              }}
+              className="relative px-4 py-2 text-[15px] font-medium"
+              style={{ color: 'var(--color-ink-charcoal)' }}
             >
-              {tab}
-              {tab === 'AI & Automation' && (
-                <span
-                  className="ml-2 text-[12px]"
-                  style={{ color: 'var(--color-slate-mid)', fontFamily: 'var(--font-aux-mono)' }}
-                >
-                  NEW
-                </span>
-              )}
               {active === tab && (
                 <motion.div
-                  layoutId="active-tab-underline"
-                  className="absolute left-0 right-0 bottom-0"
-                  style={{ height: 2, backgroundColor: 'var(--color-koret-navy)' }}
-                  transition={{ duration: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
+                  layoutId="active-tab-pill"
+                  className="absolute inset-0 rounded-[48px]"
+                  style={{ backgroundColor: 'var(--color-surface-ivory)' }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 />
               )}
+              <span className="relative z-10">
+                {tab}
+                {tab === 'AI & Automation' && (
+                  <span className="ml-2 text-[12px] font-medium" style={{ color: 'var(--color-koret-navy)' }}>
+                    NEW
+                  </span>
+                )}
+              </span>
             </button>
           ))}
         </div>
@@ -62,15 +57,11 @@ export default function ServicesTabs() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: reduceMotion ? 0 : 0.25, ease: 'easeOut' }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             className="mt-10 max-w-[640px] mx-auto space-y-4"
           >
             {tracks[active].map((item) => (
-              <li
-                key={item}
-                className="text-[16px]"
-                style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-charcoal-ink)' }}
-              >
+              <li key={item} className="text-[16px]" style={{ color: 'var(--color-ink-charcoal)' }}>
                 {item}
               </li>
             ))}

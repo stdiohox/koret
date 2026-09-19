@@ -13,28 +13,25 @@ const faqs = [
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
-  const reduceMotion = !!useReducedMotion();
+  const reduceMotion = useReducedMotion();
 
   return (
-    <MotionSection id="faq" className="bg-[var(--color-bone)] py-[100px]">
-      <div className="mx-auto max-w-[900px] px-6">
+    <MotionSection id="faq" className="py-[80px]">
+      <div className="mx-auto max-w-[700px] px-6">
         {faqs.map((item, i) => (
-          <div key={item.q} style={{ borderBottom: '1px solid var(--color-hairline)' }}>
+          <div key={item.q} style={{ borderBottom: '1px solid var(--color-dock-hairline)' }}>
             <button
               className="w-full flex items-center justify-between py-6 text-left"
               onClick={() => setOpen(open === i ? null : i)}
               aria-expanded={open === i}
             >
-              <span
-                className="text-[20px] font-normal"
-                style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
-              >
+              <span className="text-[18px] font-medium" style={{ color: 'var(--color-ink-charcoal)' }}>
                 {item.q}
               </span>
               {open === i ? (
-                <Minus size={18} color="var(--color-slate-mid)" />
+                <Minus size={18} color="var(--color-dock-slate)" />
               ) : (
-                <Plus size={18} color="var(--color-slate-mid)" />
+                <Plus size={18} color="var(--color-dock-slate)" />
               )}
             </button>
             <AnimatePresence initial={false}>
@@ -46,10 +43,7 @@ export default function FAQ() {
                   transition={{ duration: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
                   style={{ overflow: 'hidden' }}
                 >
-                  <p
-                    className="pb-6 text-[16px]"
-                    style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)' }}
-                  >
+                  <p className="pb-6 text-[16px]" style={{ color: 'var(--color-dock-slate)', lineHeight: 1.56 }}>
                     {item.a}
                   </p>
                 </motion.div>
