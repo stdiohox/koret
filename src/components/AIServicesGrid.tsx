@@ -157,23 +157,23 @@ await agent.run();
                     className="group/card relative overflow-hidden rounded-xl p-4 transition-all duration-300 flex flex-col text-left"
                     style={
                       isActive
-                        ? { backgroundColor: 'var(--color-koret-navy)', border: '1px solid var(--color-koret-navy)' }
+                        ? { backgroundColor: 'var(--color-koret-cyan)', border: '1px solid var(--color-koret-cyan)' }
                         : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
                     }
                   >
                     <Icon
                       className="w-5 h-5 mb-2 transition-colors"
-                      style={{ color: isActive ? '#ffffff' : 'var(--color-dock-slate)' }}
+                      style={{ color: isActive ? 'var(--color-ink-charcoal)' : 'var(--color-dock-slate)' }}
                     />
                     <span
                       className="text-xs font-bold text-left"
-                      style={{ color: isActive ? '#ffffff' : 'var(--color-ink-charcoal)' }}
+                      style={{ color: 'var(--color-ink-charcoal)' }}
                     >
                       {feature.title}
                     </span>
                     <span
                       className="text-[10px] text-left mt-1 line-clamp-1"
-                      style={{ color: isActive ? 'rgba(255,255,255,0.7)' : 'var(--color-dock-slate)' }}
+                      style={{ color: 'var(--color-dock-slate)' }}
                     >
                       {feature.stat}
                     </span>
@@ -224,14 +224,14 @@ await agent.run();
                       className="w-full text-left p-2 rounded-lg transition-all duration-200"
                       style={
                         isSelected
-                          ? { backgroundColor: 'var(--color-koret-navy)', border: '1px solid var(--color-koret-navy)' }
+                          ? { backgroundColor: 'var(--color-koret-cyan)', border: '1px solid var(--color-koret-cyan)' }
                           : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
                       }
                     >
-                      <p className="text-[10px]" style={{ color: isSelected ? 'rgba(255,255,255,0.7)' : 'var(--color-dock-slate)' }}>
+                      <p className="text-[10px]" style={{ color: 'var(--color-dock-slate)' }}>
                         {c.label}
                       </p>
-                      <p className="text-sm font-bold mt-0.5" style={{ color: isSelected ? '#ffffff' : 'var(--color-ink-charcoal)' }}>
+                      <p className="text-sm font-bold mt-0.5" style={{ color: 'var(--color-ink-charcoal)' }}>
                         {c.detail}
                       </p>
                     </button>
