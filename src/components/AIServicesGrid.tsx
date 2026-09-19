@@ -9,7 +9,6 @@ import {
   Globe,
   GitBranch,
   Rocket,
-  Sparkles,
   Lightbulb,
   Terminal,
   Layers,
@@ -115,15 +114,6 @@ await agent.run();
 
         {/* Header */}
         <div className="flex flex-col gap-6 max-w-3xl">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full w-fit"
-            style={{ ...chipLight, border: '1px solid rgba(0, 204, 255, 0.3)' }}
-          >
-            <Sparkles className="w-4 h-4" style={{ color: 'var(--color-koret-navy)' }} />
-            <span className="text-xs font-semibold tracking-wider" style={{ color: 'var(--color-koret-navy)' }}>
-              AI & Automation
-            </span>
-          </div>
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight" style={{ color: 'var(--color-ink-charcoal)' }}>
             The AI Layer Behind Your Brand
           </h2>
