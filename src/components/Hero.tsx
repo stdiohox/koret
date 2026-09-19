@@ -1,76 +1,82 @@
-import { m, useReducedMotion } from 'framer-motion'
-import { Button } from './Button'
-import { DiamondGlyph } from './Wordmark'
-
-const EASE = [0.22, 1, 0.36, 1] as const
-
-export function Hero() {
-  const reduceMotion = useReducedMotion()
-
-  const rise = (delay: number) =>
-    reduceMotion
-      ? {}
-      : {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.38, ease: EASE, delay },
-        }
-
+export default function Hero() {
   return (
-    <section
-      id="top"
-      aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-white pb-16 pt-16 md:pb-24 md:pt-24"
-    >
-      {/* Soft cyan wash behind the headline. Decorative only. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[420px] w-[820px] max-w-[130%] -translate-x-1/2 rounded-full bg-cyan-whisper blur-[90px]"
-      />
+    <section className="bg-[--color-pure-white] py-[100px]">
+      <div className="mx-auto max-w-[1200px] flex flex-col items-center text-center px-6">
 
-      <div className="relative mx-auto flex w-full max-w-page flex-col items-center px-6 text-center md:px-10">
-        <m.p
-          {...rise(0)}
-          className="inline-flex items-center gap-2.5 rounded-buttons border border-border bg-white px-4 py-2 text-caption font-semibold uppercase tracking-[0.12em] text-navy"
+        {/* Announcement Pill */}
+        <div
+          className="inline-flex items-center rounded-full px-4 py-1.5 mb-6"
+          style={{ border: '1px solid var(--color-lavender-trace)' }}
         >
-          <DiamondGlyph className="bg-orange" />
-          Marketing + AI, Under One Roof
-        </m.p>
+          <span
+            className="text-[14px]"
+            style={{
+              fontFamily: 'var(--font-aux-mono)',
+              color: 'var(--color-logo-violet)',
+              letterSpacing: '-0.04em',
+            }}
+          >
+            Marketing + AI, Under One Roof
+          </span>
+        </div>
 
-        <m.h1
-          {...rise(0.08)}
-          id="hero-heading"
-          className="mt-7 max-w-[900px] text-[40px] font-bold leading-[1.05] tracking-[-0.03em] text-black md:text-heading-lg lg:text-display"
+        {/* Hero Headline */}
+        <h1
+          className="max-w-[900px] text-[48px] md:text-[72px] font-normal"
+          style={{
+            fontFamily: 'var(--font-inter-display)',
+            color: 'var(--color-charcoal-ink)',
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+          }}
         >
-          Brands That <span className="text-teal">Tell Stories</span>. Systems
-          That <span className="text-orange-ink">Scale</span> Them.
-        </m.h1>
+          Brands That Tell Stories. Systems That Scale Them.
+        </h1>
 
-        <m.p
-          {...rise(0.16)}
-          className="mt-6 max-w-[640px] text-body text-text-muted md:text-subheading md:leading-[1.5]"
+        {/* Subhead */}
+        <p
+          className="max-w-[640px] mt-6 text-[16px]"
+          style={{
+            fontFamily: 'var(--font-inter)',
+            color: 'var(--color-slate-mid)',
+            lineHeight: 1.5,
+            letterSpacing: '-0.16px',
+          }}
         >
           Koret builds the brand strategy that makes people care — and the AI
-          infrastructure that makes your business run itself. From campaigns to
-          code, we bring your brand to limelight.
-        </m.p>
+          infrastructure that makes your business run itself. From campaigns
+          to code, we bring your brand to limelight.
+        </p>
 
-        <m.div
-          {...rise(0.24)}
-          className="mt-10 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row"
-        >
-          <Button href="#contact" className="w-full sm:w-auto">
+        {/* Buttons */}
+        <div className="flex gap-4 mt-10">
+          <button
+            className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
+            style={{
+              backgroundColor: 'var(--color-charcoal-ink)',
+              color: 'var(--color-pure-white)',
+              fontFamily: 'var(--font-inter-display)',
+              boxShadow: 'rgb(241, 241, 241) 8px 8px 0px 0px',
+            }}
+          >
             Start Your Project
-          </Button>
-          <Button
-            href="#ai-services"
-            variant="secondary"
-            className="w-full sm:w-auto"
+          </button>
+
+          <button
+            className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
+            style={{
+              backgroundColor: 'transparent',
+              color: 'var(--color-charcoal-ink)',
+              fontFamily: 'var(--font-inter-display)',
+              border: '1.5px solid var(--color-charcoal-ink)',
+              boxShadow: 'rgba(226, 226, 227, 0.5) 10px 10px 0px -2px',
+            }}
           >
             See What We Build
-          </Button>
-        </m.div>
+          </button>
+        </div>
+
       </div>
     </section>
-  )
+  );
 }
