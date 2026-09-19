@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import MotionSection from './MotionSection';
 
@@ -13,6 +13,7 @@ const faqs = [
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
+  const reduceMotion = !!useReducedMotion();
 
   return (
     <MotionSection id="faq" className="bg-[var(--color-bone)] py-[100px]">
@@ -31,7 +32,7 @@ export default function FAQ() {
                 {item.q}
               </span>
               {open === i ? (
-                <Minus size={18} color="var(--color-lavender-trace)" />
+                <Minus size={18} color="var(--color-slate-mid)" />
               ) : (
                 <Plus size={18} color="var(--color-slate-mid)" />
               )}
@@ -42,7 +43,7 @@ export default function FAQ() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  transition={{ duration: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
                   style={{ overflow: 'hidden' }}
                 >
                   <p

@@ -1,26 +1,30 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
-const container = {
+const container = (reduceMotion: boolean) => ({
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-};
+  show: { transition: { staggerChildren: reduceMotion ? 0 : 0.12 } },
+});
 
-const item = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
+// When reduced motion is on, `hidden` already matches `show`, so children render in
+// their final state rather than waiting on a stagger that never visibly runs.
+const item = (reduceMotion: boolean) => ({
+  hidden: reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.5, ease: 'easeOut' } },
+});
 
 export default function Hero() {
+  const reduceMotion = !!useReducedMotion();
+
   return (
     <section className="bg-[var(--color-pure-white)] py-[100px]">
       <motion.div
         className="mx-auto max-w-[1200px] flex flex-col items-center text-center px-6"
-        variants={container}
+        variants={container(reduceMotion)}
         initial="hidden"
         animate="show"
       >
         <motion.div
-          variants={item}
+          variants={item(reduceMotion)}
           className="inline-flex items-center rounded-full px-4 py-1.5 mb-6"
           style={{ border: '1px solid var(--color-lavender-trace)' }}
         >
@@ -33,7 +37,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          variants={item}
+          variants={item(reduceMotion)}
           className="max-w-[900px] text-[48px] md:text-[72px] font-normal"
           style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)', lineHeight: 1.1, letterSpacing: '-0.03em' }}
         >
@@ -41,7 +45,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          variants={item}
+          variants={item(reduceMotion)}
           className="max-w-[640px] mt-6 text-[16px]"
           style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)', lineHeight: 1.5, letterSpacing: '-0.16px' }}
         >
@@ -50,10 +54,10 @@ export default function Hero() {
           to code, we bring your brand to limelight.
         </motion.p>
 
-        <motion.div variants={item} className="flex gap-4 mt-10">
+        <motion.div variants={item(reduceMotion)} className="flex gap-4 mt-10">
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
             className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
             style={{
               backgroundColor: 'var(--color-charcoal-ink)',
@@ -66,8 +70,8 @@ export default function Hero() {
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
             className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
             style={{
               backgroundColor: 'transparent',

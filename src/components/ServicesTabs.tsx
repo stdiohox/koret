@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import MotionSection from './MotionSection';
 
 const tracks = {
@@ -19,6 +19,7 @@ const tracks = {
 
 export default function ServicesTabs() {
   const [active, setActive] = useState<keyof typeof tracks>('Brand & Marketing');
+  const reduceMotion = !!useReducedMotion();
 
   return (
     <MotionSection id="services" className="bg-[var(--color-pure-white)] py-[100px]">
@@ -48,7 +49,7 @@ export default function ServicesTabs() {
                   layoutId="active-tab-underline"
                   className="absolute left-0 right-0 bottom-0"
                   style={{ height: 2, backgroundColor: 'var(--color-logo-violet)' }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  transition={{ duration: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
                 />
               )}
             </button>
@@ -61,7 +62,7 @@ export default function ServicesTabs() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: reduceMotion ? 0 : 0.25, ease: 'easeOut' }}
             className="mt-10 max-w-[640px] mx-auto space-y-4"
           >
             {tracks[active].map((item) => (

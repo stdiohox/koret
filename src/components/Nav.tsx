@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function Nav() {
   const links = ['Services', 'AI Agency', 'Process', 'Results', 'FAQ'];
+  const reduceMotion = !!useReducedMotion();
   return (
     <header
       className="sticky top-0 z-50 bg-[var(--color-pure-white)]"
@@ -43,8 +44,8 @@ export default function Nav() {
             Contact
           </a>
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
             className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
             style={{
               backgroundColor: 'var(--color-charcoal-ink)',
