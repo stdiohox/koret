@@ -1,10 +1,21 @@
 'use client';
 
 import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [isDesktop, setIsDesktop] = React.useState(false);
   const menuRef = React.useRef<HTMLDivElement | null>(null);
+  const reduceMotion = useReducedMotion();
+
+  React.useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   React.useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -31,6 +42,15 @@ export default function HeroSection() {
     };
   }, [menuOpen]);
 
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: reduceMotion ? 0 : 0.12 } },
+  };
+  const item = {
+    hidden: reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
+    show: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.5, ease: 'easeOut' } },
+  };
+
   return (
     <>
       <style>{`
@@ -38,90 +58,106 @@ export default function HeroSection() {
         .koret-hero-poppins, .koret-hero-poppins * { font-family: 'Poppins', sans-serif; }
       `}</style>
 
-      <section className="koret-hero-poppins bg-[url('https://images.unsplash.com/photo-1771846160864-cfb1b0d56b1d?q=80&w=2400&auto=format&fit=crop')] w-full bg-no-repeat bg-cover bg-center text-sm pb-44">
-        <nav className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-6 w-full">
-          <a href="/" aria-label="Koret home" className="flex items-center">
-            <img src="/logo/koret-logo-full.png" alt="Koret" className="h-7 w-auto" />
-          </a>
+      <section className="koret-hero-poppins relative bg-[url('https://images.unsplash.com/photo-1771846160864-cfb1b0d56b1d?q=80&w=2400&auto=format&fit=crop')] w-full bg-no-repeat bg-cover bg-center text-sm pb-44">
 
-          <div
-            id="menu"
-            ref={menuRef}
-            className={[
-              'max-md:absolute max-md:top-0 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-full max-md:bg-white/50 max-md:backdrop-blur',
-              'flex items-center gap-8 font-medium',
-              'max-md:flex-col max-md:justify-center',
-              menuOpen ? 'max-md:w-full' : 'max-md:w-0',
-            ].join(' ')}
-            aria-hidden={!menuOpen}
-          >
-            <div className="relative group flex items-center gap-1 cursor-pointer">
-              <span>Services</span>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="#050040" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <div className="absolute bg-white font-normal flex flex-col gap-2 w-max rounded-lg p-4 top-36 left-0 opacity-0 -translate-y-full group-hover:top-44 group-hover:opacity-100 transition-all duration-300 shadow-sm">
-                <a href="#services" className="hover:translate-x-1 hover:text-slate-500 transition-all">Brand & Marketing</a>
-                <a href="#ai-agency" className="hover:translate-x-1 hover:text-slate-500 transition-all">AI & Automation</a>
+        {/* Contrast scrim — keeps text legible regardless of what the photo looks like underneath */}
+        <div className="absolute inset-0 z-0 bg-white/55" aria-hidden="true" />
+
+        <div className="relative z-10">
+          <nav className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-6 w-full">
+            <a href="/" aria-label="Koret home" className="flex items-center">
+              <img src="/logo/koret-logo-full.png" alt="Koret" className="h-7 w-auto" />
+            </a>
+
+            <div
+              id="menu"
+              ref={menuRef}
+              className={[
+                'max-md:absolute max-md:top-0 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-full max-md:bg-white/50 max-md:backdrop-blur',
+                'flex items-center gap-8 font-medium',
+                'max-md:flex-col max-md:justify-center',
+                menuOpen ? 'max-md:w-full' : 'max-md:w-0',
+              ].join(' ')}
+              aria-hidden={isDesktop ? false : !menuOpen}
+            >
+              <div className="relative group flex items-center gap-1 cursor-pointer">
+                <span>Services</span>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="#050040" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div className="absolute bg-white font-normal flex flex-col gap-2 w-max rounded-lg p-4 top-36 left-0 opacity-0 -translate-y-full group-hover:top-44 group-hover:opacity-100 transition-all duration-300 shadow-sm">
+                  <a href="#services" className="hover:translate-x-1 hover:text-slate-500 transition-all">Brand & Marketing</a>
+                  <a href="#ai-agency" className="hover:translate-x-1 hover:text-slate-500 transition-all">AI & Automation</a>
+                </div>
               </div>
+
+              <a href="#ai-agency" className="hover:text-gray-600">AI Agency</a>
+              <a href="#process" className="hover:text-gray-600">Process</a>
+              <a href="#faq" className="hover:text-gray-600">FAQ</a>
+
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="md:hidden bg-gray-800 hover:bg-black text-white p-2 rounded-md aspect-square font-medium transition"
+                aria-label="Close menu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </button>
             </div>
 
-            <a href="#ai-agency" className="hover:text-gray-600">AI Agency</a>
-            <a href="#process" className="hover:text-gray-600">Process</a>
-            <a href="#faq" className="hover:text-gray-600">FAQ</a>
+            <button className="hidden md:block bg-gray-800 hover:bg-black text-white px-6 py-3 rounded-full font-medium transition">
+              Book a Consultation
+            </button>
 
             <button
-              onClick={() => setMenuOpen(false)}
+              id="open-menu"
+              onClick={() => setMenuOpen(true)}
               className="md:hidden bg-gray-800 hover:bg-black text-white p-2 rounded-md aspect-square font-medium transition"
-              aria-label="Close menu"
+              aria-label="Open menu"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
+                <path d="M4 12h16" />
+                <path d="M4 18h16" />
+                <path d="M4 6h16" />
               </svg>
             </button>
-          </div>
+          </nav>
 
-          <button className="hidden md:block bg-gray-800 hover:bg-black text-white px-6 py-3 rounded-full font-medium transition">
-            Book a Consultation
-          </button>
+          <motion.div variants={container} initial="hidden" animate="show">
+            <motion.div variants={item} className="flex items-center gap-2 border border-slate-300 rounded-full w-max mx-auto px-4 py-2 mt-40 md:mt-32">
+              <span>Marketing + AI, Under One Roof</span>
+            </motion.div>
 
-          <button
-            id="open-menu"
-            onClick={() => setMenuOpen(true)}
-            className="md:hidden bg-gray-800 hover:bg-black text-white p-2 rounded-md aspect-square font-medium transition"
-            aria-label="Open menu"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M4 12h16" />
-              <path d="M4 18h16" />
-              <path d="M4 6h16" />
-            </svg>
-          </button>
-        </nav>
+            <motion.h1 variants={item} className="text-4xl md:text-7xl font-medium max-w-[850px] text-center mx-auto mt-8">
+              Brands That Tell Stories. Systems That Scale Them.
+            </motion.h1>
 
-        <div className="flex items-center gap-2 border border-slate-300 rounded-full w-max mx-auto px-4 py-2 mt-40 md:mt-32">
-          <span>Marketing + AI, Under One Roof</span>
-        </div>
+            <motion.p variants={item} className="text-sm md:text-base mx-auto max-w-2xl text-center mt-6 max-md:px-2">
+              Koret builds the brand strategy that makes people care — and the AI infrastructure that makes your business run itself. From campaigns to code, we bring your brand to limelight.
+            </motion.p>
 
-        <h1 className="text-4xl md:text-7xl font-medium max-w-[850px] text-center mx-auto mt-8">
-          Brands That Tell Stories. Systems That Scale Them.
-        </h1>
-
-        <p className="text-sm md:text-base mx-auto max-w-2xl text-center mt-6 max-md:px-2">
-          Koret builds the brand strategy that makes people care — and the AI infrastructure that makes your business run itself. From campaigns to code, we bring your brand to limelight.
-        </p>
-
-        <div className="mx-auto w-full flex items-center justify-center gap-3 mt-4">
-          <button className="bg-slate-800 hover:bg-black text-white px-6 py-3 rounded-full font-medium transition">
-            Start Your Project
-          </button>
-          <button className="flex items-center gap-2 border border-slate-300 hover:bg-slate-200/30 rounded-full px-6 py-3">
-            <span>See What We Build</span>
-            <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <path d="M1.25.5 4.75 4l-3.5 3.5" stroke="#050040" strokeOpacity=".4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+            <motion.div variants={item} className="mx-auto w-full flex items-center justify-center gap-3 mt-4">
+              <motion.button
+                whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                className="bg-slate-800 hover:bg-black text-white px-6 py-3 rounded-full font-medium transition"
+              >
+                Start Your Project
+              </motion.button>
+              <motion.button
+                whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                className="flex items-center gap-2 border border-slate-300 hover:bg-slate-200/30 rounded-full px-6 py-3"
+              >
+                <span>See What We Build</span>
+                <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path d="M1.25.5 4.75 4l-3.5 3.5" stroke="#050040" strokeOpacity=".4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </>
