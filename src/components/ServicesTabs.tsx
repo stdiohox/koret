@@ -39,7 +39,7 @@ export default function ServicesTabs() {
               {tab === 'AI & Automation' && (
                 <span
                   className="ml-2 text-[12px]"
-                  style={{ color: 'var(--color-lavender-trace)', fontFamily: 'var(--font-aux-mono)' }}
+                  style={{ color: 'var(--color-slate-mid)', fontFamily: 'var(--font-aux-mono)' }}
                 >
                   NEW
                 </span>
