@@ -127,7 +127,7 @@ await agent.run();
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight" style={{ color: 'var(--color-ink-charcoal)' }}>
             The AI Layer Behind Your Brand
           </h2>
-          <p className="text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--color-dock-slate)' }}>
+          <p className="text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--color-ink-charcoal)' }}>
             From one automation to a full agentic system — everything below is built to match your brand and run without you in the loop.
           </p>
         </div>
@@ -137,7 +137,7 @@ await agent.run();
 
           {/* Interactive Services Selector */}
           <div
-            className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl p-8 flex flex-col justify-between transition-all duration-300"
+            className="md:col-span-2 md:row-span-2 group light-card-hover relative overflow-hidden rounded-2xl p-8 flex flex-col justify-between transition-all duration-300"
             style={cardBase}
           >
             <div className="relative z-10">
@@ -151,7 +151,7 @@ await agent.run();
               <h3 className="text-3xl font-bold tracking-tight mb-2" style={{ color: 'var(--color-ink-charcoal)' }}>
                 Our AI Services
               </h3>
-              <p className="text-sm" style={{ color: 'var(--color-dock-slate)' }}>
+              <p className="text-sm" style={{ color: 'var(--color-ink-charcoal)' }}>
                 Click to explore what we build
               </p>
             </div>
@@ -197,9 +197,9 @@ await agent.run();
               style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
             >
               <div className="flex-1">
-                <p className="text-xs font-mono mb-1" style={{ color: 'var(--color-dock-steel)' }}>Selected:</p>
+                <p className="text-xs font-mono mb-1" style={{ color: 'var(--color-dock-slate)' }}>Selected:</p>
                 <p className="text-lg font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.title}</p>
-                <p className="text-xs mt-1" style={{ color: 'var(--color-dock-slate)' }}>{activeFeature.desc}</p>
+                <p className="text-xs mt-1" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.desc}</p>
               </div>
               <div className="text-2xl font-bold font-mono mt-3" style={{ color: 'var(--color-koret-navy)' }}>
                 {activeFeature.stat}
@@ -208,7 +208,7 @@ await agent.run();
           </div>
 
           {/* AI Consultation Card */}
-          <div className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
+          <div className="group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
@@ -222,7 +222,7 @@ await agent.run();
                 </span>
               </div>
               <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>AI Consultation</h3>
-              <p className="text-xs mb-4" style={{ color: 'var(--color-dock-slate)' }}>What's included</p>
+              <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>What's included</p>
 
               <div className="space-y-2">
                 {consultationItems.map((c, idx) => {
@@ -238,7 +238,7 @@ await agent.run();
                           : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
                       }
                     >
-                      <p className="text-[10px]" style={{ color: isSelected ? 'rgba(255,255,255,0.7)' : 'var(--color-dock-steel)' }}>
+                      <p className="text-[10px]" style={{ color: isSelected ? 'rgba(255,255,255,0.7)' : 'var(--color-dock-slate)' }}>
                         {c.label}
                       </p>
                       <p className="text-sm font-bold mt-0.5" style={{ color: isSelected ? '#ffffff' : 'var(--color-ink-charcoal)' }}>
@@ -252,13 +252,13 @@ await agent.run();
           </div>
 
           {/* Works With Your Stack */}
-          <div className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
+          <div className="group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="p-2 rounded-lg w-fit mb-4" style={chipLight}>
                 <Layers className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
               </div>
               <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>Works With Your Stack</h3>
-              <p className="text-xs mb-4" style={{ color: 'var(--color-dock-slate)' }}>Tools we build around</p>
+              <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>Tools we build around</p>
 
               <div className="grid grid-cols-3 gap-2">
                 {stack.map((s, idx) => (
@@ -268,7 +268,7 @@ await agent.run();
                     style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
                   >
                     <span className="text-xl group-hover/int:scale-125 transition-transform duration-200">{s.abbr}</span>
-                    <p className="text-[9px] text-center" style={{ color: 'var(--color-dock-steel)' }}>{s.name}</p>
+                    <p className="text-[9px] text-center" style={{ color: 'var(--color-dock-slate)' }}>{s.name}</p>
                   </div>
                 ))}
               </div>
@@ -276,7 +276,7 @@ await agent.run();
           </div>
 
           {/* Example Agent — intentionally kept dark; a "light" code block reads as wrong regardless of the section theme */}
-          <div className="md:col-span-2 group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
+          <div className="md:col-span-2 group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
@@ -310,7 +310,7 @@ await agent.run();
         {/* Bottom Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, idx) => (
-            <div key={idx} className="group relative overflow-hidden rounded-xl p-4 transition-all duration-300" style={cardBase}>
+            <div key={idx} className="group light-card-hover relative overflow-hidden rounded-xl p-4 transition-all duration-300" style={cardBase}>
               <p className="text-xs relative z-10" style={{ color: 'var(--color-dock-slate)' }}>{stat.label}</p>
               <p className="text-xl font-bold mt-1 relative z-10" style={{ color: 'var(--color-koret-navy)' }}>{stat.value}</p>
             </div>
