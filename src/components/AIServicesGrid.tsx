@@ -36,10 +36,13 @@ export default function AIServicesGrid() {
     { label: 'Ongoing Advisory', detail: 'Monthly strategy check-ins' },
   ];
 
-  const stack = [
+  // `slug` pulls the brand mark from Simple Icons (CC0) at render time; `src` points at a
+  // logo file supplied for this build, for brands Simple Icons doesn't carry.
+  const stack: { name: string; slug?: string; src?: string }[] = [
     { name: 'n8n', slug: 'n8n' },
     { name: 'Supabase', slug: 'supabase' },
-    { name: 'Slack', slug: 'slack' },
+    // Not in Simple Icons — using the logo file supplied for this build.
+    { name: 'Vapi', src: '/vapi.jpeg' },
     { name: 'HubSpot', slug: 'hubspot' },
     { name: 'Notion', slug: 'notion' },
     { name: 'Claude', slug: 'claude' },
@@ -251,27 +254,34 @@ await agent.run();
               <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>Tools we build around</p>
 
               <div className="grid grid-cols-3 gap-2">
-                {stack.map((s, idx) => (
-                  <div
-                    key={idx}
-                    className="group/int p-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer"
-                    style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
-                  >
-                    <img
-                      src={`https://cdn.simpleicons.org/${s.slug}`}
-                      alt={s.name}
-                      className="w-6 h-6 group-hover/int:scale-125 transition-transform duration-200"
-                      loading="lazy"
-                      // Simple Icons drops brands on trademark request (Slack is currently
-                      // one), so a slug can 404. Hide rather than render a broken image —
-                      // the tile keeps its footprint and the name below still identifies it.
-                      onError={(e) => {
-                        e.currentTarget.style.visibility = 'hidden';
-                      }}
-                    />
-                    <p className="text-[9px] text-center" style={{ color: 'var(--color-dock-slate)' }}>{s.name}</p>
-                  </div>
-                ))}
+                {stack.map((s, idx) => {
+                  return (
+                    <div
+                      key={idx}
+                      className="group/int p-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer"
+                      style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
+                    >
+                      <img
+                        src={s.src ?? `https://cdn.simpleicons.org/${s.slug}`}
+                        alt={s.name}
+                        className={cn(
+                          'w-6 h-6 group-hover/int:scale-125 transition-transform duration-200',
+                          // Simple Icons marks are transparent; a supplied logo file may be a
+                          // solid-background square, so round it to read as an app icon.
+                          s.src && 'rounded-[4px] object-contain'
+                        )}
+                        loading="lazy"
+                        // Simple Icons drops brands on trademark request, so a slug can
+                        // 404. Hide rather than render a broken image — the tile keeps its
+                        // footprint and the name below still identifies it.
+                        onError={(e) => {
+                          e.currentTarget.style.visibility = 'hidden';
+                        }}
+                      />
+                      <p className="text-[9px] text-center" style={{ color: 'var(--color-dock-slate)' }}>{s.name}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
