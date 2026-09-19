@@ -1,10 +1,3 @@
-/* Onest carries the whole page. Caveat stands in for Guthen Jacqueline, which is a paid
-   marketplace font — see --font-script below. font-display:swap is Google's default on
-   this endpoint, which is what keeps font loading from shifting layout. */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Onest:wght@400;500;600;700;800&display=swap');
-
-/* Shade reference design system — carries the hero. Kept separate from the Koret
-   tokens above so the two systems never get confused for one another. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&family=JetBrains+Mono:wght@400&display=swap');
 
 /* Tailwind v4 auto-detects sources from the project root, which here would drag in
@@ -15,131 +8,71 @@
 @source './';
 
 @theme {
-  /* ---- Brand colours (Koret brand guide — do not alter) ---- */
-  --color-cyan: #00ccff; /* primary interactive accent, CTA glow */
-  --color-navy: #00419b; /* dark section background, secondary brand colour */
-  --color-black: #000000; /* primary text on light backgrounds */
-  --color-white: #ffffff; /* canvas */
-  --color-teal: #03857a; /* accent — headline keyword highlight, icons */
-  --color-orange: #fd7f00; /* accent — headline keyword highlight, secondary CTA */
-
-  /* ---- Supporting neutrals (derived — not in the brand guide) ---- */
-  --color-navy-deep: #002d6e; /* deepest section background ("abyss" tier) */
-  --color-cloud: #f4f8fb; /* light alternate section background, faint cyan tint */
-  --color-cyan-whisper: #e8fbff; /* soft accent background wash */
-  --color-border: #e1e8f0; /* hairline borders on light sections */
-  --color-text-muted: #4a5568; /* secondary body text on light backgrounds — 7.5:1 on white */
-  --color-text-on-dark-muted: #a9c4e0; /* secondary text on navy — 5.2:1 on navy */
-
-  /* Derived accessible variant of --color-orange.
-     #FD7F00 is only 2.6:1 on white, which fails WCAG AA for text AND the 3:1 bar for
-     large text and icons. The brand orange is kept intact above for fills, the cutout
-     shadow and anything on navy (3.7:1 there, which passes); this darkened variant is
-     used wherever orange has to be *text or an icon on a light background*. */
-  --color-orange-ink: #b85c00; /* 4.6:1 on white */
-
-  /* ---- Type ---- */
-  --font-primary: 'Onest', ui-sans-serif, system-ui, sans-serif;
-  /* Swap this one value for Guthen Jacqueline if the licensed file is supplied. */
-  --font-script: 'Caveat', cursive;
-
-  --text-caption: 12px;
-  --text-caption--line-height: 1.5;
-  --text-body-sm: 14px;
-  --text-body-sm--line-height: 1.6;
-  --text-body: 16px;
-  --text-body--line-height: 1.6;
-  --text-subheading: 20px;
-  --text-subheading--line-height: 1.3;
-  --text-heading-sm: 24px;
-  --text-heading-sm--line-height: 1.25;
-  --text-heading-sm--letter-spacing: -0.02em;
-  --text-heading: 32px;
-  --text-heading--line-height: 1.2;
-  --text-heading--letter-spacing: -0.03em;
-  --text-heading-lg: 48px;
-  --text-heading-lg--line-height: 1.1;
-  --text-heading-lg--letter-spacing: -0.03em;
-  --text-display: 72px;
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.03em;
-
-  /* ---- Shape ---- */
-  --radius-cards: 12px;
-  --radius-inputs: 8px;
-  --radius-buttons: 9999px; /* pill — buttons only, never cards */
-
-  /* ---- Elevation ---- */
-  --shadow-card:
-    0px 8px 24px rgba(0, 65, 155, 0.08), 0px 1px 2px rgba(0, 65, 155, 0.06);
-  /* Shade-style hard offset. Used on exactly two elements page-wide:
-     the "Agentic AI Builds" card and the final-CTA accent button. */
-  --shadow-cutout: 6px 6px 0px 0px rgba(3, 133, 122, 0.18);
-  /* Same device on the navy section — teal at 0.18 is invisible against #00419B,
-     so the alpha is raised until the offset block actually reads. */
-  --shadow-cutout-onnavy: 6px 6px 0px 0px rgba(3, 133, 122, 0.55);
-  --shadow-cutout-orange: 6px 6px 0px 0px rgba(253, 127, 0, 0.25);
-  /* The rare accent button sits on --color-navy-deep, where orange at 0.25 blends
-     to a muddy brown and reads as a plain drop shadow. Raised until the offset
-     block actually reads as orange. */
-  --shadow-cutout-orange-onnavy: 6px 6px 0px 0px rgba(253, 127, 0, 0.85);
-
-  /* ---- Layout ---- */
-  --container-page: 1200px;
-}
-
-/* Shade reference design system. Literal copy — palette and type are not the Koret
-   brand tokens above and must not be merged with them. */
-@theme {
+  /* Colors */
   --color-charcoal-ink: #131315;
   --color-pure-white: #ffffff;
+  --color-bone: #f7f5ff;
   --color-cutout-gray: #f1f1f1;
   --color-slate-mid: #717173;
+  --color-hairline: #d0d0d0;
+  --color-deep-charcoal: #444444;
   --color-logo-violet: #855cf7;
   --color-lavender-trace: #dacefd;
 
+  /* Typography */
   --font-inter-display: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-aux-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Type Scale */
+  --text-caption: 12px; --leading-caption: 1.2; --tracking-caption: -0.12px;
+  --text-body-sm: 14px; --leading-body-sm: 1.29; --tracking-body-sm: -0.14px;
+  --text-body: 16px; --leading-body: 1.5; --tracking-body: -0.16px;
+  --text-subheading: 20px; --leading-subheading: 1.4; --tracking-subheading: -0.2px;
+  --text-heading-sm: 24px; --leading-heading-sm: 1.3; --tracking-heading-sm: -0.24px;
+  --text-heading: 32px; --leading-heading: 1.22; --tracking-heading: -0.96px;
+  --text-heading-lg: 48px; --leading-heading-lg: 1.15; --tracking-heading-lg: -1.44px;
+  --text-display: 72px; --leading-display: 1.1; --tracking-display: -2.16px;
+
+  /* Border Radius */
+  --radius-sm: 2px; --radius-lg: 9px; --radius-xl: 14px; --radius-2xl: 20px; --radius-2xl-2: 23px; --radius-3xl: 35px;
+
+  /* Shadows */
+  --shadow-subtle: rgb(241, 241, 241) 8px 8px 0px 0px;
+  --shadow-subtle-2: rgba(226, 226, 227, 0.5) 10px 10px 0px -2px;
+  --shadow-sm: rgba(19, 19, 21, 0.12) 0px 1px 4px 0px;
+  --shadow-sm-2: rgba(0, 0, 0, 0.2) 0px 3px 4px 0px;
+  --shadow-subtle-3: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;
 }
 
+/* Spacing — deliberately NOT in @theme. Tailwind v4 reads the `--spacing-*` namespace
+   as the numeric spacing scale, so `--spacing-6: 6px` there redefines `px-6`/`p-6` from
+   24px to 6px (verified in the built CSS), collapsing every gutter, gap and card pad in
+   the system and contradicting the "24px inside cards" rule. Declared on :root instead:
+   the values stay exact and reachable as var(--spacing-N), the utility scale stays sane. */
 :root {
-  --glow-cyan: 0 0 0 4px rgba(0, 204, 255, 0.35);
+  --spacing-4: 4px; --spacing-5: 5px; --spacing-6: 6px; --spacing-7: 7px; --spacing-8: 8px;
+  --spacing-9: 9px; --spacing-10: 10px; --spacing-12: 12px; --spacing-15: 15px; --spacing-20: 20px;
+  --spacing-25: 25px; --spacing-30: 30px; --spacing-40: 40px; --spacing-50: 50px; --spacing-60: 60px; --spacing-100: 100px;
 }
 
+body {
+  background-color: var(--color-pure-white);
+  font-family: var(--font-inter);
+  color: var(--color-charcoal-ink);
+}
+
+/* Infrastructure kept from the previous stylesheet — no brand colour survives it.
+   The old focus ring was navy + cyan glow; recoloured to Charcoal Ink so the system
+   stays achromatic without dropping a visible keyboard focus indicator. */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
-  body {
-    background-color: var(--color-white);
-    color: var(--color-black);
-    font-family: var(--font-primary);
-    font-size: var(--text-body);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
-  /* Cyan on white is only 1.9:1, so the glow alone is not a sufficient focus indicator.
-     A solid navy line carries the contrast and the cyan glow carries the brand. */
   :focus-visible {
-    outline: 2px solid var(--color-navy);
+    outline: 2px solid var(--color-charcoal-ink);
     outline-offset: 2px;
-    box-shadow: var(--glow-cyan);
-    border-radius: var(--radius-inputs);
-  }
-
-  /* On navy/black sections the navy outline disappears — switch it to white.
-     Cyan is 5:1 against navy, so the glow does real work here. */
-  .on-dark :focus-visible {
-    outline-color: var(--color-white);
-  }
-
-  ::selection {
-    background-color: var(--color-cyan);
-    color: var(--color-black);
   }
 }
 

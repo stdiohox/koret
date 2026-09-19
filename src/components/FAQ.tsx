@@ -1,104 +1,50 @@
-import { useState } from 'react'
-import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
-import { Plus } from 'lucide-react'
-import { FAQS } from '../data/content'
-import { Eyebrow, Section } from './Section'
-import { Reveal } from './Reveal'
+import { useState } from 'react';
+import { Plus, Minus } from 'lucide-react';
 
-/** Generated from the same array that renders the accordion, so the schema
- *  always describes what is actually on the page. */
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': 'https://koret.agency/#faq',
-  mainEntity: FAQS.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-  })),
-}
+const faqs = [
+  { q: "What's the difference between your marketing services and your AI services?", a: 'Marketing builds the story and drives attention. AI automation builds the systems that convert that attention into results — and keeps running after the campaign ends.' },
+  { q: 'Do I need to be technical to work with your AI team?', a: 'No. We handle the build; you tell us the outcome you want.' },
+  { q: 'Can you automate an existing workflow, or does it have to be new?', a: 'Both. We regularly plug automation into tools businesses already use.' },
+  { q: 'What\'s an "agentic build"?', a: "An AI agent that doesn't just answer questions — it takes action: qualifying a lead, booking a call, updating a record, following up." },
+  { q: 'Do you offer ongoing support after launch?', a: 'Yes — through consultation and managed automation support.' },
+];
 
-export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-  const reduceMotion = useReducedMotion()
+export default function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <Section id="faq" tone="cloud" labelledBy="faq-heading">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <Reveal>
-          <Eyebrow>FAQ</Eyebrow>
-          <h2
-            id="faq-heading"
-            className="mt-4 text-heading font-bold text-black md:text-heading-lg"
-          >
-            Questions we get asked first.
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.08}>
-          <dl className="divide-y divide-border border-y border-border">
-            {FAQS.map((faq, index) => {
-              const isOpen = openIndex === index
-              const panelId = `faq-panel-${index}`
-              const buttonId = `faq-button-${index}`
-
-              return (
-                <div key={faq.question}>
-                  <dt>
-                    <button
-                      type="button"
-                      id={buttonId}
-                      aria-expanded={isOpen}
-                      aria-controls={panelId}
-                      onClick={() => setOpenIndex(isOpen ? null : index)}
-                      className="flex w-full items-start justify-between gap-6 py-6 text-left"
-                    >
-                      <span className="text-subheading font-semibold leading-[1.3] text-black">
-                        {faq.question}
-                      </span>
-                      <m.span
-                        aria-hidden="true"
-                        animate={
-                          reduceMotion ? undefined : { rotate: isOpen ? 45 : 0 }
-                        }
-                        transition={{ duration: 0.22, ease: 'easeOut' }}
-                        className="mt-0.5 shrink-0 text-teal"
-                      >
-                        <Plus size={22} strokeWidth={2} />
-                      </m.span>
-                    </button>
-                  </dt>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <m.dd
-                        id={panelId}
-                        aria-labelledby={buttonId}
-                        initial={
-                          reduceMotion ? false : { height: 0, opacity: 0 }
-                        }
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
-                        transition={{ duration: 0.28, ease: 'easeOut' }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-[60ch] pb-6 pr-10 text-body text-text-muted">
-                          {faq.answer}
-                        </p>
-                      </m.dd>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )
-            })}
-          </dl>
-        </Reveal>
+    <section id="faq" className="bg-[var(--color-bone)] py-[100px]">
+      <div className="mx-auto max-w-[900px] px-6">
+        {faqs.map((item, i) => (
+          <div key={item.q} style={{ borderBottom: '1px solid var(--color-hairline)' }}>
+            <button
+              className="w-full flex items-center justify-between py-6 text-left"
+              onClick={() => setOpen(open === i ? null : i)}
+              aria-expanded={open === i}
+            >
+              <span
+                className="text-[20px] font-normal"
+                style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
+              >
+                {item.q}
+              </span>
+              {open === i ? (
+                <Minus size={18} color="var(--color-logo-violet)" />
+              ) : (
+                <Plus size={18} color="var(--color-slate-mid)" />
+              )}
+            </button>
+            {open === i && (
+              <p
+                className="pb-6 text-[16px]"
+                style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)' }}
+              >
+                {item.a}
+              </p>
+            )}
+          </div>
+        ))}
       </div>
-    </Section>
-  )
+    </section>
+  );
 }

@@ -1,68 +1,57 @@
-import { CONTACT_EMAIL, FOOTER_COLUMNS } from '../data/content'
-import { Section } from './Section'
-import { DiamondGlyph, Wordmark } from './Wordmark'
+export default function Footer() {
+  const columns = {
+    Services: ['Brand & Marketing', 'AI & Automation'],
+    Company: ['Why Koret', 'Process', 'Results'],
+    Contact: ['Book a Consultation'],
+  };
 
-export function Footer() {
   return (
-    <Section as="footer" tone="black" labelledBy="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Site footer
-      </h2>
-
-      <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr] lg:gap-16">
+    <footer id="contact" className="bg-[var(--color-bone)]" style={{ borderTop: '1px solid var(--color-hairline)' }}>
+      <div className="mx-auto max-w-[1200px] px-6 py-[100px] grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
-          <Wordmark tone="dark" className="h-8" />
-
-          {/* The one script-font moment on the page. Guthen Jacqueline is a paid
-              marketplace font; Caveat stands in until the licensed file lands.
-              Swap --font-script in src/index.css — nothing else changes. */}
-          <p className="mt-5 flex items-center gap-3 font-script text-heading-sm leading-none text-cyan md:text-heading">
-            <DiamondGlyph className="bg-orange" />
+          <div className="flex items-center gap-2 mb-3">
+            <div
+              className="w-6 h-6 rounded-sm"
+              style={{ background: 'conic-gradient(from 180deg, transparent, #855cf7)' }}
+            />
+            <span
+              className="text-[20px] font-normal"
+              style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
+            >
+              Koret
+            </span>
+          </div>
+          <p
+            className="text-[14px]"
+            style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)' }}
+          >
             Bringing your brand to limelight.
           </p>
-
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="mt-8 inline-block text-body font-semibold text-white underline underline-offset-4"
-          >
-            {CONTACT_EMAIL}
-          </a>
         </div>
-
-        <nav aria-label="Footer" className="grid gap-10 sm:grid-cols-3">
-          {FOOTER_COLUMNS.map((column) => (
-            <div key={column.heading}>
-              <h3 className="text-caption font-semibold uppercase tracking-[0.14em] text-text-on-dark-muted">
-                {column.heading}
-              </h3>
-              <ul className="mt-5 flex flex-col gap-3">
-                {column.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-body-sm text-white/80 transition-colors duration-150 hover:text-cyan"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </nav>
+        {Object.entries(columns).map(([heading, links]) => (
+          <div key={heading}>
+            <p
+              className="text-[14px] mb-4"
+              style={{ fontFamily: 'var(--font-aux-mono)', color: 'var(--color-slate-mid)', letterSpacing: '-0.04em' }}
+            >
+              {heading.toUpperCase()}
+            </p>
+            <ul className="space-y-2">
+              {links.map((link) => (
+                <li key={link}>
+                  <a
+                    href="#"
+                    className="text-[14px]"
+                    style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-charcoal-ink)' }}
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-
-      <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-body-sm text-text-on-dark-muted">
-          © {new Date().getFullYear()} Koret. All rights reserved.
-        </p>
-        <a
-          href="#top"
-          className="text-body-sm font-semibold text-white/80 transition-colors duration-150 hover:text-cyan"
-        >
-          Back to top
-        </a>
-      </div>
-    </Section>
-  )
+    </footer>
+  );
 }

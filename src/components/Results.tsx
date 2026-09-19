@@ -1,44 +1,30 @@
-import { RESULTS } from '../data/content'
-import { Eyebrow, Section } from './Section'
-import { Reveal, Stagger, StaggerItem } from './Reveal'
+const stats = [
+  { value: '[X]%', label: 'Increase in qualified leads' },
+  { value: '[X]', label: 'Hours/week saved through automation' },
+  { value: '[X]', label: 'AI workflows deployed' },
+];
 
-export function Results() {
+export default function Results() {
   return (
-    <Section id="results" tone="white" labelledBy="results-heading">
-      <Reveal className="max-w-[720px]">
-        <Eyebrow>Results</Eyebrow>
-        <h2
-          id="results-heading"
-          className="mt-4 text-heading font-bold text-black md:text-heading-lg"
-        >
-          Campaigns that earned their spend. Systems that earned their keep.
-        </h2>
-      </Reveal>
-
-      <Stagger className="mt-12 grid gap-6 sm:grid-cols-3 md:mt-16 md:gap-8">
-        {RESULTS.map((result) => (
-          <StaggerItem
-            key={result.label}
-            className="rounded-cards border border-border bg-white p-8 shadow-card"
-          >
-            <p className="text-heading font-bold tracking-[-0.03em] text-navy md:text-heading-lg">
-              {result.value}
+    <section id="results" className="bg-[var(--color-pure-white)] py-[100px]">
+      <div className="mx-auto max-w-[1200px] px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+        {stats.map((stat) => (
+          <div key={stat.label}>
+            <p
+              className="text-[48px] font-normal mb-2"
+              style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)', letterSpacing: '-1.44px' }}
+            >
+              {stat.value}
             </p>
-            <p className="mt-3 text-body-sm text-text-muted">{result.label}</p>
-          </StaggerItem>
+            <p
+              className="text-[14px]"
+              style={{ fontFamily: 'var(--font-aux-mono)', color: 'var(--color-slate-mid)', letterSpacing: '-0.04em' }}
+            >
+              {stat.label}
+            </p>
+          </div>
         ))}
-      </Stagger>
-
-      <Reveal delay={0.1}>
-        <p className="mt-8 text-body-sm text-text-muted">
-          <span className="font-semibold text-black">
-            Placeholder figures.
-          </span>{' '}
-          Each <code className="font-mono text-orange-ink">[X]</code> is waiting
-          on a verified number from a real engagement — see{' '}
-          <code className="font-mono">src/data/content.ts</code>.
-        </p>
-      </Reveal>
-    </Section>
-  )
+      </div>
+    </section>
+  );
 }

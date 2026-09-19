@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="bg-[--color-pure-white] py-[100px]">
+    <section className="bg-[var(--color-pure-white)] py-[100px]">
       <div className="mx-auto max-w-[1200px] flex flex-col items-center text-center px-6">
 
         {/* Announcement Pill */}

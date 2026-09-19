@@ -1,49 +1,31 @@
-import { CONTACT_EMAIL } from '../data/content'
-import { Section } from './Section'
-import { Reveal } from './Reveal'
-import { Button } from './Button'
-
-export function FinalCTA() {
+export default function FinalCTA() {
   return (
-    <Section id="contact" tone="navy-deep" labelledBy="final-cta-heading">
-      <Reveal className="mx-auto flex max-w-[760px] flex-col items-center text-center">
+    <section className="bg-[var(--color-pure-white)] py-[100px]">
+      <div className="mx-auto max-w-[640px] px-6 text-center">
         <h2
-          id="final-cta-heading"
-          className="text-heading font-bold text-white md:text-heading-lg"
+          className="text-[48px] font-normal mb-4"
+          style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)', letterSpacing: '-1.44px' }}
         >
           Ready to Build a Brand That Runs Itself?
         </h2>
-        <p className="mt-6 max-w-[560px] text-body text-text-on-dark-muted md:text-subheading md:leading-[1.5]">
-          Thirty minutes, no deck. You leave with a straight answer on whether
-          the thing you are describing is worth building — and roughly what it
-          takes.
+        <p
+          className="text-[16px] mb-8"
+          style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)' }}
+        >
+          Tell us where you're stuck — marketing, tech, or both.
         </p>
-
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          {/* The page's one rare accent button: black fill, orange hard offset.
-              TODO: swap this mailto for a real form endpoint (Formspree, Resend,
-              or your own API) once one exists. */}
-          <Button
-            href={`mailto:${CONTACT_EMAIL}?subject=Consultation%20request`}
-            variant="accent"
-          >
-            Book a Consultation
-          </Button>
-          <Button href="#ai-services" variant="secondary-on-dark">
-            See What We Build
-          </Button>
-        </div>
-
-        <p className="mt-8 text-body-sm text-text-on-dark-muted">
-          Or email us directly at{' '}
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="font-semibold text-cyan underline underline-offset-4"
-          >
-            {CONTACT_EMAIL}
-          </a>
-        </p>
-      </Reveal>
-    </Section>
-  )
+        <button
+          className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
+          style={{
+            backgroundColor: 'var(--color-charcoal-ink)',
+            color: 'var(--color-pure-white)',
+            fontFamily: 'var(--font-inter-display)',
+            boxShadow: 'var(--shadow-subtle)',
+          }}
+        >
+          Book a Consultation
+        </button>
+      </div>
+    </section>
+  );
 }

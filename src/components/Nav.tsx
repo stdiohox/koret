@@ -1,115 +1,58 @@
-import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import { NAV_LINKS } from '../data/content'
-import { Button } from './Button'
-import { Wordmark } from './Wordmark'
-
-export function Nav() {
-  const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  // Close the mobile sheet on Escape, and stop the page scrolling behind it.
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [open])
-
+export default function Nav() {
+  const links = ['Services', 'AI Agency', 'Process', 'Results', 'FAQ'];
   return (
     <header
-      className={`sticky top-0 z-50 bg-white transition-shadow duration-200 ${
-        scrolled ? 'shadow-[0_1px_0_0_var(--color-border)]' : ''
-      }`}
+      className="sticky top-0 z-50 bg-[var(--color-pure-white)]"
+      style={{ borderBottom: '1px solid var(--color-hairline)' }}
     >
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-3 focus:z-50 focus:rounded-inputs focus:bg-navy focus:px-4 focus:py-2 focus:text-body-sm focus:font-semibold focus:text-white"
-      >
-        Skip to content
-      </a>
+      <div className="mx-auto max-w-[1200px] flex items-center justify-between px-6 py-[20px]">
+        <div className="flex items-center gap-2">
+          <div
+            className="w-6 h-6 rounded-sm"
+            style={{ background: 'conic-gradient(from 180deg, transparent, #855cf7)' }}
+          />
+          <span
+            className="text-[20px] font-normal"
+            style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
+          >
+            Koret
+          </span>
+        </div>
 
-      <nav
-        aria-label="Primary"
-        className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-6 md:px-10"
-      >
-        <a href="#top" className="flex items-center" aria-label="Koret — home">
-          <Wordmark />
-        </a>
-
-        <ul className="hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href + link.label}>
-              <a
-                href={link.href}
-                className="text-body-sm font-semibold text-black transition-colors duration-150 hover:text-teal"
-              >
-                {link.label}
-              </a>
-            </li>
+        <nav className="flex items-center gap-5">
+          {links.map((link) => (
+            <a
+              key={link}
+              href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
+              className="text-[14px]"
+              style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
+            >
+              {link}
+            </a>
           ))}
-        </ul>
+        </nav>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="flex items-center gap-5">
           <a
             href="#contact"
-            className="text-body-sm font-semibold text-text-muted transition-colors duration-150 hover:text-black"
+            className="text-[14px]"
+            style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
           >
-            Client Log In
+            Contact
           </a>
-          <Button href="#contact" className="text-body-sm px-5 py-2.5">
+          <button
+            className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
+            style={{
+              backgroundColor: 'var(--color-charcoal-ink)',
+              color: 'var(--color-pure-white)',
+              fontFamily: 'var(--font-inter-display)',
+              boxShadow: 'var(--shadow-subtle)',
+            }}
+          >
             Book a Consultation
-          </Button>
+          </button>
         </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          className="rounded-inputs p-2 text-black lg:hidden"
-        >
-          {open ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
-        </button>
-      </nav>
-
-      {open && (
-        <div
-          id="mobile-menu"
-          className="border-t border-border bg-white px-6 pb-8 pt-4 lg:hidden"
-        >
-          <ul className="flex flex-col gap-1">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href + link.label}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-inputs py-3 text-subheading font-semibold text-black"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <Button href="#contact" className="mt-4 w-full">
-            Book a Consultation
-          </Button>
-        </div>
-      )}
+      </div>
     </header>
-  )
+  );
 }
