@@ -1,7 +1,9 @@
+import MotionSection from './MotionSection';
+
 export default function LogoStrip() {
   const logos = ['Client A', 'Client B', 'Client C', 'Client D', 'Client E', 'Client F', 'Client G'];
   return (
-    <section className="bg-[var(--color-bone)] py-[100px]">
+    <MotionSection className="bg-[var(--color-bone)] py-[100px]">
       <div className="mx-auto max-w-[1200px] px-6 text-center">
         <p
           className="text-[14px] mb-10"
@@ -21,6 +23,6 @@ export default function LogoStrip() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

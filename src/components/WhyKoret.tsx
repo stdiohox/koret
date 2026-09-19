@@ -1,6 +1,8 @@
+import MotionSection from './MotionSection';
+
 export default function WhyKoret() {
   return (
-    <section className="bg-[var(--color-pure-white)] py-[100px]">
+    <MotionSection className="bg-[var(--color-pure-white)] py-[100px]">
       <div className="mx-auto max-w-[900px] px-6 text-center">
         <h2
           className="text-[32px] font-normal mb-6"
@@ -15,6 +17,6 @@ export default function WhyKoret() {
           Most agencies stop at the campaign. Most dev shops don't understand the brand. Koret does both — so the automation we build sounds like your brand, and the marketing we run is backed by systems that actually deliver.
         </p>
       </div>
-    </section>
+    </MotionSection>
   );
 }

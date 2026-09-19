@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion';
+import MotionSection from './MotionSection';
+
 const steps = [
   { label: '01', title: 'Discover', desc: 'We learn your brand, your bottlenecks, and your goals.' },
   { label: '02', title: 'Design', desc: 'Strategy and system architecture, mapped together.' },
@@ -5,13 +8,22 @@ const steps = [
   { label: '04', title: 'Scale', desc: 'We monitor, refine, and expand what\'s working.' },
 ];
 
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } } };
+
 export default function ProcessTimeline() {
   return (
-    <section id="process" className="bg-[var(--color-bone)] py-[100px]">
+    <MotionSection id="process" className="bg-[var(--color-bone)] py-[100px]">
       <div className="mx-auto max-w-[1200px] px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-4 gap-10"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-80px' }}
+        >
           {steps.map((step) => (
-            <div key={step.label}>
+            <motion.div key={step.label} variants={item}>
               <p
                 className="text-[14px] mb-3"
                 style={{ fontFamily: 'var(--font-aux-mono)', color: 'var(--color-slate-mid)', letterSpacing: '-0.04em' }}
@@ -30,9 +42,9 @@ export default function ProcessTimeline() {
               >
                 {step.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
         <div className="mt-12 flex items-center" style={{ borderTop: '1px solid var(--color-hairline)' }}>
           {steps.map((step) => (
             <div key={step.label} className="flex-1 flex justify-start -mt-[5px]">
@@ -41,6 +53,6 @@ export default function ProcessTimeline() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

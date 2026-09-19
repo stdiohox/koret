@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 export default function Nav() {
   const links = ['Services', 'AI Agency', 'Process', 'Results', 'FAQ'];
   return (
@@ -40,7 +42,9 @@ export default function Nav() {
           >
             Contact
           </a>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
             style={{
               backgroundColor: 'var(--color-charcoal-ink)',
@@ -50,7 +54,7 @@ export default function Nav() {
             }}
           >
             Book a Consultation
-          </button>
+          </motion.button>
         </div>
       </div>
     </header>

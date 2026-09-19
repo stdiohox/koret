@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
+import MotionSection from './MotionSection';
 
 const faqs = [
   { q: "What's the difference between your marketing services and your AI services?", a: 'Marketing builds the story and drives attention. AI automation builds the systems that convert that attention into results — and keeps running after the campaign ends.' },
@@ -13,7 +15,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="bg-[var(--color-bone)] py-[100px]">
+    <MotionSection id="faq" className="bg-[var(--color-bone)] py-[100px]">
       <div className="mx-auto max-w-[900px] px-6">
         {faqs.map((item, i) => (
           <div key={item.q} style={{ borderBottom: '1px solid var(--color-hairline)' }}>
@@ -29,22 +31,32 @@ export default function FAQ() {
                 {item.q}
               </span>
               {open === i ? (
-                <Minus size={18} color="var(--color-logo-violet)" />
+                <Minus size={18} color="var(--color-lavender-trace)" />
               ) : (
                 <Plus size={18} color="var(--color-slate-mid)" />
               )}
             </button>
-            {open === i && (
-              <p
-                className="pb-6 text-[16px]"
-                style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)' }}
-              >
-                {item.a}
-              </p>
-            )}
+            <AnimatePresence initial={false}>
+              {open === i && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <p
+                    className="pb-6 text-[16px]"
+                    style={{ fontFamily: 'var(--font-inter)', color: 'var(--color-slate-mid)' }}
+                  >
+                    {item.a}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         ))}
       </div>
-    </section>
+    </MotionSection>
   );
 }

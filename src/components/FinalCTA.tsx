@@ -1,6 +1,9 @@
+import { motion } from 'framer-motion';
+import MotionSection from './MotionSection';
+
 export default function FinalCTA() {
   return (
-    <section className="bg-[var(--color-pure-white)] py-[100px]">
+    <MotionSection className="bg-[var(--color-pure-white)] py-[100px]">
       <div className="mx-auto max-w-[640px] px-6 text-center">
         <h2
           className="text-[48px] font-normal mb-4"
@@ -14,7 +17,9 @@ export default function FinalCTA() {
         >
           Tell us where you're stuck — marketing, tech, or both.
         </p>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="rounded-[35px] px-6 py-[15px] text-[16px] font-normal"
           style={{
             backgroundColor: 'var(--color-charcoal-ink)',
@@ -24,8 +29,8 @@ export default function FinalCTA() {
           }}
         >
           Book a Consultation
-        </button>
+        </motion.button>
       </div>
-    </section>
+    </MotionSection>
   );
 }
