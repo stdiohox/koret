@@ -48,7 +48,7 @@ export default function ServicesTabs() {
                 <motion.div
                   layoutId="active-tab-underline"
                   className="absolute left-0 right-0 bottom-0"
-                  style={{ height: 2, backgroundColor: 'var(--color-logo-violet)' }}
+                  style={{ height: 2, backgroundColor: 'var(--color-koret-navy)' }}
                   transition={{ duration: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
                 />
               )}

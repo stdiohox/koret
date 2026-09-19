@@ -41,7 +41,7 @@ export default function AIServicesGrid() {
           >
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center mb-4"
-              style={{ border: '1px solid var(--color-lavender-trace)' }}
+              style={{ border: '1px solid rgba(0, 204, 255, 0.4)' }}
             >
               <Icon size={18} color="var(--color-slate-mid)" />
             </div>

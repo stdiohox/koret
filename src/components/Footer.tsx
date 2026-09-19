@@ -10,10 +10,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1200px] px-6 py-[100px] grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div
-              className="w-6 h-6 rounded-sm"
-              style={{ background: 'conic-gradient(from 180deg, transparent, #855cf7)' }}
-            />
+            <img src="/logo/koret-logo-mark.png" alt="" className="w-6 h-6" />
             <span
               className="text-[20px] font-normal"
               style={{ fontFamily: 'var(--font-inter-display)', color: 'var(--color-charcoal-ink)' }}
