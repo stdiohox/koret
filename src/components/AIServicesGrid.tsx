@@ -201,7 +201,7 @@ await agent.run();
                 <p className="text-lg font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.title}</p>
                 <p className="text-xs mt-1" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.desc}</p>
               </div>
-              <div className="text-2xl font-bold font-mono mt-3" style={{ color: 'var(--color-koret-navy)' }}>
+              <div className="text-2xl font-bold mt-3" style={{ color: 'var(--color-koret-navy)' }}>
                 {activeFeature.stat}
               </div>
             </div>
