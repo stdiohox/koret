@@ -7,6 +7,12 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
 
+    /* Path alias — mirrors `resolve.alias` in vite.config.ts */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
