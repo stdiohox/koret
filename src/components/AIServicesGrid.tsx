@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import MotionSection from './MotionSection';
 import {
@@ -15,19 +16,12 @@ import {
   BarChart3,
 } from 'lucide-react';
 
-/* Navy surface tiers — see --color-navy-* in index.css.
-   abyss   = section + terminal ground (darkest)
-   card    = every card and nested box (one step up)
-   navy    = active / selected states and icon chips
-   hairline = default border; -strong is the hover border (via .navy-card-hover) */
-const SURFACE_ABYSS = 'var(--color-navy-abyss)';
-const SURFACE_CARD = 'var(--color-navy-card)';
-const SURFACE_ACTIVE = 'var(--color-koret-navy)';
-const HAIRLINE = 'var(--color-navy-hairline)';
-
 export default function AIServicesGrid() {
   const [activeTab, setActiveTab] = useState(0);
   const [selectedItem, setSelectedItem] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const blobRef = React.useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(blobRef, { margin: '200px' });
 
   const features = [
     { id: 0, title: 'Automation', desc: 'Custom workflows that eliminate repetitive tasks across sales, support, and operations.', icon: Zap, stat: 'Fully custom' },
@@ -71,29 +65,69 @@ await agent.run();
 
   const activeFeature = features[activeTab];
 
+  // Shared style tokens for this section's light-theme cards
+  const cardBase = {
+    backgroundColor: 'var(--color-pure-white)',
+    border: '1px solid var(--color-dock-hairline)',
+  };
+  const chipLight = { backgroundColor: 'rgba(0, 65, 155, 0.06)' };
+
   return (
-    <MotionSection
-      id="ai-agency"
-      className="w-full py-24 px-4 md:px-8 text-white font-sans antialiased overflow-hidden"
-      style={{ backgroundColor: SURFACE_ABYSS }}
-    >
-      <div className="max-w-7xl mx-auto flex flex-col gap-16">
+    <MotionSection id="ai-agency" className="relative overflow-hidden bg-white py-24 px-4 md:px-8 font-sans antialiased">
+
+      {/* Soft brand-color gradient wash — same recipe as the earlier Hero blob treatment */}
+      <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: 600,
+            height: 600,
+            top: '-15%',
+            right: '0%',
+            background: 'radial-gradient(circle, rgba(0,204,255,0.3) 0%, rgba(0,204,255,0) 70%)',
+          }}
+          animate={
+            reduceMotion || !isInView
+              ? undefined
+              : { x: [0, 25, -15, 0], y: [0, -15, 20, 0], scale: [1, 1.05, 0.98, 1] }
+          }
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: 560,
+            height: 560,
+            bottom: '-15%',
+            left: '-5%',
+            background: 'radial-gradient(circle, rgba(0,65,155,0.25) 0%, rgba(0,65,155,0) 70%)',
+          }}
+          animate={
+            reduceMotion || !isInView
+              ? undefined
+              : { x: [0, -20, 15, 0], y: [0, 20, -10, 0], scale: [1, 0.97, 1.04, 1] }
+          }
+          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-16">
 
         {/* Header */}
         <div className="flex flex-col gap-6 max-w-3xl">
           <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border w-fit"
-            style={{ backgroundColor: SURFACE_CARD, borderColor: SURFACE_ACTIVE }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full w-fit"
+            style={{ ...chipLight, border: '1px solid rgba(0, 204, 255, 0.3)' }}
           >
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-xs font-semibold tracking-wider text-zinc-300">
+            <Sparkles className="w-4 h-4" style={{ color: 'var(--color-koret-navy)' }} />
+            <span className="text-xs font-semibold tracking-wider" style={{ color: 'var(--color-koret-navy)' }}>
               AI & Automation
             </span>
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-white">
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight" style={{ color: 'var(--color-ink-charcoal)' }}>
             The AI Layer Behind Your Brand
           </h2>
-          <p className="text-lg text-zinc-400 max-w-2xl leading-relaxed">
+          <p className="text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--color-dock-slate)' }}>
             From one automation to a full agentic system — everything below is built to match your brand and run without you in the loop.
           </p>
         </div>
@@ -103,19 +137,21 @@ await agent.run();
 
           {/* Interactive Services Selector */}
           <div
-            className="md:col-span-2 md:row-span-2 group navy-card-hover relative overflow-hidden rounded-2xl border p-8 flex flex-col justify-between transition-all duration-300"
-            style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
+            className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl p-8 flex flex-col justify-between transition-all duration-300"
+            style={cardBase}
           >
             <div className="relative z-10">
               <div
-                className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-lg border text-zinc-300 text-xs font-semibold"
-                style={{ backgroundColor: SURFACE_ACTIVE, borderColor: SURFACE_ACTIVE }}
+                className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-lg text-xs font-semibold"
+                style={{ ...chipLight, color: 'var(--color-ink-charcoal)' }}
               >
-                <Lightbulb className="w-3.5 h-3.5" />
+                <Lightbulb className="w-3.5 h-3.5" style={{ color: 'var(--color-koret-navy)' }} />
                 Smart Infrastructure
               </div>
-              <h3 className="text-3xl font-bold tracking-tight mb-2 text-white">Our AI Services</h3>
-              <p className="text-sm text-zinc-400">
+              <h3 className="text-3xl font-bold tracking-tight mb-2" style={{ color: 'var(--color-ink-charcoal)' }}>
+                Our AI Services
+              </h3>
+              <p className="text-sm" style={{ color: 'var(--color-dock-slate)' }}>
                 Click to explore what we build
               </p>
             </div>
@@ -128,131 +164,128 @@ await agent.run();
                   <button
                     key={feature.id}
                     onClick={() => setActiveTab(feature.id)}
-                    className={cn(
-                      'group/card relative overflow-hidden rounded-xl p-4 border transition-all duration-300 flex flex-col',
-                      !isActive && 'navy-card-hover'
-                    )}
-                    style={{
-                      backgroundColor: isActive ? SURFACE_ACTIVE : SURFACE_CARD,
-                      borderColor: isActive ? SURFACE_ACTIVE : HAIRLINE,
-                    }}
+                    className="group/card relative overflow-hidden rounded-xl p-4 transition-all duration-300 flex flex-col text-left"
+                    style={
+                      isActive
+                        ? { backgroundColor: 'var(--color-koret-navy)', border: '1px solid var(--color-koret-navy)' }
+                        : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
+                    }
                   >
-                    <Icon className={cn('w-5 h-5 mb-2 transition-colors', isActive ? 'text-white' : 'text-zinc-500')} />
-                    <span className="text-xs font-bold text-white text-left">{feature.title}</span>
-                    <span className="text-[10px] text-zinc-400 text-left mt-1 line-clamp-1">{feature.stat}</span>
+                    <Icon
+                      className="w-5 h-5 mb-2 transition-colors"
+                      style={{ color: isActive ? '#ffffff' : 'var(--color-dock-slate)' }}
+                    />
+                    <span
+                      className="text-xs font-bold text-left"
+                      style={{ color: isActive ? '#ffffff' : 'var(--color-ink-charcoal)' }}
+                    >
+                      {feature.title}
+                    </span>
+                    <span
+                      className="text-[10px] text-left mt-1 line-clamp-1"
+                      style={{ color: isActive ? 'rgba(255,255,255,0.7)' : 'var(--color-dock-slate)' }}
+                    >
+                      {feature.stat}
+                    </span>
                   </button>
                 );
               })}
             </div>
 
             <div
-              className="relative z-10 mt-6 p-4 rounded-xl border"
-              style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
+              className="relative z-10 mt-6 p-4 rounded-xl"
+              style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
             >
               <div className="flex-1">
-                <p className="text-xs font-mono text-zinc-500 mb-1">Selected:</p>
-                <p className="text-lg font-bold text-white">{activeFeature.title}</p>
-                <p className="text-xs text-zinc-400 mt-1">{activeFeature.desc}</p>
+                <p className="text-xs font-mono mb-1" style={{ color: 'var(--color-dock-steel)' }}>Selected:</p>
+                <p className="text-lg font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.title}</p>
+                <p className="text-xs mt-1" style={{ color: 'var(--color-dock-slate)' }}>{activeFeature.desc}</p>
               </div>
-              <div className="text-2xl font-bold font-mono text-white mt-3">{activeFeature.stat}</div>
+              <div className="text-2xl font-bold font-mono mt-3" style={{ color: 'var(--color-koret-navy)' }}>
+                {activeFeature.stat}
+              </div>
             </div>
           </div>
 
           {/* AI Consultation Card */}
-          <div
-            className="group navy-card-hover relative overflow-hidden rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300"
-            style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
-          >
+          <div className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
-                <div
-                  className="p-2 border rounded-lg"
-                  style={{ backgroundColor: SURFACE_ACTIVE, borderColor: SURFACE_ACTIVE }}
-                >
-                  <BarChart3 className="w-5 h-5 text-white" />
+                <div className="p-2 rounded-lg" style={chipLight}>
+                  <BarChart3 className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
                 </div>
                 <span
-                  className="text-xs px-2 py-1 rounded-lg text-zinc-300 font-semibold"
-                  style={{ backgroundColor: SURFACE_ACTIVE }}
+                  className="text-xs px-2 py-1 rounded-lg font-semibold"
+                  style={{ ...chipLight, color: 'var(--color-koret-navy)' }}
                 >
                   Included
                 </span>
               </div>
-              <h3 className="text-sm font-bold text-white mb-1">AI Consultation</h3>
-              <p className="text-xs text-zinc-400 mb-4">What's included</p>
+              <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>AI Consultation</h3>
+              <p className="text-xs mb-4" style={{ color: 'var(--color-dock-slate)' }}>What's included</p>
 
               <div className="space-y-2">
-                {consultationItems.map((c, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedItem(idx)}
-                    className={cn(
-                      'w-full text-left p-2 rounded-lg transition-all duration-200 border',
-                      selectedItem !== idx && 'navy-card-hover'
-                    )}
-                    style={{
-                      backgroundColor: selectedItem === idx ? SURFACE_ACTIVE : SURFACE_CARD,
-                      borderColor: selectedItem === idx ? SURFACE_ACTIVE : HAIRLINE,
-                    }}
-                  >
-                    <p className="text-[10px] text-zinc-400">{c.label}</p>
-                    <p className="text-sm font-bold text-white mt-0.5">{c.detail}</p>
-                  </button>
-                ))}
+                {consultationItems.map((c, idx) => {
+                  const isSelected = selectedItem === idx;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedItem(idx)}
+                      className="w-full text-left p-2 rounded-lg transition-all duration-200"
+                      style={
+                        isSelected
+                          ? { backgroundColor: 'var(--color-koret-navy)', border: '1px solid var(--color-koret-navy)' }
+                          : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
+                      }
+                    >
+                      <p className="text-[10px]" style={{ color: isSelected ? 'rgba(255,255,255,0.7)' : 'var(--color-dock-steel)' }}>
+                        {c.label}
+                      </p>
+                      <p className="text-sm font-bold mt-0.5" style={{ color: isSelected ? '#ffffff' : 'var(--color-ink-charcoal)' }}>
+                        {c.detail}
+                      </p>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
 
           {/* Works With Your Stack */}
-          <div
-            className="group navy-card-hover relative overflow-hidden rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300"
-            style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
-          >
+          <div className="group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
-              <div
-                className="p-2 border rounded-lg w-fit mb-4"
-                style={{ backgroundColor: SURFACE_ACTIVE, borderColor: SURFACE_ACTIVE }}
-              >
-                <Layers className="w-5 h-5 text-white" />
+              <div className="p-2 rounded-lg w-fit mb-4" style={chipLight}>
+                <Layers className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
               </div>
-              <h3 className="text-sm font-bold text-white mb-1">Works With Your Stack</h3>
-              <p className="text-xs text-zinc-400 mb-4">Tools we build around</p>
+              <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>Works With Your Stack</h3>
+              <p className="text-xs mb-4" style={{ color: 'var(--color-dock-slate)' }}>Tools we build around</p>
 
               <div className="grid grid-cols-3 gap-2">
                 {stack.map((s, idx) => (
                   <div
                     key={idx}
-                    className="group/int navy-card-hover p-3 rounded-lg border transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer"
-                    style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
+                    className="group/int p-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer"
+                    style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
                   >
                     <span className="text-xl group-hover/int:scale-125 transition-transform duration-200">{s.abbr}</span>
-                    <p className="text-[9px] text-zinc-500 text-center">{s.name}</p>
+                    <p className="text-[9px] text-center" style={{ color: 'var(--color-dock-steel)' }}>{s.name}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Example Agent */}
-          <div
-            className="md:col-span-2 group navy-card-hover relative overflow-hidden rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300"
-            style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
-          >
+          {/* Example Agent — intentionally kept dark; a "light" code block reads as wrong regardless of the section theme */}
+          <div className="md:col-span-2 group relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
-                <div
-                  className="p-2 border rounded-lg"
-                  style={{ backgroundColor: SURFACE_ACTIVE, borderColor: SURFACE_ACTIVE }}
-                >
-                  <Terminal className="w-5 h-5 text-white" />
+                <div className="p-2 rounded-lg" style={chipLight}>
+                  <Terminal className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
                 </div>
-                <h3 className="text-sm font-bold text-white">Example: A Lead-Qualifying Agent</h3>
+                <h3 className="text-sm font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>Example: A Lead-Qualifying Agent</h3>
               </div>
 
-              <div
-                className="border rounded-lg p-4 font-mono text-[12px] leading-relaxed overflow-auto max-h-32 scrollbar-hide"
-                style={{ backgroundColor: SURFACE_ABYSS, borderColor: HAIRLINE }}
-              >
+              <div className="bg-black border border-zinc-800 rounded-lg p-4 font-mono text-[12px] leading-relaxed overflow-auto max-h-32 scrollbar-hide">
                 {agentExample.split('\n').map((line, idx) => (
                   <div key={idx} className="flex gap-2">
                     <span className="text-zinc-600 select-none w-6 text-right">{idx + 1}</span>
@@ -277,13 +310,9 @@ await agent.run();
         {/* Bottom Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="group navy-card-hover relative overflow-hidden rounded-xl border p-4 transition-all duration-300"
-              style={{ backgroundColor: SURFACE_CARD, borderColor: HAIRLINE }}
-            >
-              <p className="text-xs text-zinc-400 relative z-10">{stat.label}</p>
-              <p className="text-xl font-bold text-white mt-1 relative z-10">{stat.value}</p>
+            <div key={idx} className="group relative overflow-hidden rounded-xl p-4 transition-all duration-300" style={cardBase}>
+              <p className="text-xs relative z-10" style={{ color: 'var(--color-dock-slate)' }}>{stat.label}</p>
+              <p className="text-xl font-bold mt-1 relative z-10" style={{ color: 'var(--color-koret-navy)' }}>{stat.value}</p>
             </div>
           ))}
         </div>
