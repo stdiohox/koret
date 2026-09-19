@@ -25,7 +25,7 @@ export default function ProcessTimeline() {
           <motion.div key={step.label} variants={item}>
             <div
               className="w-6 h-6 rounded-full flex items-center justify-center mb-4 text-[12px] font-semibold"
-              style={{ border: '1.5px solid var(--color-koret-navy)', color: 'var(--color-koret-navy)' }}
+              style={{ border: '1.5px solid var(--color-ink-charcoal)', color: 'var(--color-ink-charcoal)' }}
             >
               {step.label.replace('0', '')}
             </div>

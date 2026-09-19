@@ -135,7 +135,7 @@ await agent.run();
                 className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-lg text-xs font-semibold"
                 style={{ ...chipLight, color: 'var(--color-ink-charcoal)' }}
               >
-                <Lightbulb className="w-3.5 h-3.5" style={{ color: 'var(--color-koret-navy)' }} />
+                <Lightbulb className="w-3.5 h-3.5" style={{ color: 'var(--color-ink-charcoal)' }} />
                 Smart Infrastructure
               </div>
               <h3 className="text-3xl font-bold tracking-tight mb-2" style={{ color: 'var(--color-ink-charcoal)' }}>
@@ -191,7 +191,7 @@ await agent.run();
                 <p className="text-lg font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.title}</p>
                 <p className="text-xs mt-1" style={{ color: 'var(--color-ink-charcoal)' }}>{activeFeature.desc}</p>
               </div>
-              <div className="text-2xl font-bold mt-3" style={{ color: 'var(--color-koret-navy)' }}>
+              <div className="text-2xl font-bold mt-3" style={{ color: 'var(--color-ink-charcoal)' }}>
                 {activeFeature.stat}
               </div>
             </div>
@@ -202,11 +202,11 @@ await agent.run();
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
-                  <BarChart3 className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
+                  <BarChart3 className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
                 </div>
                 <span
                   className="text-xs px-2 py-1 rounded-lg font-semibold"
-                  style={{ ...chipLight, color: 'var(--color-koret-navy)' }}
+                  style={{ ...chipLight, color: 'var(--color-ink-charcoal)' }}
                 >
                   Included
                 </span>
@@ -245,7 +245,7 @@ await agent.run();
           <div className="group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="p-2 rounded-lg w-fit mb-4" style={chipLight}>
-                <Layers className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
+                <Layers className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
               </div>
               <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>Works With Your Stack</h3>
               <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>Tools we build around</p>
@@ -270,7 +270,7 @@ await agent.run();
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
-                  <Terminal className="w-5 h-5" style={{ color: 'var(--color-koret-navy)' }} />
+                  <Terminal className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
                 </div>
                 <h3 className="text-sm font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>Example: A Lead-Qualifying Agent</h3>
               </div>
@@ -302,7 +302,7 @@ await agent.run();
           {stats.map((stat, idx) => (
             <div key={idx} className="group light-card-hover relative overflow-hidden rounded-xl p-4 transition-all duration-300" style={cardBase}>
               <p className="text-xs relative z-10" style={{ color: 'var(--color-dock-slate)' }}>{stat.label}</p>
-              <p className="text-xl font-bold mt-1 relative z-10" style={{ color: 'var(--color-koret-navy)' }}>{stat.value}</p>
+              <p className="text-xl font-bold mt-1 relative z-10" style={{ color: 'var(--color-ink-charcoal)' }}>{stat.value}</p>
             </div>
           ))}
         </div>
