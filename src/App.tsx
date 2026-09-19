@@ -1,6 +1,6 @@
 import Hero from './components/Hero';
-import ServicesTabs from './components/ServicesTabs';
 import AIServicesGrid from './components/AIServicesGrid';
+import ServicesTabs from './components/ServicesTabs';
 import WhyKoret from './components/WhyKoret';
 import ProcessTimeline from './components/ProcessTimeline';
 import Results from './components/Results';
@@ -12,8 +12,8 @@ export default function App() {
   return (
     <>
       <Hero />
-      <ServicesTabs />
       <AIServicesGrid />
+      <ServicesTabs />
       <WhyKoret />
       <ProcessTimeline />
       <Results />
