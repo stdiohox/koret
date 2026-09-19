@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Koret — Marketing &amp; AI Automation Agency</title>
+    <meta
+      name="description"
+      content="Koret blends brand strategy with AI-powered automation, web apps, and agentic workflows. Marketing that builds momentum — and the tech that scales it."
+    />
+
+    <!-- TODO: replace https://koret.agency/ with the real domain here, in public/robots.txt,
+         public/sitemap.xml, and in every @id / url below before launch. -->
+    <link rel="canonical" href="https://koret.agency/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#00419B" />
+
+    <!-- TODO: replace with the official logo SVG / favicon set -->
+    <link rel="icon" type="image/png" href="/assets/koret-mark.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://koret.agency/" />
+    <meta property="og:site_name" content="Koret" />
+    <meta property="og:title" content="Koret — Marketing &amp; AI Automation Agency" />
+    <meta
+      property="og:description"
+      content="Koret blends brand strategy with AI-powered automation, web apps, and agentic workflows. Marketing that builds momentum — and the tech that scales it."
+    />
+    <!-- TODO: replace with a real 1200x630 OG image -->
+    <meta property="og:image" content="https://koret.agency/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Koret — marketing and AI automation agency"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Koret — Marketing &amp; AI Automation Agency" />
+    <meta
+      name="twitter:description"
+      content="Koret blends brand strategy with AI-powered automation, web apps, and agentic workflows. Marketing that builds momentum — and the tech that scales it."
+    />
+    <meta name="twitter:image" content="https://koret.agency/assets/og-image.png" />
+
+    <!--
+      Organization + one Service node per AI offering.
+      The FAQPage node is rendered by src/components/FAQ.tsx from the same data
+      that renders the accordion, so the two can never drift apart.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://koret.agency/#organization",
+            "name": "Koret",
+            "url": "https://koret.agency/",
+            "slogan": "Bringing your brand to limelight",
+            "description": "Koret blends brand strategy with AI-powered automation, web apps, and agentic workflows.",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://koret.agency/assets/koret-wordmark-blue.png"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "email": "hello@koret.agency",
+              "availableLanguage": "English"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://koret.agency/#website",
+            "url": "https://koret.agency/",
+            "name": "Koret",
+            "publisher": { "@id": "https://koret.agency/#organization" }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://koret.agency/#service-automation",
+            "name": "Automation",
+            "serviceType": "Business process automation",
+            "description": "We map one process end to end, then replace the repetitive parts. Intake, onboarding, reporting, order handling. The steps that need judgement stay with your team.",
+            "provider": { "@id": "https://koret.agency/#organization" }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://koret.agency/#service-web",
+            "name": "Website & Web App Development",
+            "serviceType": "Web app development",
+            "description": "Marketing sites that load fast, rank and convert, plus the internal tools, client portals and dashboards behind them.",
+            "provider": { "@id": "https://koret.agency/#organization" }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://koret.agency/#service-workflow",
+            "name": "Workflow Systems",
+            "serviceType": "Workflow automation",
+            "description": "Before anything gets built we redraw how the work flows. Most automation projects fail because a broken process was automated faithfully.",
+            "provider": { "@id": "https://koret.agency/#organization" }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://koret.agency/#service-agentic",
+            "name": "Agentic AI Builds",
+            "serviceType": "AI agent development",
+            "description": "Custom agents with real tool access, an evaluation set that proves they work, and approval gates where the cost of being wrong is high.",
+            "provider": { "@id": "https://koret.agency/#organization" }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://koret.agency/#service-consultation",
+            "name": "AI Consultation",
+            "serviceType": "AI consulting",
+            "description": "A readiness review that names which processes are worth automating, which are not, what it will cost, and what your team needs to run it.",
+            "provider": { "@id": "https://koret.agency/#organization" }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
