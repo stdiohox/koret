@@ -58,10 +58,43 @@ export default function HeroSection() {
         .koret-hero-poppins, .koret-hero-poppins * { font-family: 'Poppins', sans-serif; }
       `}</style>
 
-      <section className="koret-hero-poppins relative bg-[url('https://images.unsplash.com/photo-1771846160864-cfb1b0d56b1d?q=80&w=2400&auto=format&fit=crop')] w-full bg-no-repeat bg-cover bg-center text-sm pb-44">
+      <section className="koret-hero-poppins relative overflow-hidden bg-white w-full text-sm pb-44">
 
-        {/* Contrast scrim — keeps text legible regardless of what the photo looks like underneath */}
-        <div className="absolute inset-0 z-0 bg-white/55" aria-hidden="true" />
+        {/* Animated brand-color gradient — replaces the photo + scrim */}
+        <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+          <motion.div
+            className="absolute rounded-full blur-3xl"
+            style={{
+              width: 700,
+              height: 700,
+              top: '-10%',
+              right: '5%',
+              background: 'radial-gradient(circle, rgba(0,204,255,0.45) 0%, rgba(0,204,255,0) 70%)',
+            }}
+            animate={
+              reduceMotion
+                ? undefined
+                : { x: [0, 30, -20, 0], y: [0, -20, 25, 0], scale: [1, 1.06, 0.98, 1] }
+            }
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="absolute rounded-full blur-3xl"
+            style={{
+              width: 640,
+              height: 640,
+              bottom: '-15%',
+              left: '10%',
+              background: 'radial-gradient(circle, rgba(0,65,155,0.4) 0%, rgba(0,65,155,0) 70%)',
+            }}
+            animate={
+              reduceMotion
+                ? undefined
+                : { x: [0, -25, 20, 0], y: [0, 25, -15, 0], scale: [1, 0.97, 1.05, 1] }
+            }
+            transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </div>
 
         <div className="relative z-10">
           <nav className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-6 w-full">
