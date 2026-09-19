@@ -3,7 +3,7 @@ import MotionSection from './MotionSection';
 
 const stats = [
   { value: '[X]%', label: 'Increase in qualified leads', color: 'var(--color-koret-cyan)' },
-  { value: '[X]', label: 'Hours/week saved through automation', color: 'var(--color-koret-navy)' },
+  { value: '[X]', label: 'Hours/week saved through automation', color: 'var(--color-ink-charcoal)' },
   { value: '[X]', label: 'AI workflows deployed', color: 'var(--color-koret-cyan)' },
 ];
 
