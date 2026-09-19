@@ -157,7 +157,7 @@ await agent.run();
                     className="group/card relative overflow-hidden rounded-xl p-4 transition-all duration-300 flex flex-col text-left"
                     style={
                       isActive
-                        ? { backgroundColor: 'var(--color-koret-cyan)', border: '1px solid var(--color-koret-cyan)' }
+                        ? { backgroundColor: 'rgba(0, 204, 255, 0.12)', border: '1px solid rgba(0, 204, 255, 0.35)', boxShadow: '0 0 32px rgba(0, 204, 255, 0.2)' }
                         : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
                     }
                   >
@@ -224,7 +224,7 @@ await agent.run();
                       className="w-full text-left p-2 rounded-lg transition-all duration-200"
                       style={
                         isSelected
-                          ? { backgroundColor: 'var(--color-koret-cyan)', border: '1px solid var(--color-koret-cyan)' }
+                          ? { backgroundColor: 'rgba(0, 204, 255, 0.12)', border: '1px solid rgba(0, 204, 255, 0.35)', boxShadow: '0 0 32px rgba(0, 204, 255, 0.2)' }
                           : { backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }
                       }
                     >
