@@ -173,7 +173,7 @@ export default function HeroSection() {
 
             <button
               className="hidden md:block px-6 py-3 rounded-full font-medium transition hover:opacity-90"
-              style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#000000' }}
+              style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >
               Book a Consultation
             </button>
@@ -214,7 +214,7 @@ export default function HeroSection() {
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className="px-6 py-3 rounded-full font-medium transition hover:opacity-90"
-                style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#000000' }}
+                style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
               >
                 Start Your Project
               </motion.button>
