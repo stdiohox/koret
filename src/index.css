@@ -86,6 +86,17 @@ body {
   }
 }
 
+/* Not a Tailwind utility — hand-rolled so the agent-code block in AIServicesGrid can
+   scroll without showing a scrollbar. Firefox/old-Edge use the standard properties,
+   WebKit/Blink need the pseudo-element. */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
