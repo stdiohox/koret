@@ -37,12 +37,12 @@ export default function AIServicesGrid() {
   ];
 
   const stack = [
-    { name: 'n8n', abbr: '🔗' },
-    { name: 'Zapier', abbr: '⚡' },
-    { name: 'Slack', abbr: '💬' },
-    { name: 'HubSpot', abbr: '🎯' },
-    { name: 'Notion', abbr: '📝' },
-    { name: 'OpenAI', abbr: '🤖' },
+    { name: 'n8n', slug: 'n8n' },
+    { name: 'Supabase', slug: 'supabase' },
+    { name: 'Slack', slug: 'slack' },
+    { name: 'HubSpot', slug: 'hubspot' },
+    { name: 'Notion', slug: 'notion' },
+    { name: 'Claude', slug: 'claude' },
   ];
 
   const agentExample = `// One of the agents we build
@@ -257,7 +257,18 @@ await agent.run();
                     className="group/int p-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer"
                     style={{ backgroundColor: 'var(--color-canvas-cream)', border: '1px solid var(--color-dock-hairline)' }}
                   >
-                    <span className="text-xl group-hover/int:scale-125 transition-transform duration-200">{s.abbr}</span>
+                    <img
+                      src={`https://cdn.simpleicons.org/${s.slug}`}
+                      alt={s.name}
+                      className="w-6 h-6 group-hover/int:scale-125 transition-transform duration-200"
+                      loading="lazy"
+                      // Simple Icons drops brands on trademark request (Slack is currently
+                      // one), so a slug can 404. Hide rather than render a broken image —
+                      // the tile keeps its footprint and the name below still identifies it.
+                      onError={(e) => {
+                        e.currentTarget.style.visibility = 'hidden';
+                      }}
+                    />
                     <p className="text-[9px] text-center" style={{ color: 'var(--color-dock-slate)' }}>{s.name}</p>
                   </div>
                 ))}
