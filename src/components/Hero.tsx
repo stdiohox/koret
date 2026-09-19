@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { MeshGradient } from '@paper-design/shaders-react';
 
 export default function HeroSection() {
@@ -9,6 +9,20 @@ export default function HeroSection() {
   const [isDesktop, setIsDesktop] = React.useState(false);
   const menuRef = React.useRef<HTMLDivElement | null>(null);
   const reduceMotion = useReducedMotion();
+
+  const heroSectionRef = React.useRef<HTMLElement | null>(null);
+  const isInView = useInView(heroSectionRef, { margin: '200px' });
+  const [webglSupported, setWebglSupported] = React.useState(true);
+
+  React.useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) setWebglSupported(false);
+    } catch {
+      setWebglSupported(false);
+    }
+  }, []);
 
   React.useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -59,22 +73,58 @@ export default function HeroSection() {
         .koret-hero-poppins, .koret-hero-poppins * { font-family: 'Poppins', sans-serif; }
       `}</style>
 
-      <section className="koret-hero-poppins relative overflow-hidden bg-black w-full text-sm pb-44">
+      <section
+        ref={heroSectionRef}
+        className="koret-hero-poppins relative overflow-hidden bg-black w-full text-sm pb-44"
+      >
 
         {/* Mesh gradient shader background — Koret palette in place of the reference's approximate hues */}
         <div className="absolute inset-0" aria-hidden="true">
-          <MeshGradient
-            className="absolute inset-0 w-full h-full"
-            colors={['#000000', '#00CCFF', '#03857A', '#00419B', '#FD7F00']}
-            speed={reduceMotion ? 0 : 0.3}
-            style={{ backgroundColor: '#000000' }}
-          />
-          <MeshGradient
-            className="absolute inset-0 w-full h-full opacity-60"
-            colors={['#000000', '#ffffff', '#00CCFF', '#FD7F00']}
-            speed={reduceMotion ? 0 : 0.2}
-            style={{ backgroundColor: 'transparent' }}
-          />
+          {webglSupported ? (
+            <MeshGradient
+              className="absolute inset-0 w-full h-full"
+              colors={['#000000', '#00CCFF', '#03857A', '#00419B', '#FD7F00']}
+              distortion={0.8}
+              swirl={0.3}
+              speed={reduceMotion || !isInView ? 0 : 0.3}
+              style={{ backgroundColor: '#000000' }}
+            />
+          ) : (
+            <>
+              <motion.div
+                className="absolute rounded-full blur-3xl"
+                style={{
+                  width: 700,
+                  height: 700,
+                  top: '-10%',
+                  right: '5%',
+                  background: 'radial-gradient(circle, rgba(0,204,255,0.45) 0%, rgba(0,204,255,0) 70%)',
+                }}
+                animate={
+                  reduceMotion || !isInView
+                    ? undefined
+                    : { x: [0, 30, -20, 0], y: [0, -20, 25, 0], scale: [1, 1.06, 0.98, 1] }
+                }
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <motion.div
+                className="absolute rounded-full blur-3xl"
+                style={{
+                  width: 640,
+                  height: 640,
+                  bottom: '-15%',
+                  left: '10%',
+                  background: 'radial-gradient(circle, rgba(0,65,155,0.5) 0%, rgba(0,65,155,0) 70%)',
+                }}
+                animate={
+                  reduceMotion || !isInView
+                    ? undefined
+                    : { x: [0, -25, 20, 0], y: [0, 25, -15, 0], scale: [1, 0.97, 1.05, 1] }
+                }
+                transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </>
+          )}
         </div>
 
         <div className="relative z-10">
