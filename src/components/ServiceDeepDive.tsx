@@ -1,6 +1,7 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
 import { Zap, Globe, GitBranch, Rocket, Compass } from 'lucide-react';
 import { Badge } from './ui/badge';
@@ -79,9 +80,51 @@ const iconPanel: Record<string, ReactNode> = {
 };
 
 export default function ServiceDeepDive() {
+  const reduceMotion = useReducedMotion();
+  const blobRef = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(blobRef, { margin: '200px' });
+
   return (
-    <MotionSection id="ai-agency" className="py-24 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
+    <MotionSection id="ai-agency" className="relative overflow-hidden py-24 px-4 md:px-8">
+
+      {/* Brand-colour wash. Mirrored from AIServicesGrid's (cyan top-right / navy
+          bottom-left) so the two adjacent sections don't read as the same graphic twice. */}
+      <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: 560,
+            height: 560,
+            top: '10%',
+            left: '-8%',
+            background: 'radial-gradient(circle, rgba(0,204,255,0.25) 0%, rgba(0,204,255,0) 70%)',
+          }}
+          animate={
+            reduceMotion || !isInView
+              ? undefined
+              : { x: [0, 20, -15, 0], y: [0, -20, 15, 0], scale: [1, 1.04, 0.97, 1] }
+          }
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: 520,
+            height: 520,
+            bottom: '5%',
+            right: '-5%',
+            background: 'radial-gradient(circle, rgba(0,65,155,0.2) 0%, rgba(0,65,155,0) 70%)',
+          }}
+          animate={
+            reduceMotion || !isInView
+              ? undefined
+              : { x: [0, -20, 15, 0], y: [0, 15, -20, 0], scale: [1, 0.96, 1.05, 1] }
+          }
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col items-center gap-4 text-center">
           <Badge variant="outline">Our Services, In Depth</Badge>
           <h2

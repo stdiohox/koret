@@ -29,6 +29,9 @@ export default function AIServicesGrid() {
     { name: 'HubSpot', slug: 'hubspot' },
     { name: 'Notion', slug: 'notion' },
     { name: 'Claude', slug: 'claude' },
+    { name: 'Airtable', slug: 'airtable' },
+    { name: 'Google Sheets', slug: 'googlesheets' },
+    { name: 'WhatsApp', slug: 'whatsapp' },
   ];
 
   const agentExample = `// One of the agents we build
