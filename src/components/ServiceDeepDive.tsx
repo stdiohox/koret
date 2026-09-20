@@ -161,7 +161,7 @@ export default function ServiceDeepDive() {
           {tabs.map((tab) => (
             <div
               key={tab.value}
-              className="rounded-2xl p-6 lg:p-16 grid items-stretch gap-12 lg:grid-cols-2 lg:gap-10"
+              className="rounded-2xl p-6 lg:p-16 grid place-items-center gap-12 lg:grid-cols-2 lg:gap-10"
               style={{ backgroundColor: 'var(--color-surface-ivory)', border: '1px solid var(--color-dock-hairline)' }}
             >
               <div className="flex flex-col gap-5">
@@ -178,7 +178,7 @@ export default function ServiceDeepDive() {
                 </p>
                 <Button className="mt-2.5 w-fit gap-2" size="lg">{tab.content.buttonText}</Button>
               </div>
-              <div className="w-full h-full min-h-[280px] rounded-xl overflow-hidden">
+              <div className="w-full aspect-square max-w-[320px] rounded-xl overflow-hidden">
                 <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
               </div>
             </div>
