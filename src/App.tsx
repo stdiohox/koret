@@ -4,6 +4,7 @@ import AIServicesGrid from './components/AIServicesGrid';
 import WhyKoret from './components/WhyKoret';
 import HowItWorksSection from './components/HowItWorksSection';
 import Results from './components/Results';
+import ParallaxSection from './components/ParallaxSection';
 import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
 import FinalCTA from './components/FinalCTA';
@@ -18,6 +19,7 @@ export default function App() {
       <WhyKoret />
       <HowItWorksSection />
       <Results />
+      <ParallaxSection />
       <FAQ />
       <Testimonials />
       <FinalCTA />
