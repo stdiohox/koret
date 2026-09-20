@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
   return (
     <MotionSection id="process">
       <LazyMotion features={domAnimation}>
-        <div className="max-md:pt-10 max-md:pb-25 md:py-20 px-8 relative">
+        <div className="max-md:pb-25 md:pb-20 px-8 relative">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[var(--color-canvas-cream)]" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[var(--color-canvas-cream)]" />
 
@@ -73,9 +73,6 @@ export default function HowItWorksSection() {
               <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
                 Simple to Start, Built to Scale
               </h2>
-              <p style={{ color: 'var(--color-dock-slate)' }}>
-                Four steps from first conversation to a system that runs itself.
-              </p>
             </div>
 
             {/* md:h-[var(--md-height)] consumes the variable declared below. Without it the
