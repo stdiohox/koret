@@ -8,6 +8,7 @@ export default function HeroSection() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [isDesktop, setIsDesktop] = React.useState(false);
   const menuRef = React.useRef<HTMLDivElement | null>(null);
+  const openBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const reduceMotion = useReducedMotion();
 
   const heroSectionRef = React.useRef<HTMLElement | null>(null);
@@ -38,7 +39,13 @@ export default function HeroSection() {
     }
     function onClickOutside(e: MouseEvent) {
       if (!menuRef.current) return;
-      if (menuRef.current.contains(e.target as Node)) return;
+      const target = e.target as Node;
+      if (menuRef.current.contains(target)) return;
+      // The click that OPENS the menu keeps bubbling to document after React has already
+      // committed the state change and attached this listener — so without exempting the
+      // toggle, the menu opened and closed itself within the same click (measured: open at
+      // +2ms, closed at +3ms). Ignore the button and its SVG children.
+      if (openBtnRef.current?.contains(target)) return;
       setMenuOpen(false);
     }
 
@@ -137,16 +144,25 @@ export default function HeroSection() {
               id="menu"
               ref={menuRef}
               className={[
-                'max-md:absolute max-md:top-0 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-full max-md:bg-white/10 max-md:backdrop-blur-lg',
+                // fixed + 100dvh so the overlay covers the whole viewport (as `absolute` it sized to the
+                // hero's content wrapper: 592px of an 844px screen, leaving a bare strip). z-50 lifts it
+                // above sibling hero content — the "Marketing + AI" pill was painting over the Process link.
+                'max-md:fixed max-md:top-0 max-md:left-0 max-md:z-50 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-[100dvh] max-md:bg-white/10 max-md:backdrop-blur-lg',
                 'flex items-center gap-8 font-medium',
                 'max-md:flex-col max-md:justify-center',
                 menuOpen ? 'max-md:w-full' : 'max-md:w-0',
               ].join(' ')}
               aria-hidden={isDesktop ? false : !menuOpen}
+              onClick={(e) => {
+                // Tapping the overlay's empty area dismisses. The document-level
+                // click-outside handler can't do this any more: the overlay now covers the
+                // viewport, so every tap is technically "inside" it.
+                if (e.target === e.currentTarget) setMenuOpen(false);
+              }}
             >
-              <a href="#ai-agency" className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Agency</a>
-              <a href="#process" className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Process</a>
-              <a href="#faq" className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">FAQ</a>
+              <a href="#ai-agency" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Agency</a>
+              <a href="#process" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Process</a>
+              <a href="#faq" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">FAQ</a>
 
               <button
                 onClick={() => setMenuOpen(false)}
@@ -169,6 +185,7 @@ export default function HeroSection() {
 
             <button
               id="open-menu"
+              ref={openBtnRef}
               onClick={() => setMenuOpen(true)}
               className="md:hidden bg-white/10 hover:bg-white/20 text-white p-2.5 rounded-md aspect-square font-medium transition backdrop-blur-sm"
               aria-label="Open menu"
