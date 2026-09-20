@@ -115,8 +115,9 @@ export default function FAQ() {
                   <div
                     className="relative flex items-center space-x-2 rounded-xl p-3 transition-colors"
                     style={{
-                      backgroundColor: isOpen ? 'rgba(0,204,255,0.12)' : 'var(--color-canvas-cream)',
-                      color: isOpen ? 'var(--color-koret-navy)' : 'var(--color-ink-charcoal)',
+                      backgroundColor: isOpen ? 'var(--color-surface-ivory)' : 'var(--color-canvas-cream)',
+                      border: isOpen ? '1px solid var(--color-dock-hairline)' : '1px solid transparent',
+                      color: 'var(--color-ink-charcoal)',
                     }}
                   >
                     <span className="font-medium text-left">{item.question}</span>
@@ -141,7 +142,11 @@ export default function FAQ() {
                   <div className="flex justify-end ml-7 mt-4 md:ml-16">
                     <div
                       className="relative max-w-md rounded-2xl px-4 py-2 text-lg text-left"
-                      style={{ backgroundColor: 'var(--color-koret-navy)', color: '#ffffff' }}
+                      style={{
+                        backgroundColor: 'var(--color-surface-ivory)',
+                        border: '1px solid var(--color-dock-hairline)',
+                        color: 'var(--color-ink-charcoal)',
+                      }}
                     >
                       {item.answer}
                     </div>
