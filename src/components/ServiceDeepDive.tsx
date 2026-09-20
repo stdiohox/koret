@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, type ReactNode } from 'react';
+import { useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
 import { Zap, Globe, GitBranch, Rocket, Compass } from 'lucide-react';
@@ -70,14 +70,6 @@ const tabs = [
     },
   },
 ];
-
-const iconPanel: Record<string, ReactNode> = {
-  automation: <Zap size={64} color="var(--color-koret-navy)" />,
-  web: <Globe size={64} color="var(--color-koret-navy)" />,
-  workflow: <GitBranch size={64} color="var(--color-koret-navy)" />,
-  agentic: <Rocket size={64} color="var(--color-koret-navy)" />,
-  consultation: <Compass size={64} color="var(--color-koret-navy)" />,
-};
 
 export default function ServiceDeepDive() {
   const reduceMotion = useReducedMotion();
@@ -175,11 +167,20 @@ export default function ServiceDeepDive() {
                     {tab.content.buttonText}
                   </Button>
                 </div>
+                {/* Gradient stays on the wrapper so the panel degrades to the brand wash
+                    while the video loads — or if the file is missing — rather than a void. */}
                 <div
-                  className="w-full aspect-square max-w-[320px] rounded-xl flex items-center justify-center"
+                  className="w-full aspect-square max-w-[320px] rounded-xl overflow-hidden"
                   style={{ background: 'linear-gradient(135deg, rgba(0,204,255,0.15), rgba(0,65,155,0.1))' }}
                 >
-                  {iconPanel[tab.value]}
+                  <video
+                    src={`/services/${tab.value}.mp4`}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </TabsContent>
             ))}
