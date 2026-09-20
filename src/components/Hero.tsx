@@ -199,14 +199,17 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.div variants={item} className="mx-auto w-full flex items-center justify-center gap-3 mt-4">
-              <motion.button
+              <motion.a
+                href="https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className="px-6 py-3 rounded-full font-medium transition hover:opacity-90"
                 style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
               >
                 Start Your Project
-              </motion.button>
+              </motion.a>
               <motion.button
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
