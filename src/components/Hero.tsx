@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { MeshGradient } from '@paper-design/shaders-react';
-import { useParallax } from '@/hooks/useParallax';
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -13,7 +12,6 @@ export default function HeroSection() {
 
   const heroSectionRef = React.useRef<HTMLElement | null>(null);
   const isInView = useInView(heroSectionRef, { margin: '200px' });
-  const bgRef = useParallax<HTMLDivElement>(0.15);
   const [webglSupported, setWebglSupported] = React.useState(true);
 
   React.useEffect(() => {
@@ -81,7 +79,7 @@ export default function HeroSection() {
       >
 
         {/* Mesh gradient shader background — Koret palette in place of the reference's approximate hues */}
-        <div ref={bgRef} className="absolute inset-0" aria-hidden="true">
+        <div className="absolute inset-0" aria-hidden="true">
           {webglSupported ? (
             <MeshGradient
               className="absolute inset-0 w-full h-full"
