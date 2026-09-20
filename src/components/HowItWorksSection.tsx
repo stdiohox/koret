@@ -11,7 +11,7 @@ interface CardProps {
   description: string;
   className?: string;
   rotate?: string;
-  colors: { bg: string; text: string; border: string };
+  colors: { bg: string; text: string; border: string; pin: string };
 }
 
 const Pin = ({ className }: { className?: string }) => (
@@ -24,7 +24,7 @@ const Pin = ({ className }: { className?: string }) => (
 const Card = ({ number, title, description, className, rotate, colors }: CardProps) => (
   <div className={`relative w-full md:w-[280px] transition-transform duration-300 hover:z-30 hover:scale-105 ${rotate} ${className}`}>
     <div className="bg-white p-2 rounded-[25px] shadow-[0px_10px_20px_0px_#D3D3D3] border border-neutral-100">
-      <Pin className={`w-8 h-8 ${colors.text} z-20 mb-6 mx-auto`} />
+      <Pin className={`w-8 h-8 ${colors.pin} z-20 mb-6 mx-auto`} />
       <div className={`${colors.bg} border ${colors.border} rounded-[15px] p-[15px] h-full flex flex-col relative overflow-hidden`}>
         <span
           className={`${colors.text} text-4xl font-bold mb-5`}
@@ -40,10 +40,10 @@ const Card = ({ number, title, description, className, rotate, colors }: CardPro
 );
 
 const steps = [
-  { title: 'Discover', description: 'We learn your brand, your bottlenecks, and your goals.', colors: { bg: 'bg-[rgba(0,204,255,0.10)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(0,204,255,0.25)]' } },
-  { title: 'Design', description: 'Strategy and system architecture, mapped together.', colors: { bg: 'bg-[rgba(0,65,155,0.08)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(0,65,155,0.2)]' } },
-  { title: 'Build', description: 'Campaigns launch, workflows deploy, agents go live.', colors: { bg: 'bg-[rgba(3,133,122,0.08)]', text: 'text-[#03857A]', border: 'border-[rgba(3,133,122,0.2)]' } },
-  { title: 'Scale', description: "We monitor, refine, and expand what's working.", colors: { bg: 'bg-[rgba(253,127,0,0.08)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(253,127,0,0.22)]' } },
+  { title: 'Discover', description: 'We learn your brand, your bottlenecks, and your goals.', colors: { bg: 'bg-[rgba(0,204,255,0.10)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(0,204,255,0.25)]', pin: 'text-[#00CCFF]' } },
+  { title: 'Design', description: 'Strategy and system architecture, mapped together.', colors: { bg: 'bg-[rgba(0,65,155,0.08)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(0,65,155,0.2)]', pin: 'text-[var(--color-koret-navy)]' } },
+  { title: 'Build', description: 'Campaigns launch, workflows deploy, agents go live.', colors: { bg: 'bg-[rgba(3,133,122,0.08)]', text: 'text-[#03857A]', border: 'border-[rgba(3,133,122,0.2)]', pin: 'text-[#03857A]' } },
+  { title: 'Scale', description: "We monitor, refine, and expand what's working.", colors: { bg: 'bg-[rgba(253,127,0,0.08)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(253,127,0,0.22)]', pin: 'text-[#FD7F00]' } },
 ];
 
 const positions = [
@@ -64,10 +64,6 @@ export default function HowItWorksSection() {
     <MotionSection id="process">
       <LazyMotion features={domAnimation}>
         <div className="max-md:pt-10 max-md:pb-25 md:py-20 px-8 relative">
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.08]"
-            style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px)', backgroundSize: '100% 32px', marginTop: '4px' }}
-          />
           <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[var(--color-canvas-cream)]" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[var(--color-canvas-cream)]" />
 
@@ -75,7 +71,7 @@ export default function HowItWorksSection() {
             <div className="flex flex-col items-center gap-4 text-center mb-16">
               <Badge variant="outline">Our Process</Badge>
               <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
-                How We Work
+                Simple to Start, Built to Scale
               </h2>
               <p style={{ color: 'var(--color-dock-slate)' }}>
                 Four steps from first conversation to a system that runs itself.
