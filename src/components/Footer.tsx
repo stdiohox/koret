@@ -56,7 +56,7 @@ export default function Footer() {
               ) : (
                 <span
                   key={s.slug}
-                  className="opacity-40 cursor-not-allowed"
+                  className="cursor-not-allowed"
                   aria-label={`${s.name} (coming soon)`}
                   title="Coming soon"
                 >
