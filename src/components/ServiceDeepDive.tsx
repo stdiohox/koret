@@ -80,7 +80,7 @@ const iconPanel: Record<string, ReactNode> = {
 
 export default function ServiceDeepDive() {
   return (
-    <MotionSection className="py-24 px-4 md:px-8">
+    <MotionSection id="ai-agency" className="py-24 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center gap-4 text-center">
           <Badge variant="outline">Our Services, In Depth</Badge>
