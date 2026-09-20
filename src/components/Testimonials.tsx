@@ -1,5 +1,6 @@
 import TweetCard from './ui/tweet-card';
 import MotionSection from './MotionSection';
+import { useParallax } from '@/hooks/useParallax';
 
 const posts = [
   {
@@ -23,6 +24,8 @@ const posts = [
 ];
 
 export default function Testimonials() {
+  const driftRef = useParallax<HTMLDivElement>(0.08);
+
   return (
     <MotionSection className="py-24 px-4 flex flex-col items-center gap-8">
       <div className="text-center max-w-2xl">
@@ -32,7 +35,7 @@ export default function Testimonials() {
       </div>
       {/* max-w-6xl matches the other sections' container. Without it the grid is full-bleed,
           columns outgrow the card's max-width past ~1440px, and each column shows a gap. */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl items-start">
+      <div ref={driftRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl items-start">
         {posts.map((post) => (
           <TweetCard
             key={post.content}

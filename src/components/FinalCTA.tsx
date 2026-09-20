@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
+import { useParallax } from '@/hooks/useParallax';
 
 export default function FinalCTA() {
+  const driftRef = useParallax<HTMLDivElement>(0.07);
+
   return (
     <section
       id="final-cta"
@@ -9,7 +12,7 @@ export default function FinalCTA() {
         background: 'linear-gradient(135deg, var(--color-canvas-cream) 0%, var(--color-canvas-cream) 55%, rgba(0,204,255,0.35) 100%)',
       }}
     >
-      <div className="mx-auto max-w-[640px] px-6 text-center">
+      <div ref={driftRef} className="mx-auto max-w-[640px] px-6 text-center">
         <h2 className="text-[48px] font-semibold mb-4" style={{ color: 'var(--color-ink-charcoal)', lineHeight: 1.2 }}>
           Ready to Build a Brand That Runs Itself?
         </h2>

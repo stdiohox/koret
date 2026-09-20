@@ -6,6 +6,7 @@ import { Zap, Globe, GitBranch, Rocket, Compass } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import MotionSection from './MotionSection';
+import { useParallax } from '@/hooks/useParallax';
 
 const tabs = [
   {
@@ -105,6 +106,7 @@ export default function ServiceDeepDive() {
   const reduceMotion = useReducedMotion();
   const blobRef = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(blobRef, { margin: '200px' });
+  const washRef = useParallax<HTMLDivElement>(0.18);
 
   return (
     <MotionSection id="ai-agency" className="relative overflow-hidden py-24 px-4 md:px-8">
@@ -112,6 +114,7 @@ export default function ServiceDeepDive() {
       {/* Brand-colour wash. Mirrored from AIServicesGrid's (cyan top-right / navy
           bottom-left) so the two adjacent sections don't read as the same graphic twice. */}
       <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div ref={washRef} className="absolute inset-0">
         <motion.div
           className="absolute rounded-full blur-3xl"
           style={{
@@ -144,6 +147,7 @@ export default function ServiceDeepDive() {
           }
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
         />
+        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">

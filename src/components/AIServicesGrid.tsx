@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import MotionSection from './MotionSection';
+import { useParallax } from '@/hooks/useParallax';
 import { Terminal, Layers, BarChart3 } from 'lucide-react';
 
 export default function AIServicesGrid() {
@@ -11,6 +12,7 @@ export default function AIServicesGrid() {
   const reduceMotion = useReducedMotion();
   const blobRef = React.useRef<HTMLDivElement | null>(null);
   const isInView = useInView(blobRef, { margin: '200px' });
+  const washRef = useParallax<HTMLDivElement>(0.12);
 
   const consultationItems = [
     { label: 'Stack Audit', detail: 'Review what you\'re already using' },
@@ -58,6 +60,7 @@ await agent.run();
 
       {/* Soft brand-color gradient wash — same recipe as the earlier Hero blob treatment */}
       <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div ref={washRef} className="absolute inset-0">
         <motion.div
           className="absolute rounded-full blur-3xl"
           style={{
@@ -90,6 +93,7 @@ await agent.run();
           }
           transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
         />
+        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-16">

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import MotionSection from './MotionSection';
+import { useParallax } from '@/hooks/useParallax';
 
 const stats = [
   { value: '70%', label: 'Increase in qualified leads', color: 'var(--color-koret-cyan)' },
@@ -11,8 +12,13 @@ const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } }
 const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } } };
 
 export default function Results() {
+  const driftRef = useParallax<HTMLDivElement>(0.06);
+
   return (
     <MotionSection id="results" className="pt-0 pb-[80px]">
+      {/* Plain wrapper: the inner motion.div animates transform via framer variants, so the
+          GSAP parallax must not target the same element. */}
+      <div ref={driftRef}>
       <motion.div
         className="mx-auto max-w-[1200px] px-6 grid grid-cols-1 md:grid-cols-3 gap-6"
         variants={container}
@@ -39,6 +45,7 @@ export default function Results() {
           </motion.div>
         ))}
       </motion.div>
+      </div>
     </MotionSection>
   );
 }
