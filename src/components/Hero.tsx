@@ -144,17 +144,6 @@ export default function HeroSection() {
               ].join(' ')}
               aria-hidden={isDesktop ? false : !menuOpen}
             >
-              <div className="relative group flex items-center gap-1 cursor-pointer text-white/80 hover:text-white transition-colors">
-                <span>Services</span>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                  <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div className="absolute bg-white font-normal flex flex-col gap-2 w-max rounded-lg p-4 top-36 left-0 opacity-0 -translate-y-full group-hover:top-44 group-hover:opacity-100 transition-all duration-300 shadow-sm text-black">
-                  <a href="#services" className="hover:translate-x-1 hover:text-slate-500 transition-all">Brand & Marketing</a>
-                  <a href="#ai-agency" className="hover:translate-x-1 hover:text-slate-500 transition-all">AI & Automation</a>
-                </div>
-              </div>
-
               <a href="#ai-agency" className="text-white/80 hover:text-white transition-colors">AI Agency</a>
               <a href="#process" className="text-white/80 hover:text-white transition-colors">Process</a>
               <a href="#faq" className="text-white/80 hover:text-white transition-colors">FAQ</a>
