@@ -1,5 +1,6 @@
 import TweetCard from './ui/tweet-card';
 import MotionSection from './MotionSection';
+import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
 
 const posts = [
@@ -37,14 +38,15 @@ export default function Testimonials() {
           columns outgrow the card's max-width past ~1440px, and each column shows a gap. */}
       <div ref={driftRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl items-start">
         {posts.map((post) => (
+          <ScrollReveal key={post.content}>
           <TweetCard
-            key={post.content}
             author={{ name: 'Koret', handle: 'koret', avatarSrc: '/logo/koret-logo-mark.png', isVerified: false }}
             content={post.content}
             timestamp={post.timestamp}
             tags={post.tags}
             stats={post.stats}
           />
+          </ScrollReveal>
         ))}
       </div>
     </MotionSection>

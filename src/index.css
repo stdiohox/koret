@@ -95,6 +95,64 @@ body {
   }
 }
 
+/* ---- Motion tokens ----------------------------------------------------------------
+   Easing curves and durations, so timings are named rather than scattered magic numbers.
+   --ease-apple is the signature "precision" curve; --ease-out-expo is the fast-in /
+   soft-stop used for reveals. */
+:root {
+  --ease-apple: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-micro: 150ms;
+  --dur-fast: 250ms;
+}
+
+/* ---- Card interaction -------------------------------------------------------------
+   Lift on hover: transform is GPU-composited, and the shadow stays featherlight to match
+   the Dock-derived language rather than a heavy drop shadow. The shadow is transitioned
+   rather than animated per-frame — one paint on a discrete hover, not a scroll loop.
+   Touch devices get a press-in instead, since :hover there is a sticky lie. */
+.card-lift {
+  transition:
+    transform var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast) ease,
+    border-color var(--dur-fast) ease;
+  will-change: transform;
+}
+.card-lift:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow:
+    0 12px 32px rgba(19, 19, 21, 0.07),
+    0 2px 8px rgba(19, 19, 21, 0.04);
+}
+.card-lift:active {
+  transform: translateY(-2px) scale(1);
+  transition-duration: var(--dur-micro);
+}
+@media (hover: none) {
+  .card-lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .card-lift:active {
+    transform: scale(0.99);
+  }
+}
+
+/* Results' stat cards are framer `motion.div`s whose variants write `transform` — a CSS
+   transform hover would be overridden by that inline style. So they get the same lift
+   language expressed through border and shadow only, no transform. */
+.results-card {
+  transition:
+    box-shadow var(--dur-fast) ease,
+    border-color var(--dur-fast) ease;
+}
+.results-card:hover {
+  border-color: rgba(0, 65, 155, 0.3) !important;
+  box-shadow:
+    0 12px 32px rgba(19, 19, 21, 0.07),
+    0 2px 8px rgba(19, 19, 21, 0.04);
+}
+
 /* Tailwind's `hover:` variant cannot override an inline style, and the AI Services cards
    set their default border inline — so the hover border lives here and needs !important
    to win against the element's own style attribute. */

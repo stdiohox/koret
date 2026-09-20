@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import MotionSection from './MotionSection';
+import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
 import { Terminal, Layers, BarChart3 } from 'lucide-react';
 
@@ -100,7 +101,7 @@ await agent.run();
 
         {/* Header */}
         <div className="flex flex-col gap-6 max-w-3xl">
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight" style={{ color: 'var(--color-ink-charcoal)' }}>
+          <h2 className="text-[clamp(2rem,1.3rem+3vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.03em]" style={{ color: 'var(--color-ink-charcoal)' }}>
             Backed by Consultation, Not Just Code
           </h2>
           <p className="text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--color-ink-charcoal)' }}>
@@ -112,7 +113,8 @@ await agent.run();
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {/* AI Consultation Card */}
-          <div className="group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
+          <ScrollReveal className="h-full">
+          <div className="h-full group light-card-hover card-lift relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
@@ -155,8 +157,11 @@ await agent.run();
             </div>
           </div>
 
+          </ScrollReveal>
+
           {/* Works With Your Stack */}
-          <div className="group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
+          <ScrollReveal className="h-full">
+          <div className="h-full group light-card-hover card-lift relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="p-2 rounded-lg w-fit mb-4" style={chipLight}>
                 <Layers className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
@@ -190,11 +195,13 @@ await agent.run();
             </div>
           </div>
 
+        </ScrollReveal>
         </div>
 
         <div className="mt-4">
+          <ScrollReveal>
           {/* Example Agent — intentionally kept dark; a "light" code block reads as wrong regardless of the section theme */}
-          <div className="group light-card-hover relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
+          <div className="h-full group light-card-hover card-lift relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
@@ -222,6 +229,7 @@ await agent.run();
               </div>
             </div>
           </div>
+          </ScrollReveal>
 
         </div>
 

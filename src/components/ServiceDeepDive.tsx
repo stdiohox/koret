@@ -6,6 +6,7 @@ import { Zap, Globe, GitBranch, Rocket, Compass } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import MotionSection from './MotionSection';
+import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
 
 const tabs = [
@@ -153,7 +154,7 @@ export default function ServiceDeepDive() {
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex flex-col items-center gap-4 text-center">
           <Badge variant="outline">Our Services, In Depth</Badge>
-          <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
+          <h2 className="max-w-2xl text-[clamp(1.75rem,1.2rem+2.2vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.02em]" style={{ color: 'var(--color-ink-charcoal)' }}>
             Five Ways We Move Your Brand Forward
           </h2>
           <p style={{ color: 'var(--color-dock-slate)' }}>
@@ -163,9 +164,9 @@ export default function ServiceDeepDive() {
 
         <div className="mt-12 flex flex-col gap-10">
           {tabs.map((tab) => (
+            <ScrollReveal key={tab.value}>
             <div
-              key={tab.value}
-              className="rounded-2xl p-6 lg:p-16 grid place-items-center gap-12 lg:grid-cols-2 lg:gap-10"
+              className="card-lift rounded-2xl p-6 lg:p-16 grid place-items-center gap-12 lg:grid-cols-2 lg:gap-10"
               style={{ backgroundColor: 'var(--color-surface-ivory)', border: '1px solid var(--color-dock-hairline)' }}
             >
               <div className="flex flex-col gap-5">
@@ -174,7 +175,7 @@ export default function ServiceDeepDive() {
                   <span className="text-sm font-semibold">{tab.label}</span>
                 </div>
                 <Badge variant="outline" className="w-fit">{tab.content.badge}</Badge>
-                <h3 className="text-3xl font-semibold lg:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
+                <h3 className="text-[clamp(1.5rem,1.1rem+1.7vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.02em]" style={{ color: 'var(--color-ink-charcoal)' }}>
                   {tab.content.title}
                 </h3>
                 <p className="lg:text-lg" style={{ color: 'var(--color-dock-slate)' }}>
@@ -186,6 +187,7 @@ export default function ServiceDeepDive() {
                 <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -30,13 +30,13 @@ export default function Results() {
           <motion.div
             key={stat.label}
             variants={item}
-            className="p-6 rounded-[16px]"
+            className="results-card p-6 rounded-[16px]"
             style={{
               backgroundColor: 'var(--color-surface-ivory)',
               border: '1px solid var(--color-dock-hairline)',
             }}
           >
-            <p className="text-[40px] font-semibold mb-2" style={{ color: stat.color, lineHeight: 1.25 }}>
+            <p className="text-[clamp(2rem,1.4rem+2.6vw,2.75rem)] font-semibold mb-2 leading-[1.1] tracking-[-0.02em]" style={{ color: stat.color, lineHeight: 1.25 }}>
               {stat.value}
             </p>
             <p className="text-[14px] font-medium" style={{ color: 'var(--color-dock-slate)' }}>

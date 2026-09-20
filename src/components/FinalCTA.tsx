@@ -13,7 +13,7 @@ export default function FinalCTA() {
       }}
     >
       <div ref={driftRef} className="mx-auto max-w-[640px] px-6 text-center">
-        <h2 className="text-[48px] font-semibold mb-4" style={{ color: 'var(--color-ink-charcoal)', lineHeight: 1.2 }}>
+        <h2 className="text-[clamp(2rem,1.3rem+3vw,3rem)] font-semibold mb-4 leading-[1.1] tracking-[-0.025em]" style={{ color: 'var(--color-ink-charcoal)' }}>
           Ready to Build a Brand That Runs Itself?
         </h2>
         <p className="text-[16px] mb-8" style={{ color: 'var(--color-dock-slate)' }}>

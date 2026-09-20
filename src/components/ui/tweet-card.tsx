@@ -127,7 +127,7 @@ export default function TweetCard({
     <div
       onMouseMove={handleMouseMove}
       className={cn(
-        'group relative w-full max-w-[550px] overflow-hidden rounded-2xl p-5 transition-shadow duration-300',
+        'group card-lift relative w-full max-w-[550px] overflow-hidden rounded-2xl p-5',
         className
       )}
       style={{
