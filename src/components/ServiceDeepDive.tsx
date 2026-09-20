@@ -175,6 +175,7 @@ export default function ServiceDeepDive() {
                 >
                   <video
                     src={`/services/${tab.value}.mp4`}
+                    poster={`/services/${tab.value}-poster.jpg`}
                     autoPlay
                     loop
                     muted
