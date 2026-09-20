@@ -1,57 +1,157 @@
-import { useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
-import MotionSection from './MotionSection';
+'use client';
 
-const faqs = [
-  { q: "What's the difference between your marketing services and your AI services?", a: 'Marketing builds the story and drives attention. AI automation builds the systems that convert that attention into results — and keeps running after the campaign ends.' },
-  { q: 'Do I need to be technical to work with your AI team?', a: 'No. We handle the build; you tell us the outcome you want.' },
-  { q: 'Can you automate an existing workflow, or does it have to be new?', a: 'Both. We regularly plug automation into tools businesses already use.' },
-  { q: 'What\'s an "agentic build"?', a: "An AI agent that doesn't just answer questions — it takes action: qualifying a lead, booking a call, updating a record, following up." },
-  { q: 'Do you offer ongoing support after launch?', a: 'Yes — through consultation and managed automation support.' },
+import * as React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import * as Accordion from '@radix-ui/react-accordion';
+import { Minus, Plus } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Badge } from './ui/badge';
+
+// Registered at module scope, not in an effect: useGSAP runs inside a layout effect, which
+// fires BEFORE useEffect — so registering there left ScrollTrigger unregistered at the
+// moment the timeline was built, and the `scrollTrigger` config was silently dropped (no
+// pin-spacer, timeline just played on a clock). Verified in-browser both ways.
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+interface FAQItem {
+  id: number;
+  question: string;
+  answer: string;
+}
+
+const data: FAQItem[] = [
+  {
+    id: 1,
+    question: 'Do you handle marketing too, or just the AI side?',
+    answer:
+      "Just AI and automation — automation, web and app development, workflow systems, agentic builds, and consultation. We don't run marketing campaigns, but everything we build is designed to fit the brand you already have.",
+  },
+  {
+    id: 2,
+    question: 'Do I need to be technical to work with your AI team?',
+    answer: 'No. We handle the build; you tell us the outcome you want.',
+  },
+  {
+    id: 3,
+    question: 'Can you automate an existing workflow, or does it have to be new?',
+    answer: 'Both. We regularly plug automation into tools businesses already use.',
+  },
+  {
+    id: 4,
+    question: 'What\'s an "agentic build"?',
+    answer:
+      "An AI agent that doesn't just answer questions — it takes action: qualifying a lead, booking a call, updating a record, following up.",
+  },
+  {
+    id: 5,
+    question: 'Do you offer ongoing support after launch?',
+    answer: 'Yes — through consultation and managed automation support.',
+  },
 ];
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [openItem, setOpenItem] = React.useState<string | null>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
+  useGSAP(() => {
+    if (!containerRef.current || data.length === 0 || reduceMotion) return;
+
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top top',
+        end: `+=${data.length * 200}`,
+        scrub: 0.3,
+        pin: true,
+        markers: false,
+      },
+    });
+
+    data.forEach((item, index) => {
+      tl.add(() => {
+        setOpenItem(item.id.toString());
+      }, index * 2);
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [reduceMotion]);
+
   return (
-    <MotionSection id="faq" className="py-[80px]">
-      <div className="mx-auto max-w-[700px] px-6">
-        {faqs.map((item, i) => (
-          <div key={item.q} style={{ borderBottom: '1px solid var(--color-dock-hairline)' }}>
-            <button
-              className="w-full flex items-center justify-between py-6 text-left"
-              onClick={() => setOpen(open === i ? null : i)}
-              aria-expanded={open === i}
-            >
-              <span className="text-[18px] font-medium" style={{ color: 'var(--color-ink-charcoal)' }}>
-                {item.q}
-              </span>
-              {open === i ? (
-                <Minus size={18} color="var(--color-dock-slate)" />
-              ) : (
-                <Plus size={18} color="var(--color-dock-slate)" />
-              )}
-            </button>
-            <AnimatePresence initial={false}>
-              {open === i && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <p className="pb-6 text-[16px]" style={{ color: 'var(--color-dock-slate)', lineHeight: 1.56 }}>
-                    {item.a}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+    <div
+      ref={containerRef}
+      id="faq"
+      className={cn('max-w-4xl mx-auto text-center px-4', reduceMotion ? 'py-24' : 'py-16 h-[300vh]')}
+    >
+      <div className="flex flex-col items-center gap-4 mb-10">
+        <Badge variant="outline">Common Questions</Badge>
+        <h2 className="text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
+          Frequently Asked Questions
+        </h2>
+        <p style={{ color: 'var(--color-dock-slate)' }}>
+          Find answers to common questions about how we work.
+        </p>
       </div>
-    </MotionSection>
+
+      <Accordion.Root
+        type="single"
+        collapsible
+        value={openItem || ''}
+        onValueChange={(value) => setOpenItem(value || null)}
+      >
+        {data.map((item) => {
+          const isOpen = openItem === item.id.toString();
+          return (
+            <Accordion.Item value={item.id.toString()} key={item.id} className="mb-6">
+              <Accordion.Header>
+                <Accordion.Trigger className="flex w-full items-center justify-start gap-x-4 cursor-pointer">
+                  <div
+                    className="relative flex items-center space-x-2 rounded-xl p-3 transition-colors"
+                    style={{
+                      backgroundColor: isOpen ? 'rgba(0,204,255,0.12)' : 'var(--color-canvas-cream)',
+                      color: isOpen ? 'var(--color-koret-navy)' : 'var(--color-ink-charcoal)',
+                    }}
+                  >
+                    <span className="font-medium text-left">{item.question}</span>
+                  </div>
+                  <span style={{ color: isOpen ? 'var(--color-koret-navy)' : 'var(--color-dock-slate)' }}>
+                    {isOpen ? <Minus className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+                  </span>
+                </Accordion.Trigger>
+              </Accordion.Header>
+
+              <Accordion.Content asChild forceMount>
+                <motion.div
+                  initial="collapsed"
+                  animate={isOpen ? 'open' : 'collapsed'}
+                  variants={{
+                    open: { opacity: 1, height: 'auto' },
+                    collapsed: { opacity: 0, height: 0 },
+                  }}
+                  transition={{ duration: reduceMotion ? 0 : 0.4 }}
+                  className="overflow-hidden"
+                >
+                  <div className="flex justify-end ml-7 mt-4 md:ml-16">
+                    <div
+                      className="relative max-w-md rounded-2xl px-4 py-2 text-lg text-left"
+                      style={{ backgroundColor: 'var(--color-koret-navy)', color: '#ffffff' }}
+                    >
+                      {item.answer}
+                    </div>
+                  </div>
+                </motion.div>
+              </Accordion.Content>
+            </Accordion.Item>
+          );
+        })}
+      </Accordion.Root>
+    </div>
   );
 }
