@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Zap, Globe, GitBranch, Rocket, Compass } from 'lucide-react';
 import { Badge } from './ui/badge';
@@ -69,6 +69,37 @@ const tabs = [
     },
   },
 ];
+
+// One observer per video: with all five cards mounted at once, `preload="none"` keeps the
+// bytes off the wire until a card is near the viewport, and play/pause on visibility means
+// at most the on-screen clips are decoding rather than all five at once.
+function ServiceVideo({ src, poster }: { src: string; poster: string }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const isInView = useInView(videoRef, { margin: '100px' });
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isInView) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isInView]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      poster={poster}
+      preload="none"
+      loop
+      muted
+      playsInline
+      className="w-full h-full object-cover"
+    />
+  );
+}
 
 export default function ServiceDeepDive() {
   const reduceMotion = useReducedMotion();
@@ -148,15 +179,7 @@ export default function ServiceDeepDive() {
                 <Button className="mt-2.5 w-fit gap-2" size="lg">{tab.content.buttonText}</Button>
               </div>
               <div className="w-full aspect-square max-w-[320px] rounded-xl overflow-hidden">
-                <video
-                  src={`/services/${tab.value}.mp4`}
-                  poster={`/services/${tab.value}-poster.jpg`}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
+                <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
               </div>
             </div>
           ))}
