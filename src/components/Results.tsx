@@ -12,7 +12,7 @@ const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transiti
 
 export default function Results() {
   return (
-    <MotionSection id="results" className="py-[80px]">
+    <MotionSection id="results" className="pt-0 pb-[80px]">
       <motion.div
         className="mx-auto max-w-[1200px] px-6 grid grid-cols-1 md:grid-cols-3 gap-6"
         variants={container}
