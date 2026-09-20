@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Zap, Globe, GitBranch, Rocket, Compass } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import MotionSection from './MotionSection';
@@ -159,36 +158,31 @@ export default function ServiceDeepDive() {
         </div>
 
         <div className="mt-12 flex flex-col gap-10">
-          {tabs.map((tab, i) => {
-            // Zigzag on desktop only — the order classes are lg:-scoped, so the DOM order
-            // (text, then video) is what narrow screens read, every card the same way.
-            const flip = i % 2 === 1;
-            return (
-              <div
-                key={tab.value}
-                className="rounded-2xl p-6 lg:p-16 grid place-items-center gap-12 lg:grid-cols-2 lg:gap-10"
-                style={{ backgroundColor: 'var(--color-surface-ivory)', border: '1px solid var(--color-dock-hairline)' }}
-              >
-                <div className={cn('flex flex-col gap-5', flip && 'lg:order-2')}>
-                  <div className="flex items-center gap-2" style={{ color: 'var(--color-dock-slate)' }}>
-                    {tab.icon}
-                    <span className="text-sm font-semibold">{tab.label}</span>
-                  </div>
-                  <Badge variant="outline" className="w-fit">{tab.content.badge}</Badge>
-                  <h3 className="text-3xl font-semibold lg:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
-                    {tab.content.title}
-                  </h3>
-                  <p className="lg:text-lg" style={{ color: 'var(--color-dock-slate)' }}>
-                    {tab.content.description}
-                  </p>
-                  <Button className="mt-2.5 w-fit gap-2" size="lg">{tab.content.buttonText}</Button>
+          {tabs.map((tab) => (
+            <div
+              key={tab.value}
+              className="rounded-2xl p-6 lg:p-16 grid items-stretch gap-12 lg:grid-cols-2 lg:gap-10"
+              style={{ backgroundColor: 'var(--color-surface-ivory)', border: '1px solid var(--color-dock-hairline)' }}
+            >
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center gap-2" style={{ color: 'var(--color-dock-slate)' }}>
+                  {tab.icon}
+                  <span className="text-sm font-semibold">{tab.label}</span>
                 </div>
-                <div className={cn('w-full aspect-square max-w-[320px] rounded-xl overflow-hidden', flip && 'lg:order-1')}>
-                  <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
-                </div>
+                <Badge variant="outline" className="w-fit">{tab.content.badge}</Badge>
+                <h3 className="text-3xl font-semibold lg:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
+                  {tab.content.title}
+                </h3>
+                <p className="lg:text-lg" style={{ color: 'var(--color-dock-slate)' }}>
+                  {tab.content.description}
+                </p>
+                <Button className="mt-2.5 w-fit gap-2" size="lg">{tab.content.buttonText}</Button>
               </div>
-            );
-          })}
+              <div className="w-full h-full min-h-[280px] rounded-xl overflow-hidden">
+                <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </MotionSection>
