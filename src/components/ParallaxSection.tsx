@@ -36,7 +36,9 @@ export default function ParallaxSection() {
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      // Scoped to this timeline's own trigger. ScrollTrigger.getAll().kill() would also
+      // destroy the FAQ's pin, which lives on the same page.
+      tl.scrollTrigger?.kill();
       gsap.killTweensOf(trigger);
     };
   }, [reduceMotion]);

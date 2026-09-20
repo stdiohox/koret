@@ -19,8 +19,8 @@ export default function App() {
       <WhyKoret />
       <HowItWorksSection />
       <Results />
-      <ParallaxSection />
       <FAQ />
+      <ParallaxSection />
       <Testimonials />
       <FinalCTA />
       <Footer />
