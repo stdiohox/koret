@@ -42,7 +42,7 @@ export default function Footer() {
           <p className="text-[14px] mb-4" style={{ color: 'var(--color-dock-slate)' }}>
             Bringing your brand to limelight.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1">
             {socialLinks.map((s) => {
               const Glyph = s.Icon;
               const icon = Glyph ? (
@@ -61,13 +61,13 @@ export default function Footer() {
                 />
               );
               return s.url ? (
-                <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+                <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="inline-flex h-11 w-11 items-center justify-center">
                   {icon}
                 </a>
               ) : (
                 <span
                   key={s.slug}
-                  className="cursor-not-allowed"
+                  className="inline-flex h-11 w-11 cursor-not-allowed items-center justify-center"
                   aria-label={`${s.name} (coming soon)`}
                   title="Coming soon"
                 >
@@ -82,10 +82,10 @@ export default function Footer() {
             <p className="text-[13px] font-semibold mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>
               {heading.toUpperCase()}
             </p>
-            <ul className="space-y-2">
+            <ul>
               {links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-[14px]" style={{ color: 'var(--color-dock-slate)' }}>
+                  <a href={link.href} className="flex min-h-[44px] items-center text-[14px]" style={{ color: 'var(--color-dock-slate)' }}>
                     {link.label}
                   </a>
                 </li>

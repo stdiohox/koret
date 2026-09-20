@@ -129,7 +129,7 @@ export default function HeroSection() {
 
         <div className="relative z-10">
           <nav className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-6 w-full">
-            <a href="/" aria-label="Koret home" className="flex items-center">
+            <a href="/" aria-label="Koret home" className="flex items-center py-2">
               <img src="/logo/koret-wordmark-light.png" alt="Koret" className="h-7 w-auto" />
             </a>
 
@@ -144,13 +144,13 @@ export default function HeroSection() {
               ].join(' ')}
               aria-hidden={isDesktop ? false : !menuOpen}
             >
-              <a href="#ai-agency" className="text-white/80 hover:text-white transition-colors">AI Agency</a>
-              <a href="#process" className="text-white/80 hover:text-white transition-colors">Process</a>
-              <a href="#faq" className="text-white/80 hover:text-white transition-colors">FAQ</a>
+              <a href="#ai-agency" className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Agency</a>
+              <a href="#process" className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Process</a>
+              <a href="#faq" className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">FAQ</a>
 
               <button
                 onClick={() => setMenuOpen(false)}
-                className="md:hidden bg-white/10 hover:bg-white/20 text-white p-2 rounded-md aspect-square font-medium transition backdrop-blur-sm"
+                className="md:hidden bg-white/10 hover:bg-white/20 text-white p-2.5 rounded-md aspect-square font-medium transition backdrop-blur-sm"
                 aria-label="Close menu"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -170,7 +170,7 @@ export default function HeroSection() {
             <button
               id="open-menu"
               onClick={() => setMenuOpen(true)}
-              className="md:hidden bg-white/10 hover:bg-white/20 text-white p-2 rounded-md aspect-square font-medium transition backdrop-blur-sm"
+              className="md:hidden bg-white/10 hover:bg-white/20 text-white p-2.5 rounded-md aspect-square font-medium transition backdrop-blur-sm"
               aria-label="Open menu"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

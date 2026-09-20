@@ -69,7 +69,7 @@ function ActionButton({
       aria-pressed={onClick ? active : undefined}
       aria-label={hasCount ? `${label}, ${count}` : label}
       className={cn(
-        'flex items-center gap-2 rounded-full px-2 py-1 text-sm transition-colors',
+        'flex min-h-[44px] items-center gap-2 rounded-full px-2 text-sm transition-colors',
         hoverClass,
         active && activeClass
       )}
