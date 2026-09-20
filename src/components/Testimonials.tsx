@@ -5,14 +5,18 @@ const posts = [
   {
     content: "If your AI agent doesn't sound like your brand, it's not finished yet.",
     timestamp: '3d',
+    tags: ['AI', 'branding'],
   },
   {
     content: 'Manual data entry is not a personality trait.',
     timestamp: '1d',
+    tags: ['automation'],
+    mediaUrl: '/services/automation-poster.jpg',
   },
   {
     content: "We don't do \"set it and forget it.\" We do \"set it and it just works.\"",
     timestamp: 'Today',
+    tags: ['automation', 'AI'],
   },
 ];
 
@@ -36,6 +40,8 @@ export default function Testimonials() {
             }}
             content={post.content}
             timestamp={post.timestamp}
+            tags={post.tags}
+            mediaUrl={post.mediaUrl}
             stats={{ replies: 0, retweets: 0, likes: 0, views: '' }}
           />
         ))}

@@ -14,6 +14,13 @@ export interface TweetCardProps {
   };
   content: string;
   timestamp: string;
+  /** Rendered as #hashtags beneath the post body. */
+  tags?: string[];
+  /** Optional post image. */
+  mediaUrl?: string;
+  /** Alt text for `mediaUrl`. Defaults to empty — the post body carries the meaning, so an
+   *  illustrative image is decorative unless a real description is supplied. */
+  mediaAlt?: string;
   stats: {
     replies: number;
     retweets: number;
@@ -87,7 +94,16 @@ function AvatarFallback() {
   );
 }
 
-export default function TweetCard({ author, content, timestamp, stats, className }: TweetCardProps) {
+export default function TweetCard({
+  author,
+  content,
+  timestamp,
+  tags,
+  mediaUrl,
+  mediaAlt,
+  stats,
+  className,
+}: TweetCardProps) {
   const [liked, setLiked] = React.useState(false);
   const [retweeted, setRetweeted] = React.useState(false);
   const [avatarFailed, setAvatarFailed] = React.useState(false);
@@ -169,6 +185,26 @@ export default function TweetCard({ author, content, timestamp, stats, className
         >
           {content}
         </p>
+
+        {/* Hashtags — navy rather than the card's cyan accent: cyan on ivory is ~1.8:1,
+            which is unreadable at this size. Navy reads as a link and clears contrast. */}
+        {tags && tags.length > 0 && (
+          <p className="mt-2 flex flex-wrap gap-x-2 text-[15px]" style={{ color: 'var(--color-koret-navy)' }}>
+            {tags.map((tag) => (
+              <span key={tag}>#{tag}</span>
+            ))}
+          </p>
+        )}
+
+        {/* Post image */}
+        {mediaUrl && (
+          <div
+            className="mt-3 overflow-hidden rounded-xl"
+            style={{ border: '1px solid var(--color-dock-hairline)' }}
+          >
+            <img src={mediaUrl} alt={mediaAlt ?? ''} className="h-auto w-full object-cover" loading="lazy" />
+          </div>
+        )}
 
         {/* Timestamp */}
         <p className="mt-3 text-sm" style={{ color: 'var(--color-dock-slate)' }}>
