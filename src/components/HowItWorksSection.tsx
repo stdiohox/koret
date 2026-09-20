@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
+import { Badge } from './ui/badge';
 import MotionSection from './MotionSection';
 
 interface CardProps {
@@ -71,6 +72,16 @@ export default function HowItWorksSection() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[var(--color-canvas-cream)]" />
 
           <div className="max-w-6xl mx-auto relative z-10">
+            <div className="flex flex-col items-center gap-4 text-center mb-16">
+              <Badge variant="outline">Our Process</Badge>
+              <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
+                How We Work
+              </h2>
+              <p style={{ color: 'var(--color-dock-slate)' }}>
+                Four steps from first conversation to a system that runs itself.
+              </p>
+            </div>
+
             {/* md:h-[var(--md-height)] consumes the variable declared below. Without it the
                 container is h-auto with only absolutely-positioned children at md+, so it
                 collapses to 0 and the cards overflow into the next section. */}
