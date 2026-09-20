@@ -8,9 +8,16 @@ const columns = {
   Contact: [{ label: 'Book a Consultation', href: '#final-cta' }],
 };
 
-const socialLinks = [
+// `url: null` renders the icon dimmed and inert until a real profile link exists.
+const socialLinks: { name: string; slug: string; url: string | null }[] = [
   { name: 'Instagram', slug: 'instagram', url: 'https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi' },
-  // More platforms to be added here once links are provided
+  { name: 'X (Twitter)', slug: 'x', url: null },
+  // LinkedIn is omitted deliberately: Simple Icons has dropped it from the set (trademark
+  // request), so cdn.simpleicons.org/linkedin 404s and would render as a blank gap in this
+  // row. Restore this line once the mark is self-hosted or sourced from another set:
+  // { name: 'LinkedIn', slug: 'linkedin', url: null },
+  { name: 'Facebook', slug: 'facebook', url: null },
+  { name: 'TikTok', slug: 'tiktok', url: null },
 ];
 
 export default function Footer() {
@@ -28,8 +35,8 @@ export default function Footer() {
             Bringing your brand to limelight.
           </p>
           <div className="flex items-center gap-4">
-            {socialLinks.map((s) => (
-              <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+            {socialLinks.map((s) => {
+              const icon = (
                 <img
                   // 777c86 is --color-dock-slate, the same tone as this footer's link and
                   // copyright text. (Keep in sync manually — the CDN needs a literal hex.)
@@ -37,10 +44,26 @@ export default function Footer() {
                   alt={s.name}
                   className="w-5 h-5"
                   loading="lazy"
-                  onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
+                  onError={(e) => {
+                    e.currentTarget.style.visibility = 'hidden';
+                  }}
                 />
-              </a>
-            ))}
+              );
+              return s.url ? (
+                <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+                  {icon}
+                </a>
+              ) : (
+                <span
+                  key={s.slug}
+                  className="opacity-40 cursor-not-allowed"
+                  aria-label={`${s.name} (coming soon)`}
+                  title="Coming soon"
+                >
+                  {icon}
+                </span>
+              );
+            })}
           </div>
         </div>
         {Object.entries(columns).map(([heading, links]) => (
