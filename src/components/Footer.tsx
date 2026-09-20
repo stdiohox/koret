@@ -31,7 +31,9 @@ export default function Footer() {
             {socialLinks.map((s) => (
               <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
                 <img
-                  src={`https://cdn.simpleicons.org/${s.slug}`}
+                  // 777c86 is --color-dock-slate, the same tone as this footer's link and
+                  // copyright text. (Keep in sync manually — the CDN needs a literal hex.)
+                  src={`https://cdn.simpleicons.org/${s.slug}/777c86`}
                   alt={s.name}
                   className="w-5 h-5"
                   loading="lazy"
