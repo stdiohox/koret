@@ -2,7 +2,7 @@ import Hero from './components/Hero';
 import ServiceDeepDive from './components/ServiceDeepDive';
 import AIServicesGrid from './components/AIServicesGrid';
 import WhyKoret from './components/WhyKoret';
-import ProcessTimeline from './components/ProcessTimeline';
+import HowItWorksSection from './components/HowItWorksSection';
 import Results from './components/Results';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
@@ -15,7 +15,7 @@ export default function App() {
       <ServiceDeepDive />
       <AIServicesGrid />
       <WhyKoret />
-      <ProcessTimeline />
+      <HowItWorksSection />
       <Results />
       <FAQ />
       <FinalCTA />
