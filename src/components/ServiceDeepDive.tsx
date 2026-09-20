@@ -146,7 +146,7 @@ export default function ServiceDeepDive() {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex flex-col items-center gap-4 text-center">
           <Badge variant="outline">Our Services, In Depth</Badge>
           <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>

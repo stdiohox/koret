@@ -52,7 +52,9 @@ await agent.run();
   const chipLight = { backgroundColor: 'rgba(0, 65, 155, 0.06)' };
 
   return (
-    <MotionSection className="relative overflow-hidden bg-white py-24 px-4 md:px-8 font-sans antialiased">
+    // No background class here: every other section is transparent over the body's
+    // canvas-cream, so an explicit bg-white produced a hard #faf9f7 -> #ffffff seam.
+    <MotionSection className="relative overflow-hidden py-24 px-4 md:px-8 font-sans antialiased">
 
       {/* Soft brand-color gradient wash — same recipe as the earlier Hero blob treatment */}
       <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
