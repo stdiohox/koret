@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 export default function FinalCTA() {
   return (
     <section
+      id="final-cta"
       className="py-[100px]"
       style={{
         background: 'linear-gradient(135deg, var(--color-canvas-cream) 0%, var(--color-canvas-cream) 55%, rgba(0,204,255,0.35) 100%)',

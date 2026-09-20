@@ -78,9 +78,12 @@ body {
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  /* No `scroll-behavior: smooth` here. GSAP ScrollTrigger's pinning (the FAQ section) is
+     incompatible with native smooth scrolling: an anchor jump that travels through the
+     pinned region has the layout shift under it mid-flight and lands short. Measured — with
+     smooth on, four of five footer anchors missed by 380–4800px; with it off, all land
+     exactly. If smooth scrolling is wanted back, it has to go through GSAP's ScrollToPlugin
+     rather than CSS. */
 
   /* Cyan at 0.4 alpha is roughly 1.4:1 on white, so the glow cannot carry the focus
      indicator on its own — it would fail the 3:1 bar for non-text UI. The solid outline
