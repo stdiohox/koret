@@ -58,13 +58,6 @@ const agent = new KoretAgent({
 await agent.run();
 // ✓ Responding to leads in seconds`;
 
-  const stats = [
-    { label: 'AI Services Offered', value: '5' },
-    { label: 'Disciplines, One Team', value: '2' },
-    { label: 'Handoff Friction', value: '0' },
-    { label: 'Brand-Matched Builds', value: '100%' },
-  ];
-
   const activeFeature = features[activeTab];
 
   // Shared style tokens for this section's light-theme cards
@@ -311,15 +304,6 @@ await agent.run();
 
         </div>
 
-        {/* Bottom Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="group light-card-hover relative overflow-hidden rounded-xl p-4 transition-all duration-300" style={cardBase}>
-              <p className="text-xs relative z-10" style={{ color: 'var(--color-dock-slate)' }}>{stat.label}</p>
-              <p className="text-xl font-bold mt-1 relative z-10" style={{ color: 'var(--color-ink-charcoal)' }}>{stat.value}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </MotionSection>
   );

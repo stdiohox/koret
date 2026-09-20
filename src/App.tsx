@@ -1,5 +1,6 @@
 import Hero from './components/Hero';
 import AIServicesGrid from './components/AIServicesGrid';
+import ServiceDeepDive from './components/ServiceDeepDive';
 import ServicesTabs from './components/ServicesTabs';
 import WhyKoret from './components/WhyKoret';
 import ProcessTimeline from './components/ProcessTimeline';
@@ -13,6 +14,7 @@ export default function App() {
     <>
       <Hero />
       <AIServicesGrid />
+      <ServiceDeepDive />
       <ServicesTabs />
       <WhyKoret />
       <ProcessTimeline />
