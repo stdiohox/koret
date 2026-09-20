@@ -30,6 +30,50 @@ const compact = (n: number) =>
       ? `${(n / 1_000).toFixed(1).replace(/\.0$/, '')}K`
       : `${n}`;
 
+/**
+ * A count of 0 (or an empty string) renders as no number at all, rather than a literal "0".
+ * Zeroed engagement is the honest state for a card that isn't mirroring a real post — and
+ * showing "0 likes" reads as failure rather than as "not applicable".
+ */
+function ActionButton({
+  icon: Icon,
+  count,
+  label,
+  onClick,
+  active = false,
+  activeClass,
+  hoverClass,
+  fillWhenActive = false,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  count?: number | string;
+  label: string;
+  onClick?: () => void;
+  active?: boolean;
+  activeClass?: string;
+  hoverClass: string;
+  fillWhenActive?: boolean;
+}) {
+  const hasCount = count !== undefined && count !== null && count !== '' && count !== 0;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={onClick ? active : undefined}
+      aria-label={hasCount ? `${label}, ${count}` : label}
+      className={cn(
+        'flex items-center gap-2 rounded-full px-2 py-1 text-sm transition-colors',
+        hoverClass,
+        active && activeClass
+      )}
+      style={active ? undefined : { color: 'var(--color-dock-slate)' }}
+    >
+      <Icon className={cn('h-4 w-4', active && fillWhenActive && 'fill-current')} />
+      {hasCount && <span>{count}</span>}
+    </button>
+  );
+}
+
 /** Neutral stand-in while there is no real avatar. Deliberately not a stock face. */
 function AvatarFallback() {
   return (
@@ -116,14 +160,6 @@ export default function TweetCard({ author, content, timestamp, stats, className
               @{author.handle}
             </span>
           </div>
-
-          <button
-            type="button"
-            aria-label="Share"
-            className="rounded-full p-2 transition-colors hover:bg-[rgba(0,204,255,0.1)]"
-          >
-            <Share className="h-4 w-4" style={{ color: 'var(--color-dock-slate)' }} />
-          </button>
         </div>
 
         {/* Content */}
@@ -144,51 +180,41 @@ export default function TweetCard({ author, content, timestamp, stats, className
           className="mt-4 flex items-center justify-between pt-3"
           style={{ borderTop: '1px solid var(--color-dock-hairline)' }}
         >
-          <button
-            type="button"
-            aria-label={`Reply, ${stats.replies}`}
-            className="flex items-center gap-2 rounded-full px-2 py-1 text-sm transition-colors hover:bg-[rgba(0,204,255,0.1)]"
-            style={{ color: 'var(--color-dock-slate)' }}
-          >
-            <MessageCircle className="h-4 w-4" />
-            <span>{compact(stats.replies)}</span>
-          </button>
+          <ActionButton
+            icon={MessageCircle}
+            label="Reply"
+            count={stats.replies ? compact(stats.replies) : undefined}
+            hoverClass="hover:bg-[rgba(0,204,255,0.1)]"
+          />
 
           {/* Green / pink are X's own interaction conventions, kept deliberately. */}
-          <button
-            type="button"
-            aria-pressed={retweeted}
-            aria-label={`Repost, ${stats.retweets + (retweeted ? 1 : 0)}`}
+          <ActionButton
+            icon={Repeat2}
+            label="Repost"
             onClick={() => setRetweeted((v) => !v)}
-            className={cn(
-              'flex items-center gap-2 rounded-full px-2 py-1 text-sm transition-colors hover:bg-green-500/10',
-              retweeted ? 'text-green-600' : ''
-            )}
-            style={retweeted ? undefined : { color: 'var(--color-dock-slate)' }}
-          >
-            <Repeat2 className="h-4 w-4" />
-            <span>{compact(stats.retweets + (retweeted ? 1 : 0))}</span>
-          </button>
+            active={retweeted}
+            activeClass="text-green-600"
+            hoverClass="hover:bg-green-500/10"
+            count={stats.retweets + (retweeted ? 1 : 0) ? compact(stats.retweets + (retweeted ? 1 : 0)) : undefined}
+          />
 
-          <button
-            type="button"
-            aria-pressed={liked}
-            aria-label={`Like, ${stats.likes + (liked ? 1 : 0)}`}
+          <ActionButton
+            icon={Heart}
+            label="Like"
             onClick={() => setLiked((v) => !v)}
-            className={cn(
-              'flex items-center gap-2 rounded-full px-2 py-1 text-sm transition-colors hover:bg-pink-500/10',
-              liked ? 'text-pink-600' : ''
-            )}
-            style={liked ? undefined : { color: 'var(--color-dock-slate)' }}
-          >
-            <Heart className={cn('h-4 w-4', liked && 'fill-current')} />
-            <span>{compact(stats.likes + (liked ? 1 : 0))}</span>
-          </button>
+            active={liked}
+            activeClass="text-pink-600"
+            hoverClass="hover:bg-pink-500/10"
+            fillWhenActive
+            count={stats.likes + (liked ? 1 : 0) ? compact(stats.likes + (liked ? 1 : 0)) : undefined}
+          />
 
-          <span className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-dock-slate)' }}>
-            <span className="sr-only">Views</span>
-            <span aria-hidden="true">{typeof stats.views === 'number' ? compact(stats.views) : stats.views}</span>
-          </span>
+          <ActionButton
+            icon={Share}
+            label="Share"
+            count={typeof stats.views === 'number' ? (stats.views ? compact(stats.views) : undefined) : stats.views || undefined}
+            hoverClass="hover:bg-[rgba(0,204,255,0.1)]"
+          />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import WhyKoret from './components/WhyKoret';
 import HowItWorksSection from './components/HowItWorksSection';
 import Results from './components/Results';
 import FAQ from './components/FAQ';
+import Testimonials from './components/Testimonials';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 
@@ -18,6 +19,7 @@ export default function App() {
       <HowItWorksSection />
       <Results />
       <FAQ />
+      <Testimonials />
       <FinalCTA />
       <Footer />
     </>
