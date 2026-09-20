@@ -52,6 +52,11 @@ const data: FAQItem[] = [
   },
 ];
 
+// Scroll distance the pin is held for. ScrollTrigger's default pinSpacing adds this on
+// top of the element's own height when it builds the pin-spacer, so the container itself
+// must NOT also reserve it — it just needs its natural content height.
+const pinDistance = data.length * 200;
+
 export default function FAQ() {
   const [openItem, setOpenItem] = React.useState<string | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -66,7 +71,7 @@ export default function FAQ() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: `+=${data.length * 200}`,
+        end: `+=${pinDistance}`,
         scrub: 0.3,
         pin: true,
         markers: false,
@@ -88,7 +93,7 @@ export default function FAQ() {
     <div
       ref={containerRef}
       id="faq"
-      className={cn('max-w-4xl mx-auto text-center px-4', reduceMotion ? 'py-24' : 'py-16 h-[300vh]')}
+      className={cn('max-w-4xl mx-auto text-center px-4', reduceMotion ? 'py-24' : 'py-16')}
     >
       <div className="flex flex-col items-center gap-4 mb-10">
         <Badge variant="outline">Common Questions</Badge>
