@@ -8,16 +8,24 @@ const columns = {
   Contact: [{ label: 'Book a Consultation', href: '#final-cta' }],
 };
 
-// `url: null` renders the icon dimmed and inert until a real profile link exists.
-const socialLinks: { name: string; slug: string; url: string | null }[] = [
+import { Linkedin, MessageCircle, type LucideIcon } from 'lucide-react';
+
+// `slug` pulls the brand mark from Simple Icons; `Icon` is a lucide component, used for
+// marks Simple Icons doesn't carry (it dropped LinkedIn on trademark request, so
+// cdn.simpleicons.org/linkedin 404s) and for non-brand glyphs like Message.
+// `url: null` renders the icon inert until a real link exists.
+const socialLinks: {
+  name: string;
+  slug?: string;
+  Icon?: LucideIcon;
+  url: string | null;
+}[] = [
   { name: 'Instagram', slug: 'instagram', url: 'https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi' },
   { name: 'X (Twitter)', slug: 'x', url: null },
-  // LinkedIn is omitted deliberately: Simple Icons has dropped it from the set (trademark
-  // request), so cdn.simpleicons.org/linkedin 404s and would render as a blank gap in this
-  // row. Restore this line once the mark is self-hosted or sourced from another set:
-  // { name: 'LinkedIn', slug: 'linkedin', url: null },
+  { name: 'LinkedIn', Icon: Linkedin, url: null },
   { name: 'Facebook', slug: 'facebook', url: null },
   { name: 'TikTok', slug: 'tiktok', url: null },
+  { name: 'Message', Icon: MessageCircle, url: null },
 ];
 
 export default function Footer() {
@@ -36,7 +44,10 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map((s) => {
-              const icon = (
+              const Glyph = s.Icon;
+              const icon = Glyph ? (
+                <Glyph className="w-5 h-5" style={{ color: 'var(--color-dock-slate)' }} aria-hidden="true" />
+              ) : (
                 <img
                   // 777c86 is --color-dock-slate, the same tone as this footer's link and
                   // copyright text. (Keep in sync manually — the CDN needs a literal hex.)
