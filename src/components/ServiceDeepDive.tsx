@@ -134,7 +134,7 @@ export default function ServiceDeepDive() {
             Five Ways We Move Your Brand Forward
           </h2>
           <p style={{ color: 'var(--color-dock-slate)' }}>
-            Each service, on its own or as part of the full system.
+            Click a service below to see how it works — five ways, one system.
           </p>
         </div>
 
