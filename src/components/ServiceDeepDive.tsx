@@ -173,19 +173,21 @@ export default function ServiceDeepDive() {
                         // Eleven stops, not three. The 3-stop version changed slope abruptly
                         // at its 45% and 70% stops (measured: 0.87 -> 0.16 -> 0.00 units/row),
                         // and the eye reads those kinks as horizontal creases. These stops
-                        // follow a smooth decay curve, so the slope never jumps.
+                        // follow a smooth decay curve, so the slope never jumps. The curve is
+                        // compressed into 0-75% so the top quarter of the image stays clear,
+                        // which is roughly the coverage the 3-stop version had.
                         background: `linear-gradient(to top,
                           rgba(3,133,122,0.55) 0%,
-                          rgba(3,133,122,0.406) 19%,
-                          rgba(3,133,122,0.298) 34%,
-                          rgba(3,133,122,0.210) 47%,
-                          rgba(3,133,122,0.153) 56.5%,
-                          rgba(3,133,122,0.107) 65%,
-                          rgba(3,133,122,0.069) 73%,
-                          rgba(3,133,122,0.041) 80.9%,
-                          rgba(3,133,122,0.023) 87.6%,
-                          rgba(3,133,122,0.012) 94.1%,
-                          rgba(3,133,122,0) 100%)`,
+                          rgba(3,133,122,0.406) 14%,
+                          rgba(3,133,122,0.298) 25.5%,
+                          rgba(3,133,122,0.210) 35%,
+                          rgba(3,133,122,0.153) 42%,
+                          rgba(3,133,122,0.107) 49%,
+                          rgba(3,133,122,0.069) 55%,
+                          rgba(3,133,122,0.041) 60.5%,
+                          rgba(3,133,122,0.023) 66%,
+                          rgba(3,133,122,0.012) 70.5%,
+                          rgba(3,133,122,0) 75%)`,
                       }}
                     />
                     <div
@@ -193,16 +195,16 @@ export default function ServiceDeepDive() {
                       style={{
                         background: `linear-gradient(to top,
                           rgba(3,133,122,0.70) 0%,
-                          rgba(3,133,122,0.517) 19%,
-                          rgba(3,133,122,0.379) 34%,
-                          rgba(3,133,122,0.267) 47%,
-                          rgba(3,133,122,0.195) 56.5%,
-                          rgba(3,133,122,0.136) 65%,
-                          rgba(3,133,122,0.088) 73%,
-                          rgba(3,133,122,0.053) 80.9%,
-                          rgba(3,133,122,0.029) 87.6%,
-                          rgba(3,133,122,0.015) 94.1%,
-                          rgba(3,133,122,0) 100%)`,
+                          rgba(3,133,122,0.517) 14%,
+                          rgba(3,133,122,0.379) 25.5%,
+                          rgba(3,133,122,0.267) 35%,
+                          rgba(3,133,122,0.195) 42%,
+                          rgba(3,133,122,0.136) 49%,
+                          rgba(3,133,122,0.088) 55%,
+                          rgba(3,133,122,0.053) 60.5%,
+                          rgba(3,133,122,0.029) 66%,
+                          rgba(3,133,122,0.015) 70.5%,
+                          rgba(3,133,122,0) 75%)`,
                       }}
                     />
                   </div>
