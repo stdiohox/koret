@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Zap, Globe, GitBranch, Rocket, Compass, ArrowRight } from 'lucide-react';
 import MotionSection from './MotionSection';
@@ -69,37 +69,6 @@ const tabs = [
     },
   },
 ];
-
-// One observer per video: with all five cards mounted at once, `preload="none"` keeps the
-// bytes off the wire until a card is near the viewport, and play/pause on visibility means
-// at most the on-screen clips are decoding rather than all five at once.
-function ServiceVideo({ src, poster }: { src: string; poster: string }) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const isInView = useInView(videoRef, { margin: '100px' });
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (isInView) {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-  }, [isInView]);
-
-  return (
-    <video
-      ref={videoRef}
-      src={src}
-      poster={poster}
-      preload="none"
-      loop
-      muted
-      playsInline
-      className="w-full h-full object-cover"
-    />
-  );
-}
 
 export default function ServiceDeepDive() {
   const reduceMotion = useReducedMotion();
@@ -186,8 +155,13 @@ export default function ServiceDeepDive() {
                       Removing the floor lets the aspect-ratio win at every width, with no
                       hardcoded pixel height to keep in sync with the breakpoints. */}
                   <div className="aspect-square w-full min-h-0 relative">
-                    <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
-                    {/* Navy scrim, heaviest at the bottom edge. The five clips are lit and
+                    <img
+                      src={`/services/${tab.value}-poster.jpg`}
+                      alt={tab.label}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    {/* Navy scrim, heaviest at the bottom edge. The five stills are lit and
                         colour-graded differently; this pulls them onto a common base so the
                         row doesn't read as five unrelated stock assets. */}
                     <div
