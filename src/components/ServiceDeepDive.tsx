@@ -143,7 +143,7 @@ export default function ServiceDeepDive() {
               // cards in a row from matching heights — same pattern as AIServicesGrid.
               <ScrollReveal key={tab.value} className="h-full">
                 <div
-                  className="h-full flex flex-col overflow-clip rounded-xl"
+                  className="group h-full flex flex-col overflow-clip rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   style={{ border: '1px solid var(--color-dock-hairline)', backgroundColor: 'var(--color-pure-white)' }}
                 >
                   {/* min-h-0 is load-bearing, not tidying. This wrapper is a flex item of
@@ -158,16 +158,25 @@ export default function ServiceDeepDive() {
                     <img
                       src={`/services/${tab.value}-poster.jpg`}
                       alt={tab.label}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
-                    {/* Navy scrim, heaviest at the bottom edge. The five stills are lit and
+                    {/* Teal scrim, heaviest at the bottom edge. The five stills are lit and
                         colour-graded differently; this pulls them onto a common base so the
-                        row doesn't read as five unrelated stock assets. */}
+                        row doesn't read as five unrelated stock assets. Two stacked layers
+                        rather than one: the gradient lives in an inline style, which Tailwind
+                        can't vary on `group-hover`, so the stronger version is a second layer
+                        cross-faded in on top. */}
                     <div
-                      className="absolute inset-0 pointer-events-none"
+                      className="absolute inset-0 pointer-events-none transition-opacity duration-300"
                       style={{
                         background: 'linear-gradient(to top, rgba(3,133,122,0.55) 0%, rgba(3,133,122,0.05) 45%, rgba(3,133,122,0) 70%)',
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(3,133,122,0.7) 0%, rgba(3,133,122,0.15) 45%, rgba(3,133,122,0) 70%)',
                       }}
                     />
                   </div>
