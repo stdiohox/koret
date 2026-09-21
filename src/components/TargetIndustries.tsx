@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Stethoscope, Scale, ShoppingBag, Dumbbell, UserSearch, Wrench } from 'lucide-react';
 import MotionSection from './MotionSection';
 
@@ -11,8 +13,12 @@ const industries = [
 ];
 
 export default function TargetIndustries() {
+  const reduceMotion = useReducedMotion();
+  const blobRef = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(blobRef, { margin: '200px' });
+
   return (
-    <MotionSection className="py-16 px-4 md:px-8">
+    <MotionSection className="relative overflow-hidden py-16 px-4 md:px-8">
       {/* The reduced-motion stop matches how the rest of the site treats ambient
           motion (the blob washes gate on useReducedMotion); an infinite marquee is
           the one piece here that would otherwise never hold still. */}
@@ -25,7 +31,31 @@ export default function TargetIndustries() {
           .koret-marquee-track { animation: none !important; }
         }
       `}</style>
-      <div className="max-w-5xl mx-auto text-center mb-10">
+
+      {/* Teal top-left / orange bottom-right: mirrored against the cyan-and-navy
+          wash above so two adjacent sections don't read as the same graphic twice. */}
+      <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: 450, height: 450, top: '-20%', left: '-5%',
+            background: 'radial-gradient(circle, rgba(3,133,122,0.2) 0%, rgba(3,133,122,0) 70%)',
+          }}
+          animate={reduceMotion || !isInView ? undefined : { x: [0, 20, -10, 0], y: [0, -10, 15, 0], scale: [1, 1.04, 0.97, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute rounded-full blur-3xl"
+          style={{
+            width: 420, height: 420, bottom: '-25%', right: '-5%',
+            background: 'radial-gradient(circle, rgba(253,127,0,0.15) 0%, rgba(253,127,0,0) 70%)',
+          }}
+          animate={reduceMotion || !isInView ? undefined : { x: [0, -15, 10, 0], y: [0, 15, -10, 0], scale: [1, 0.96, 1.03, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-semibold" style={{ color: 'var(--color-ink-charcoal)' }}>
           Who We Work With
         </h2>
@@ -35,7 +65,7 @@ export default function TargetIndustries() {
       </div>
 
       <div
-        className="w-full overflow-hidden"
+        className="relative z-10 w-full overflow-hidden"
         style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
       >
         <div
