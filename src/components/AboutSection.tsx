@@ -71,23 +71,23 @@ export default function AboutSection() {
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-10">
+        <div className="mt-8 flex flex-col md:flex-row items-center gap-16">
           <div
             className="shrink-0 w-full md:w-[380px] aspect-square rounded-2xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, rgba(0,204,255,0.15), rgba(0,65,155,0.1))' }}
+            style={{ backgroundColor: 'var(--color-pure-white)', border: '1px solid var(--color-dock-hairline)' }}
           >
-            <img src="/logo/koret-logo-mark.png" alt="" className="w-32 h-32 opacity-60" />
+            <img src="/logo/koret-logo-full.png" alt="Koret" className="w-48 opacity-90" />
           </div>
           <div className="max-w-lg text-sm" style={{ color: 'var(--color-dock-slate)' }}>
             <h3 className="text-xl uppercase font-semibold" style={{ color: 'var(--color-ink-charcoal)' }}>What We Do</h3>
             <div className="w-24 h-[3px] rounded-full my-3" style={{ background: 'linear-gradient(to right, var(--color-koret-cyan), var(--color-koret-navy))' }} />
-            <p className="mt-6">
+            <p className="mt-8">
               Koret runs three integrated service lines under one roof — AI automation, business consulting, and brand building — so you're not coordinating three separate vendors who've never spoken.
             </p>
-            <p className="mt-4">
+            <p className="mt-6">
               We audit your workflows and build the AI systems that save real hours, offer strategic guidance on where automation and process change create the most leverage, and build the brand and content that turns those efficiency gains into visible growth.
             </p>
-            <p className="mt-4">One team, one strategy, one point of contact — that's the whole idea.</p>
+            <p className="mt-6">One team, one strategy, one point of contact — that's the whole idea.</p>
             <a href="#process">
               <Button className="mt-8 gap-2" size="lg">See How We Work</Button>
             </a>
