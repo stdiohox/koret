@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="flex flex-col">
               {/* The light wordmark, not the navy/cyan one — this panel is navy. */}
               <img src="/logo/koret-wordmark-light.png" alt="Koret" className="mb-4 h-8 w-auto shrink-0 self-start" />
-              <h2 className="text-xl font-medium leading-tight text-white md:text-[22px]">
+              <h2 className="text-base font-medium leading-tight text-white md:text-lg">
                 Bringing your brand
                 <br />
                 to limelight.
