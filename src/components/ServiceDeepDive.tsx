@@ -143,18 +143,18 @@ export default function ServiceDeepDive() {
               // cards in a row from matching heights — same pattern as AIServicesGrid.
               <ScrollReveal key={tab.value} className="h-full">
                 <div
-                  className="group h-full flex flex-col overflow-clip rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="group h-full flex flex-col overflow-clip rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   style={{ border: '1px solid var(--color-dock-hairline)', backgroundColor: 'var(--color-pure-white)' }}
                 >
                   {/* min-h-0 is load-bearing, not tidying. This wrapper is a flex item of
                       the card's flex-col, so it carries `min-height: auto`, whose automatic
-                      minimum is the content-based minimum — the poster's intrinsic 1080x1920
-                      scaled to the wrapper's width. At 622px wide that floor is 1106px, and
-                      it outvoted `aspect-square`'s preferred 622px: measured height was
-                      1105.77px on all five cards, ratio 0.563 (= 1080/1920) rather than 1:1.
-                      Removing the floor lets the aspect-ratio win at every width, with no
-                      hardcoded pixel height to keep in sync with the breakpoints. */}
-                  <div className="aspect-square w-full min-h-0 relative">
+                      minimum is the content-based minimum — the poster's intrinsic height
+                      scaled to the wrapper's width, which for these portrait images is far
+                      taller than the ratio wants. It once outvoted the aspect ratio outright:
+                      cards measured 1105.77px instead of the intended 622px. Removing the
+                      floor lets the aspect-ratio win at every width, with no hardcoded pixel
+                      height to keep in sync with the breakpoints. */}
+                  <div className="aspect-[4/3] w-full min-h-0 relative">
                     <img
                       src={`/services/${tab.value}-poster.jpg`}
                       alt={tab.label}
