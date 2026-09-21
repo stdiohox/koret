@@ -71,7 +71,7 @@ export default function AboutSection() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col md:flex-row items-center gap-16">
+        <div className="mt-24 flex flex-col md:flex-row items-center gap-16">
           <div
             className="shrink-0 w-full md:w-[380px] aspect-square rounded-2xl flex items-center justify-center"
             style={{ backgroundColor: 'var(--color-pure-white)', border: '1px solid var(--color-dock-hairline)' }}
