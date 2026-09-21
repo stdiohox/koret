@@ -95,13 +95,12 @@ export default function Footer() {
                   // Flat, unbadged icons. shrink-0 keeps the CDN images from being squeezed
                   // narrower than the lucide components when the column is tight.
                   const icon = Glyph ? (
-                    <Glyph className="h-6 w-6 shrink-0" style={{ color: 'var(--color-koret-cyan)' }} aria-hidden="true" />
+                    <Glyph className="h-6 w-6 shrink-0" style={{ color: 'var(--color-pure-white)' }} aria-hidden="true" />
                   ) : (
                     <img
-                      // 00CCFF is --color-koret-cyan, the same tone as the lucide glyph above,
-                      // so the row reads as one colour. (Keep in sync manually — the CDN needs
-                      // a literal hex.)
-                      src={`https://cdn.simpleicons.org/${s.slug}/00CCFF`}
+                      // FFFFFF matches the lucide glyph above, so the row reads as one
+                      // colour. (Keep in sync manually — the CDN needs a literal hex.)
+                      src={`https://cdn.simpleicons.org/${s.slug}/FFFFFF`}
                       alt={s.name}
                       className="h-6 w-6 shrink-0"
                       loading="lazy"
