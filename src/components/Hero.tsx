@@ -208,7 +208,7 @@ export default function HeroSection() {
               className="hidden md:block px-6 py-3 rounded-full font-medium transition hover:opacity-90"
               style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >
-              Book a Consultation
+              Book a Free Consultation
             </button>
 
             <button

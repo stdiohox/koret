@@ -25,7 +25,7 @@ export default function FinalCTA() {
           className="rounded-[48px] px-6 py-3 text-[16px] font-medium"
           style={{ backgroundColor: 'var(--color-koret-cyan)', color: 'var(--color-ink-charcoal)' }}
         >
-          Book a Consultation
+          Book a Free Consultation
         </motion.button>
       </div>
     </section>

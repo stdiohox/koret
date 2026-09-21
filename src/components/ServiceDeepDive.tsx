@@ -65,7 +65,7 @@ const tabs = [
       title: "Not sure where automation actually pays off? We'll show you.",
       description:
         'A stack audit, a prioritized roadmap, and ROI modeling — so you invest in the automation that moves the needle first, not just what sounds impressive.',
-      buttonText: 'Book a Consultation',
+      buttonText: 'Book a Free Consultation',
     },
   },
 ];
@@ -160,11 +160,11 @@ export default function ServiceDeepDive() {
             </p>
             <a
               href="#final-cta"
-              className="group flex items-center text-xs font-medium md:text-base lg:text-lg"
-              style={{ color: 'var(--color-ink-charcoal)' }}
+              className="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition hover:opacity-90 w-fit"
+              style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#000000' }}
             >
-              Book a Consultation
-              <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+              Book a Free Consultation
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
 

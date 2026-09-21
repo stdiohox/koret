@@ -9,7 +9,7 @@ const columns = {
     { label: 'Process', href: '#process' },
     { label: 'Results', href: '#results' },
   ],
-  Contact: [{ label: 'Book a Consultation', href: '#final-cta' }],
+  Contact: [{ label: 'Book a Free Consultation', href: '#final-cta' }],
 };
 
 import { Linkedin, MessageCircle, type LucideIcon } from 'lucide-react';
