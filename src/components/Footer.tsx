@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="flex items-center gap-1">
             {socialLinks.map((s) => {
               const Glyph = s.Icon;
-              const icon = Glyph ? (
+              const glyph = Glyph ? (
                 <Glyph className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} aria-hidden="true" />
               ) : (
                 <img
@@ -64,6 +64,23 @@ export default function Footer() {
                     e.currentTarget.style.visibility = 'hidden';
                   }}
                 />
+              );
+              // One badge wrapping the shared glyph, so the CDN marks and the lucide
+              // components get an identical circle rather than two near-identical ones.
+              // shrink-0: the row is the narrow first column of a 4-up grid, and without
+              // it flex would squash the circles into ovals before wrapping.
+              const icon = (
+                <div
+                  className="flex shrink-0 items-center justify-center rounded-full"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    backgroundColor: 'rgba(0, 204, 255, 0.12)',
+                    border: '1px solid rgba(0, 204, 255, 0.3)',
+                  }}
+                >
+                  {glyph}
+                </div>
               );
               return s.url ? (
                 <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="inline-flex h-11 w-11 items-center justify-center">
