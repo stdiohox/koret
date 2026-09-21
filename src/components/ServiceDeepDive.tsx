@@ -177,7 +177,15 @@ export default function ServiceDeepDive() {
                   className="h-full flex flex-col overflow-clip rounded-xl"
                   style={{ border: '1px solid var(--color-dock-hairline)', backgroundColor: 'var(--color-pure-white)' }}
                 >
-                  <div className="aspect-square w-full">
+                  {/* min-h-0 is load-bearing, not tidying. This wrapper is a flex item of
+                      the card's flex-col, so it carries `min-height: auto`, whose automatic
+                      minimum is the content-based minimum — the poster's intrinsic 1080x1920
+                      scaled to the wrapper's width. At 622px wide that floor is 1106px, and
+                      it outvoted `aspect-square`'s preferred 622px: measured height was
+                      1105.77px on all five cards, ratio 0.563 (= 1080/1920) rather than 1:1.
+                      Removing the floor lets the aspect-ratio win at every width, with no
+                      hardcoded pixel height to keep in sync with the breakpoints. */}
+                  <div className="aspect-square w-full min-h-0">
                     <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
                   </div>
                   <div className="px-6 py-8 md:px-8 md:py-10">
