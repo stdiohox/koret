@@ -168,7 +168,7 @@ export default function ServiceDeepDive() {
             </a>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+          <div className="grid gap-6 md:grid-cols-3 lg:gap-8">
             {tabs.map((tab) => (
               // h-full on both wrapper and card so the reveal wrapper doesn't stop the
               // cards in a row from matching heights — same pattern as AIServicesGrid.
@@ -185,8 +185,17 @@ export default function ServiceDeepDive() {
                       1105.77px on all five cards, ratio 0.563 (= 1080/1920) rather than 1:1.
                       Removing the floor lets the aspect-ratio win at every width, with no
                       hardcoded pixel height to keep in sync with the breakpoints. */}
-                  <div className="aspect-square w-full min-h-0">
+                  <div className="aspect-square w-full min-h-0 relative">
                     <ServiceVideo src={`/services/${tab.value}.mp4`} poster={`/services/${tab.value}-poster.jpg`} />
+                    {/* Navy scrim, heaviest at the bottom edge. The five clips are lit and
+                        colour-graded differently; this pulls them onto a common base so the
+                        row doesn't read as five unrelated stock assets. */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(0,65,155,0.55) 0%, rgba(0,65,155,0.05) 45%, rgba(0,65,155,0) 70%)',
+                      }}
+                    />
                   </div>
                   <div className="px-6 py-8 md:px-8 md:py-10">
                     <h3 className="mb-3 text-lg font-semibold md:mb-4 md:text-2xl" style={{ color: 'var(--color-ink-charcoal)' }}>
