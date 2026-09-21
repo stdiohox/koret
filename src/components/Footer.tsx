@@ -41,18 +41,6 @@ export default function Footer() {
       id="contact"
       className="relative w-full overflow-hidden bg-white antialiased [font-synthesis:none]"
     >
-      {/* Stroke-outline wordmark. The negative bottom margin tucks it behind the panel
-          below (which carries z-10), so the letterforms are cropped by the panel edge
-          exactly as in the reference. Navy stroke rather than the reference's black. */}
-      <div className="relative z-0 flex w-full items-end justify-center pt-24 pb-0 md:pt-32">
-        <h1
-          aria-hidden="true"
-          className="-mb-4 select-none text-[120px] font-semibold leading-[0.75] text-transparent opacity-50 [-webkit-text-stroke:1px_rgba(0,65,155,0.4)] sm:text-[160px] md:-mb-6 md:text-[210px]"
-        >
-          KORET.
-        </h1>
-      </div>
-
       {/* Navy panel. --color-primary is the reference's hook for the panel colour; Koret
           navy replaces its #1C76F8. The colour lives on the panel rather than in the
           shader (colorBack is transparent), so the panel is correct even where WebGL is
