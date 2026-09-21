@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Zap, Globe, GitBranch, Rocket, Compass, ArrowRight } from 'lucide-react';
+import AgenticDiagram from './AgenticDiagram';
 import MotionSection from './MotionSection';
 import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
@@ -155,12 +156,19 @@ export default function ServiceDeepDive() {
                       Removing the floor lets the aspect-ratio win at every width, with no
                       hardcoded pixel height to keep in sync with the breakpoints. */}
                   <div className="aspect-square w-full min-h-0 relative">
-                    <img
-                      src={`/services/${tab.value}-poster.jpg`}
-                      alt={tab.label}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                    {/* The agentic diagram is drawn rather than photographed: two rounds of
+                        image generation produced duplicate labels and a colliding icon, so
+                        its five nodes are now real text in an SVG that can't drift. */}
+                    {tab.value === 'agentic' ? (
+                      <AgenticDiagram />
+                    ) : (
+                      <img
+                        src={`/services/${tab.value}-poster.jpg`}
+                        alt={tab.label}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    )}
                     {/* Teal scrim, heaviest at the bottom edge. The five stills are lit and
                         colour-graded differently; this pulls them onto a common base so the
                         row doesn't read as five unrelated stock assets. Two stacked layers
