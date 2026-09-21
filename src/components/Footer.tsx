@@ -41,11 +41,12 @@ export default function Footer() {
       id="contact"
       className="relative w-full overflow-hidden bg-white antialiased [font-synthesis:none]"
     >
-      {/* Navy panel. --color-primary is the reference's hook for the panel colour; Koret
-          navy replaces its #1C76F8. The colour lives on the panel rather than in the
-          shader (colorBack is transparent), so the panel is correct even where WebGL is
+      {/* Black panel. --color-primary is the reference's hook for the panel colour; black
+          replaces its #1C76F8 so the footer closes the page on the same base the Hero
+          opens it with. The colour lives on the panel rather than in the shader
+          (colorBack is transparent), so the panel is correct even where WebGL is
           unavailable and the canvas never paints. */}
-      <div className="relative z-10 min-h-[400px] w-full [--color-primary:#00419B] bg-(--color-primary)">
+      <div className="relative z-10 min-h-[400px] w-full [--color-primary:#000000] bg-(--color-primary)">
         {/* Background shader. FlutedGlass is an image filter; with no `image` it lays its
             ribbed highlight/shadow pass over whatever sits behind. `speed` is left unset
             (presets default it to 0), so this is static — no motion to gate on
