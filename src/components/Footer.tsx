@@ -1,4 +1,6 @@
-import { FlutedGlass } from '@paper-design/shaders-react';
+import React from 'react';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
+import { MeshGradient } from '@paper-design/shaders-react';
 import { Linkedin, MessageCircle, type LucideIcon } from 'lucide-react';
 
 const columns = {
@@ -35,6 +37,20 @@ const socialLinks: {
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const reduceMotion = useReducedMotion();
+  const panelRef = React.useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(panelRef, { margin: '200px' });
+  const [webglSupported, setWebglSupported] = React.useState(true);
+
+  React.useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) setWebglSupported(false);
+    } catch {
+      setWebglSupported(false);
+    }
+  }, []);
 
   return (
     <footer
@@ -43,36 +59,62 @@ export default function Footer() {
     >
       {/* Black panel. --color-primary is the reference's hook for the panel colour; black
           replaces its #1C76F8 so the footer closes the page on the same base the Hero
-          opens it with. The colour lives on the panel rather than in the shader
-          (colorBack is transparent), so the panel is correct even where WebGL is
-          unavailable and the canvas never paints. */}
-      <div className="relative z-10 min-h-[400px] w-full [--color-primary:#000000] bg-(--color-primary)">
-        {/* Background shader. FlutedGlass is an image filter; with no `image` it lays its
-            ribbed highlight/shadow pass over whatever sits behind. `speed` is left unset
-            (presets default it to 0), so this is static — no motion to gate on
-            prefers-reduced-motion, unlike the Hero's shader. */}
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <FlutedGlass
-            size={0.89}
-            shape="lines"
-            angle={0}
-            distortionShape="prism"
-            distortion={0.5}
-            shift={0}
-            blur={0}
-            edges={0.25}
-            stretch={0}
-            scale={1.11}
-            fit="cover"
-            highlights={0.1}
-            shadows={0.2}
-            grainMixer={0.1}
-            grainOverlay={0.1}
-            colorBack="#00000000"
-            colorHighlight="#FFFFFF"
-            colorShadow="#000000"
-            className="h-full w-full bg-transparent"
-          />
+          opens it with. The black also sits on the panel itself, not only in the shader,
+          so the panel is correct in the frames before the canvas first paints. */}
+      <div
+        ref={panelRef}
+        className="relative z-10 min-h-[400px] w-full [--color-primary:#000000] bg-(--color-primary)"
+      >
+        {/* Same mesh gradient the Hero opens the page with — identical palette and
+            settings, so the two dark bookends read as one treatment rather than two.
+            Speed is gated on reduced motion and on the panel being near the viewport,
+            so it costs nothing while the footer is off-screen. */}
+        <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+          {webglSupported ? (
+            <MeshGradient
+              className="absolute inset-0 h-full w-full"
+              colors={['#000000', '#00CCFF', '#03857A', '#00419B', '#FD7F00']}
+              distortion={0.8}
+              swirl={0.3}
+              speed={reduceMotion || !isInView ? 0 : 0.3}
+              style={{ backgroundColor: '#000000' }}
+            />
+          ) : (
+            <>
+              <motion.div
+                className="absolute rounded-full blur-3xl"
+                style={{
+                  width: 700,
+                  height: 700,
+                  top: '-20%',
+                  right: '5%',
+                  background: 'radial-gradient(circle, rgba(0,204,255,0.45) 0%, rgba(0,204,255,0) 70%)',
+                }}
+                animate={
+                  reduceMotion || !isInView
+                    ? undefined
+                    : { x: [0, 30, -20, 0], y: [0, -20, 25, 0], scale: [1, 1.06, 0.98, 1] }
+                }
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <motion.div
+                className="absolute rounded-full blur-3xl"
+                style={{
+                  width: 640,
+                  height: 640,
+                  bottom: '-25%',
+                  left: '10%',
+                  background: 'radial-gradient(circle, rgba(0,65,155,0.5) 0%, rgba(0,65,155,0) 70%)',
+                }}
+                animate={
+                  reduceMotion || !isInView
+                    ? undefined
+                    : { x: [0, -25, 20, 0], y: [0, 25, -15, 0], scale: [1, 0.97, 1.05, 1] }
+                }
+                transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </>
+          )}
         </div>
 
         {/* Content */}
@@ -80,7 +122,7 @@ export default function Footer() {
           {/* Left side */}
           <div className="flex w-full max-w-sm flex-col justify-between">
             <div className="flex flex-col">
-              {/* The light wordmark, not the navy/cyan one — this panel is navy. */}
+              {/* The light wordmark, not the navy/cyan one — this panel is dark. */}
               <img src="/logo/koret-wordmark-light.png" alt="Koret" className="mb-4 h-8 w-auto shrink-0 self-start" />
               <h2 className="text-sm font-medium leading-tight text-white md:text-base">
                 Bringing your brand
