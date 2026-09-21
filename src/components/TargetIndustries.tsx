@@ -18,7 +18,7 @@ export default function TargetIndustries() {
   const isInView = useInView(blobRef, { margin: '200px' });
 
   return (
-    <MotionSection className="relative overflow-hidden py-16 px-4 md:px-8">
+    <MotionSection id="industries" className="relative overflow-hidden py-16 px-4 md:px-8">
       {/* The reduced-motion stop matches how the rest of the site treats ambient
           motion (the blob washes gate on useReducedMotion); an infinite marquee is
           the one piece here that would otherwise never hold still. */}

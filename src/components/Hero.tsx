@@ -160,6 +160,12 @@ export default function HeroSection() {
                 if (e.target === e.currentTarget) setMenuOpen(false);
               }}
             >
+              {/* About and Industries carry no breakpoint modifier, the same as Process
+                  and FAQ below: one link serves both layouts. Order here gives About →
+                  Services → Industries → Process on desktop, and the same sequence on
+                  mobile with the three flat Services links standing in for the panel. */}
+              <a href="#about" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">About</a>
+
               {/* Desktop: Services hover panel. Hidden below md because hover doesn't
                   exist on touch — the mobile menu gets the same three destinations as
                   flat, directly tappable links (just below). `group-focus-within` keeps
@@ -189,6 +195,7 @@ export default function HeroSection() {
               <a href="#ai-agency" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Automation</a>
               <a href="#business-consulting" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Business Consulting</a>
               <a href="#brand-building" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Brand Building</a>
+              <a href="#industries" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Industries</a>
               <a href="#process" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Process</a>
               <a href="#faq" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">FAQ</a>
 

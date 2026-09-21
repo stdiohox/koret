@@ -20,7 +20,7 @@ export default function AboutSection() {
   const isInView = useInView(blobRef, { margin: '200px' });
 
   return (
-    <MotionSection className="relative overflow-hidden py-32 px-4 md:px-8">
+    <MotionSection id="about" className="relative overflow-hidden py-32 px-4 md:px-8">
       {/* Cyan top-right / navy bottom-left, the same wash the service sections use. */}
       <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <motion.div
