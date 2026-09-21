@@ -127,7 +127,7 @@ export default function FAQ() {
                   >
                     <span className="font-medium text-left">{item.question}</span>
                   </div>
-                  <span style={{ color: isOpen ? 'var(--color-koret-navy)' : 'var(--color-dock-slate)' }}>
+                  <span style={{ color: 'var(--color-koret-cyan)' }}>
                     {isOpen ? <Minus className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
                   </span>
                 </Accordion.Trigger>

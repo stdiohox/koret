@@ -2,6 +2,8 @@ import TweetCard from './ui/tweet-card';
 import MotionSection from './MotionSection';
 import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
+import { motion } from 'framer-motion';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const posts = [
   {
@@ -26,6 +28,7 @@ const posts = [
 
 export default function Testimonials() {
   const driftRef = useParallax<HTMLDivElement>(0.08);
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
     <MotionSection className="py-24 px-4 flex flex-col items-center gap-8">
@@ -36,6 +39,11 @@ export default function Testimonials() {
       </div>
       {/* max-w-6xl matches the other sections' container. Without it the grid is full-bleed,
           columns outgrow the card's max-width past ~1440px, and each column shows a gap. */}
+      <motion.div
+        ref={tiltRef}
+        style={{ rotateX, scale, transformPerspective: 1000 }}
+        className="w-full flex justify-center"
+      >
       <div ref={driftRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl items-start">
         {posts.map((post) => (
           <ScrollReveal key={post.content}>
@@ -49,6 +57,7 @@ export default function Testimonials() {
           </ScrollReveal>
         ))}
       </div>
+      </motion.div>
     </MotionSection>
   );
 }

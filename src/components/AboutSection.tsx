@@ -4,6 +4,7 @@ import { Clock, Compass, Sparkles, Users, Wallet, Target } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import MotionSection from './MotionSection';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const features = [
   { icon: Clock, title: 'Reclaim 15–20+ Hours a Week', desc: 'We automate the repetitive work — follow-ups, data entry, scheduling — so your week isn\'t spent on it.' },
@@ -18,6 +19,7 @@ export default function AboutSection() {
   const reduceMotion = useReducedMotion();
   const blobRef = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(blobRef, { margin: '200px' });
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
     <MotionSection id="about" className="relative overflow-hidden py-32 px-4 md:px-8">
@@ -43,7 +45,11 @@ export default function AboutSection() {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <motion.div
+        ref={tiltRef}
+        style={{ rotateX, scale, transformPerspective: 1000 }}
+        className="relative z-10 max-w-6xl mx-auto"
+      >
         <div className="flex flex-col items-center gap-4 text-center mb-16">
           <Badge variant="outline">About Koret</Badge>
           <h2 className="text-3xl md:text-4xl font-semibold max-w-2xl" style={{ color: 'var(--color-ink-charcoal)' }}>
@@ -61,7 +67,7 @@ export default function AboutSection() {
                 className="size-10 p-2 rounded flex items-center justify-center"
                 style={{ backgroundColor: 'rgba(0, 65, 155, 0.1)', border: '1px solid rgba(0, 65, 155, 0.25)' }}
               >
-                <Icon size={20} color="var(--color-koret-navy)" />
+                <Icon size={20} color="var(--color-koret-cyan)" />
               </div>
               <div className="mt-5 space-y-2">
                 <h3 className="text-base font-medium" style={{ color: 'var(--color-ink-charcoal)' }}>{title}</h3>
@@ -93,7 +99,7 @@ export default function AboutSection() {
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </MotionSection>
   );
 }

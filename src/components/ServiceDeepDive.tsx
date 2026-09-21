@@ -6,6 +6,7 @@ import { Zap, Globe, GitBranch, Rocket, Compass, ArrowRight } from 'lucide-react
 import MotionSection from './MotionSection';
 import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const tabs = [
   {
@@ -75,6 +76,7 @@ export default function ServiceDeepDive() {
   const blobRef = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(blobRef, { margin: '200px' });
   const washRef = useParallax<HTMLDivElement>(0.18);
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
     <MotionSection id="ai-agency" className="relative overflow-hidden py-24 px-4 md:px-8">
@@ -118,7 +120,11 @@ export default function ServiceDeepDive() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <motion.div
+        ref={tiltRef}
+        style={{ rotateX, scale, transformPerspective: 1000 }}
+        className="relative z-10 max-w-7xl mx-auto"
+      >
         <div className="flex flex-col gap-16">
           <div className="lg:max-w-sm">
             <h2 className="mb-3 text-xl font-semibold md:mb-4 md:text-4xl lg:mb-6" style={{ color: 'var(--color-ink-charcoal)' }}>
@@ -177,34 +183,34 @@ export default function ServiceDeepDive() {
                         // compressed into 0-75% so the top quarter of the image stays clear,
                         // which is roughly the coverage the 3-stop version had.
                         background: `linear-gradient(to top,
-                          rgba(3,133,122,0.55) 0%,
-                          rgba(3,133,122,0.406) 14%,
-                          rgba(3,133,122,0.298) 25.5%,
-                          rgba(3,133,122,0.210) 35%,
-                          rgba(3,133,122,0.153) 42%,
-                          rgba(3,133,122,0.107) 49%,
-                          rgba(3,133,122,0.069) 55%,
-                          rgba(3,133,122,0.041) 60.5%,
-                          rgba(3,133,122,0.023) 66%,
-                          rgba(3,133,122,0.012) 70.5%,
-                          rgba(3,133,122,0) 75%)`,
+                          rgba(0,204,255,0.55) 0%,
+                          rgba(0,204,255,0.406) 14%,
+                          rgba(0,204,255,0.298) 25.5%,
+                          rgba(0,204,255,0.210) 35%,
+                          rgba(0,204,255,0.153) 42%,
+                          rgba(0,204,255,0.107) 49%,
+                          rgba(0,204,255,0.069) 55%,
+                          rgba(0,204,255,0.041) 60.5%,
+                          rgba(0,204,255,0.023) 66%,
+                          rgba(0,204,255,0.012) 70.5%,
+                          rgba(0,204,255,0) 75%)`,
                       }}
                     />
                     <div
                       className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{
                         background: `linear-gradient(to top,
-                          rgba(3,133,122,0.70) 0%,
-                          rgba(3,133,122,0.517) 14%,
-                          rgba(3,133,122,0.379) 25.5%,
-                          rgba(3,133,122,0.267) 35%,
-                          rgba(3,133,122,0.195) 42%,
-                          rgba(3,133,122,0.136) 49%,
-                          rgba(3,133,122,0.088) 55%,
-                          rgba(3,133,122,0.053) 60.5%,
-                          rgba(3,133,122,0.029) 66%,
-                          rgba(3,133,122,0.015) 70.5%,
-                          rgba(3,133,122,0) 75%)`,
+                          rgba(0,204,255,0.70) 0%,
+                          rgba(0,204,255,0.517) 14%,
+                          rgba(0,204,255,0.379) 25.5%,
+                          rgba(0,204,255,0.267) 35%,
+                          rgba(0,204,255,0.195) 42%,
+                          rgba(0,204,255,0.136) 49%,
+                          rgba(0,204,255,0.088) 55%,
+                          rgba(0,204,255,0.053) 60.5%,
+                          rgba(0,204,255,0.029) 66%,
+                          rgba(0,204,255,0.015) 70.5%,
+                          rgba(0,204,255,0) 75%)`,
                       }}
                     />
                   </div>
@@ -221,7 +227,7 @@ export default function ServiceDeepDive() {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </MotionSection>
   );
 }

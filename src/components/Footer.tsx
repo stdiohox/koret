@@ -50,7 +50,7 @@ export default function Footer() {
             {socialLinks.map((s) => {
               const Glyph = s.Icon;
               const icon = Glyph ? (
-                <Glyph className="w-5 h-5" style={{ color: 'var(--color-dock-slate)' }} aria-hidden="true" />
+                <Glyph className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} aria-hidden="true" />
               ) : (
                 <img
                   // 777c86 is --color-dock-slate, the same tone as this footer's link and

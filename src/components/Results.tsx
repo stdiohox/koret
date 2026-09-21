@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import MotionSection from './MotionSection';
 import { useParallax } from '@/hooks/useParallax';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const stats = [
   { value: '70%', label: 'Increase in qualified leads', color: 'var(--color-koret-cyan)' },
@@ -13,12 +14,14 @@ const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transiti
 
 export default function Results() {
   const driftRef = useParallax<HTMLDivElement>(0.06);
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
     <MotionSection id="results" className="pt-0 pb-[80px]">
       {/* Plain wrapper: the inner motion.div animates transform via framer variants, so the
           GSAP parallax must not target the same element. */}
       <div ref={driftRef}>
+      <motion.div ref={tiltRef} style={{ rotateX, scale, transformPerspective: 1000 }}>
       <motion.div
         className="mx-auto max-w-[1200px] px-6 grid grid-cols-1 md:grid-cols-3 gap-6"
         variants={container}
@@ -44,6 +47,7 @@ export default function Results() {
             </p>
           </motion.div>
         ))}
+      </motion.div>
       </motion.div>
       </div>
     </MotionSection>

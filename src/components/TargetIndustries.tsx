@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { Stethoscope, Scale, ShoppingBag, Dumbbell, UserSearch, Wrench } from 'lucide-react';
 import MotionSection from './MotionSection';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const industries = [
   { icon: Stethoscope, label: 'Healthcare & Dental', gradient: { from: '#00CCFF', to: '#00419B' } },
@@ -16,6 +17,7 @@ export default function TargetIndustries() {
   const reduceMotion = useReducedMotion();
   const blobRef = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(blobRef, { margin: '200px' });
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
     <MotionSection id="industries" className="relative overflow-hidden py-16 px-4 md:px-8">
@@ -64,9 +66,13 @@ export default function TargetIndustries() {
         </p>
       </div>
 
-      <div
+      <motion.div
+        ref={tiltRef}
         className="relative z-10 w-full overflow-hidden"
-        style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
+        style={{
+          maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          rotateX, scale, transformPerspective: 1000,
+        }}
       >
         <div
           className="koret-marquee-track flex w-max items-center gap-4 py-4"
@@ -82,14 +88,14 @@ export default function TargetIndustries() {
                 className="absolute inset-0 scale-150 opacity-0 transition-all duration-700 ease-out group-hover:opacity-15 group-hover:scale-100"
                 style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
               />
-              <Icon size={28} color="var(--color-koret-navy)" className="relative" />
+              <Icon size={28} color="var(--color-koret-cyan)" className="relative" />
               <span className="relative text-xs font-medium text-center px-2" style={{ color: 'var(--color-ink-charcoal)' }}>
                 {label}
               </span>
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </MotionSection>
   );
 }

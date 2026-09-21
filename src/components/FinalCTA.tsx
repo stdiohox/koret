@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useParallax } from '@/hooks/useParallax';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 export default function FinalCTA() {
   const driftRef = useParallax<HTMLDivElement>(0.07);
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
     <section
@@ -13,6 +15,7 @@ export default function FinalCTA() {
       }}
     >
       <div ref={driftRef} className="mx-auto max-w-[640px] px-6 text-center">
+        <motion.div ref={tiltRef} style={{ rotateX, scale, transformPerspective: 1000 }}>
         <h2 className="text-[clamp(2rem,1.3rem+3vw,3rem)] font-semibold mb-4 leading-[1.1] tracking-[-0.025em]" style={{ color: 'var(--color-ink-charcoal)' }}>
           Ready to Build a Brand That Runs Itself?
         </h2>
@@ -27,6 +30,7 @@ export default function FinalCTA() {
         >
           Book a Free Consultation
         </motion.button>
+        </motion.div>
       </div>
     </section>
   );

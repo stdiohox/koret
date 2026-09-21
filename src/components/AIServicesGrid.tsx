@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import MotionSection from './MotionSection';
+import { useScrollTilt } from '@/hooks/useScrollTilt';
 import ScrollReveal from './ScrollReveal';
 import { useParallax } from '@/hooks/useParallax';
 import { Terminal, Layers, BarChart3 } from 'lucide-react';
 
 export default function AIServicesGrid() {
+  const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
   const [selectedItem, setSelectedItem] = useState(0);
   const reduceMotion = useReducedMotion();
   const blobRef = React.useRef<HTMLDivElement | null>(null);
@@ -97,7 +99,11 @@ await agent.run();
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-16">
+      <motion.div
+        ref={tiltRef}
+        style={{ rotateX, scale, transformPerspective: 1000 }}
+        className="relative z-10 max-w-7xl mx-auto flex flex-col gap-16"
+      >
 
         {/* Header */}
         <div className="flex flex-col gap-6 max-w-3xl">
@@ -118,7 +124,7 @@ await agent.run();
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
-                  <BarChart3 className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
+                  <BarChart3 className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} />
                 </div>
                 <span
                   className="text-xs px-2 py-1 rounded-lg font-semibold"
@@ -164,7 +170,7 @@ await agent.run();
           <div className="h-full group light-card-hover card-lift relative overflow-hidden rounded-2xl p-6 flex flex-col justify-between transition-all duration-300" style={cardBase}>
             <div className="relative z-10">
               <div className="p-2 rounded-lg w-fit mb-4" style={chipLight}>
-                <Layers className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
+                <Layers className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} />
               </div>
               <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>Works With Your Stack</h3>
               <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>Tools we build around</p>
@@ -205,7 +211,7 @@ await agent.run();
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-2 rounded-lg" style={chipLight}>
-                  <Terminal className="w-5 h-5" style={{ color: 'var(--color-ink-charcoal)' }} />
+                  <Terminal className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} />
                 </div>
                 <h3 className="text-sm font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>Example: A Lead-Qualifying Agent</h3>
               </div>
@@ -233,7 +239,7 @@ await agent.run();
 
         </div>
 
-      </div>
+      </motion.div>
     </MotionSection>
   );
 }
