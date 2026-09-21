@@ -42,7 +42,7 @@ export default function Footer() {
     <footer id="contact" style={{ backgroundColor: 'var(--color-pure-white)' }}>
       {/* Stroke-outline wordmark. -webkit-text-stroke is the only cross-browser way to
           outline text without duplicating it; `color: transparent` hollows the fill. */}
-      <div className="mx-auto max-w-[1200px] px-6 pt-20 pb-10 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 pt-20 pb-10 overflow-hidden">
         <h2
           aria-hidden="true"
           className="select-none text-center font-bold leading-[0.85] tracking-[-0.03em] text-[clamp(3.5rem,17vw,13rem)]"
@@ -55,7 +55,7 @@ export default function Footer() {
         </h2>
       </div>
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-16">
+      <div className="mx-auto max-w-7xl px-6 pb-16">
         <div className="relative overflow-hidden rounded-[28px]" style={{ backgroundColor: NAVY }}>
           {/* FlutedGlass is an image filter — with no `image` it contributes its ribbed
               highlight/shadow pass over colorBack rather than distorting a photo, which is
@@ -86,17 +86,20 @@ export default function Footer() {
             fit="cover"
           />
 
-          <div className="relative z-10 grid grid-cols-1 gap-10 p-8 md:grid-cols-4 md:p-14">
-            <div className="md:col-span-1">
+          <div className="relative z-10 flex flex-col gap-12 p-8 md:p-14 lg:flex-row lg:justify-between">
+            <div>
               {/* The light wordmark, not the navy/cyan one — this panel is navy. */}
               <img src="/logo/koret-wordmark-light.png" alt="Koret" className="h-7 w-auto" />
               <p className="mt-4 text-[14px] text-white/80">Bringing your brand to limelight.</p>
 
-              <div className="mt-6 flex items-center gap-1">
+              <div className="mt-6 flex items-center gap-4">
                 {socialLinks.map((s) => {
                   const Glyph = s.Icon;
-                  const glyph = Glyph ? (
-                    <Glyph className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} aria-hidden="true" />
+                  // Flat, unbadged icons: the circle wrapper is gone, so the glyph itself
+                  // is the whole control. shrink-0 keeps the CDN images from being squeezed
+                  // narrower than the lucide components when the column is tight.
+                  const icon = Glyph ? (
+                    <Glyph className="w-6 h-6 shrink-0" style={{ color: 'var(--color-koret-cyan)' }} aria-hidden="true" />
                   ) : (
                     <img
                       // 00CCFF is --color-koret-cyan, the same tone as the lucide glyph above,
@@ -104,38 +107,21 @@ export default function Footer() {
                       // a literal hex.)
                       src={`https://cdn.simpleicons.org/${s.slug}/00CCFF`}
                       alt={s.name}
-                      className="w-5 h-5"
+                      className="w-6 h-6 shrink-0"
                       loading="lazy"
                       onError={(e) => {
                         e.currentTarget.style.visibility = 'hidden';
                       }}
                     />
                   );
-                  // One badge wrapping the shared glyph, so the CDN marks and the lucide
-                  // components get an identical circle rather than two near-identical ones.
-                  // shrink-0: the row is a narrow column, and without it flex would squash
-                  // the circles into ovals before wrapping.
-                  const icon = (
-                    <div
-                      className="flex shrink-0 items-center justify-center rounded-full"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        backgroundColor: 'rgba(0, 204, 255, 0.12)',
-                        border: '1px solid rgba(0, 204, 255, 0.3)',
-                      }}
-                    >
-                      {glyph}
-                    </div>
-                  );
                   return s.url ? (
-                    <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="inline-flex h-11 w-11 items-center justify-center">
+                    <a key={s.slug} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="inline-flex items-center justify-center">
                       {icon}
                     </a>
                   ) : (
                     <span
                       key={s.slug}
-                      className="inline-flex h-11 w-11 cursor-not-allowed items-center justify-center"
+                      className="inline-flex cursor-not-allowed items-center justify-center"
                       aria-label={`${s.name} (coming soon)`}
                       title="Coming soon"
                     >
@@ -148,23 +134,25 @@ export default function Footer() {
               <p className="mt-8 text-[13px] text-white/80">© {year} Koret. All rights reserved.</p>
             </div>
 
-            {Object.entries(columns).map(([heading, links]) => (
-              <div key={heading}>
-                <p className="mb-4 text-[13px] font-semibold text-white">{heading.toUpperCase()}</p>
-                <ul>
-                  {links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="flex min-h-[44px] items-center text-[14px] text-white/70 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div className="flex flex-wrap gap-12 md:gap-24 lg:flex-nowrap">
+              {Object.entries(columns).map(([heading, links]) => (
+                <div key={heading}>
+                  <p className="mb-4 font-semibold text-white text-lg md:text-xl">{heading.toUpperCase()}</p>
+                  <ul>
+                    {links.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          className="flex min-h-[44px] items-center text-sm font-medium text-white/70 transition-colors hover:text-white md:text-[15px]"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
