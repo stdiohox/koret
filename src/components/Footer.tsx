@@ -53,9 +53,10 @@ export default function Footer() {
                 <Glyph className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} aria-hidden="true" />
               ) : (
                 <img
-                  // 777c86 is --color-dock-slate, the same tone as this footer's link and
-                  // copyright text. (Keep in sync manually — the CDN needs a literal hex.)
-                  src={`https://cdn.simpleicons.org/${s.slug}/777c86`}
+                  // 00CCFF is --color-koret-cyan, the same tone as the lucide glyph above,
+                  // so the row reads as one colour. (Keep in sync manually — the CDN needs
+                  // a literal hex.)
+                  src={`https://cdn.simpleicons.org/${s.slug}/00CCFF`}
                   alt={s.name}
                   className="w-5 h-5"
                   loading="lazy"
