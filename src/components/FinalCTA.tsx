@@ -23,7 +23,7 @@ export default function FinalCTA() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="rounded-[48px] px-6 py-3 text-[16px] font-medium"
-          style={{ backgroundColor: 'var(--color-koret-cyan)', color: 'var(--color-ink-charcoal)' }}
+          style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
         >
           Book a Free Consultation
         </motion.button>
