@@ -4,12 +4,12 @@ import { Button } from './ui/button';
 import MotionSection from './MotionSection';
 
 const features = [
-  { icon: Clock, title: 'Reclaim 15–20+ Hours a Week', desc: 'We automate the repetitive work — follow-ups, data entry, scheduling — so your week isn\'t spent on it.', color: '#00CCFF' },
-  { icon: Compass, title: 'An AI-Fluent Strategic Partner', desc: 'Outside, informed guidance on where automation and process change actually move the needle.', color: '#00419B' },
-  { icon: Sparkles, title: 'Look Like a Bigger Business', desc: 'Positioning, identity, and content that make a small team read as an established, credible brand.', color: '#03857A' },
-  { icon: Users, title: 'One Team, One Point of Contact', desc: 'No coordinating three vendors who\'ve never spoken. One strategy, one relationship.', color: '#FD7F00' },
-  { icon: Wallet, title: 'Fixed-Fee Projects, Simple Retainers', desc: 'Priced around the value delivered, not hours worked — implementation plus ongoing optimization.', color: '#00CCFF' },
-  { icon: Target, title: 'Built for SMBs, Not Enterprises', desc: 'Playbooks and pricing designed for owner-operated businesses, not enterprise budgets.', color: '#00419B' },
+  { icon: Clock, title: 'Reclaim 15–20+ Hours a Week', desc: 'We automate the repetitive work — follow-ups, data entry, scheduling — so your week isn\'t spent on it.' },
+  { icon: Compass, title: 'An AI-Fluent Strategic Partner', desc: 'Outside, informed guidance on where automation and process change actually move the needle.' },
+  { icon: Sparkles, title: 'Look Like a Bigger Business', desc: 'Positioning, identity, and content that make a small team read as an established, credible brand.' },
+  { icon: Users, title: 'One Team, One Point of Contact', desc: 'No coordinating three vendors who\'ve never spoken. One strategy, one relationship.' },
+  { icon: Wallet, title: 'Fixed-Fee Projects, Simple Retainers', desc: 'Priced around the value delivered, not hours worked — implementation plus ongoing optimization.' },
+  { icon: Target, title: 'Built for SMBs, Not Enterprises', desc: 'Playbooks and pricing designed for owner-operated businesses, not enterprise budgets.' },
 ];
 
 export default function AboutSection() {
@@ -27,13 +27,13 @@ export default function AboutSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10 mb-20">
-          {features.map(({ icon: Icon, title, desc, color }) => (
+          {features.map(({ icon: Icon, title, desc }) => (
             <div key={title}>
               <div
                 className="size-10 p-2 rounded flex items-center justify-center"
-                style={{ backgroundColor: `${color}1A`, border: `1px solid ${color}40` }}
+                style={{ backgroundColor: 'rgba(0, 65, 155, 0.1)', border: '1px solid rgba(0, 65, 155, 0.25)' }}
               >
-                <Icon size={20} color={color} />
+                <Icon size={20} color="var(--color-koret-navy)" />
               </div>
               <div className="mt-5 space-y-2">
                 <h3 className="text-base font-medium" style={{ color: 'var(--color-ink-charcoal)' }}>{title}</h3>
