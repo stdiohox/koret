@@ -65,7 +65,7 @@ export default function AboutSection() {
             <div key={title}>
               <div
                 className="size-10 p-2 rounded flex items-center justify-center"
-                style={{ backgroundColor: 'rgba(0, 65, 155, 0.1)', border: '1px solid rgba(0, 65, 155, 0.25)' }}
+                style={{ backgroundColor: 'var(--color-pure-white)', border: '1px solid rgba(0, 65, 155, 0.25)' }}
               >
                 <Icon size={20} color="var(--color-koret-cyan)" />
               </div>
