@@ -25,9 +25,9 @@ interface FAQItem {
 const data: FAQItem[] = [
   {
     id: 1,
-    question: 'Do you handle marketing too, or just the AI side?',
+    question: 'Do you only do AI, or branding and strategy too?',
     answer:
-      "Just AI and automation — automation, web and app development, workflow systems, agentic builds, and consultation. We don't run marketing campaigns, but everything we build is designed to fit the brand you already have.",
+      'All three, as one team — AI automation and workflow systems, business and operations consulting, and brand building (positioning, identity, website, content). No juggling three separate vendors.',
   },
   {
     id: 2,

@@ -160,7 +160,35 @@ export default function HeroSection() {
                 if (e.target === e.currentTarget) setMenuOpen(false);
               }}
             >
-              <a href="#ai-agency" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Agency</a>
+              {/* Desktop: Services hover panel. Hidden below md because hover doesn't
+                  exist on touch — the mobile menu gets the same three destinations as
+                  flat, directly tappable links (just below). `group-focus-within` keeps
+                  the panel reachable by keyboard, which hover alone wouldn't. */}
+              <div className="max-md:hidden relative z-50 group">
+                <button
+                  type="button"
+                  className="flex items-center gap-1 py-3 text-white/80 hover:text-white group-focus-within:text-white transition-colors"
+                  aria-haspopup="true"
+                >
+                  <span>Services</span>
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <path d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                {/* pt-3 is a hover bridge: without it the gap between trigger and panel
+                    drops :hover the moment the pointer leaves the button. */}
+                <div className="absolute left-0 top-full pt-3 invisible opacity-0 -translate-y-2 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                  <div className="flex flex-col gap-2 w-max rounded-lg bg-white p-4 font-normal text-black shadow-sm">
+                    <a href="#ai-agency" className="hover:translate-x-1 hover:text-slate-500 transition-all">AI Automation</a>
+                    <a href="#business-consulting" className="hover:translate-x-1 hover:text-slate-500 transition-all">Business Consulting</a>
+                    <a href="#brand-building" className="hover:translate-x-1 hover:text-slate-500 transition-all">Brand Building</a>
+                  </div>
+                </div>
+              </div>
+
+              <a href="#ai-agency" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Automation</a>
+              <a href="#business-consulting" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Business Consulting</a>
+              <a href="#brand-building" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Brand Building</a>
               <a href="#process" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Process</a>
               <a href="#faq" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">FAQ</a>
 
@@ -204,7 +232,7 @@ export default function HeroSection() {
               className="flex items-center gap-2 rounded-full w-max mx-auto px-4 py-2 mt-40 md:mt-32 backdrop-blur-sm"
               style={{ border: '1px solid rgba(255,255,255,0.15)', backgroundColor: 'rgba(255,255,255,0.05)' }}
             >
-              <span className="text-white/90">Marketing + AI, Under One Roof</span>
+              <span className="text-white/90">AI, Consulting &amp; Brand — Under One Roof</span>
             </motion.div>
 
             <motion.h1 variants={item} className="text-4xl md:text-7xl font-medium max-w-[850px] text-center mx-auto mt-8 text-white">

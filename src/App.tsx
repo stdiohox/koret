@@ -1,5 +1,6 @@
 import Hero from './components/Hero';
 import ServiceDeepDive from './components/ServiceDeepDive';
+import BrandBuilding from './components/BrandBuilding';
 import AIServicesGrid from './components/AIServicesGrid';
 import WhyKoret from './components/WhyKoret';
 import HowItWorksSection from './components/HowItWorksSection';
@@ -14,6 +15,7 @@ export default function App() {
     <>
       <Hero />
       <ServiceDeepDive />
+      <BrandBuilding />
       <AIServicesGrid />
       <WhyKoret />
       <HowItWorksSection />

@@ -1,5 +1,9 @@
 const columns = {
-  Services: [{ label: 'AI & Automation', href: '#ai-agency' }],
+  Services: [
+    { label: 'AI Automation', href: '#ai-agency' },
+    { label: 'Business Consulting', href: '#business-consulting' },
+    { label: 'Brand Building', href: '#brand-building' },
+  ],
   Company: [
     { label: 'Why Koret', href: '#why-koret' },
     { label: 'Process', href: '#process' },

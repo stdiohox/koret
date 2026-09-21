@@ -57,7 +57,7 @@ await agent.run();
   return (
     // No background class here: every other section is transparent over the body's
     // canvas-cream, so an explicit bg-white produced a hard #faf9f7 -> #ffffff seam.
-    <MotionSection className="relative overflow-hidden py-24 px-4 md:px-8 font-sans antialiased">
+    <MotionSection id="business-consulting" className="relative overflow-hidden py-24 px-4 md:px-8 font-sans antialiased">
 
       {/* Soft brand-color gradient wash — same recipe as the earlier Hero blob treatment */}
       <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -102,10 +102,10 @@ await agent.run();
         {/* Header */}
         <div className="flex flex-col gap-6 max-w-3xl">
           <h2 className="text-[clamp(2rem,1.3rem+3vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.03em]" style={{ color: 'var(--color-ink-charcoal)' }}>
-            Backed by Consultation, Not Just Code
+            Your Fractional Head of AI & Operations
           </h2>
           <p className="text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--color-ink-charcoal)' }}>
-            Every AI engagement starts with a stack audit and a roadmap — then we build inside the tools you already use.
+            Strategic guidance on where AI and process change actually move the needle — not just implementation, ongoing advisory.
           </p>
         </div>
 
