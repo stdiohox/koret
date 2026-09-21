@@ -1,6 +1,5 @@
 'use client';
 
-import type { ReactNode } from 'react';
 import { Fingerprint, Palette, Megaphone } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -9,6 +8,7 @@ import ScrollReveal from './ScrollReveal';
 
 const items = [
   {
+    value: 'identity',
     icon: <Fingerprint className="h-auto w-4 shrink-0" />,
     label: 'Positioning & Identity',
     content: {
@@ -19,6 +19,7 @@ const items = [
     },
   },
   {
+    value: 'design',
     icon: <Palette className="h-auto w-4 shrink-0" />,
     label: 'Visual Identity & Website',
     content: {
@@ -29,6 +30,7 @@ const items = [
     },
   },
   {
+    value: 'content',
     icon: <Megaphone className="h-auto w-4 shrink-0" />,
     label: 'AI-Assisted Content Engine',
     content: {
@@ -39,12 +41,6 @@ const items = [
     },
   },
 ];
-
-const iconPanel: Record<string, ReactNode> = {
-  'Positioning & Identity': <Fingerprint size={64} color="var(--color-koret-navy)" />,
-  'Visual Identity & Website': <Palette size={64} color="var(--color-koret-navy)" />,
-  'AI-Assisted Content Engine': <Megaphone size={64} color="var(--color-koret-navy)" />,
-};
 
 export default function BrandBuilding() {
   return (
@@ -83,11 +79,38 @@ export default function BrandBuilding() {
                   </p>
                   <Button className="mt-2.5 w-fit gap-2" size="lg">{item.content.buttonText}</Button>
                 </div>
-                <div
-                  className="w-full aspect-square max-w-[320px] rounded-xl overflow-hidden flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, rgba(0,204,255,0.15), rgba(0,65,155,0.1))' }}
-                >
-                  {iconPanel[item.label]}
+                {/* Same media treatment as the ServiceDeepDive cards — 4/3, rounded-2xl,
+                    hover zoom, and the eased teal scrim — so the two sections read as one
+                    system rather than two. The scrim's stops are the 0-75% curve: eleven
+                    stops rather than three, because a 3-stop version creases visibly where
+                    its slope changes. */}
+                <div className="w-full aspect-[4/3] max-w-[320px] rounded-2xl overflow-hidden relative group">
+                  <img
+                    src={`/branding/${item.value}-poster.jpg`}
+                    alt={item.label}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                    style={{
+                      background: `linear-gradient(to top,
+                        rgba(3,133,122,0.55) 0%, rgba(3,133,122,0.406) 14%, rgba(3,133,122,0.298) 25.5%,
+                        rgba(3,133,122,0.210) 35%, rgba(3,133,122,0.153) 42%, rgba(3,133,122,0.107) 49%,
+                        rgba(3,133,122,0.069) 55%, rgba(3,133,122,0.041) 60.5%, rgba(3,133,122,0.023) 66%,
+                        rgba(3,133,122,0.012) 70.5%, rgba(3,133,122,0) 75%)`,
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background: `linear-gradient(to top,
+                        rgba(3,133,122,0.70) 0%, rgba(3,133,122,0.517) 14%, rgba(3,133,122,0.379) 25.5%,
+                        rgba(3,133,122,0.267) 35%, rgba(3,133,122,0.195) 42%, rgba(3,133,122,0.136) 49%,
+                        rgba(3,133,122,0.088) 55%, rgba(3,133,122,0.053) 60.5%, rgba(3,133,122,0.029) 66%,
+                        rgba(3,133,122,0.015) 70.5%, rgba(3,133,122,0) 75%)`,
+                    }}
+                  />
                 </div>
               </div>
             </ScrollReveal>
