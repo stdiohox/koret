@@ -155,13 +155,13 @@ export default function ServiceDeepDive() {
             <h2 className="mb-3 text-xl font-semibold md:mb-4 md:text-4xl lg:mb-6" style={{ color: 'var(--color-ink-charcoal)' }}>
               Five Ways We Move Your Brand Forward
             </h2>
-            <p className="mb-8 lg:text-lg" style={{ color: 'var(--color-dock-slate)' }}>
+            <p className="mb-8 text-sm" style={{ color: 'var(--color-dock-slate)' }}>
               Here's how each one works — automation, web and app builds, workflow systems, agentic AI, and consultation, all under one team.
             </p>
             <a
               href="#final-cta"
               className="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition hover:opacity-90 w-fit"
-              style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#000000' }}
+              style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >
               Book a Free Consultation
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
