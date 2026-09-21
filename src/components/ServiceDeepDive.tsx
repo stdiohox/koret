@@ -167,7 +167,7 @@ export default function ServiceDeepDive() {
                     <div
                       className="absolute inset-0 pointer-events-none"
                       style={{
-                        background: 'linear-gradient(to top, rgba(0,65,155,0.55) 0%, rgba(0,65,155,0.05) 45%, rgba(0,65,155,0) 70%)',
+                        background: 'linear-gradient(to top, rgba(3,133,122,0.55) 0%, rgba(3,133,122,0.05) 45%, rgba(3,133,122,0) 70%)',
                       }}
                     />
                   </div>
