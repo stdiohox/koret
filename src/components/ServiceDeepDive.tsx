@@ -15,7 +15,8 @@ const tabs = [
     content: {
       badge: 'Save Hours Every Week',
       title: 'Stop doing by hand what a workflow can do for you.',
-      description: 'Repetitive tasks like lead follow-ups and data entry, automated and running in the background.',
+      description:
+        "We map your repetitive tasks — lead follow-ups, data entry, status updates — and replace them with automations that run in the background. You keep the oversight, we remove the manual work.",
       buttonText: 'See Automation Examples',
     },
   },
@@ -26,7 +27,8 @@ const tabs = [
     content: {
       badge: 'Built to Convert',
       title: 'A site that works as hard as your sales team.',
-      description: 'Fast, on-brand websites and web apps built to convert, not just look good.',
+      description:
+        'Fast, on-brand websites and custom web apps, built with the same attention to conversion as your campaigns. No template feel — every build matches your brand system exactly.',
       buttonText: 'View Our Builds',
     },
   },
@@ -37,7 +39,8 @@ const tabs = [
     content: {
       badge: 'Connected, Not Siloed',
       title: 'Your tools should talk to each other.',
-      description: 'Your CRM, forms, email, and chat — connected into one pipeline, so no lead gets lost.',
+      description:
+        "We connect your CRM, forms, email, and chat into one pipeline, so a lead that comes in on one channel doesn't get lost before it reaches another. Fewer handoffs, fewer dropped threads.",
       buttonText: 'Map Your Workflow',
     },
   },
@@ -48,7 +51,8 @@ const tabs = [
     content: {
       badge: 'Always On',
       title: 'An agent that actually does the work, not just answers questions.',
-      description: 'AI agents that qualify leads, answer customers, and take real action — not just chat.',
+      description:
+        'We build AI agents that qualify leads, respond to customers, and take real action — booking calls, updating records, following up — without waiting on a human to press go.',
       buttonText: 'See an Agent in Action',
     },
   },
@@ -59,7 +63,8 @@ const tabs = [
     content: {
       badge: 'Where to Start',
       title: "Not sure where automation actually pays off? We'll show you.",
-      description: 'A stack audit, a roadmap, and ROI modeling — so you invest where it actually pays off.',
+      description:
+        'A stack audit, a prioritized roadmap, and ROI modeling — so you invest in the automation that moves the needle first, not just what sounds impressive.',
       buttonText: 'Book a Consultation',
     },
   },
@@ -196,7 +201,7 @@ export default function ServiceDeepDive() {
                     <h3 className="mb-3 text-lg font-semibold md:mb-4 md:text-2xl" style={{ color: 'var(--color-ink-charcoal)' }}>
                       {tab.content.title}
                     </h3>
-                    <p className="lg:text-lg" style={{ color: 'var(--color-dock-slate)' }}>
+                    <p className="text-sm" style={{ color: 'var(--color-dock-slate)' }}>
                       {tab.content.description}
                     </p>
                   </div>
