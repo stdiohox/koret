@@ -236,21 +236,21 @@ export default function HeroSection() {
           <motion.div variants={container} initial="hidden" animate="show">
             <motion.div
               variants={item}
-              className="flex items-center gap-2 rounded-full w-max mx-auto px-4 py-2 mt-40 md:mt-32 backdrop-blur-sm"
+              className="flex items-center gap-2 rounded-full w-max max-w-[calc(100%-2rem)] text-center mx-auto px-4 py-2 mt-40 md:mt-32 backdrop-blur-sm"
               style={{ border: '1px solid rgba(255,255,255,0.15)', backgroundColor: 'rgba(255,255,255,0.05)' }}
             >
               <span className="text-white/90">AI, Consulting &amp; Brand — Under One Roof</span>
             </motion.div>
 
-            <motion.h1 variants={item} className="text-4xl md:text-7xl font-medium max-w-[850px] text-center mx-auto mt-8 text-white">
+            <motion.h1 variants={item} className="text-4xl md:text-7xl font-medium max-w-[850px] text-center mx-auto mt-8 px-4 text-white">
               Brands That Tell Stories. Systems That Scale Them.
             </motion.h1>
 
-            <motion.p variants={item} className="text-sm md:text-base mx-auto max-w-2xl text-center mt-6 max-md:px-2 text-white/70">
+            <motion.p variants={item} className="text-sm md:text-base mx-auto max-w-2xl text-center mt-6 px-4 text-white/70">
               Koret builds the brand strategy that makes people care — and the AI infrastructure that makes your business run itself. From campaigns to code, we bring your brand to limelight.
             </motion.p>
 
-            <motion.div variants={item} className="mx-auto w-full flex items-center justify-center gap-3 mt-4">
+            <motion.div variants={item} className="mx-auto w-full flex flex-wrap items-center justify-center gap-3 mt-4 px-4">
               <motion.a
                 href="https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi"
                 target="_blank"

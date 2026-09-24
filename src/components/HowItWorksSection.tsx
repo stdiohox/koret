@@ -22,7 +22,7 @@ const Pin = ({ className }: { className?: string }) => (
 );
 
 const Card = ({ number, title, description, className, rotate, colors }: CardProps) => (
-  <div className={`relative w-full md:w-[280px] transition-transform duration-300 hover:z-30 hover:scale-105 ${rotate} ${className}`}>
+  <div className={`relative w-full max-w-sm mx-auto lg:mx-0 lg:w-[280px] transition-transform duration-300 hover:z-30 hover:scale-105 ${rotate} ${className}`}>
     <div className="bg-white p-2 rounded-[25px] shadow-[0px_10px_20px_0px_#D3D3D3] border border-neutral-100">
       <Pin className={`w-8 h-8 ${colors.pin} z-20 mb-6 mx-auto`} />
       <div className={`${colors.bg} border ${colors.border} rounded-[15px] p-[15px] h-full flex flex-col relative overflow-hidden`}>
@@ -47,10 +47,10 @@ const steps = [
 ];
 
 const positions = [
-  { className: 'md:absolute md:top-0 md:left-[15%]', rotate: 'rotate-8' },
-  { className: 'md:absolute md:top-[120px] md:right-[15%]', rotate: '-rotate-8' },
-  { className: 'md:absolute md:top-[450px] md:left-[15%]', rotate: 'rotate-8' },
-  { className: 'md:absolute md:top-[570px] md:right-[10%]', rotate: '-rotate-8' },
+  { className: 'lg:absolute lg:top-0 lg:left-[15%]', rotate: 'rotate-2 lg:rotate-8' },
+  { className: 'lg:absolute lg:top-[120px] lg:right-[15%]', rotate: '-rotate-2 lg:-rotate-8' },
+  { className: 'lg:absolute lg:top-[450px] lg:left-[15%]', rotate: 'rotate-2 lg:rotate-8' },
+  { className: 'lg:absolute lg:top-[570px] lg:right-[10%]', rotate: '-rotate-2 lg:-rotate-8' },
 ];
 
 const height = 900;
@@ -75,15 +75,15 @@ export default function HowItWorksSection() {
               </h2>
             </div>
 
-            {/* md:h-[var(--md-height)] consumes the variable declared below. Without it the
-                container is h-auto with only absolutely-positioned children at md+, so it
+            {/* lg:h-[var(--md-height)] consumes the variable declared below. Without it the
+                container is h-auto with only absolutely-positioned children at lg+, so it
                 collapses to 0 and the cards overflow into the next section. */}
             <div
-              className="relative w-full max-w-[1000px] mx-auto flex flex-col space-y-8 md:space-y-0 md:block h-auto md:h-[var(--md-height)]"
+              className="relative w-full max-w-[1000px] mx-auto flex flex-col space-y-8 lg:space-y-0 lg:block h-auto lg:h-[var(--md-height)]"
               style={{ '--md-height': `${height}px` } as React.CSSProperties}
             >
               <svg
-                className="absolute top-0 left-0 w-full h-full pointer-events-none hidden md:block z-0"
+                className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:block z-0"
                 viewBox={`0 0 1000 ${height}`}
                 preserveAspectRatio="none"
               >
