@@ -29,7 +29,7 @@ const socialLinks: {
 }[] = [
   { name: 'Instagram', slug: 'instagram', url: 'https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi' },
   { name: 'X (Twitter)', slug: 'x', url: null },
-  { name: 'LinkedIn', Icon: Linkedin, url: null },
+  { name: 'LinkedIn', Icon: Linkedin, url: 'https://www.linkedin.com/company/koret-consulting/' },
   { name: 'Facebook', slug: 'facebook', url: null },
   { name: 'TikTok', slug: 'tiktok', url: null },
   { name: 'Message', Icon: MessageCircle, url: null },
@@ -154,7 +154,7 @@ export default function Footer() {
                   );
                   return s.url ? (
                     <a
-                      key={s.slug}
+                      key={s.name}
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -165,7 +165,7 @@ export default function Footer() {
                     </a>
                   ) : (
                     <span
-                      key={s.slug}
+                      key={s.name}
                       className="inline-flex cursor-not-allowed items-center justify-center"
                       aria-label={`${s.name} (coming soon)`}
                       title="Coming soon"

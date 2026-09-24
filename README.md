@@ -54,9 +54,9 @@ client names, the mock case-study figures and the invented testimonial.
    copy fixes the schema automatically.
 4. **Domain.** `https://koret.agency/` is a placeholder in the canonical, OG tags, all seven schema
    `@id` values, `robots.txt` and `sitemap.xml`.
-5. **Contact.** `hello@koret.agency` is a placeholder, in `src/data/content.ts`.
-6. **There is no form.** Every CTA is a `mailto:`. Point them at Formspree, Resend or your own
-   endpoint when one exists — see the TODO in `src/components/FinalCTA.tsx`.
+5. **Contact.** `koretconsult@outlook.com`, set in `src/components/ContactForm.tsx` and the `index.html` schema.
+6. **Enquiry form → Google Sheet.** Set `VITE_FORM_ENDPOINT` to the Apps Script web app URL; setup in
+   `scripts/google-sheets/README.md`. Until it is set, the form falls back to opening a pre-filled email.
 7. **OG image.** `og:image` points at `/assets/og-image.png`, which does not exist yet. Needs a real
    1200×630.
 8. **Logo.** Real brand PNGs are in use. An SVG would be sharper and ~40KB lighter per variant.
