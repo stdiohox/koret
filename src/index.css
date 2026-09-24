@@ -71,6 +71,16 @@
   --spacing-25: 25px; --spacing-30: 30px; --spacing-40: 40px; --spacing-50: 50px; --spacing-60: 60px; --spacing-100: 100px;
 }
 
+/* Safety net against sideways scrolling on phones: the scroll-tilt scale and the
+   drifting blobs can push content a few px past the viewport, and iOS Safari lets the
+   whole page pan when anything does. `clip` rather than `hidden`: hidden on both html
+   and body turns body into its own scroll container, which breaks window scrolling and
+   the FAQ's ScrollTrigger pin. `clip` cuts the overflow without creating one. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background-color: var(--color-canvas-cream);
   font-family: var(--font-inter);

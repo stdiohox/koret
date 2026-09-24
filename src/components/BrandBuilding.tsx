@@ -47,7 +47,7 @@ const items = [
 export default function BrandBuilding() {
   const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
   return (
-    <MotionSection id="brand-building" className="py-24 px-4 md:px-8">
+    <MotionSection id="brand-building" className="relative overflow-hidden py-24 px-4 md:px-8">
       <motion.div
         ref={tiltRef}
         style={{ rotateX, scale, transformPerspective: 1000 }}
