@@ -134,7 +134,7 @@ export default function ServiceDeepDive() {
               Here's how each one works — automation, web and app builds, workflow systems, agentic AI, and consultation, all under one team.
             </p>
             <a
-              href="#final-cta"
+              href="#start-project"
               className="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition hover:opacity-90 w-fit"
               style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >

@@ -14,7 +14,7 @@ const columns = {
     { label: 'Process', href: '#process' },
     { label: 'Results', href: '#results' },
   ],
-  Contact: [{ label: 'Book a Free Consultation', href: '#final-cta' }],
+  Contact: [{ label: 'Book a Free Consultation', href: '#start-project' }],
 };
 
 // `slug` pulls the brand mark from Simple Icons; `Icon` is a lucide component, used for

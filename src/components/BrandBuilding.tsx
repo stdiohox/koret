@@ -84,7 +84,9 @@ export default function BrandBuilding() {
                   <p className="lg:text-lg" style={{ color: 'var(--color-dock-slate)' }}>
                     {item.content.description}
                   </p>
-                  <Button className="mt-2.5 w-fit gap-2" size="lg">{item.content.buttonText}</Button>
+                  <Button asChild className="mt-2.5 w-fit gap-2" size="lg">
+                    <a href="#start-project">{item.content.buttonText}</a>
+                  </Button>
                 </div>
                 {/* Same media treatment as the ServiceDeepDive cards — 4/3, rounded-2xl,
                     hover zoom, and the eased teal scrim — so the two sections read as one

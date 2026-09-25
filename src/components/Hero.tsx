@@ -211,12 +211,13 @@ export default function HeroSection() {
               </button>
             </div>
 
-            <button
+            <a
+              href="#start-project"
               className="hidden md:block px-6 py-3 rounded-full font-medium transition hover:opacity-90"
               style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >
               Book a Free Consultation
-            </button>
+            </a>
 
             <button
               id="open-menu"
@@ -252,9 +253,7 @@ export default function HeroSection() {
 
             <motion.div variants={item} className="mx-auto w-full flex flex-wrap items-center justify-center gap-3 mt-4 px-4">
               <motion.a
-                href="https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#start-project"
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className="px-6 py-3 rounded-full font-medium transition hover:opacity-90"
@@ -262,7 +261,8 @@ export default function HeroSection() {
               >
                 Start Your Project
               </motion.a>
-              <motion.button
+              <motion.a
+                href="#start-project"
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className="flex items-center gap-2 rounded-full px-6 py-3 text-white hover:bg-white/10 transition-colors"
@@ -272,7 +272,7 @@ export default function HeroSection() {
                 <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <path d="M1.25.5 4.75 4l-3.5 3.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>
