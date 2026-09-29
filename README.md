@@ -52,13 +52,12 @@ client names, the mock case-study figures and the invented testimonial.
    threshold, escalation to a person, the audit log, the no-obligation consultation. Correct
    anything that is not true. The `FAQPage` schema is generated from that same array, so fixing the
    copy fixes the schema automatically.
-4. **Domain.** `https://koret.agency/` is a placeholder in the canonical, OG tags, all seven schema
-   `@id` values, `robots.txt` and `sitemap.xml`.
+4. **Domain.** Done: `https://koretconsult.com/` in the canonical, OG tags, schema, `robots.txt`
+   and `sitemap.xml`.
 5. **Contact.** `koretconsult@outlook.com`, set in `src/components/ContactForm.tsx` and the `index.html` schema.
 6. **Enquiry form → Google Sheet.** Set `VITE_FORM_ENDPOINT` to the Apps Script web app URL; setup in
    `scripts/google-sheets/README.md`. Until it is set, the form falls back to opening a pre-filled email.
-7. **OG image.** `og:image` points at `/assets/og-image.png`, which does not exist yet. Needs a real
-   1200×630.
+7. **OG image.** Done: `/assets/og-image.png`, 1200×630. Regenerate it if the headline changes.
 8. **Logo.** Real brand PNGs are in use. An SVG would be sharper and ~40KB lighter per variant.
 
 ## Accessibility

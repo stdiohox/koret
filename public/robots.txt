@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://koret.agency/sitemap.xml
+Sitemap: https://koretconsult.com/sitemap.xml

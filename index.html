@@ -10,9 +10,7 @@
       content="Koret builds the brand and website that bring customers in, and the AI automations that answer, book and follow up for you. One team, fixed price, no tech skills needed."
     />
 
-    <!-- TODO: replace https://koret.agency/ with the real domain here, in public/robots.txt,
-         public/sitemap.xml, and in every @id / url below before launch. -->
-    <link rel="canonical" href="https://koret.agency/" />
+    <link rel="canonical" href="https://koretconsult.com/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#131315" />
 
@@ -21,7 +19,7 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://koret.agency/" />
+    <meta property="og:url" content="https://koretconsult.com/" />
     <meta property="og:site_name" content="Koret" />
     <meta property="og:title" content="Koret — More Customers, Less Admin | AI Automation, Consulting &amp; Branding" />
     <meta
@@ -29,7 +27,7 @@
       content="Koret builds the brand and website that bring customers in, and the AI automations that answer, book and follow up for you. One team, fixed price, no tech skills needed."
     />
     <!-- TODO: replace with a real 1200x630 OG image -->
-    <meta property="og:image" content="https://koret.agency/assets/og-image.png" />
+    <meta property="og:image" content="https://koretconsult.com/assets/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
@@ -43,27 +41,24 @@
       name="twitter:description"
       content="Koret builds the brand and website that bring customers in, and the AI automations that answer, book and follow up for you. One team, fixed price, no tech skills needed."
     />
-    <meta name="twitter:image" content="https://koret.agency/assets/og-image.png" />
+    <meta name="twitter:image" content="https://koretconsult.com/assets/og-image.png" />
 
-    <!--
-      Organization + one Service node per AI offering.
-      The FAQPage node is rendered by src/components/FAQ.tsx from the same data
-      that renders the accordion, so the two can never drift apart.
-    -->
+    <!-- Organization + one Service node per service shown on the page. Keep the names and
+         descriptions in step with the service cards when the copy changes. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Organization",
-            "@id": "https://koret.agency/#organization",
+            "@id": "https://koretconsult.com/#organization",
             "name": "Koret",
-            "url": "https://koret.agency/",
+            "url": "https://koretconsult.com/",
             "slogan": "More customers. Less admin. One team.",
             "description": "Koret builds the brand and website that bring customers in, and the AI automations that answer, book and follow up for you.",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://koret.agency/assets/koret-wordmark-blue.png"
+              "url": "https://koretconsult.com/assets/koret-wordmark-blue.png"
             },
             "contactPoint": {
               "@type": "ContactPoint",
@@ -78,50 +73,58 @@
           },
           {
             "@type": "WebSite",
-            "@id": "https://koret.agency/#website",
-            "url": "https://koret.agency/",
+            "@id": "https://koretconsult.com/#website",
+            "url": "https://koretconsult.com/",
             "name": "Koret",
-            "publisher": { "@id": "https://koret.agency/#organization" }
+            "publisher": { "@id": "https://koretconsult.com/#organization" }
           },
           {
             "@type": "Service",
-            "@id": "https://koret.agency/#service-automation",
+            "@id": "https://koretconsult.com/#service-automation",
             "name": "Automation",
             "serviceType": "Business process automation",
-            "description": "We map one process end to end, then replace the repetitive parts. Intake, onboarding, reporting, order handling. The steps that need judgement stay with your team.",
-            "provider": { "@id": "https://koret.agency/#organization" }
+            "description": "Follow-ups, reminders, data entry and status updates set up to run on their own, while the business keeps full visibility.",
+            "provider": { "@id": "https://koretconsult.com/#organization" }
           },
           {
             "@type": "Service",
-            "@id": "https://koret.agency/#service-web",
-            "name": "Website & Web App Development",
-            "serviceType": "Web app development",
-            "description": "Marketing sites that load fast, rank and convert, plus the internal tools, client portals and dashboards behind them.",
-            "provider": { "@id": "https://koret.agency/#organization" }
+            "@id": "https://koretconsult.com/#service-web",
+            "name": "Websites & Web Apps",
+            "serviceType": "Web design and development",
+            "description": "Fast, custom-designed websites that turn visitors into bookings, plus client portals, booking systems and dashboards.",
+            "provider": { "@id": "https://koretconsult.com/#organization" }
           },
           {
             "@type": "Service",
-            "@id": "https://koret.agency/#service-workflow",
+            "@id": "https://koretconsult.com/#service-workflow",
             "name": "Workflow Systems",
             "serviceType": "Workflow automation",
-            "description": "Before anything gets built we redraw how the work flows. Most automation projects fail because a broken process was automated faithfully.",
-            "provider": { "@id": "https://koret.agency/#organization" }
+            "description": "Forms, email, WhatsApp, calendar and customer list connected, so every enquiry lands in one place.",
+            "provider": { "@id": "https://koretconsult.com/#organization" }
           },
           {
             "@type": "Service",
-            "@id": "https://koret.agency/#service-agentic",
-            "name": "Agentic AI Builds",
+            "@id": "https://koretconsult.com/#service-agentic",
+            "name": "AI Assistants",
             "serviceType": "AI agent development",
-            "description": "Custom agents with real tool access, an evaluation set that proves they work, and approval gates where the cost of being wrong is high.",
-            "provider": { "@id": "https://koret.agency/#organization" }
+            "description": "AI assistants and voice agents that answer customers, check whether a lead is a good fit, book calls and follow up, any hour.",
+            "provider": { "@id": "https://koretconsult.com/#organization" }
           },
           {
             "@type": "Service",
-            "@id": "https://koret.agency/#service-consultation",
-            "name": "AI Consultation",
-            "serviceType": "AI consulting",
-            "description": "A readiness review that names which processes are worth automating, which are not, what it will cost, and what your team needs to run it.",
-            "provider": { "@id": "https://koret.agency/#organization" }
+            "@id": "https://koretconsult.com/#service-consultation",
+            "name": "Consulting",
+            "serviceType": "AI and operations consulting",
+            "description": "A review of how the business runs today and a costed 90-day plan for what to automate first, with monthly check-ins after.",
+            "provider": { "@id": "https://koretconsult.com/#organization" }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://koretconsult.com/#service-brand",
+            "name": "Brand Building",
+            "serviceType": "Branding and content",
+            "description": "Positioning, logo and visual identity, website and ongoing content, designed as one brand so customers trust the business at first glance.",
+            "provider": { "@id": "https://koretconsult.com/#organization" }
           }
         ]
       }

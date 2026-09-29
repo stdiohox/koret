@@ -58,10 +58,8 @@ image.
 
 ## Before launch
 
-1. Replace `https://koret.agency/` with the real domain in `index.html` (canonical, OG URL, image
-   URL, and all seven schema `@id` values), `public/robots.txt`, `public/sitemap.xml`, and the
-   `@id` in `src/components/FAQ.tsx`.
-2. Create the OG image. `og:image` currently points at `/assets/og-image.png`, which does not exist.
+1. ~~Replace the placeholder domain~~ Done: `https://koretconsult.com/` throughout.
+2. ~~Create the OG image~~ Done: `/assets/og-image.png`, 1200×630.
 3. Verify in Google's Rich Results Test and the Schema.org validator.
 4. **Read the five FAQ answers.** Each is a claim about how Koret operates. Correct anything untrue
    — the schema follows the copy automatically, so there is only one place to edit.
