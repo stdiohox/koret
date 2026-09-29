@@ -11,8 +11,15 @@ import { Badge } from './ui/badge';
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 const CONTACT_EMAIL = 'koretconsult@outlook.com';
 
+// Meta Pixel (loaded in index.html). A successful enquiry is reported as a Lead so ads can
+// be measured against real enquiries, not just page views. Optional-chained because ad
+// blockers commonly stop the pixel from loading, and that must never break the form.
+declare global {
+  interface Window { fbq?: (...args: unknown[]) => void }
+}
+const trackLead = () => window.fbq?.('track', 'Lead');
+
 const services = ['AI Automation', 'Consulting', 'Brand Building', 'Not sure yet'];
-const budgets = ['Under $2k', '$2k–$5k', '$5k–$10k', '$10k+'];
 
 const nextSteps = [
   { icon: MessageSquare, title: 'Tell us where you’re stuck', text: 'A few lines is enough — marketing, tech, or both.' },
@@ -80,7 +87,6 @@ export default function ContactForm() {
   const reduceMotion = useReducedMotion();
   const [fields, setFields] = useState<Fields>(empty);
   const [picked, setPicked] = useState<string[]>([]);
-  const [budget, setBudget] = useState<string | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
   // Spam trap: a field people never see, so anything in it came from a bot.
@@ -106,7 +112,9 @@ export default function ContactForm() {
       return;
     }
 
-    const payload = { ...fields, services: picked.join(', '), budget: budget ?? 'Not specified' };
+    // Budget is asked on the discovery call, not here. The sheet keeps its Budget column
+    // (so older rows stay aligned); new rows just leave it blank.
+    const payload = { ...fields, services: picked.join(', ') };
 
     if (!ENDPOINT) {
       const body = [
@@ -114,7 +122,6 @@ export default function ContactForm() {
         `Email: ${payload.email}`,
         payload.company && `Company: ${payload.company}`,
         `Interested in: ${payload.services}`,
-        `Budget: ${payload.budget}`,
         '',
         payload.message,
       ].filter((l) => l !== '' && l !== undefined).join('\n');
@@ -135,7 +142,9 @@ export default function ContactForm() {
       });
       // Apps Script answers 200 even when the script throws, so trust its own flag.
       const data = await res.json().catch(() => null);
-      setStatus(res.ok && data?.ok !== false ? 'sent' : 'failed');
+      const ok = res.ok && data?.ok !== false;
+      if (ok) trackLead();
+      setStatus(ok ? 'sent' : 'failed');
     } catch {
       setStatus('failed');
     }
@@ -144,7 +153,6 @@ export default function ContactForm() {
   const reset = () => {
     setFields(empty);
     setPicked([]);
-    setBudget(null);
     setStatus('idle');
   };
 
@@ -265,17 +273,6 @@ export default function ContactForm() {
                     ))}
                   </div>
                   {errors.services && <p id={`${fid('services')}-error`} className="text-[13px]" style={{ color: '#c2410c' }}>{errors.services}</p>}
-                </fieldset>
-
-                <fieldset className="flex flex-col gap-3">
-                  <legend className="mb-3 text-sm font-medium" style={{ color: 'var(--color-ink-charcoal)' }}>
-                    Budget <span className="font-normal" style={{ color: 'var(--color-dock-slate)' }}>(optional)</span>
-                  </legend>
-                  <div className="flex flex-wrap gap-2">
-                    {budgets.map((b) => (
-                      <Chip key={b} selected={budget === b} onClick={() => setBudget(budget === b ? null : b)}>{b}</Chip>
-                    ))}
-                  </div>
                 </fieldset>
 
                 <Field label="Tell us about your project" htmlFor={fid('message')} error={errors.message}>
