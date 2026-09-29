@@ -27,15 +27,16 @@ const nextSteps = [
   { icon: Check, title: 'A free 30-minute consultation', text: 'Leave with a clear next step, whether or not we work together.' },
 ];
 
-type Fields = { name: string; email: string; company: string; message: string };
+type Fields = { name: string; email: string; phone: string; company: string; message: string };
 type Errors = Partial<Record<keyof Fields | 'services', string>>;
 
-const empty: Fields = { name: '', email: '', company: '', message: '' };
+const empty: Fields = { name: '', email: '', phone: '', company: '', message: '' };
 
 function validate(f: Fields, picked: string[]): Errors {
   const e: Errors = {};
   if (!f.name.trim()) e.name = 'Please tell us your name.';
   if (!/^\S+@\S+\.\S+$/.test(f.email.trim())) e.email = 'Enter a valid email address.';
+  if (!/^\+?[\d\s()-]{7,20}$/.test(f.phone.trim())) e.phone = 'Enter your WhatsApp number, e.g. +234 801 234 5678.';
   if (picked.length === 0) e.services = 'Pick at least one — “Not sure yet” is fine.';
   if (f.message.trim().length < 10) e.message = 'A sentence or two helps us prepare.';
   return e;
@@ -120,6 +121,7 @@ export default function ContactForm() {
       const body = [
         `Name: ${payload.name}`,
         `Email: ${payload.email}`,
+        payload.phone && `WhatsApp: ${payload.phone}`,
         payload.company && `Company: ${payload.company}`,
         `Interested in: ${payload.services}`,
         '',
@@ -260,10 +262,16 @@ export default function ContactForm() {
                   <input id={fid('website')} name="website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                 </div>
 
-                <Field label="Company" optional htmlFor={fid('company')}>
-                  <input id={fid('company')} name="company" autoComplete="organization" placeholder="Your business name" value={fields.company} onChange={set('company')}
-                    className={`${inputBase} ${inputBorder()} h-12`} />
-                </Field>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <Field label="WhatsApp number" htmlFor={fid('phone')} error={errors.phone}>
+                    <input id={fid('phone')} name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="+234 801 234 5678" value={fields.phone} onChange={set('phone')}
+                      aria-invalid={!!errors.phone} aria-describedby={describedBy('phone')} className={`${inputBase} ${inputBorder(errors.phone)} h-12`} />
+                  </Field>
+                  <Field label="Company" optional htmlFor={fid('company')}>
+                    <input id={fid('company')} name="company" autoComplete="organization" placeholder="Your business name" value={fields.company} onChange={set('company')}
+                      className={`${inputBase} ${inputBorder()} h-12`} />
+                  </Field>
+                </div>
 
                 <fieldset className="flex flex-col gap-3" aria-describedby={describedBy('services')}>
                   <legend className="mb-3 text-sm font-medium" style={{ color: 'var(--color-ink-charcoal)' }}>What can we help with?</legend>

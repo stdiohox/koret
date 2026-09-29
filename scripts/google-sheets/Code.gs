@@ -8,7 +8,7 @@
 
 const SHEET_NAME = 'Enquiries';
 const NOTIFY_EMAIL = 'koretconsult@outlook.com'; // set to '' to turn notifications off
-const HEADERS = ['Submitted', 'Name', 'Email', 'Company', 'Services', 'Budget', 'Message'];
+const HEADERS = ['Submitted', 'Name', 'Email', 'Company', 'Services', 'Budget', 'Message', 'WhatsApp'];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -28,8 +28,9 @@ function doPost(e) {
       clean(data.services),
       clean(data.budget),
       clean(data.message),
+      clean(data.phone),
     ];
-    if (!row[1] || !row[2]) return json({ ok: false, error: 'Missing name or email' });
+    if (!row[1] || !row[2] || !row[7]) return json({ ok: false, error: 'Missing name, email or WhatsApp number' });
 
     getSheet().appendRow(row);
     notify(row);
@@ -57,6 +58,11 @@ function getSheet() {
     sheet.setColumnWidth(1, 160);
     sheet.setColumnWidth(7, 420);
   }
+  // Sheets created before a column was added get its header filled in, once.
+  const header = sheet.getRange(1, 1, 1, HEADERS.length);
+  if (header.getValues()[0].some((h, i) => h !== HEADERS[i])) {
+    header.setValues([HEADERS]).setFontWeight('bold').setBackground('#e6faff');
+  }
   return sheet;
 }
 
@@ -69,7 +75,7 @@ function clean(value) {
 
 function notify(row) {
   if (!NOTIFY_EMAIL) return;
-  const [, name, email, company, services, budget, message] = row;
+  const [, name, email, company, services, budget, message, phone] = row;
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
     replyTo: email,
@@ -77,6 +83,7 @@ function notify(row) {
     body: [
       'Name: ' + name,
       'Email: ' + email,
+      'WhatsApp: ' + (phone ? phone.replace(/^'/, '') + '  (https://wa.me/' + phone.replace(/\D/g, '') + ')' : '—'),
       'Company: ' + (company || '—'),
       'Interested in: ' + services,
       'Budget: ' + budget,

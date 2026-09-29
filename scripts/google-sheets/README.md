@@ -52,4 +52,4 @@ update `VITE_FORM_ENDPOINT`.
 - **Notification emails:** change or clear `NOTIFY_EMAIL` at the top of `Code.gs`. Hitting
   Reply on a notification replies to the person who filled in the form.
 - **Spam:** a hidden field catches basic bots, and those submissions are silently dropped.
-- **Columns:** Submitted, Name, Email, Company, Services, Budget, Message.
+- **Columns:** Submitted, Name, Email, Company, Services, Budget, Message, WhatsApp.
