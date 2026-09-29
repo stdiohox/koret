@@ -4,8 +4,8 @@ import { useParallax } from '@/hooks/useParallax';
 import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const stats = [
-  { value: '70%', label: 'Increase in qualified leads', color: 'var(--color-koret-cyan)' },
-  { value: '20', label: 'Hours/week saved through automation', color: 'var(--color-ink-charcoal)' },
+  { value: '70%', label: 'More qualified leads', color: 'var(--color-koret-cyan)' },
+  { value: '20', label: 'Hours a week saved with automation', color: 'var(--color-ink-charcoal)' },
   { value: '15', label: 'AI workflows deployed', color: 'var(--color-koret-cyan)' },
 ];
 
@@ -17,11 +17,16 @@ export default function Results() {
   const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
-    <MotionSection id="results" className="pt-0 pb-[80px]">
+    <MotionSection id="results" className="pt-16 pb-[80px]">
       {/* Plain wrapper: the inner motion.div animates transform via framer variants, so the
           GSAP parallax must not target the same element. */}
       <div ref={driftRef}>
       <motion.div ref={tiltRef} style={{ rotateX, scale, transformPerspective: 1000 }}>
+      <div className="mx-auto max-w-[1200px] px-6 mb-10 text-center">
+        <h2 className="text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
+          What Our Clients Get
+        </h2>
+      </div>
       <motion.div
         className="mx-auto max-w-[1200px] px-6 grid grid-cols-1 md:grid-cols-3 gap-6"
         variants={container}

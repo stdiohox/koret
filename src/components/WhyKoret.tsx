@@ -14,10 +14,10 @@ export default function WhyKoret() {
         <motion.div ref={tiltRef} style={{ rotateX, scale, transformPerspective: 1000 }}>
         <ScrollReveal>
         <h2 className="text-[clamp(1.75rem,1.15rem+2.6vw,2.5rem)] font-semibold mb-6 leading-[1.14] tracking-[-0.02em]" style={{ color: 'var(--color-ink-charcoal)' }}>
-          One Team. Three Disciplines. Zero Handoffs.
+          Why One Team Beats Three
         </h2>
         <p className="text-[16px]" style={{ color: 'var(--color-dock-slate)', lineHeight: 1.56 }}>
-          Most businesses coordinate an automation agency, a consultant, and a branding agency separately — three vendors, three invoices, three people who've never spoken. Koret runs AI automation, business consulting, and brand building as one integrated team, so the systems we build, the strategy behind them, and the brand carrying it all actually agree with each other.
+          When your website, your automations and your brand come from different people, nothing quite fits — and you end up as the go-between. With Koret, the same team plans it, builds it and makes it look good. You get one plan, one price and one person to call.
         </p>
         </ScrollReveal>
         </motion.div>

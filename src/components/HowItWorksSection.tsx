@@ -40,10 +40,10 @@ const Card = ({ number, title, description, className, rotate, colors }: CardPro
 );
 
 const steps = [
-  { title: 'Discover', description: 'We learn your brand, your bottlenecks, and your goals.', colors: { bg: 'bg-[rgba(0,204,255,0.10)]', text: 'text-[#00CCFF]', border: 'border-[rgba(0,204,255,0.25)]', pin: 'text-[#00CCFF]' } },
-  { title: 'Design', description: 'Strategy and system architecture, mapped together.', colors: { bg: 'bg-[rgba(0,65,155,0.08)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(0,65,155,0.2)]', pin: 'text-[#00CCFF]' } },
-  { title: 'Build', description: 'Campaigns launch, workflows deploy, agents go live.', colors: { bg: 'bg-[rgba(3,133,122,0.08)]', text: 'text-[#03857A]', border: 'border-[rgba(3,133,122,0.2)]', pin: 'text-[#00CCFF]' } },
-  { title: 'Scale', description: "We monitor, refine, and expand what's working.", colors: { bg: 'bg-[rgba(253,127,0,0.08)]', text: 'text-[#FD7F00]', border: 'border-[rgba(253,127,0,0.22)]', pin: 'text-[#00CCFF]' } },
+  { title: 'Talk', description: 'A free 30-minute call. You tell us what’s slowing you down; we tell you honestly whether we can help.', colors: { bg: 'bg-[rgba(0,204,255,0.10)]', text: 'text-[#00CCFF]', border: 'border-[rgba(0,204,255,0.25)]', pin: 'text-[#00CCFF]' } },
+  { title: 'Plan', description: 'You get a clear plan and a fixed price before any work starts. No surprises later.', colors: { bg: 'bg-[rgba(0,65,155,0.08)]', text: 'text-[var(--color-koret-navy)]', border: 'border-[rgba(0,65,155,0.2)]', pin: 'text-[#00CCFF]' } },
+  { title: 'Build', description: 'We build and set everything up. You see it and approve it before anything goes live.', colors: { bg: 'bg-[rgba(3,133,122,0.08)]', text: 'text-[#03857A]', border: 'border-[rgba(3,133,122,0.2)]', pin: 'text-[#00CCFF]' } },
+  { title: 'Grow', description: "We watch the results and keep improving what's working, month after month.", colors: { bg: 'bg-[rgba(253,127,0,0.08)]', text: 'text-[#FD7F00]', border: 'border-[rgba(253,127,0,0.22)]', pin: 'text-[#00CCFF]' } },
 ];
 
 const positions = [
@@ -71,8 +71,11 @@ export default function HowItWorksSection() {
             <div className="flex flex-col items-center gap-4 text-center mb-16">
               <Badge variant="outline">Our Process</Badge>
               <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
-                Simple to Start, Built to Scale
+                From First Call to Real Results
               </h2>
+              <p style={{ color: 'var(--color-dock-slate)' }}>
+                Four simple steps. You're never left guessing what happens next.
+              </p>
             </div>
 
             {/* lg:h-[var(--md-height)] consumes the variable declared below. Without it the

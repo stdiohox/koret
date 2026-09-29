@@ -7,10 +7,10 @@ import AIServicesGrid from './components/AIServicesGrid';
 import WhyKoret from './components/WhyKoret';
 import TargetIndustries from './components/TargetIndustries';
 import HowItWorksSection from './components/HowItWorksSection';
+import RecentWork from './components/RecentWork';
 import Results from './components/Results';
 import FAQ from './components/FAQ';
 import ContactForm from './components/ContactForm';
-import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -30,18 +30,22 @@ export default function App() {
 
   return (
     <>
+      {/* Problem → the three services, in nav order → who it's for → proof (work, then
+          numbers) → process →
+          why us → objections → form. The form is the last thing before the footer, so
+          there is no separate closing CTA pointing back up at it. */}
       <Hero />
       <AboutSection />
       <ServiceDeepDive />
-      <BrandBuilding />
       <AIServicesGrid />
-      <WhyKoret />
+      <BrandBuilding />
       <TargetIndustries />
-      <HowItWorksSection />
+      <RecentWork />
       <Results />
+      <HowItWorksSection />
+      <WhyKoret />
       <FAQ />
       <ContactForm />
-      <FinalCTA />
       <Footer />
     </>
   );

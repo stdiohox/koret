@@ -25,30 +25,38 @@ interface FAQItem {
 const data: FAQItem[] = [
   {
     id: 1,
-    question: 'Do you only do AI, or branding and strategy too?',
+    question: 'How much does it cost?',
     answer:
-      'All three, as one team — AI automation and workflow systems, business and operations consulting, and brand building (positioning, identity, website, content). No juggling three separate vendors.',
+      'Every project is fixed-fee, and you get the price in writing before any work starts — so there are no surprise bills. Ongoing support is a simple monthly retainer.',
   },
   {
     id: 2,
-    question: 'Do I need to be technical to work with your AI team?',
-    answer: 'No. We handle the build; you tell us the outcome you want.',
+    question: "I'm not sure what I need. Can you still help?",
+    answer:
+      "Yes — that's what the free 30-minute call is for. Tell us what's eating your time or holding you back, and we'll tell you what's worth fixing first. You leave with a clear next step, whether or not we work together.",
   },
   {
     id: 3,
-    question: 'Can you automate an existing workflow, or does it have to be new?',
-    answer: 'Both. We regularly plug automation into tools businesses already use.',
+    question: 'Do I need to be technical?',
+    answer: 'Not at all. You tell us the result you want; we handle the build and explain everything in plain English.',
   },
   {
     id: 4,
-    question: 'What\'s an "agentic build"?',
+    question: 'Will this work with the tools I already use?',
     answer:
-      "An AI agent that doesn't just answer questions — it takes action: qualifying a lead, booking a call, updating a record, following up.",
+      'Almost always. We connect to what you already have — your email, calendar, WhatsApp, forms, spreadsheets and CRM — instead of making you start over.',
   },
   {
     id: 5,
-    question: 'Do you offer ongoing support after launch?',
-    answer: 'Yes — through consultation and managed automation support.',
+    question: 'Do you only do AI, or branding too?',
+    answer:
+      'Both, as one team: AI automation, consulting, and brand building (positioning, logo and visual identity, website, content). One plan, one point of contact.',
+  },
+  {
+    id: 6,
+    question: 'What happens after launch?',
+    answer:
+      "We don't disappear. We keep an eye on how everything is performing, fix anything that needs fixing, and suggest what to improve next.",
   },
 ];
 
@@ -98,10 +106,10 @@ export default function FAQ() {
       <div className="flex flex-col items-center gap-4 mb-10">
         <Badge variant="outline">Common Questions</Badge>
         <h2 className="text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
-          Frequently Asked Questions
+          Questions We Get Asked Most
         </h2>
         <p style={{ color: 'var(--color-dock-slate)' }}>
-          Find answers to common questions about how we work.
+          Straight answers. If yours isn't here, ask us on the free call.
         </p>
       </div>
 

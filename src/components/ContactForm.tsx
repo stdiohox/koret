@@ -11,7 +11,7 @@ import { Badge } from './ui/badge';
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 const CONTACT_EMAIL = 'koretconsult@outlook.com';
 
-const services = ['AI Automation', 'Business Consulting', 'Brand Building', 'Not sure yet'];
+const services = ['AI Automation', 'Consulting', 'Brand Building', 'Not sure yet'];
 const budgets = ['Under $2k', '$2k–$5k', '$5k–$10k', '$10k+'];
 
 const nextSteps = [
@@ -164,10 +164,10 @@ export default function ContactForm() {
         <div className="flex flex-col">
           <Badge variant="outline" className="w-max">Start a Project</Badge>
           <h2 className="mt-5 text-[clamp(2rem,1.4rem+2.6vw,3rem)] font-semibold leading-[1.1] tracking-[-0.025em]" style={{ color: 'var(--color-ink-charcoal)' }}>
-            Let’s build what your business needs next.
+            Get your free 30-minute call.
           </h2>
           <p className="mt-4 max-w-md text-[16px] leading-relaxed" style={{ color: 'var(--color-dock-slate)' }}>
-            Automation, strategy, or a brand that finally matches the business behind it — tell us a little, and we’ll come back with a plan.
+            Tell us what’s slowing your business down. We’ll come back with honest advice on what to fix first — even if the answer isn’t us.
           </p>
 
           <ol className="mt-10 flex flex-col gap-6">

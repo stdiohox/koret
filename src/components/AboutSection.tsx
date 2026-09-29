@@ -1,18 +1,18 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
-import { Clock, Compass, Sparkles, Users, Wallet, Target } from 'lucide-react';
+import { Clock, Compass, Sparkles, Users, Wallet, MessageSquare } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import MotionSection from './MotionSection';
 import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const features = [
-  { icon: Clock, title: 'Reclaim 15–20+ Hours a Week', desc: 'We automate the repetitive work — follow-ups, data entry, scheduling — so your week isn\'t spent on it.' },
-  { icon: Compass, title: 'An AI-Fluent Strategic Partner', desc: 'Outside, informed guidance on where automation and process change actually move the needle.' },
-  { icon: Sparkles, title: 'Look Like a Bigger Business', desc: 'Positioning, identity, and content that make a small team read as an established, credible brand.' },
-  { icon: Users, title: 'One Team, One Point of Contact', desc: 'No coordinating three vendors who\'ve never spoken. One strategy, one relationship.' },
-  { icon: Wallet, title: 'Fixed-Fee Projects, Simple Retainers', desc: 'Priced around the value delivered, not hours worked — implementation plus ongoing optimization.' },
-  { icon: Target, title: 'Built for SMBs, Not Enterprises', desc: 'Playbooks and pricing designed for owner-operated businesses, not enterprise budgets.' },
+  { icon: MessageSquare, title: 'Leads wait hours for a reply', desc: 'We set up instant replies and follow-ups, so every enquiry hears back in seconds — even at 9pm on a Sunday.' },
+  { icon: Clock, title: 'Your evenings go to admin', desc: 'Bookings, reminders, data entry and follow-ups run on their own. Most clients get 15–20+ hours a week back.' },
+  { icon: Sparkles, title: 'Your brand looks smaller than your business', desc: 'We sharpen your positioning, look and website so people see a business they can trust at first glance.' },
+  { icon: Compass, title: 'AI feels like hype, and you don’t know where to start', desc: 'We show you exactly what’s worth automating first, what it costs, and what it gives back.' },
+  { icon: Users, title: 'You’re juggling too many freelancers', desc: 'One team handles the tech, the strategy and the brand. One point of contact, one plan.' },
+  { icon: Wallet, title: 'Agency pricing feels like a blank cheque', desc: 'Every project is fixed-fee and quoted up front. Ongoing support is a simple monthly retainer.' },
 ];
 
 export default function AboutSection() {
@@ -22,7 +22,7 @@ export default function AboutSection() {
   const { ref: tiltRef, rotateX, scale } = useScrollTilt<HTMLDivElement>();
 
   return (
-    <MotionSection id="about" className="relative overflow-hidden py-32 px-4 md:px-8">
+    <MotionSection id="about" className="relative overflow-hidden pt-16 md:pt-20 pb-32 px-4 md:px-8">
       {/* Cyan top-right / navy bottom-left, the same wash the service sections use. */}
       <div ref={blobRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <motion.div
@@ -51,12 +51,12 @@ export default function AboutSection() {
         className="relative z-10 max-w-6xl mx-auto"
       >
         <div className="flex flex-col items-center gap-4 text-center mb-16">
-          <Badge variant="outline">About Koret</Badge>
-          <h2 className="text-3xl md:text-4xl font-semibold max-w-2xl" style={{ color: 'var(--color-ink-charcoal)' }}>
-            The Integrated Growth Partner for SMBs
+          <Badge variant="outline">Sound Familiar?</Badge>
+          <h2 className="text-3xl md:text-4xl font-semibold max-w-3xl text-balance" style={{ color: 'var(--color-ink-charcoal)' }}>
+            You Started a Business, Not an Admin Job
           </h2>
           <p className="max-w-lg" style={{ color: 'var(--color-dock-slate)' }}>
-            One team, three disciplines, no coordinating separate vendors.
+            If any of these hit home, we can fix it.
           </p>
         </div>
 
@@ -87,13 +87,17 @@ export default function AboutSection() {
           <div className="max-w-lg text-sm" style={{ color: 'var(--color-dock-slate)' }}>
             <h3 className="text-xl uppercase font-semibold" style={{ color: 'var(--color-ink-charcoal)' }}>What We Do</h3>
             <div className="w-24 h-[3px] rounded-full my-3" style={{ background: 'linear-gradient(to right, var(--color-koret-cyan), var(--color-koret-navy))' }} />
-            <p className="mt-8">
-              Koret runs three integrated service lines under one roof — AI automation, business consulting, and brand building — so you're not coordinating three separate vendors who've never spoken.
+            <p className="mt-8">Three services, one team:</p>
+            <p className="mt-4">
+              <strong style={{ color: 'var(--color-ink-charcoal)' }}>AI Automation</strong> — replies, bookings, follow-ups and admin that run by themselves.
             </p>
-            <p className="mt-6">
-              We audit your workflows and build the AI systems that save real hours, offer strategic guidance on where automation and process change create the most leverage, and build the brand and content that turns those efficiency gains into visible growth.
+            <p className="mt-3">
+              <strong style={{ color: 'var(--color-ink-charcoal)' }}>Consulting</strong> — a clear plan for what to automate first, and what it will pay back.
             </p>
-            <p className="mt-6">One team, one strategy, one point of contact — that's the whole idea.</p>
+            <p className="mt-3">
+              <strong style={{ color: 'var(--color-ink-charcoal)' }}>Brand Building</strong> — positioning, identity, website and content that make people trust you.
+            </p>
+            <p className="mt-6">Built for small and growing businesses, priced for them too.</p>
             <a href="#process">
               <Button className="mt-8 gap-2" size="lg">See How We Work</Button>
             </a>

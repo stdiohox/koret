@@ -15,9 +15,9 @@ const items = [
     label: 'Positioning & Identity',
     content: {
       badge: 'Stand Out On Purpose',
-      title: 'Look and sound like a brand twice your size.',
-      description: 'We define how your business is positioned against competitors and build the identity system — name, voice, visual language — that carries it.',
-      buttonText: 'See Our Approach',
+      title: 'Give people a reason to pick you over the competition.',
+      description: 'We work out what makes you different, then build the name, voice and look that say it clearly — so customers get it in seconds.',
+      buttonText: 'Talk to Us About Your Brand',
     },
   },
   {
@@ -26,9 +26,9 @@ const items = [
     label: 'Visual Identity & Website',
     content: {
       badge: 'Designed, Not Templated',
-      title: 'A brand system and website built to match, not bolted together.',
-      description: 'From logo to full visual system to the site that carries it — designed as one coherent brand, not assembled from disconnected pieces.',
-      buttonText: 'See Our Work',
+      title: 'A logo, look and website that finally match.',
+      description: 'Your logo, colours, social pages and website designed together by one team — so everywhere a customer meets you, you look like the same trustworthy business.',
+      buttonText: 'Get a Quote',
     },
   },
   {
@@ -37,9 +37,9 @@ const items = [
     label: 'AI-Assisted Content Engine',
     content: {
       badge: 'Consistent, Without a Full-Time Team',
-      title: 'Content and reputation management that runs without a content team.',
-      description: 'Social, email, and review/reputation management, kept consistent and on-brand — powered by AI, overseen by us.',
-      buttonText: 'See What We Publish',
+      title: 'Stay visible without hiring a content team.',
+      description: 'Regular social posts, emails, and replies to your reviews — on-brand and on schedule. AI does the heavy lifting; our team checks everything before it goes out.',
+      buttonText: 'Get a Quote',
     },
   },
 ];
@@ -56,10 +56,10 @@ export default function BrandBuilding() {
         <div className="flex flex-col items-center gap-4 text-center">
           <Badge variant="outline">Brand Building</Badge>
           <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl" style={{ color: 'var(--color-ink-charcoal)' }}>
-            The Brand Behind the Systems
+            Look Like the Business You Actually Are
           </h2>
           <p style={{ color: 'var(--color-dock-slate)' }}>
-            Automation runs the business. This is what makes people trust it.
+            People judge you in seconds. We make sure what they see matches the quality of your work.
           </p>
         </div>
 

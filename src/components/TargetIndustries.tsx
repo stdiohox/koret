@@ -5,12 +5,12 @@ import MotionSection from './MotionSection';
 import { useScrollTilt } from '@/hooks/useScrollTilt';
 
 const industries = [
-  { icon: Stethoscope, label: 'Healthcare & Dental', gradient: { from: '#00CCFF', to: '#00419B' } },
-  { icon: Scale, label: 'Law & Professional Services', gradient: { from: '#00419B', to: '#03857A' } },
-  { icon: ShoppingBag, label: 'E-Commerce & DTC', gradient: { from: '#03857A', to: '#FD7F00' } },
-  { icon: Dumbbell, label: 'Fitness & Coaching', gradient: { from: '#FD7F00', to: '#00CCFF' } },
-  { icon: UserSearch, label: 'Recruitment & Staffing', gradient: { from: '#00CCFF', to: '#03857A' } },
-  { icon: Wrench, label: 'Home Services & Trades', gradient: { from: '#00419B', to: '#FD7F00' } },
+  { icon: Stethoscope, label: 'Healthcare & Dental', win: 'Fewer no-shows, fuller diaries', gradient: { from: '#00CCFF', to: '#00419B' } },
+  { icon: Scale, label: 'Law & Professional Services', win: 'Faster intake, no missed enquiries', gradient: { from: '#00419B', to: '#03857A' } },
+  { icon: ShoppingBag, label: 'E-Commerce & Online Stores', win: 'Instant replies, more repeat orders', gradient: { from: '#03857A', to: '#FD7F00' } },
+  { icon: Dumbbell, label: 'Fitness & Coaching', win: 'Every lead followed up, automatically', gradient: { from: '#FD7F00', to: '#00CCFF' } },
+  { icon: UserSearch, label: 'Recruitment & Staffing', win: 'Candidates screened in minutes', gradient: { from: '#00CCFF', to: '#03857A' } },
+  { icon: Wrench, label: 'Home Services & Trades', win: 'Every call and quote chased up', gradient: { from: '#00419B', to: '#FD7F00' } },
 ];
 
 export default function TargetIndustries() {
@@ -59,10 +59,10 @@ export default function TargetIndustries() {
 
       <div className="relative z-10 max-w-5xl mx-auto text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-semibold" style={{ color: 'var(--color-ink-charcoal)' }}>
-          Who We Work With
+          Built for Businesses That Run on Bookings
         </h2>
         <p className="mt-2 max-w-lg mx-auto text-sm" style={{ color: 'var(--color-dock-slate)' }}>
-          Service-based, appointment-driven businesses — where manual work is easiest to see, and automation pays off fastest.
+          If your business depends on enquiries, appointments and happy customers, you're who we built this for.
         </p>
       </div>
 
@@ -78,10 +78,10 @@ export default function TargetIndustries() {
           className="koret-marquee-track flex w-max items-center gap-4 py-4"
           style={{ animation: 'koret-marquee 40s linear infinite' }}
         >
-          {[...industries, ...industries].map(({ icon: Icon, label, gradient }, i) => (
+          {[...industries, ...industries].map(({ icon: Icon, label, win, gradient }, i) => (
             <div
               key={i}
-              className="group relative h-28 w-44 shrink-0 flex flex-col items-center justify-center gap-2 rounded-lg overflow-hidden"
+              className="group relative h-36 w-52 shrink-0 flex flex-col items-center justify-center gap-2 rounded-lg overflow-hidden"
               style={{ backgroundColor: 'var(--color-surface-ivory)', border: '1px solid var(--color-dock-hairline)' }}
             >
               <div
@@ -91,6 +91,9 @@ export default function TargetIndustries() {
               <Icon size={28} color="var(--color-koret-cyan)" className="relative" />
               <span className="relative text-xs font-medium text-center px-2" style={{ color: 'var(--color-ink-charcoal)' }}>
                 {label}
+              </span>
+              <span className="relative text-[11px] text-center px-3" style={{ color: 'var(--color-dock-slate)' }}>
+                {win}
               </span>
             </div>
           ))}

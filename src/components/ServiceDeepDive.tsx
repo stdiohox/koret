@@ -15,9 +15,9 @@ const tabs = [
     label: 'Automation',
     content: {
       badge: 'Save Hours Every Week',
-      title: 'Stop doing by hand what a workflow can do for you.',
+      title: 'Get your evenings back.',
       description:
-        "We map your repetitive tasks — lead follow-ups, data entry, status updates — and replace them with automations that run in the background. You keep the oversight, we remove the manual work.",
+        "Follow-ups, reminders, data entry, status updates — the jobs you repeat every day. We set them up to run on their own, and you still see everything that happens.",
       buttonText: 'See Automation Examples',
     },
   },
@@ -27,9 +27,9 @@ const tabs = [
     label: 'Website & Web Apps',
     content: {
       badge: 'Built to Convert',
-      title: 'A site that works as hard as your sales team.',
+      title: 'A website that brings in enquiries, not just visitors.',
       description:
-        'Fast, on-brand websites and custom web apps, built with the same attention to conversion as your campaigns. No template feel — every build matches your brand system exactly.',
+        'Fast, custom-designed websites that turn visitors into bookings — plus client portals, booking systems and dashboards when you need them. No templates.',
       buttonText: 'View Our Builds',
     },
   },
@@ -39,21 +39,21 @@ const tabs = [
     label: 'Workflow Systems',
     content: {
       badge: 'Connected, Not Siloed',
-      title: 'Your tools should talk to each other.',
+      title: 'No more leads falling through the cracks.',
       description:
-        "We connect your CRM, forms, email, and chat into one pipeline, so a lead that comes in on one channel doesn't get lost before it reaches another. Fewer handoffs, fewer dropped threads.",
+        "Your forms, email, WhatsApp, calendar and customer list — connected, so every enquiry lands in one place and nobody has to copy anything across by hand.",
       buttonText: 'Map Your Workflow',
     },
   },
   {
     value: 'agentic',
     icon: <Rocket className="h-auto w-4 shrink-0" />,
-    label: 'Agentic AI Builds',
+    label: 'AI Assistants',
     content: {
       badge: 'Always On',
-      title: 'An agent that actually does the work, not just answers questions.',
+      title: 'An AI assistant that works while you sleep.',
       description:
-        'We build AI agents that qualify leads, respond to customers, and take real action — booking calls, updating records, following up — without waiting on a human to press go.',
+        'It answers customer questions, checks whether a lead is a good fit, books the call into your calendar and follows up — any hour, every day.',
       buttonText: 'See an Agent in Action',
     },
   },
@@ -63,9 +63,9 @@ const tabs = [
     label: 'AI Consultation',
     content: {
       badge: 'Where to Start',
-      title: "Not sure where automation actually pays off? We'll show you.",
+      title: "Not sure where to start? We'll show you.",
       description:
-        'A stack audit, a prioritized roadmap, and ROI modeling — so you invest in the automation that moves the needle first, not just what sounds impressive.',
+        "We look at how your business runs today and tell you what's worth automating first, what it costs, and what it saves — before you spend anything on building.",
       buttonText: 'Book a Free Consultation',
     },
   },
@@ -128,17 +128,17 @@ export default function ServiceDeepDive() {
         <div className="flex flex-col gap-16">
           <div className="lg:max-w-sm">
             <h2 className="mb-3 text-xl font-semibold md:mb-4 md:text-4xl lg:mb-6" style={{ color: 'var(--color-ink-charcoal)' }}>
-              Five Ways We Move Your Brand Forward
+              AI Automation: Let the Busywork Run Itself
             </h2>
             <p className="mb-8 text-sm" style={{ color: 'var(--color-dock-slate)' }}>
-              Here's how each one works — automation, web and app builds, workflow systems, agentic AI, and consultation, all under one team.
+              We build the systems that reply, book, follow up and keep records for you. You don't need to know anything technical — tell us the result you want, and we build it.
             </p>
             <a
               href="#start-project"
               className="group inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition hover:opacity-90 w-fit"
               style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >
-              Book a Free Consultation
+              Book a Free Call
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </a>
           </div>

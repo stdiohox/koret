@@ -18,10 +18,10 @@ export default function AIServicesGrid() {
   const washRef = useParallax<HTMLDivElement>(0.12);
 
   const consultationItems = [
-    { label: 'Stack Audit', detail: 'Review what you\'re already using' },
-    { label: 'Roadmap', detail: 'Prioritized 90-day plan' },
-    { label: 'ROI Modeling', detail: 'Where automation pays off first' },
-    { label: 'Ongoing Advisory', detail: 'Monthly strategy check-ins' },
+    { label: 'Review', detail: 'We look at the tools and processes you already have' },
+    { label: '90-Day Plan', detail: 'What to fix first, second and third' },
+    { label: 'Cost vs. Payback', detail: 'What each step costs and what it saves you' },
+    { label: 'Ongoing Support', detail: 'Monthly check-ins to keep things improving' },
   ];
 
   // `slug` pulls the brand mark from Simple Icons (CC0) at render time; `src` points at a
@@ -39,15 +39,13 @@ export default function AIServicesGrid() {
     { name: 'WhatsApp', slug: 'whatsapp' },
   ];
 
-  const agentExample = `// One of the agents we build
-const agent = new KoretAgent({
-  role: "qualify inbound leads",
-  channels: ["web chat", "email"],
-  handoff: "book call when ready"
-});
-
-await agent.run();
-// ✓ Responding to leads in seconds`;
+  const agentExample = `// 9:14pm — new enquiry on your website
+→ Replies in seconds, day or night
+→ Asks a few questions to check it's a good fit
+→ Books a call straight into your calendar
+→ Saves the details to your customer list
+→ Sends you a summary in the morning
+✓ Nobody on your team lifted a finger`;
 
   // Shared style tokens for this section's light-theme cards
   const cardBase = {
@@ -108,10 +106,10 @@ await agent.run();
         {/* Header */}
         <div className="flex flex-col gap-6 max-w-3xl">
           <h2 className="text-[clamp(2rem,1.3rem+3vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.03em]" style={{ color: 'var(--color-ink-charcoal)' }}>
-            Your Fractional Head of AI & Operations
+            Consulting: Know What to Fix First
           </h2>
           <p className="text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--color-ink-charcoal)' }}>
-            Strategic guidance on where AI and process change actually move the needle — not just implementation, ongoing advisory.
+            Most businesses waste money automating the wrong things. We give you a clear, costed plan before anything gets built — and stay on as your go-to advisor after.
           </p>
         </div>
 
@@ -133,8 +131,8 @@ await agent.run();
                   Included
                 </span>
               </div>
-              <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>AI Consultation</h3>
-              <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>What's included</p>
+              <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>What You Get</h3>
+              <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>Included in every consulting engagement</p>
 
               <div className="space-y-2">
                 {consultationItems.map((c, idx) => {
@@ -173,7 +171,7 @@ await agent.run();
                 <Layers className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} />
               </div>
               <h3 className="text-sm font-bold mb-1" style={{ color: 'var(--color-ink-charcoal)' }}>Works With Your Stack</h3>
-              <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>Tools we build around</p>
+              <p className="text-xs mb-4" style={{ color: 'var(--color-ink-charcoal)' }}>We build around the tools you already use</p>
 
               <div className="grid grid-cols-3 gap-2">
                 {stack.map((s, idx) => (
@@ -213,10 +211,10 @@ await agent.run();
                 <div className="p-2 rounded-lg" style={chipLight}>
                   <Terminal className="w-5 h-5" style={{ color: 'var(--color-koret-cyan)' }} />
                 </div>
-                <h3 className="text-sm font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>Example: A Lead-Qualifying Agent</h3>
+                <h3 className="text-sm font-bold" style={{ color: 'var(--color-ink-charcoal)' }}>Example: What an AI Assistant Does With a New Lead</h3>
               </div>
 
-              <div className="bg-black border border-zinc-800 rounded-lg p-4 font-mono text-[12px] leading-relaxed overflow-auto max-h-32 scrollbar-hide">
+              <div className="bg-black border border-zinc-800 rounded-lg p-4 font-mono text-[12px] leading-relaxed overflow-auto max-h-48 scrollbar-hide">
                 {agentExample.split('\n').map((line, idx) => (
                   <div key={idx} className="flex gap-2">
                     <span className="text-zinc-600 select-none w-6 text-right">{idx + 1}</span>

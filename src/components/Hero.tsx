@@ -82,7 +82,7 @@ export default function HeroSection() {
 
       <section
         ref={heroSectionRef}
-        className="koret-hero-poppins relative overflow-hidden bg-black w-full text-sm pb-44"
+        className="koret-hero-poppins relative overflow-hidden bg-black w-full text-sm pb-32"
       >
 
         {/* Mesh gradient shader background — Koret palette in place of the reference's approximate hues */}
@@ -186,16 +186,17 @@ export default function HeroSection() {
                 <div className="absolute left-0 top-full pt-3 invisible opacity-0 -translate-y-2 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0">
                   <div className="flex flex-col gap-2 w-max rounded-lg bg-white p-4 font-normal text-black shadow-sm">
                     <a href="#ai-agency" className="hover:translate-x-1 hover:text-slate-500 transition-all">AI Automation</a>
-                    <a href="#business-consulting" className="hover:translate-x-1 hover:text-slate-500 transition-all">Business Consulting</a>
+                    <a href="#business-consulting" className="hover:translate-x-1 hover:text-slate-500 transition-all">Consulting</a>
                     <a href="#brand-building" className="hover:translate-x-1 hover:text-slate-500 transition-all">Brand Building</a>
                   </div>
                 </div>
               </div>
 
               <a href="#ai-agency" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">AI Automation</a>
-              <a href="#business-consulting" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Business Consulting</a>
+              <a href="#business-consulting" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Consulting</a>
               <a href="#brand-building" onClick={() => setMenuOpen(false)} className="md:hidden flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Brand Building</a>
               <a href="#industries" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Industries</a>
+              <a href="#work" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Work</a>
               <a href="#process" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">Process</a>
               <a href="#faq" onClick={() => setMenuOpen(false)} className="flex items-center justify-center py-3 max-md:w-full text-white/80 hover:text-white transition-colors">FAQ</a>
 
@@ -216,7 +217,7 @@ export default function HeroSection() {
               className="hidden md:block px-6 py-3 rounded-full font-medium transition hover:opacity-90"
               style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
             >
-              Book a Free Consultation
+              Book a Free Call
             </a>
 
             <button
@@ -240,15 +241,15 @@ export default function HeroSection() {
               className="flex items-center gap-2 rounded-full w-max max-w-[calc(100%-2rem)] text-center mx-auto px-4 py-2 mt-40 md:mt-32 backdrop-blur-sm"
               style={{ border: '1px solid rgba(255,255,255,0.15)', backgroundColor: 'rgba(255,255,255,0.05)' }}
             >
-              <span className="text-white/90">AI, Consulting &amp; Brand — Under One Roof</span>
+              <span className="text-white/90">For clinics, law firms, trades, coaches &amp; online stores</span>
             </motion.div>
 
             <motion.h1 variants={item} className="text-4xl md:text-7xl font-medium max-w-[850px] text-center mx-auto mt-8 px-4 text-white">
-              Brands That Tell Stories. Systems That Scale Them.
+              More Customers. Less Admin. One Team.
             </motion.h1>
 
             <motion.p variants={item} className="text-sm md:text-base mx-auto max-w-2xl text-center mt-6 px-4 text-white/70">
-              Koret builds the brand strategy that makes people care — and the AI infrastructure that makes your business run itself. From campaigns to code, we bring your brand to limelight.
+              Koret builds the brand and website that bring customers in — and the AI automations that answer, book and follow up with them for you. Fixed price. No tech skills needed.
             </motion.p>
 
             <motion.div variants={item} className="mx-auto w-full flex flex-wrap items-center justify-center gap-3 mt-4 px-4">
@@ -259,16 +260,16 @@ export default function HeroSection() {
                 className="px-6 py-3 rounded-full font-medium transition hover:opacity-90"
                 style={{ backgroundColor: 'var(--color-koret-cyan)', color: '#ffffff' }}
               >
-                Start Your Project
+                Book a Free 30-Min Call
               </motion.a>
               <motion.a
-                href="#start-project"
+                href="#work"
                 whileHover={reduceMotion ? undefined : { scale: 1.02 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                 className="flex items-center gap-2 rounded-full px-6 py-3 text-white hover:bg-white/10 transition-colors"
                 style={{ border: '1px solid rgba(255,255,255,0.3)' }}
               >
-                <span>See What We Build</span>
+                <span>See Our Work</span>
                 <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <path d="M1.25.5 4.75 4l-3.5 3.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

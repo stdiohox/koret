@@ -1,20 +1,21 @@
 import React from 'react';
 import { motion, useReducedMotion, useInView } from 'framer-motion';
 import { MeshGradient } from '@paper-design/shaders-react';
-import { Linkedin, MessageCircle, type LucideIcon } from 'lucide-react';
+import { Linkedin, type LucideIcon } from 'lucide-react';
 
 const columns = {
   Services: [
     { label: 'AI Automation', href: '#ai-agency' },
-    { label: 'Business Consulting', href: '#business-consulting' },
+    { label: 'Consulting', href: '#business-consulting' },
     { label: 'Brand Building', href: '#brand-building' },
   ],
   Company: [
+    { label: 'Our Work', href: '#work' },
     { label: 'Why Koret', href: '#why-koret' },
     { label: 'Process', href: '#process' },
     { label: 'Results', href: '#results' },
   ],
-  Contact: [{ label: 'Book a Free Consultation', href: '#start-project' }],
+  Contact: [{ label: 'Book a Free Call', href: '#start-project' }],
 };
 
 // `slug` pulls the brand mark from Simple Icons; `Icon` is a lucide component, used for
@@ -28,11 +29,7 @@ const socialLinks: {
   url: string | null;
 }[] = [
   { name: 'Instagram', slug: 'instagram', url: 'https://www.instagram.com/koretconsult?stkn=c21yb3UxaTA4enpi' },
-  { name: 'X (Twitter)', slug: 'x', url: null },
   { name: 'LinkedIn', Icon: Linkedin, url: 'https://www.linkedin.com/company/koret-consulting/' },
-  { name: 'Facebook', slug: 'facebook', url: null },
-  { name: 'TikTok', slug: 'tiktok', url: null },
-  { name: 'Message', Icon: MessageCircle, url: null },
 ];
 
 export default function Footer() {
@@ -125,9 +122,9 @@ export default function Footer() {
               {/* The light wordmark, not the navy/cyan one — this panel is dark. */}
               <img src="/logo/koret-wordmark-light.png" alt="Koret" className="mb-4 h-8 w-auto shrink-0 self-start" />
               <h2 className="text-sm font-medium leading-tight text-white md:text-base">
-                Bringing your brand
+                More customers. Less admin.
                 <br />
-                to limelight.
+                One team.
               </h2>
             </div>
 
