@@ -8,7 +8,9 @@
 
 const SHEET_NAME = 'Enquiries';
 const NOTIFY_EMAIL = 'koretconsult@outlook.com'; // set to '' to turn notifications off
-const HEADERS = ['Submitted', 'Name', 'Email', 'Company', 'Services', 'Budget', 'Message', 'WhatsApp'];
+// Matches the live sheet: the team renamed F to Details (their call notes) and keeps Budget
+// further right, so the form leaves F blank. A mismatch here rewrites the sheet's header row.
+const HEADERS = ['Submitted', 'Name', 'Email', 'Company', 'Services', 'Details', 'Message', 'WhatsApp'];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -26,7 +28,7 @@ function doPost(e) {
       clean(data.email),
       clean(data.company),
       clean(data.services),
-      clean(data.budget),
+      '', // Details: filled in by the team after the call
       clean(data.message),
       clean(data.phone),
     ];
@@ -75,7 +77,7 @@ function clean(value) {
 
 function notify(row) {
   if (!NOTIFY_EMAIL) return;
-  const [, name, email, company, services, budget, message, phone] = row;
+  const [, name, email, company, services, , message, phone] = row;
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
     replyTo: email,
@@ -86,7 +88,6 @@ function notify(row) {
       'WhatsApp: ' + (phone ? phone.replace(/^'/, '') + '  (https://wa.me/' + phone.replace(/\D/g, '') + ')' : '—'),
       'Company: ' + (company || '—'),
       'Interested in: ' + services,
-      'Budget: ' + budget,
       '',
       message,
       '',

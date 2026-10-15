@@ -37,9 +37,13 @@ Create a file called `.env.local` in the project root (next to `package.json`):
 VITE_FORM_ENDPOINT=https://script.google.com/macros/s/AKfy.../exec
 ```
 
-Restart `npm run dev`. On your hosting provider (Vercel, Netlify, …), add the same variable
-under the project's **Environment Variables** and redeploy. The value is built into the site at
-build time.
+Restart `npm run dev`. On Vercel, add the same variable under the project's **Settings →
+Environment Variables** (Production and Preview) and redeploy. The value is built into the site
+at build time.
+
+**If the variable is missing from a build, nothing errors:** the form quietly falls back to
+opening a pre-filled email, so no row reaches the sheet and no Meta Pixel `Lead` fires. To
+check a live site, search its `assets/index-*.js` for `script.google.com`.
 
 ## Changing the script later
 
@@ -52,4 +56,5 @@ update `VITE_FORM_ENDPOINT`.
 - **Notification emails:** change or clear `NOTIFY_EMAIL` at the top of `Code.gs`. Hitting
   Reply on a notification replies to the person who filled in the form.
 - **Spam:** a hidden field catches basic bots, and those submissions are silently dropped.
-- **Columns:** Submitted, Name, Email, Company, Services, Budget, Message, WhatsApp.
+- **Columns:** Submitted, Name, Email, Company, Services, Details, Message, WhatsApp. The form
+  leaves Details blank for the team's call notes; columns after WhatsApp belong to the team.
