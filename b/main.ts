@@ -113,22 +113,19 @@ if (tube && lamp && tubeLinks.length) {
 // visitor hasn't asked to save data; it fades in once it can play, and pauses off screen.
 const heroEl = $('.hero');
 const video = $<HTMLVideoElement>('[data-hero-video]');
-const toggle = $<HTMLButtonElement>('[data-motion-toggle]');
 // Phones also keep the still: the loop is 422 KB on what is often a metered connection.
 const saveData =
   (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true ||
   !window.matchMedia('(min-width: 900px)').matches;
-if (heroEl && video && toggle && !reduceMotion) {
-  let paused = false;
+if (heroEl && video && !reduceMotion) {
   let inView = true;
   const sync = () => {
-    heroEl.classList.toggle('paused', paused);
     if (saveData) return;
-    if (paused || !inView) video.pause();
+    if (!inView) video.pause();
     else video.play().catch(() => { /* autoplay refused: the still stays */ });
   };
   video.addEventListener('playing', () => video.classList.add('ready'), { once: true });
-  // Save-Data and phones keep the still photo; the CSS glow can still be paused.
+  // Save-Data and phones keep the still photo.
   if (!saveData) {
     window.addEventListener('load', () => {
       video.src = video.dataset.src ?? '';
@@ -138,14 +135,6 @@ if (heroEl && video && toggle && !reduceMotion) {
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([e]) => { inView = e.isIntersecting; sync(); }).observe(heroEl);
   }
-  // WCAG 2.2.2: the looping background can be paused.
-  toggle.hidden = false;
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    const label = $('[data-motion-label]', toggle);
-    if (label) label.textContent = paused ? 'Play background' : 'Pause background';
-    sync();
-  });
 }
 
 // ---- Hero prompt -> Lead Leak Check form -------------------------------------------------
@@ -276,17 +265,16 @@ if (plans) {
 }
 
 // ---- Lead Leak Check panel: rotating mosaic ---------------------------------------------
-// Steps through the four checks every 2.6 s. Pauses on hover/focus, when off screen and via
-// the Pause button (WCAG 2.2.2); never auto-plays under reduced motion.
+// Steps through the four checks every 2.6 s. Holds on hover/focus and when off screen; never
+// auto-plays under reduced motion. (No pause button, by request: WCAG 2.2.2 risk noted.)
 const lc = $('[data-lc]');
 if (lc) {
   const tiles = $$('[data-lc-tile]', lc);
   const caps = $$('[data-lc-cap]', lc);
   const dots = $$<HTMLButtonElement>('[data-lc-dot]', lc);
-  const pauseBtn = $<HTMLButtonElement>('[data-lc-pause]', lc);
   let i = 0;
   let timer = 0;
-  let userPaused = reduceMotion;
+  const userPaused = reduceMotion;
   let hovering = false;
   let visible = false;
   const show = (n: number) => {
@@ -304,15 +292,6 @@ if (lc) {
   lc.addEventListener('mouseleave', () => { hovering = false; sync(); });
   lc.addEventListener('focusin', () => { hovering = true; sync(); });
   lc.addEventListener('focusout', () => { hovering = false; sync(); });
-  if (pauseBtn && !reduceMotion) {
-    pauseBtn.hidden = false;
-    pauseBtn.addEventListener('click', () => {
-      userPaused = !userPaused;
-      const label = $('[data-lc-pause-label]', pauseBtn);
-      if (label) label.textContent = userPaused ? 'Play' : 'Pause';
-      sync();
-    });
-  }
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(lc);
   }

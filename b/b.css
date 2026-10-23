@@ -302,7 +302,6 @@ a:hover { text-decoration-thickness: 2px; }
 }
 @keyframes bloom { from { opacity: 0.18; transform: scale(0.97); } to { opacity: 0.7; transform: scale(1.04); } }
 @keyframes sweep { 0% { transform: translateX(-120%); } 70%, 100% { transform: translateX(320%); } }
-.hero.paused .hero-bloom, .hero.paused .hero-sweep::before { animation-play-state: paused; }
 
 /* Blueprint frame */
 .frame { position: absolute; inset: 0; z-index: 0; pointer-events: none; --frame-line: rgba(255, 255, 255, 0.28);
@@ -391,12 +390,6 @@ a:hover { text-decoration-thickness: 2px; }
 .pa-5 { background: linear-gradient(135deg, #0e1626, #3b4a66); }
 .proof p { font-size: max(13px, calc(13 * var(--u))); color: var(--white); padding: 4px 12px; border-radius: 999px; background: rgba(6, 14, 30, 0.72); text-shadow: 0 1px 10px rgba(6, 14, 30, 0.7); }
 
-.motion-toggle {
-  position: absolute; z-index: 2; right: calc(27.8 * var(--u) + 12px); bottom: 14px;
-  font: 500 12px/1 var(--hero-font); color: var(--white); background: rgba(6, 14, 30, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 999px; padding: 8px 12px; min-height: 32px; cursor: pointer;
-}
-.motion-toggle:focus-visible { outline-color: var(--white); box-shadow: 0 0 0 6px rgba(6, 14, 30, 0.85); }
 
 /* Entrance: pure CSS, once. */
 @keyframes drop { from { transform: translateY(-140%); opacity: 0; } }
@@ -442,8 +435,7 @@ a:hover { text-decoration-thickness: 2px; }
   .prompt { width: 100%; min-width: 0; margin-top: 24px; }
   .perks { gap: 8px 18px; margin-top: 18px; }
   /* In the flow under the copy, so the fixed bottom nav can never cover it. */
-  .motion-toggle { position: relative; right: auto; bottom: auto; margin-top: 20px; }
-}
+  }
 
 @media (prefers-reduced-motion: reduce) {
   .topbar, .e-badge, .e-line, .e-sub, .e-prompt, .e-perks, .e-proof { animation: none !important; }
@@ -1063,8 +1055,6 @@ input[aria-invalid='true'] { border-color: var(--error); }
 .lc-dot[aria-current='true'] { width: 48px; }
 .lc-dot[aria-current='true']::before { width: 40px; background: var(--white); }
 .lc-dot:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 6px; }
-.lc-pause { min-height: 28px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: var(--on-dark-muted); font: 500 0.75rem/1 var(--hero-font); cursor: pointer; }
-.lc-pause:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 
 .lc-side { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px 12px 40px; }
 /* Stacked: every CTA jumps to #check, so the form comes first and the showcase after it. */
