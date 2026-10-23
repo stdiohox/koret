@@ -66,13 +66,12 @@ doubling needs roughly 1,100 visitors per variant. Keep ad targeting and creativ
 5. Merge `ab-variant-b` to `main`. Check `/?variant=a`, `/?variant=b`, and a test lead from each
    (it should land with `A` / `B` in the Variant column).
 
-## Image placeholders in B
+## Images in B
 
-Each is a `<div class="ph" …>` with its size written on it. Swap it for an
-`<img src width height alt loading="lazy">` (WebP/AVIF, ≤ 60 KB each) of the same ratio.
-
-| Where | Size | What |
-|---|---|---|
+No placeholders are left. Every image is WebP under `public/b/` (hero stills and loop in
+`hero/`, the four leak images in `leaks/`, demo screenshots and the reel poster in `work/`).
+Before launch: re-encode `public/work/voice-agent.mp4` (about 18 MB) to about 2 MB and add a
+captions `<track>`. The demo screenshots were taken on 2026-10-23, so re-take them if the demos change.
 
 ## Claims on B that the team must confirm
 
