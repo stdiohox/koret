@@ -11,7 +11,7 @@ every lead is tagged with the page it came from.
 | Form | 5 fields + chips, at the bottom | 3 fields (name, WhatsApp, business); optional step 2 |
 | Navigation | plain links; mobile hamburger | tubelight nav (lamp follows the section in view); fixed bottom icon bar on phones; CTA fixed in the top bar on every screen |
 | WhatsApp | none | click-to-chat buttons (once `VITE_WHATSAPP_NUMBER` is set) |
-| Hero | Mesh-gradient shader, centred headline | "Never miss another enquiry. Even at 9pm." over Lagos lagoon at blue hour (full-quality 8 s loop, 3.7 MB, all screens unless Save-Data), blueprint frame, prompt box that carries into the form |
+| Hero | Mesh-gradient shader, centred headline | "The first reply wins the customer. Make it yours." over Lagos lagoon at blue hour (full-quality 8 s loop, 3.7 MB, all screens unless Save-Data), blueprint frame, prompt box that carries into the form |
 | Lighthouse mobile (local) | 36, LCP 6.9 s (live site) | 91, LCP 2.0 s (98 with the Pixel blocked); accessibility 100 |
 
 ## How the split works
