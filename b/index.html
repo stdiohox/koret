@@ -205,28 +205,107 @@
         </button>
       </section>
 
-      <!-- 2. THE LEAK — make the pain specific. -->
-      <section class="section" aria-labelledby="leak-title">
-        <div class="wrap">
-          <p class="kicker">Where the money goes</p>
-          <h2 id="leak-title">Your ads and your reputation bring the enquiries. Slow replies lose them.</h2>
-          <ol class="leaks" data-reveal>
-            <li>
-              <p class="leak-time">21:14</p>
-              <h3>The evening enquiry</h3>
-              <p>Someone asks about a price after work. Nobody replies until morning, and by then they've asked your competitor too.</p>
+      <!-- 2. WHERE THE MONEY GOES — four specific leaks. Layout from the "Behind the lens"
+           brief: header with badge, a featured card, then a three-card grid. Static content
+           (no database): these are fixed copy, not a feed. -->
+      <section class="section leak" aria-labelledby="leak-title">
+        <div class="wrap leak-wrap">
+          <header class="leak-head">
+            <span class="leak-badge">Where the money goes</span>
+            <h2 id="leak-title" class="leak-title">Slow replies lose sales</h2>
+            <div class="leak-head-bottom">
+              <p class="leak-sub">Your ads and your reputation bring the enquiries in. These are the four places they quietly leak out, often without anyone noticing.</p>
+              <a href="#check" class="leak-btn" data-cta="leak">Get a free audit</a>
+            </div>
+          </header>
+
+          <article class="leak-feature">
+            <div class="leak-media leak-media-feature">
+                <!-- IMAGE/VIDEO PLACEHOLDER (1200 × 1040 · fills the left half): Phone lighting up at night with an unanswered WhatsApp enquiry. Swap for an
+                     <img width height alt="" loading="lazy"> of the same ratio. A looping video needs a pause control (WCAG 2.2.2). -->
+                <div class="ph leak-ph" aria-hidden="true">
+                  <span class="ph-tag">Video / image placeholder</span>
+                  <span class="ph-size">1200 × 1040 · fills the left half</span>
+                  <span class="ph-desc">Phone lighting up at night with an unanswered WhatsApp enquiry</span>
+                </div>
+                <span class="lm-shade" aria-hidden="true"></span>
+                <span class="lm-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                <span class="lm-corner tl" aria-hidden="true"></span><span class="lm-corner tr" aria-hidden="true"></span>
+                <span class="lm-corner bl" aria-hidden="true"></span><span class="lm-corner br" aria-hidden="true"></span>
+              </div>
+            <div class="leak-feature-body">
+              <span class="leak-pill">The biggest leak</span>
+              <h3 class="leak-feature-title"><a href="#check" class="stretch">The evening enquiry nobody answers<span class="sr-only"> – get a free audit</span></a></h3>
+              <p class="leak-feature-desc">Someone asks about a price after work, at 21:14. Nobody replies until morning, and by then they have asked your competitor too. The enquiry was real; the reply was just too late.</p>
+              <div class="leak-feature-foot">
+                <span class="leak-author">Fixed by: an AI assistant that replies in seconds, any hour</span>
+                <span class="cat cat-night">After hours</span>
+              </div>
+            </div>
+          </article>
+
+          <ul class="leak-grid" role="list" aria-label="Other places leads leak">
+            <li class="leak-card">
+              <div class="leak-media">
+                <!-- IMAGE/VIDEO PLACEHOLDER (16:10 · 800 × 500): Several chat apps with unread badges. Swap for an
+                     <img width height alt="" loading="lazy"> of the same ratio. A looping video needs a pause control (WCAG 2.2.2). -->
+                <div class="ph leak-ph" aria-hidden="true">
+                  <span class="ph-tag">Video / image placeholder</span>
+                  <span class="ph-size">16:10 · 800 × 500</span>
+                  <span class="ph-desc">Several chat apps with unread badges</span>
+                </div>
+                <span class="lm-shade" aria-hidden="true"></span>
+                <span class="lm-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                <span class="lm-corner tl" aria-hidden="true"></span><span class="lm-corner tr" aria-hidden="true"></span>
+                <span class="lm-corner bl" aria-hidden="true"></span><span class="lm-corner br" aria-hidden="true"></span>
+              </div>
+              <div class="leak-card-head">
+                <h3 class="leak-card-title"><a href="#check" class="stretch">The DM nobody saw<span class="sr-only"> – get a free audit</span></a></h3>
+                <span class="cat cat-chan">Channels</span>
+              </div>
+              <p class="leak-card-body"><span class="leak-when">Sat 14:00.</span> Instagram, WhatsApp, the website form. Enquiries land in different places and no one person sees them all.</p>
             </li>
-            <li>
-              <p class="leak-time">Sat 14:00</p>
-              <h3>The DM nobody saw</h3>
-              <p>Instagram, WhatsApp, the website form, a missed call. Enquiries land in four places and no one person sees them all.</p>
+            <li class="leak-card">
+              <div class="leak-media">
+                <!-- IMAGE/VIDEO PLACEHOLDER (16:10 · 800 × 500): A quiet chat thread left on "seen". Swap for an
+                     <img width height alt="" loading="lazy"> of the same ratio. A looping video needs a pause control (WCAG 2.2.2). -->
+                <div class="ph leak-ph" aria-hidden="true">
+                  <span class="ph-tag">Video / image placeholder</span>
+                  <span class="ph-size">16:10 · 800 × 500</span>
+                  <span class="ph-desc">A quiet chat thread left on "seen"</span>
+                </div>
+                <span class="lm-shade" aria-hidden="true"></span>
+                <span class="lm-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                <span class="lm-corner tl" aria-hidden="true"></span><span class="lm-corner tr" aria-hidden="true"></span>
+                <span class="lm-corner bl" aria-hidden="true"></span><span class="lm-corner br" aria-hidden="true"></span>
+              </div>
+              <div class="leak-card-head">
+                <h3 class="leak-card-title"><a href="#check" class="stretch">The follow-up nobody sent<span class="sr-only"> – get a free audit</span></a></h3>
+                <span class="cat cat-follow">Follow-up</span>
+              </div>
+              <p class="leak-card-body"><span class="leak-when">Day 3.</span> "Let me think about it" needs a nudge two days later. When everyone is busy, it never goes out.</p>
             </li>
-            <li>
-              <p class="leak-time">Day 3</p>
-              <h3>The follow-up nobody sent</h3>
-              <p>"Let me think about it" needs a nudge two days later. When everyone is busy, it never goes out.</p>
+            <li class="leak-card">
+              <div class="leak-media">
+                <!-- IMAGE/VIDEO PLACEHOLDER (16:10 · 800 × 500): A missed-call notification on a phone. Swap for an
+                     <img width height alt="" loading="lazy"> of the same ratio. A looping video needs a pause control (WCAG 2.2.2). -->
+                <div class="ph leak-ph" aria-hidden="true">
+                  <span class="ph-tag">Video / image placeholder</span>
+                  <span class="ph-size">16:10 · 800 × 500</span>
+                  <span class="ph-desc">A missed-call notification on a phone</span>
+                </div>
+                <span class="lm-shade" aria-hidden="true"></span>
+                <span class="lm-plus" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                <span class="lm-corner tl" aria-hidden="true"></span><span class="lm-corner tr" aria-hidden="true"></span>
+                <span class="lm-corner bl" aria-hidden="true"></span><span class="lm-corner br" aria-hidden="true"></span>
+              </div>
+              <div class="leak-card-head">
+                <h3 class="leak-card-title"><a href="#check" class="stretch">The call that rang out<span class="sr-only"> – get a free audit</span></a></h3>
+                <span class="cat cat-phone">Phone</span>
+              </div>
+              <p class="leak-card-body"><span class="leak-when">13:05.</span> The team is with a customer, the phone rings out, and the caller tries the next business on the list.</p>
             </li>
-          </ol>
+          </ul>
         </div>
       </section>
 
