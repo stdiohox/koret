@@ -328,6 +328,24 @@ if (endcap && 'IntersectionObserver' in window) {
   footer?.classList.add('in');
 }
 
+// ---- Chat assistant launcher --------------------------------------------------------------
+// The widget module loads on first press, so the chat adds nothing to the initial page.
+const chatLaunch = $<HTMLButtonElement>('[data-chat-launch]');
+if (chatLaunch) {
+  chatLaunch.hidden = false;
+  chatLaunch.addEventListener('click', async () => {
+    const open = document.getElementById('koret-chat');
+    if (open && !open.hidden) {
+      open.hidden = true;
+      chatLaunch.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    track('ChatOpen');
+    const { openChat } = await import('./chat');
+    openChat(chatLaunch, track);
+  });
+}
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).

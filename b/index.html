@@ -192,7 +192,7 @@
           </picture>
           <!-- src is attached by main.ts only when motion is allowed and Save-Data is off; the
                still above stays until the first frame is ready. -->
-          <video class="hero-video" muted loop playsinline preload="none" poster="/b/hero/lagos-1920.webp" data-src="/b/hero/lagos-loop.mp4" data-hero-video></video>
+          <video class="hero-video" muted loop playsinline preload="none" data-src="/b/hero/lagos-loop.mp4" data-hero-video></video>
           <div class="hero-bloom"></div>
           <div class="hero-sweep"></div>
           <div class="hero-shade"></div>
@@ -949,7 +949,7 @@
           <source type="image/webp" srcset="/b/footer/lighthouse-960.webp 960w, /b/footer/lighthouse-1920.webp 1920w, /b/footer/lighthouse-2752.webp 2752w" sizes="100vw" />
           <img class="endcap-still" src="/b/footer/lighthouse-1920.webp" alt="" width="2752" height="1536" loading="lazy" decoding="async" />
         </picture>
-        <video class="endcap-video" muted loop playsinline preload="none" poster="/b/footer/lighthouse-1920.webp" data-src="/b/footer/lighthouse-loop.mp4" data-endcap-video></video>
+        <video class="endcap-video" muted loop playsinline preload="none" data-src="/b/footer/lighthouse-loop.mp4" data-endcap-video></video>
         <span class="endcap-shade"></span>
       </div>
 
@@ -1010,6 +1010,12 @@
         </footer>
       </div>
     </div>
+
+    <!-- Chat launcher. The widget (b/chat.ts) loads on first press; hidden without JS. -->
+    <button type="button" class="kc-launch" data-chat-launch aria-expanded="false" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+      <span class="kc-launch-label">Ask Koret</span>
+    </button>
 
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
       <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5" /></symbol>

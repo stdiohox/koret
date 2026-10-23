@@ -66,6 +66,26 @@ doubling needs roughly 1,100 visitors per variant. Keep ad targeting and creativ
 5. Merge `ab-variant-b` to `main`. Check `/?variant=a`, `/?variant=b`, and a test lead from each
    (it should land with `A` / `B` in the Variant column).
 
+## Chat assistant (variant B)
+
+An "Ask Koret" button opens an AI assistant (`b/chat.ts`, loaded only when opened) backed by
+the serverless function `api/chat.ts` on the same Vercel project. It answers from a fixed set
+of Koret facts (no prices, no client names, nothing invented), and when a visitor wants the
+free check it collects name, WhatsApp/email, business and need, confirms them, then saves a
+row to the Koret Enquiries sheet (`Services` = "Website chat", `Variant` = B, recent chat in
+`Message`) and fires a Pixel `Lead` with `source: chat`.
+
+- **Model:** Claude Opus 5.5 at low effort, streaming, with server-side refusal fallbacks and
+  prompt caching. Rough cost: about 1 to 2 US cents per visitor message, so ~$0.10 for a
+  six-message conversation. Claude Haiku 5.5 would cut that by roughly 30-40x if quality holds.
+- **Vercel env:** `ANTHROPIC_API_KEY` (required; without it the widget shows the form/email
+  fallback), `FORM_ENDPOINT` (optional; defaults to `VITE_FORM_ENDPOINT`),
+  `CHAT_ALLOWED_ORIGINS` (optional extra origins; same-origin is always allowed).
+- **Before launch:** set a monthly spend limit on the Anthropic key, and add a Vercel Firewall
+  rate-limit rule on `/api/chat` (the function's own per-IP limit is per instance only).
+- Health check: `GET /api/chat` returns `{"ok":true}`; a test message in the widget confirms the key works.
+- Limits in the function: one saved lead per reply, 24 messages per conversation, 1,200 characters per visitor message, 60 s max duration (`vercel.json`), and generation stops when the visitor closes the page.
+
 ## Images in B
 
 No placeholders are left. Every image is WebP under `public/b/` (hero stills and loop in
