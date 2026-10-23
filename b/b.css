@@ -964,9 +964,6 @@ html:not(.js) .showcase-panel { padding-bottom: 28px; }
     radial-gradient(50% 60% at 100% 0%, rgba(0, 204, 255, 0.18), transparent 70%),
     var(--paper);
 }
-.offer-grid { display: grid; gap: 40px; align-items: start; }
-@media (min-width: 960px) { .offer-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
-.offer-copy > p { margin-top: 18px; color: var(--text-2); font-size: 1.125rem; max-width: 48ch; }
 .alt-contact { margin-top: 28px !important; font-size: 1rem !important; }
 .form-card { background: var(--white); border-radius: 28px; padding: 32px; box-shadow: var(--shadow); border: 1px solid rgba(14, 22, 38, 0.06); }
 @media (max-width: 520px) { .form-card { padding: 24px 20px; } }
@@ -1017,6 +1014,73 @@ input[aria-invalid='true'] { border-color: var(--error); }
 .final { display: grid; gap: 14px; justify-items: start; }
 .final .form-title:focus { outline: none; }
 .final[hidden], .lead-form[hidden] { display: none; }
+
+/* ---- Lead Leak Check: two-panel layout (auth-section-2 pattern) ------------------------ */
+.lc { background: var(--white); padding: 12px; }
+.lc-grid { display: grid; gap: 24px; max-width: 1400px; margin: 0 auto; }
+@media (min-width: 1040px) { .lc-grid { grid-template-columns: 0.94fr 1.06fr; min-height: calc(100vh - 24px); } }
+.lc-panel {
+  position: relative; display: flex; flex-direction: column; align-items: center; overflow: hidden;
+  border-radius: 14px; background: var(--night); color: var(--white); padding: 48px 28px 28px;
+}
+@media (min-width: 640px) { .lc-panel { padding: 64px 40px 32px; } }
+.lc-panel > * { width: 100%; max-width: 500px; }
+.lc-logo { width: 104px; height: auto; }
+.lc-mosaic { position: relative; display: grid; grid-template-columns: 1.55fr 1fr; gap: 8px; margin-top: 32px; }
+.lc-tile { position: relative; margin: 0; border-radius: 8px; height: 121px; }
+.lc-tile.tile-a { grid-row: span 2; height: 250px; }
+.lc-tile.tile-c { grid-column: span 2; grid-row: 3; height: 120px; }
+.lc-tile img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; opacity: 0.4; transition: opacity 700ms ease; }
+.lc-tile.active { z-index: 1; }
+.lc-tile.active img { opacity: 1; }
+.lc-corner {
+  position: absolute; width: 16px; height: 16px; border: 0 solid rgba(255, 255, 255, 0.65); pointer-events: none;
+  opacity: 0; transition: opacity 500ms ease, transform 500ms var(--ease);
+}
+.lc-corner.tl { top: -8px; left: -8px; border-top-width: 1px; border-left-width: 1px; transform: translate(-8px, -8px); }
+.lc-corner.tr { top: -8px; right: -8px; border-top-width: 1px; border-right-width: 1px; transform: translate(8px, -8px); }
+.lc-corner.bl { bottom: -8px; left: -8px; border-bottom-width: 1px; border-left-width: 1px; transform: translate(-8px, 8px); }
+.lc-corner.br { bottom: -8px; right: -8px; border-bottom-width: 1px; border-right-width: 1px; transform: translate(8px, 8px); }
+.lc-tile.active .lc-corner { opacity: 1; transform: none; }
+.lc-fade { position: absolute; left: 0; right: 0; z-index: 2; pointer-events: none; }
+.lc-fade-t { top: 0; height: 64px; background: linear-gradient(to bottom, var(--night), rgba(8, 20, 43, 0)); }
+.lc-fade-b { bottom: 0; height: 80px; background: linear-gradient(to top, var(--night), rgba(8, 20, 43, 0)); }
+.lc-prompt { display: flex; align-items: flex-end; gap: 16px; margin-top: 24px; padding: 16px 20px; border: 1px dashed rgba(255, 255, 255, 0.2); border-radius: 10px; }
+.lc-caps { flex: 1; min-height: 3.2em; }
+.lc-cap { font-size: 0.8125rem; line-height: 1.5; color: var(--on-dark-muted); }
+.lc-cap strong { color: var(--white); }
+.lc-go { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); color: var(--white); transition: background-color 160ms ease; }
+.lc-go:hover { background: rgba(255, 255, 255, 0.32); }
+.lc-go svg { width: 16px; height: 16px; }
+.lc-go:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.lc-kicker { margin-top: 32px; text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.section .lc-title { margin: 10px auto 0; max-width: 18ch; text-align: center; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem); line-height: 1.12; color: var(--white); }
+.lc-controls { margin-top: auto; padding-top: 32px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.lc-dots { display: flex; gap: 4px; }
+/* 24px hit area around a 4px-tall bar (WCAG 2.5.8). */
+.lc-dot { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.lc-dot::before { content: ''; width: 16px; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.35); transition: width 300ms var(--ease), background-color 300ms ease; }
+.lc-dot[aria-current='true'] { width: 48px; }
+.lc-dot[aria-current='true']::before { width: 40px; background: var(--white); }
+.lc-dot:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 6px; }
+.lc-pause { min-height: 28px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: var(--on-dark-muted); font: 500 0.75rem/1 var(--hero-font); cursor: pointer; }
+.lc-pause:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+.lc-side { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px 12px 40px; }
+/* Stacked: every CTA jumps to #check, so the form comes first and the showcase after it. */
+@media (max-width: 1039px) { .lc-side { order: -1; } }
+@media (min-width: 640px) { .lc-side { padding: 48px 40px; } }
+.lc .form-card { width: 100%; max-width: 500px; padding: 0; border: 0; box-shadow: none; background: transparent; }
+.lc .form-title { text-align: center; font-family: var(--hero-font); font-weight: 600; font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem); letter-spacing: -0.04em; line-height: 1.05; }
+.lc .form-note { text-align: center; margin-top: 4px; }
+.lc .lead-form { gap: 16px; }
+.lc input, .lc select, .lc textarea { border-radius: 8px; border-color: #b9bcc4; min-height: 46px; }
+.lc .btn-block { border-radius: 10px; min-height: 50px; font-family: var(--hero-font); font-size: 1.0625rem; font-weight: 600; color: #2e2e2e; }
+.lc-ticks { width: 100%; max-width: 500px; margin-top: 28px; padding-top: 22px; border-top: 1px solid #eceef2; font-size: 0.9375rem; color: var(--text-2); }
+.lc-alt { width: 100%; max-width: 500px; margin-top: 16px; font-size: 0.9375rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  .lc-tile img, .lc-corner, .lc-dot::before { transition: none; }
+}
 
 /* ---- FAQ -------------------------------------------------------------------------------- */
 .faq { margin-top: 36px; border-top: 1px solid var(--line); }

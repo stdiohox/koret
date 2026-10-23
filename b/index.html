@@ -687,27 +687,57 @@
         </div>
       </section>
 
-      <!-- 8. THE OFFER + FORM. Step 1 is three fields and is the lead; step 2 is optional. -->
-      <section class="section offer" id="check" aria-labelledby="check-title">
-        <div class="wrap offer-grid">
-          <div class="offer-copy">
-            <p class="kicker">Free Lead Leak Check</p>
-            <h2 id="check-title">Find out how many enquiries you're losing, free</h2>
-            <p>
-              We'll check how quickly your business answers a new enquiry on WhatsApp, Instagram and your
-              website, then show you where leads slip through and what we'd fix first.
-            </p>
-            <ul class="ticks">
-              <li>We reply within one business day</li>
-              <li>A free 30-minute call to go through it</li>
-              <li>No obligation, even if the answer isn't us</li>
-            </ul>
-            <p class="alt-contact">
-              Prefer email? <a href="mailto:koretconsult@outlook.com">koretconsult@outlook.com</a>
-              <span data-whatsapp-inline hidden> · or <a href="#check" data-whatsapp="offer">chat on WhatsApp</a></span>
-            </p>
+      <!-- 8. THE OFFER + FORM — two-panel layout (pattern from auth-section-2, rebuilt without
+           React): a dark showcase panel that steps through what the Lead Leak Check covers,
+           and the lead form. Step 1 is three fields and is the lead; step 2 is optional. -->
+      <section class="section offer lc" id="check" aria-labelledby="check-title">
+        <div class="lc-grid">
+          <div class="lc-panel" data-lc>
+            <img class="lc-logo" src="/b/wordmark-light.png" alt="Koret" width="110" height="20" loading="lazy" />
+            <div class="lc-mosaic" aria-hidden="true">
+                <figure class="lc-tile tile-a" data-lc-tile>
+                  <img src="/b/leaks/evening-480.webp" srcset="/b/leaks/evening-480.webp 480w, /b/leaks/evening-800.webp 800w" sizes="(min-width: 1040px) 300px, 60vw" width="480" height="268" alt="" loading="lazy" decoding="async" />
+                  <span class="lc-corner tl"></span><span class="lc-corner tr"></span><span class="lc-corner bl"></span><span class="lc-corner br"></span>
+                </figure>
+                <figure class="lc-tile tile-b" data-lc-tile>
+                  <img src="/b/leaks/dms-480.webp" srcset="/b/leaks/dms-480.webp 480w, /b/leaks/dms-800.webp 800w" sizes="(min-width: 1040px) 300px, 60vw" width="480" height="268" alt="" loading="lazy" decoding="async" />
+                  <span class="lc-corner tl"></span><span class="lc-corner tr"></span><span class="lc-corner bl"></span><span class="lc-corner br"></span>
+                </figure>
+                <figure class="lc-tile tile-c" data-lc-tile>
+                  <img src="/b/leaks/missed-call-480.webp" srcset="/b/leaks/missed-call-480.webp 480w, /b/leaks/missed-call-800.webp 800w" sizes="(min-width: 1040px) 300px, 60vw" width="480" height="268" alt="" loading="lazy" decoding="async" />
+                  <span class="lc-corner tl"></span><span class="lc-corner tr"></span><span class="lc-corner bl"></span><span class="lc-corner br"></span>
+                </figure>
+                <figure class="lc-tile tile-d" data-lc-tile>
+                  <img src="/b/leaks/follow-up-480.webp" srcset="/b/leaks/follow-up-480.webp 480w, /b/leaks/follow-up-800.webp 800w" sizes="(min-width: 1040px) 300px, 60vw" width="480" height="268" alt="" loading="lazy" decoding="async" />
+                  <span class="lc-corner tl"></span><span class="lc-corner tr"></span><span class="lc-corner bl"></span><span class="lc-corner br"></span>
+                </figure>
+              <span class="lc-fade lc-fade-t"></span><span class="lc-fade lc-fade-b"></span>
+            </div>
+            <div class="lc-prompt">
+              <div class="lc-caps">
+                  <p class="lc-cap" data-lc-cap><strong>Check 1 · After hours.</strong> We send an enquiry in the evening and time how long the first reply takes.</p>
+                  <p class="lc-cap" data-lc-cap hidden><strong>Check 2 · Every channel.</strong> We message you on WhatsApp, Instagram and your website form, and see which ones get answered.</p>
+                  <p class="lc-cap" data-lc-cap hidden><strong>Check 3 · The phone.</strong> We call at a busy time and note whether anyone picks up.</p>
+                  <p class="lc-cap" data-lc-cap hidden><strong>Check 4 · Follow-up.</strong> We go quiet after your reply and see whether anyone follows up.</p>
+              </div>
+              <a href="#f-name" class="lc-go" aria-label="Start the free check">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+            <p class="lc-kicker">Free Lead Leak Check</p>
+            <h2 id="check-title" class="lc-title">Find out how many enquiries you're losing, free</h2>
+            <div class="lc-controls">
+              <div class="lc-dots">
+                <button type="button" class="lc-dot" data-lc-dot aria-label="Show check 1: After hours" aria-current="true"></button>
+                <button type="button" class="lc-dot" data-lc-dot aria-label="Show check 2: Every channel"></button>
+                <button type="button" class="lc-dot" data-lc-dot aria-label="Show check 3: The phone"></button>
+                <button type="button" class="lc-dot" data-lc-dot aria-label="Show check 4: Follow-up"></button>
+              </div>
+              <button type="button" class="lc-pause" data-lc-pause hidden><span data-lc-pause-label>Pause</span></button>
+            </div>
           </div>
 
+          <div class="lc-side">
           <div class="form-card">
             <form id="lead-form" class="lead-form" novalidate data-step="1" aria-labelledby="form-title">
               <h3 id="form-title" class="form-title">Get my free check</h3>
@@ -795,6 +825,16 @@
               <h3 class="form-title" tabindex="-1" data-final-title>Thank you. Talk soon.</h3>
               <p class="form-note">We'll be in touch on WhatsApp within one business day.</p>
             </div>
+          </div>
+            <ul class="ticks lc-ticks">
+              <li>We reply within one business day</li>
+              <li>A free 30-minute call to go through it</li>
+              <li>No obligation, even if the answer isn't us</li>
+            </ul>
+            <p class="alt-contact lc-alt">
+              Prefer email? <a href="mailto:koretconsult@outlook.com">koretconsult@outlook.com</a>
+              <span data-whatsapp-inline hidden> · or <a href="#check" data-whatsapp="offer">chat on WhatsApp</a></span>
+            </p>
           </div>
         </div>
       </section>

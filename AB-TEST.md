@@ -81,6 +81,9 @@ captions `<track>`. The demo screenshots were taken on 2026-10-23, so re-take th
 
 - **The Lead Leak Check is a real offer.** Someone at Koret has to test each prospect's reply
   speed (WhatsApp, Instagram, website) and send back a short write-up.
+- **What the Lead Leak Check covers.** The panel beside the form lists four checks: an evening
+  enquiry timed for first reply, every channel (WhatsApp, Instagram, website form), a call at a
+  busy time, and whether anyone follows up. The team must actually do all four.
 - "We reply within one business day" and "We'll message you on WhatsApp": the reply has to come
   on WhatsApp.
 - `areaServed: NG` in the schema, and the hero's industry list.

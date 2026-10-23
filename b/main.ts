@@ -275,6 +275,50 @@ if (plans) {
   });
 }
 
+// ---- Lead Leak Check panel: rotating mosaic ---------------------------------------------
+// Steps through the four checks every 2.6 s. Pauses on hover/focus, when off screen and via
+// the Pause button (WCAG 2.2.2); never auto-plays under reduced motion.
+const lc = $('[data-lc]');
+if (lc) {
+  const tiles = $$('[data-lc-tile]', lc);
+  const caps = $$('[data-lc-cap]', lc);
+  const dots = $$<HTMLButtonElement>('[data-lc-dot]', lc);
+  const pauseBtn = $<HTMLButtonElement>('[data-lc-pause]', lc);
+  let i = 0;
+  let timer = 0;
+  let userPaused = reduceMotion;
+  let hovering = false;
+  let visible = false;
+  const show = (n: number) => {
+    i = (n + tiles.length) % tiles.length;
+    tiles.forEach((t, k) => t.classList.toggle('active', k === i));
+    caps.forEach((c, k) => (c.hidden = k !== i));
+    dots.forEach((d, k) => (k === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+  };
+  const sync = () => {
+    window.clearInterval(timer);
+    if (!userPaused && !hovering && visible) timer = window.setInterval(() => show(i + 1), 2600);
+  };
+  dots.forEach((d, k) => d.addEventListener('click', () => { show(k); sync(); }));
+  lc.addEventListener('mouseenter', () => { hovering = true; sync(); });
+  lc.addEventListener('mouseleave', () => { hovering = false; sync(); });
+  lc.addEventListener('focusin', () => { hovering = true; sync(); });
+  lc.addEventListener('focusout', () => { hovering = false; sync(); });
+  if (pauseBtn && !reduceMotion) {
+    pauseBtn.hidden = false;
+    pauseBtn.addEventListener('click', () => {
+      userPaused = !userPaused;
+      const label = $('[data-lc-pause-label]', pauseBtn);
+      if (label) label.textContent = userPaused ? 'Play' : 'Pause';
+      sync();
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(lc);
+  }
+  show(0);
+}
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).
