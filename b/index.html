@@ -109,18 +109,23 @@
       <a href="#top" class="topbar-brand" aria-label="Koret, back to top">
         <img src="/b/wordmark-blue.png" alt="Koret" width="120" height="22" />
       </a>
-      <nav aria-label="Main" class="topbar-nav" id="topbar-nav">
-        <a href="#how">How it works</a>
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#faq">FAQ</a>
-      </nav>
       <a href="#check" class="topbar-cta" data-cta="header">Free Leak Check</a>
-      <button type="button" class="topbar-menu" aria-expanded="false" aria-controls="topbar-nav" data-menu>
-        <span class="sr-only">Menu</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-      </button>
     </header>
+
+    <!-- Tubelight nav (pattern from the shadcn tubelight-navbar, rebuilt without React): a
+         pill of section links with a lamp that springs to the active one. Desktop: centred in
+         the white bar. Below 900px: a fixed icon bar at the bottom of the screen. The active
+         item follows the section in view, not only the last click. -->
+    <nav aria-label="Main" class="tube" data-tube>
+      <div class="tube-pill">
+          <a href="#top" class="tube-link" data-tube-link><svg class="tube-ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="tube-label">Home</span></a>
+          <a href="#how" class="tube-link" data-tube-link><svg class="tube-ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg><span class="tube-label">How it works</span></a>
+          <a href="#work" class="tube-link" data-tube-link><svg class="tube-ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg><span class="tube-label">Work</span></a>
+          <a href="#services" class="tube-link" data-tube-link><svg class="tube-ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg><span class="tube-label">Services</span></a>
+          <a href="#faq" class="tube-link" data-tube-link><svg class="tube-ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg><span class="tube-label">FAQ</span></a>
+        <span class="tube-lamp" aria-hidden="true" data-tube-lamp><span class="tube-bar"><i></i><i></i><i></i></span></span>
+      </div>
+    </nav>
 
     <main id="main" tabindex="-1">
       <!-- 1. HERO — many glowing paths through the valleys meet in one place: every enquiry,
@@ -582,14 +587,6 @@
         <p class="copy">© <span data-year>2026</span> Koret. All rights reserved.</p>
       </div>
     </footer>
-
-    <!-- Mobile: one thumb-reach CTA once the hero is out of view. -->
-    <div class="sticky-cta" data-sticky aria-hidden="true">
-      <a href="#check" class="btn btn-primary" data-cta="sticky" tabindex="-1">Free Lead Leak Check</a>
-      <a href="#check" class="btn btn-wa" data-whatsapp="sticky" tabindex="-1" hidden aria-label="Chat on WhatsApp (opens in a new tab)">
-        <svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-wa" /></svg>
-      </a>
-    </div>
 
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
       <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5" /></symbol>

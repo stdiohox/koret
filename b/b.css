@@ -178,9 +178,6 @@ a:hover { text-decoration-thickness: 2px; }
   font-family: var(--hero-font); color: var(--bar-ink);
 }
 .topbar-brand img { width: calc(112 * var(--u)); min-width: 92px; height: auto; }
-.topbar-nav { display: flex; gap: calc(34 * var(--u)); position: absolute; left: 50%; transform: translateX(-50%); }
-.topbar-nav a { color: var(--bar-ink); text-decoration: none; font-size: max(14px, calc(14.5 * var(--u))); font-weight: 500; padding: 8px 0; }
-.topbar-nav a:hover { text-decoration: underline; }
 .topbar-cta {
   display: inline-flex; align-items: center; justify-content: center; position: relative;
   min-width: calc(115 * var(--u)); height: max(36px, calc(29 * var(--u))); padding: 0 16px;
@@ -191,7 +188,69 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .topbar-cta:hover { background: var(--cyan-hover); }
 .topbar-cta:active { transform: scale(0.97); }
-.topbar-menu { display: none; }
+
+/* ---- Tubelight nav ------------------------------------------------------------------------ */
+/* Desktop: fixed, centred over the white bar. Tokens map the component's shadcn colours:
+   primary -> navy text + cyan lamp, muted -> --tube-active, border -> --tube-line. */
+.tube {
+  --tube-ink: #2e2e2e; --tube-primary: var(--navy); --tube-lamp: var(--cyan);
+  --tube-active: rgba(0, 65, 155, 0.07); --tube-line: rgba(14, 22, 38, 0.1);
+  position: fixed; z-index: 61; left: 50%; translate: -50% 0;
+  top: calc(20.8 * var(--u) + max(48px, 53.5 * var(--u)) / 2); margin-top: -21px;
+  font-family: var(--hero-font);
+  animation: drop 700ms var(--ease) both;
+}
+.tube-pill {
+  position: relative; isolation: isolate; display: flex; align-items: center; gap: 4px; padding: 3px;
+  border-radius: 999px; border: 1px solid var(--tube-line); background: rgba(246, 244, 239, 0.6);
+}
+.tube-link {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  min-height: 36px; padding: 0 calc(18 * var(--u)); border-radius: 999px;
+  font-size: max(14px, calc(14 * var(--u))); font-weight: 600; text-decoration: none;
+  color: rgba(46, 46, 46, 0.85); transition: color 200ms ease;
+}
+.tube-link:hover, .tube-link[aria-current] { color: var(--tube-primary); }
+.tube-link:focus-visible { outline: 3px solid var(--navy); outline-offset: 1px; border-radius: 999px; }
+.tube-ico { display: none; width: 20px; height: 20px; }
+/* The lamp: one element that slides to the active link (the component's layoutId="lamp"). */
+.tube-lamp {
+  position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 0; width: 0; border-radius: 999px;
+  background: var(--tube-active); opacity: 0; pointer-events: none;
+  transition: transform 520ms cubic-bezier(0.25, 1.25, 0.4, 1), width 520ms cubic-bezier(0.25, 1.25, 0.4, 1), opacity 200ms ease;
+}
+.tube-lamp.on { opacity: 1; }
+.tube-bar {
+  position: absolute; top: -9px; left: 50%; translate: -50% 0; width: 32px; height: 4px;
+  border-radius: 4px 4px 0 0; background: var(--tube-lamp);
+}
+.tube-bar i { position: absolute; display: block; border-radius: 999px; background: rgba(0, 204, 255, 0.28); }
+.tube-bar i:nth-child(1) { width: 48px; height: 24px; top: -8px; left: -8px; filter: blur(12px); }
+.tube-bar i:nth-child(2) { width: 32px; height: 24px; top: -4px; left: 0; filter: blur(12px); }
+.tube-bar i:nth-child(3) { width: 16px; height: 16px; top: 0; left: 8px; filter: blur(4px); }
+
+/* Below 900px: a fixed icon bar at the bottom, as in the component. */
+@media (max-width: 899px) {
+  .tube {
+    top: auto; margin-top: 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    transition: transform 260ms var(--ease), opacity 200ms ease;
+  }
+  .tube.away { transform: translateY(140%); opacity: 0; pointer-events: none; }
+  .tube-pill {
+    gap: 2px; padding: 4px; background: rgba(255, 255, 255, 0.88);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    box-shadow: 0 14px 34px -12px rgba(8, 20, 43, 0.45);
+  }
+  .tube-link { min-width: 52px; min-height: 44px; padding: 0 12px; }
+  .tube-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .tube-ico { display: block; }
+  .tube-lamp { top: 4px; bottom: 4px; }
+  .tube-bar { top: -10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tube { animation: none; }
+  .tube-lamp, .tube { transition: none; }
+}
 
 /* ---- Hero ------------------------------------------------------------------------------- */
 .hero {
@@ -349,19 +408,6 @@ a:hover { text-decoration-thickness: 2px; }
   .topbar-brand img { width: 96px; min-width: 0; }
   @media (max-width: 360px) { .topbar-brand img { width: 80px; } .topbar-cta { padding: 0 10px; } }
   .topbar-cta { min-width: 0; height: 40px; padding: 0 12px; font-size: 14px; border-radius: 5px; }
-  .topbar-menu {
-    display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 6px;
-    background: transparent; color: var(--bar-ink); cursor: pointer;
-  }
-  .topbar-menu svg { width: 22px; height: 22px; }
-  .topbar-nav {
-    position: absolute; top: calc(100% + 8px); left: 0; right: 0; transform: none;
-    display: none; flex-direction: column; gap: 0; padding: 8px; background: var(--white); border-radius: 8px;
-    box-shadow: 0 18px 40px -16px rgba(8, 20, 43, 0.5);
-  }
-  .topbar-nav.open { display: flex; }
-  .topbar-nav a { padding: 14px 12px; font-size: 16px; border-radius: 6px; }
-  .topbar-nav a:hover { background: var(--tint); text-decoration: none; }
 
   .hero { padding: 104px 28px 72px; }
   /* Phones: still photo + bloom only (no sweep, no video, no live blur) to spare the GPU. */
@@ -646,20 +692,10 @@ input[aria-invalid='true'] { border-color: var(--error); }
 .copy { font-size: 0.875rem; }
 @media (min-width: 880px) { .copy { grid-column: 1 / -1; } }
 
-/* ---- Sticky mobile CTA ------------------------------------------------------------------ */
-.sticky-cta { display: none; }
-@media (max-width: 879px) {
-  .sticky-cta {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; gap: 10px;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-    background: rgba(246, 244, 239, 0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(14, 22, 38, 0.1);
-    transform: translateY(110%); transition: transform 260ms var(--ease); visibility: hidden;
-  }
-  .sticky-cta.show { transform: none; visibility: visible; }
-  .sticky-cta .btn-primary { flex: 1; }
+/* ---- Mobile: keep the footer and focused content clear of the bottom nav ------------- */
+@media (max-width: 899px) {
   .site-footer { padding-bottom: 104px; }
-  /* Keep keyboard focus clear of the sticky bar (WCAG 2.4.11). */
+  /* Keep keyboard focus clear of the bottom nav (WCAG 2.4.11). */
   html { scroll-padding-bottom: 96px; scroll-padding-top: 84px; }
 }
 

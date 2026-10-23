@@ -1,5 +1,5 @@
 // Variant B: the only script on the page. Everything it touches is already readable in the
-// HTML; this file adds the staged hero chat, reveals, the sticky mobile CTA, the two-step
+// HTML; this file adds the staged hero chat, reveals, the tubelight nav, the two-step
 // lead form and the A/B tracking events.
 import './b.css';
 
@@ -57,31 +57,55 @@ if (WHATSAPP) {
   $$('[data-whatsapp-inline]').forEach((el) => (el.hidden = false));
 }
 
-// ---- Top bar menu (below 900px) ----------------------------------------------------------
-const menuBtn = $<HTMLButtonElement>('[data-menu]');
-const menu = $('#topbar-nav');
-if (menuBtn && menu) {
-  const setOpen = (open: boolean, returnFocus = false) => {
-    menu.classList.toggle('open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    if (open) $('a', menu)?.focus();
-    else if (returnFocus) menuBtn.focus();
+// ---- Tubelight nav ------------------------------------------------------------------------
+// One lamp slides to the active link. Active follows the section in view (so it never goes
+// stale while scrolling); a click sets it straight away and holds it while the page scrolls.
+const tube = $('[data-tube]');
+const lamp = $('[data-tube-lamp]');
+const tubeLinks = $$<HTMLAnchorElement>('[data-tube-link]');
+if (tube && lamp && tubeLinks.length) {
+  let active: HTMLAnchorElement | null = null;
+  let holdUntil = 0;
+
+  const place = () => {
+    if (!active) return lamp.classList.remove('on');
+    lamp.style.width = `${active.offsetWidth}px`;
+    lamp.style.transform = `translateX(${active.offsetLeft}px)`;
+    lamp.classList.add('on');
   };
-  menuBtn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
-  menu.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) setOpen(false); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false, true);
-  });
-  document.addEventListener('click', (e) => {
-    const t = e.target as Node;
-    if (menu.classList.contains('open') && !menu.contains(t) && !menuBtn.contains(t)) setOpen(false);
-  });
-  // Tabbing out of the open menu closes it, and so does widening past the mobile layout.
-  menu.closest('header')?.addEventListener('focusout', (e) => {
-    const next = e.relatedTarget as Node | null;
-    if (menu.classList.contains('open') && next && !menu.closest('header')!.contains(next)) setOpen(false);
-  });
-  window.matchMedia('(min-width: 900px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  const activate = (link: HTMLAnchorElement | null) => {
+    if (link === active) return;
+    active?.removeAttribute('aria-current');
+    active = link;
+    active?.setAttribute('aria-current', 'true');
+    place();
+  };
+
+  tubeLinks.forEach((a) => a.addEventListener('click', () => {
+    activate(a);
+    holdUntil = Date.now() + 1200;
+  }));
+
+  const byId = new Map(tubeLinks.map((a) => [a.hash.slice(1), a]));
+  if ('IntersectionObserver' in window) {
+    // A section is "current" once it crosses the middle of the screen.
+    const spy = new IntersectionObserver((entries) => {
+      if (Date.now() < holdUntil) return;
+      const hit = entries.filter((e) => e.isIntersecting).pop();
+      if (hit) activate(byId.get(hit.target.id) ?? null);
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    byId.forEach((_, id) => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  }
+  activate(tubeLinks[0]);
+  if ('ResizeObserver' in window) new ResizeObserver(place).observe(tube);
+  document.fonts?.ready.then(place);
+
+  // On phones the bar sits at the bottom; move it out of the way while the keyboard is up.
+  // Stays away while focus is anywhere in a form: if it slid back when the submit button took
+  // focus, it would land under the finger mid-tap and swallow the click.
+  const typing = () => tube.classList.toggle('away', !!document.activeElement?.closest('form'));
+  document.addEventListener('focusin', typing);
+  document.addEventListener('focusout', () => setTimeout(typing, 0));
 }
 
 // ---- Hero background motion --------------------------------------------------------------
@@ -180,24 +204,6 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
     el.classList.add('stage');
     io.observe(el);
   });
-}
-
-// ---- Sticky mobile CTA -------------------------------------------------------------------
-// Shown once the hero has scrolled away, hidden again while the form itself is on screen.
-const sticky = $('[data-sticky]');
-const hero = $('.hero');
-const offer = $('#check');
-if (sticky && hero && offer && 'IntersectionObserver' in window) {
-  let heroVisible = true;
-  let offerVisible = false;
-  const sync = () => {
-    const show = !heroVisible && !offerVisible;
-    sticky.classList.toggle('show', show);
-    sticky.setAttribute('aria-hidden', String(!show));
-    $$('a', sticky).forEach((a) => (a.tabIndex = show ? 0 : -1));
-  };
-  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; sync(); }).observe(hero);
-  new IntersectionObserver(([e]) => { offerVisible = e.isIntersecting; sync(); }).observe(offer);
 }
 
 // ---- Lead form ---------------------------------------------------------------------------

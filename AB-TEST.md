@@ -9,7 +9,7 @@ every lead is tagged with the page it came from.
 | Promise | "More Customers. Less Admin. One Team." | "Every enquiry answered in seconds. Even at 9pm." |
 | Offer | Free 30-min call | Free **Lead Leak Check** (+ the call) |
 | Form | 5 fields + chips, at the bottom | 3 fields (name, WhatsApp, business); optional step 2 |
-| Mobile CTA | none after the hero | sticky bar once the hero scrolls away |
+| Navigation | plain links; mobile hamburger | tubelight nav (lamp follows the section in view); fixed bottom icon bar on phones; CTA fixed in the top bar on every screen |
 | WhatsApp | none | click-to-chat buttons (once `VITE_WHATSAPP_NUMBER` is set) |
 | Hero | Mesh-gradient shader, centred headline | Full-screen alpine photo (video loop on desktop) with glowing paths converging, blueprint frame, prompt box that carries into the form |
 | Lighthouse mobile (local) | 36, LCP 6.9 s (live site) | 89, LCP 3.4 s simulated (97 / 2.6 s with the Pixel blocked); accessibility 100 |
@@ -42,7 +42,7 @@ The Pixel loads the same way on both pages (async, in the head) so visit counts 
 
 In the **Koret Enquiries** sheet every row gets a `Variant` column; B also writes `Lead ID`,
 `Lead channels` and `Enquiries per week`. WhatsApp messages from B's buttons carry a
-`(ref B-hero)` / `B-sticky` / `B-closing` / `B-offer` tag, so chats can be counted too.
+`(ref B-hero)` / `B-closing` / `B-offer` tag, so chats can be counted too.
 
 **Primary metric:** qualified leads per 100 visitors, per variant (form leads + WhatsApp chats
 with a B ref, minus spam and non-businesses).
