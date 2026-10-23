@@ -68,23 +68,22 @@ doubling needs roughly 1,100 visitors per variant. Keep ad targeting and creativ
 
 ## Chat assistant (variant B)
 
-An "Ask Koret" button opens an AI assistant (`b/chat.ts`, loaded only when opened) backed by
-the serverless function `api/chat.ts` on the same Vercel project. It answers from a fixed set
-of Koret facts (no prices, no client names, nothing invented), and when a visitor wants the
-free check it collects name, WhatsApp/email, business and need, confirms them, then saves a
-row to the Koret Enquiries sheet (`Services` = "Website chat", `Variant` = B, recent chat in
-`Message`) and fires a Pixel `Lead` with `source: chat`.
+An "Ask Koret" button opens an automated assistant (`b/chat.ts`, loaded only when opened). It
+runs entirely in the visitor's browser and answers from the knowledge base in `b/kb.ts`: no AI
+service, no API key, no server function and no running cost. Every answer uses only facts
+already on the page (no prices, no client names, no timelines). Anything it doesn't cover, such as
+contracts, data ownership or languages, is passed to the team instead of guessed.
 
-- **Model:** Claude Opus 5.5 at low effort, streaming, with server-side refusal fallbacks and
-  prompt caching. Rough cost: about 1 to 2 US cents per visitor message, so ~$0.10 for a
-  six-message conversation. Claude Haiku 5.5 would cut that by roughly 30-40x if quality holds.
-- **Vercel env:** `ANTHROPIC_API_KEY` (required; without it the widget shows the form/email
-  fallback), `FORM_ENDPOINT` (optional; defaults to `VITE_FORM_ENDPOINT`),
-  `CHAT_ALLOWED_ORIGINS` (optional extra origins; same-origin is always allowed).
-- **Before launch:** set a monthly spend limit on the Anthropic key, and add a Vercel Firewall
-  rate-limit rule on `/api/chat` (the function's own per-IP limit is per instance only).
-- Health check: `GET /api/chat` returns `{"ok":true}`; a test message in the widget confirms the key works.
-- Limits in the function: one saved lead per reply, 24 messages per conversation, 1,200 characters per visitor message, 60 s max duration (`vercel.json`), and generation stops when the visitor closes the page.
+- **Lead capture:** "Get my free audit", "contact me" and similar start a short flow: name,
+  WhatsApp or email (validated), business (optional), need (optional), then a confirm step. On
+  Send it saves a row to the Koret Enquiries sheet through `VITE_FORM_ENDPOINT` (`Services` =
+  "Website chat", `Variant` = B, recent chat in `Message`) and fires a Pixel `Lead` with
+  `source: chat`. Saving only succeeds when the script replies `{ ok: true }`; otherwise the visitor is
+  pointed to the form and the email address.
+- **Editing answers:** change the `answer` text in `b/kb.ts`. `keys` and `phrases` decide which
+  questions reach each answer, and `follow` sets the suggestion chips. Rebuild and redeploy.
+- **Unanswered questions** get a fallback offering the main topics and the team. To find gaps,
+  review the chat transcripts in the `Message` column of chat leads.
 
 ## Images in B
 
