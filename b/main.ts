@@ -113,10 +113,8 @@ if (tube && lamp && tubeLinks.length) {
 // visitor hasn't asked to save data; it fades in once it can play, and pauses off screen.
 const heroEl = $('.hero');
 const video = $<HTMLVideoElement>('[data-hero-video]');
-// Phones also keep the still: the loop is 422 KB on what is often a metered connection.
-const saveData =
-  (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true ||
-  !window.matchMedia('(min-width: 900px)').matches;
+// Full-quality loops play on every screen size; only Save-Data keeps the still photos.
+const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
 if (heroEl && video && !reduceMotion) {
   let inView = true;
   const sync = () => {
@@ -125,7 +123,7 @@ if (heroEl && video && !reduceMotion) {
     else video.play().catch(() => { /* autoplay refused: the still stays */ });
   };
   video.addEventListener('playing', () => video.classList.add('ready'), { once: true });
-  // Save-Data and phones keep the still photo.
+  // Save-Data keeps the still photo.
   if (!saveData) {
     window.addEventListener('load', () => {
       video.src = video.dataset.src ?? '';
@@ -299,7 +297,7 @@ if (lc) {
 }
 
 // ---- Closing block: footer video and footer entrance -------------------------------------
-// The loop (2.6 MB) loads only on wider screens without Save-Data, once the block is near
+// The loop loads (without Save-Data) once the block is near
 // the viewport, and pauses when it leaves. The footer fades up the first time it shows.
 const endcap = $('[data-endcap]');
 const endVideo = $<HTMLVideoElement>('[data-endcap-video]');
