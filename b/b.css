@@ -624,7 +624,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .how-step summary::-webkit-details-marker { display: none; }
 .how-step summary:hover .step-title { text-decoration: underline; text-underline-offset: 4px; }
-.step-when { font-family: var(--mono); font-size: 0.8125rem; font-weight: 700; color: var(--navy); }
+.step-when { font-family: var(--hero-font); font-size: 0.875rem; font-weight: 600; color: var(--navy); }
 .step-chev { width: 18px; height: 18px; color: var(--muted); transition: transform 200ms var(--ease); }
 .how-step[open] .step-chev { transform: rotate(180deg); }
 .how-step p { padding: 0 0 20px 100px; color: var(--text-2); }
@@ -640,6 +640,12 @@ a:hover { text-decoration-thickness: 2px; }
   .how-step[open]::details-content { height: auto; }
 }
 .showcase-ctas { margin-top: 30px; }
+/* Section CTAs: white text needs a blue ground (white on cyan is 1.9:1; on navy 9.4:1). */
+.showcase-ctas .btn { font-family: var(--hero-font); font-weight: 600; }
+.showcase-ctas .btn-primary { background: var(--navy); color: var(--white); box-shadow: 0 8px 22px -10px rgba(0, 65, 155, 0.6); }
+.showcase-ctas .btn-primary:hover { background: #0052c2; }
+.showcase-ctas .btn-ghost { border-color: var(--navy); color: var(--navy); }
+.showcase-ctas .btn-ghost:hover { background: var(--navy); color: var(--white); }
 
 /* Tabbed card */
 .showcase-card {
