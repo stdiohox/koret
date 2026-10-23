@@ -598,52 +598,36 @@ a:hover { text-decoration-thickness: 2px; }
   .leak-media > *, .lm-plus { transition: none !important; transform: none !important; }
 }
 
-/* ---- How it works: feature showcase (dark) -------------------------------------------- */
-/* Royal-blue radiant ground, built on the brand navy, with a cyan glow behind the card and a
-   teal glow low left. Muted text is lifted to stay 4.5:1+ on the brightest blue. */
-.showcase.dark {
-  --on-dark-muted: #dde6f4;
-  background:
-    radial-gradient(55% 60% at 82% 18%, rgba(0, 204, 255, 0.26), transparent 65%),
-    radial-gradient(45% 55% at 0% 100%, rgba(3, 133, 122, 0.3), transparent 70%),
-    linear-gradient(160deg, #0047ab 0%, #00419b 45%, #002f75 100%);
-}
-@media (max-width: 959px) {
-  /* Stacked: keep the glow behind the card, not behind the copy. */
-  .showcase.dark {
-    background:
-      radial-gradient(70% 30% at 70% 82%, rgba(0, 204, 255, 0.24), transparent 70%),
-      radial-gradient(60% 25% at 0% 100%, rgba(3, 133, 122, 0.3), transparent 70%),
-      linear-gradient(170deg, #0047ab 0%, #00419b 40%, #002f75 100%);
-  }
-}
+/* ---- How it works: feature showcase (light) ------------------------------------------- */
+/* White ground. The tabbed card carries the colour: a pale blue tint with a cyan glow. */
+.showcase { background: var(--white); border-top: 1px solid #eceef2; } /* hairline: the section above is white too */
 .showcase-grid { display: grid; gap: 48px; align-items: start; }
 @media (min-width: 960px) { .showcase-grid { grid-template-columns: 1fr 1fr; gap: 56px; } }
 .showcase-badge {
   display: inline-block; margin-bottom: 22px; padding: 3px 12px; border-radius: 999px;
-  border: 1px solid rgba(246, 244, 239, 0.3); font-size: 0.8125rem; font-weight: 600; color: var(--on-dark);
+  border: 1px solid rgba(14, 22, 38, 0.2); font-size: 0.8125rem; font-weight: 600; color: var(--ink);
 }
 .section .showcase-title { font-size: clamp(2.25rem, 1.4rem + 3.2vw, 3.75rem); line-height: 0.98; letter-spacing: -0.035em; max-width: 16ch; }
-.showcase-desc { margin-top: 22px; max-width: 36rem; color: var(--on-dark-muted); font-size: 1.0625rem; }
+.showcase-desc { margin-top: 22px; max-width: 36rem; color: var(--text-2); font-size: 1.0625rem; }
 .showcase-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .showcase-stats li {
-  padding: 4px 12px; border-radius: 999px; background: rgba(246, 244, 239, 0.1);
-  color: var(--on-dark); font-size: 0.8125rem; font-weight: 600;
+  padding: 4px 12px; border-radius: 999px; background: #eef1f5;
+  color: var(--ink); font-size: 0.8125rem; font-weight: 600;
 }
 
 /* Steps: native <details> accordion; name="how-steps" keeps one open at a time. */
-.how-steps { margin-top: 36px; max-width: 36rem; border-top: 1px solid rgba(246, 244, 239, 0.16); }
-.how-step { border-bottom: 1px solid rgba(246, 244, 239, 0.16); }
+.how-steps { margin-top: 36px; max-width: 36rem; border-top: 1px solid #e3e6ec; }
+.how-step { border-bottom: 1px solid #e3e6ec; }
 .how-step summary {
   list-style: none; cursor: pointer; display: grid; grid-template-columns: 84px 1fr auto; align-items: center; gap: 16px;
   padding: 18px 0; font-size: 1.125rem; font-weight: 650;
 }
 .how-step summary::-webkit-details-marker { display: none; }
 .how-step summary:hover .step-title { text-decoration: underline; text-underline-offset: 4px; }
-.step-when { font-family: var(--mono); font-size: 0.8125rem; font-weight: 700; color: var(--cyan); }
-.step-chev { width: 18px; height: 18px; color: var(--on-dark-muted); transition: transform 200ms var(--ease); }
+.step-when { font-family: var(--mono); font-size: 0.8125rem; font-weight: 700; color: var(--navy); }
+.step-chev { width: 18px; height: 18px; color: var(--muted); transition: transform 200ms var(--ease); }
 .how-step[open] .step-chev { transform: rotate(180deg); }
-.how-step p { padding: 0 0 20px 100px; color: var(--on-dark-muted); }
+.how-step p { padding: 0 0 20px 100px; color: var(--text-2); }
 @media (max-width: 520px) {
   .how-step summary { grid-template-columns: 1fr auto; row-gap: 2px; }
   .step-when { grid-column: 1 / -1; }
@@ -659,16 +643,16 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Tabbed card */
 .showcase-card {
-  position: relative; overflow: hidden; border-radius: 24px; border: 1px solid rgba(246, 244, 239, 0.14);
+  position: relative; overflow: hidden; border-radius: 24px; border: 1px solid #dfe7f1;
   background:
     radial-gradient(70% 60% at 80% 0%, rgba(0, 204, 255, 0.22), transparent 70%),
     radial-gradient(60% 50% at 0% 100%, rgba(3, 133, 122, 0.25), transparent 70%),
-    rgba(0, 22, 64, 0.55);
-  box-shadow: 0 30px 60px -30px rgba(0, 12, 40, 0.6);
+    #eef4fb;
+  box-shadow: 0 30px 60px -36px rgba(0, 40, 100, 0.35);
 }
 .showcase-panels { display: grid; }
 .showcase-panel { padding: 28px 24px 96px; display: grid; justify-items: center; align-items: center; }
-.showcase-panel:focus-visible { outline: 3px solid var(--cyan); outline-offset: -3px; }
+.showcase-panel:focus-visible { outline: 3px solid var(--navy); outline-offset: -3px; }
 /* With JS, panels share one grid cell and only the active one shows; the card keeps the
    height of the tallest panel so switching tabs never makes the page jump. */
 .js .showcase-panel { grid-area: 1 / 1; visibility: hidden; opacity: 0; transition: opacity 260ms ease, visibility 0s 260ms; }
