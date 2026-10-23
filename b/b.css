@@ -641,7 +641,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .showcase-ctas { margin-top: 30px; }
 /* Section CTAs: the primary matches the top bar's cyan button, with softer "light black"
-   text (#2E2E2E: 7.7:1 on cyan; white would be 1.9:1). */
+   text (#2E2E2E: 7.2:1 on cyan; white would be 1.9:1). */
 .showcase-ctas .btn { font-family: var(--hero-font); font-weight: 600; }
 .showcase-ctas .btn-primary { color: #2e2e2e; }
 .showcase-ctas .btn-ghost { border-color: var(--navy); color: var(--navy); }
