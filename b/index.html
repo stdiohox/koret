@@ -37,8 +37,8 @@
     <meta name="twitter:description" content="AI assistants that reply on WhatsApp, Instagram and your website, qualify the lead and book the appointment." />
     <meta name="twitter:image" content="https://www.koretconsult.com/assets/og-image.png" />
 
-    <!-- Only facts that are on this page. FAQPage is generated from the <details> below by
-         hand; keep the two in step when an answer changes. -->
+    <!-- Only facts that are on this page. FAQPage mirrors the FAQ <details> below; keep the
+         two in step when an answer changes. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -69,6 +69,60 @@
             "url": "https://www.koretconsult.com/",
             "name": "Koret",
             "publisher": { "@id": "https://www.koretconsult.com/#organization" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://www.koretconsult.com/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How much does it cost?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Every project is fixed-fee, and you get the price in writing before any work starts, so there are no surprise bills. Ongoing support is a simple monthly retainer."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "I'm not sure what I need. Can you still help?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. That's what the free check and the 30-minute call are for. Tell us what's eating your time or losing you customers, and we'll tell you what's worth fixing first. You leave with a clear next step, whether or not we work together."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need to be technical?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not at all. You tell us the result you want; we handle the build and explain everything in plain English."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will it work with the tools I already use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Almost always. We connect to what you already have (your email, calendar, WhatsApp, forms, spreadsheets and CRM) instead of making you start over."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you only do AI, or branding too?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Both, as one team: AI automation, consulting, and brand building (positioning, logo and visual identity, website, content). One plan, one point of contact."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens after launch?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We don't disappear. We keep an eye on how everything is performing, fix anything that needs fixing, and suggest what to improve next."
+                }
+              }
+            ]
           }
         ]
       }
@@ -835,36 +889,51 @@
         </div>
       </section>
 
-      <!-- 9. FAQ — native disclosure, user-controlled. -->
-      <section class="section" id="faq" aria-labelledby="faq-title">
+      <!-- 9. FAQ — pattern from faqs-01, rebuilt without React/Radix: centred header, native
+           <details> accordion (one open at a time), and a dashed "still have a question" card.
+           Keep the answers in step with the FAQPage JSON-LD in the head. -->
+      <section class="section faq-sec" id="faq" aria-labelledby="faq-title">
         <div class="wrap narrow">
-          <p class="kicker">FAQ</p>
-          <h2 id="faq-title">Straight answers</h2>
+          <div class="faq-head">
+            <span class="faq-badge"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>FAQ</span>
+            <h2 id="faq-title">Frequently asked questions</h2>
+            <p>Quick answers to the questions we get the most. Can't find yours? Write to <a href="mailto:koretconsult@outlook.com">koretconsult@outlook.com</a>.</p>
+          </div>
           <div class="faq">
-            <details>
-              <summary>How much does it cost?</summary>
+            <details name="faq" open>
+              <summary><span>How much does it cost?</span><svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
               <p>Every project is fixed-fee, and you get the price in writing before any work starts, so there are no surprise bills. Ongoing support is a simple monthly retainer.</p>
             </details>
-            <details>
-              <summary>I'm not sure what I need. Can you still help?</summary>
+            <details name="faq">
+              <summary><span>I'm not sure what I need. Can you still help?</span><svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
               <p>Yes. That's what the free check and the 30-minute call are for. Tell us what's eating your time or losing you customers, and we'll tell you what's worth fixing first. You leave with a clear next step, whether or not we work together.</p>
             </details>
-            <details>
-              <summary>Do I need to be technical?</summary>
+            <details name="faq">
+              <summary><span>Do I need to be technical?</span><svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
               <p>Not at all. You tell us the result you want; we handle the build and explain everything in plain English.</p>
             </details>
-            <details>
-              <summary>Will it work with the tools I already use?</summary>
+            <details name="faq">
+              <summary><span>Will it work with the tools I already use?</span><svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
               <p>Almost always. We connect to what you already have (your email, calendar, WhatsApp, forms, spreadsheets and CRM) instead of making you start over.</p>
             </details>
-            <details>
-              <summary>Do you only do AI, or branding too?</summary>
+            <details name="faq">
+              <summary><span>Do you only do AI, or branding too?</span><svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
               <p>Both, as one team: AI automation, consulting, and brand building (positioning, logo and visual identity, website, content). One plan, one point of contact.</p>
             </details>
-            <details>
-              <summary>What happens after launch?</summary>
+            <details name="faq">
+              <summary><span>What happens after launch?</span><svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
               <p>We don't disappear. We keep an eye on how everything is performing, fix anything that needs fixing, and suggest what to improve next.</p>
             </details>
+          </div>
+          <div class="faq-more">
+            <div class="faq-more-text">
+              <span class="faq-more-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+              <div>
+                <p class="faq-more-title">Still have a question?</p>
+                <p class="faq-more-sub">We reply within one business day.</p>
+              </div>
+            </div>
+            <a href="#check" class="faq-more-btn" data-cta="faq">Ask us anything <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
           </div>
         </div>
       </section>
