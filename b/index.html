@@ -459,12 +459,12 @@
           </div>
 
           <figure class="feature">
-            <!-- IMAGE PLACEHOLDER: replace with the voice-agent video poster, or the video itself
-                 (re-encoded to 2 MB or less, preload="none", with captions). 4:5. -->
-            <div class="ph" style="aspect-ratio: 4 / 5" aria-hidden="true">
-              <span class="ph-tag">Video / image placeholder</span>
-              <span class="ph-size">1080 × 1350 · 4:5</span>
-              <span class="ph-desc">AI voice agent taking a call for a real estate company</span>
+            <!-- The real reel. preload="none": it is ~18 MB, so nothing downloads until someone
+                 presses play. Re-encode to ~2 MB and add a captions <track> before launch. -->
+            <div class="feature-video">
+              <video controls preload="none" playsinline width="576" height="1056"
+                poster="/b/work/voice-agent-poster.webp" src="/work/voice-agent.mp4"
+                aria-label="Video: the AI voice agent answering a call for a real estate company"></video>
             </div>
             <figcaption>
               <p class="feature-tag">Live client build · Real estate</p>
@@ -478,29 +478,20 @@
           <p class="sub-p">Working demos we built to show business owners what their own system would look like. Click around; nothing is real data.</p>
           <ul class="demos" data-reveal>
             <li>
-              <a class="demo" href="https://perez-estate-demo.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <!-- IMAGE PLACEHOLDER: screenshot of the real estate demo homepage (16:10). -->
-                <div class="ph" style="aspect-ratio: 16 / 10" aria-hidden="true">
-                  <span class="ph-tag">Image placeholder</span><span class="ph-size">1280 × 800 · 16:10</span>
-                </div>
+              <a class="demo" href="https://koret-estate-demo.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <img class="demo-shot" src="/b/work/demo-estate-640.webp" srcset="/b/work/demo-estate-640.webp 640w, /b/work/demo-estate-1280.webp 1280w" sizes="(min-width: 820px) 370px, 100vw" width="1280" height="800" alt="" loading="lazy" decoding="async" />
                 <span class="demo-body"><strong>Real estate</strong> AI assistant across web, WhatsApp and Instagram, plus the CRM behind it.<span class="demo-go">Open demo<span class="sr-only"> (opens in a new tab)</span><span aria-hidden="true"> →</span></span></span>
               </a>
             </li>
             <li>
-              <a class="demo" href="https://school-demo-black.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <!-- IMAGE PLACEHOLDER: screenshot of the school demo homepage (16:10). -->
-                <div class="ph" style="aspect-ratio: 16 / 10" aria-hidden="true">
-                  <span class="ph-tag">Image placeholder</span><span class="ph-size">1280 × 800 · 16:10</span>
-                </div>
+              <a class="demo" href="https://koretschool.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <img class="demo-shot" src="/b/work/demo-school-640.webp" srcset="/b/work/demo-school-640.webp 640w, /b/work/demo-school-1280.webp 1280w" sizes="(min-width: 820px) 370px, 100vw" width="1280" height="800" alt="" loading="lazy" decoding="async" />
                 <span class="demo-body"><strong>Schools</strong> Admissions assistant, fees, attendance alerts and a parent portal.<span class="demo-go">Open demo<span class="sr-only"> (opens in a new tab)</span><span aria-hidden="true"> →</span></span></span>
               </a>
             </li>
             <li>
-              <a class="demo" href="https://temmiebakes-demo.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <!-- IMAGE PLACEHOLDER: screenshot of the bakery demo homepage (16:10). -->
-                <div class="ph" style="aspect-ratio: 16 / 10" aria-hidden="true">
-                  <span class="ph-tag">Image placeholder</span><span class="ph-size">1280 × 800 · 16:10</span>
-                </div>
+              <a class="demo" href="https://koretbakes-demo.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <img class="demo-shot" src="/b/work/demo-bakes-640.webp" srcset="/b/work/demo-bakes-640.webp 640w, /b/work/demo-bakes-1280.webp 1280w" sizes="(min-width: 820px) 370px, 100vw" width="1280" height="800" alt="" loading="lazy" decoding="async" />
                 <span class="demo-body"><strong>Food &amp; retail</strong> Online orders with a live-priced builder and an AI order assistant.<span class="demo-go">Open demo<span class="sr-only"> (opens in a new tab)</span><span aria-hidden="true"> →</span></span></span>
               </a>
             </li>

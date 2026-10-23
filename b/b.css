@@ -795,6 +795,9 @@ html:not(.js) .showcase-panel { padding-bottom: 28px; }
   transition: transform 220ms var(--ease), box-shadow 220ms ease;
 }
 .demo .ph { border-radius: 0; border-width: 0 0 1px; border-style: solid; }
+.demo-shot { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
+.feature-video { border-radius: 18px; overflow: hidden; background: var(--night); aspect-ratio: 4 / 5; }
+.feature-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .demo:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .demo-body { display: flex; flex-direction: column; gap: 6px; padding: 22px; color: var(--text-2); flex: 1; }
 .demo-body strong { color: var(--ink); font-size: 1.125rem; }

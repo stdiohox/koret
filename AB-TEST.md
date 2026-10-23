@@ -73,10 +73,6 @@ Each is a `<div class="ph" …>` with its size written on it. Swap it for an
 
 | Where | Size | What |
 |---|---|---|
-| How it works, right column | 1080 × 1350 (4:5) | Voice-agent video poster, or the video itself (re-encode to ≤ 2 MB, `preload="none"`, add captions) |
-| Work → demo 1 | 1280 × 800 (16:10) | Screenshot of the real estate demo |
-| Work → demo 2 | 1280 × 800 (16:10) | Screenshot of the school demo |
-| Work → demo 3 | 1280 × 800 (16:10) | Screenshot of the bakery demo |
 
 ## Claims on B that the team must confirm
 
