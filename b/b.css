@@ -377,6 +377,8 @@ a:hover { text-decoration-thickness: 2px; }
 .pa-1 { background: linear-gradient(135deg, #00419b, #00a3d9); }
 .pa-2 { background: linear-gradient(135deg, #03857a, #2fbf9f); }
 .pa-3 { background: linear-gradient(135deg, #d26300, #ff9d3a); }
+.pa-4 { background: linear-gradient(135deg, #5a3fb0, #8f78e6); }
+.pa-5 { background: linear-gradient(135deg, #0e1626, #3b4a66); }
 .proof p { font-size: max(13px, calc(13 * var(--u))); color: var(--white); padding: 4px 12px; border-radius: 999px; background: rgba(6, 14, 30, 0.72); text-shadow: 0 1px 10px rgba(6, 14, 30, 0.7); }
 
 .motion-toggle {
