@@ -640,10 +640,8 @@ a:hover { text-decoration-thickness: 2px; }
   .how-step[open]::details-content { height: auto; }
 }
 .showcase-ctas { margin-top: 30px; }
-/* Section CTAs: white text needs a blue ground (white on cyan is 1.9:1; on navy 9.4:1). */
+/* Section CTAs: the primary matches the top bar's cyan button (ink text, 9.5:1). */
 .showcase-ctas .btn { font-family: var(--hero-font); font-weight: 600; }
-.showcase-ctas .btn-primary { background: var(--navy); color: var(--white); box-shadow: 0 8px 22px -10px rgba(0, 65, 155, 0.6); }
-.showcase-ctas .btn-primary:hover { background: #0052c2; }
 .showcase-ctas .btn-ghost { border-color: var(--navy); color: var(--navy); }
 .showcase-ctas .btn-ghost:hover { background: var(--navy); color: var(--white); }
 
