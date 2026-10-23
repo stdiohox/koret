@@ -285,40 +285,117 @@
         </div>
       </section>
 
-      <!-- 3. HOW IT WORKS ON ONE ENQUIRY + the process. -->
-      <section class="section dark" id="how" aria-labelledby="how-title">
-        <div class="wrap">
-          <p class="kicker">How it works</p>
-          <h2 id="how-title">One enquiry, start to finish, without anyone lifting a finger</h2>
-          <div class="how-grid">
-            <ol class="timeline" data-reveal>
-              <li><span class="t">Seconds</span><div><h3>Replies straight away</h3><p>On the channel the customer used: WhatsApp, Instagram, your website or the phone.</p></div></li>
-              <li><span class="t">1 min</span><div><h3>Asks the right questions</h3><p>The ones your team would ask, so you know if it's a real buyer, patient or parent before anyone calls.</p></div></li>
-              <li><span class="t">2 min</span><div><h3>Books it in</h3><p>Viewing, consultation, tour or call, straight into your calendar, with a reminder so they turn up.</p></div></li>
-              <li><span class="t">Next day</span><div><h3>Follows up and reports</h3><p>Chases the ones who went quiet, saves everyone to your customer list, and sends your team a morning summary.</p></div></li>
-            </ol>
-
-          <!-- Illustrative conversation. Every message is real text so it reads without JS
-               and to screen readers; main.ts only staggers their arrival. -->
-          <figure class="phone phone-how" aria-labelledby="chat-cap">
-            <div class="phone-top">
-              <span class="avatar" aria-hidden="true">Y</span>
-              <span>
-                <strong>Your business</strong>
-                <small>AI assistant · online</small>
-              </span>
+      <!-- 3. HOW IT WORKS — the FeatureShowcase pattern (shadcn feature-showcase, rebuilt without
+           React): steps as an accordion on the left, a tabbed card on the right showing the
+           assistant at work on chat, on the phone, and in the morning summary. Every mock is
+           real text (readable without JS and by screen readers) and marked illustrative. -->
+      <section class="section dark showcase" id="how" aria-labelledby="how-title">
+        <div class="wrap showcase-grid">
+          <div class="showcase-copy">
+            <span class="showcase-badge">How it works</span>
+            <h2 id="how-title" class="showcase-title">One enquiry, start to finish, without lifting a finger</h2>
+            <p class="showcase-desc">The assistant answers on the channel the customer used, asks the questions your team would ask, books the appointment and follows up. You see everything it does.</p>
+            <ul class="showcase-stats" aria-label="At a glance">
+              <li>Replies in seconds</li>
+              <li>Works 24/7</li>
+              <li>Books into your calendar</li>
+            </ul>
+            <div class="how-steps">
+            <details class="how-step" name="how-steps" open>
+              <summary><span class="step-when">Seconds<span class="sr-only">: </span></span><span class="step-title">Replies straight away</span><svg class="step-chev" aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></summary>
+              <p>On the channel the customer used: WhatsApp, Instagram, your website or the phone.</p>
+            </details>
+            <details class="how-step" name="how-steps">
+              <summary><span class="step-when">1 min<span class="sr-only">: </span></span><span class="step-title">Asks the right questions</span><svg class="step-chev" aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></summary>
+              <p>The ones your team would ask, so you know if it's a real buyer, patient or parent before anyone calls.</p>
+            </details>
+            <details class="how-step" name="how-steps">
+              <summary><span class="step-when">2 min<span class="sr-only">: </span></span><span class="step-title">Books it in</span><svg class="step-chev" aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></summary>
+              <p>Viewing, consultation, tour or call, straight into your calendar, with a reminder so they turn up.</p>
+            </details>
+            <details class="how-step" name="how-steps">
+              <summary><span class="step-when">Next day<span class="sr-only">: </span></span><span class="step-title">Follows up and reports</span><svg class="step-chev" aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></summary>
+              <p>Chases the ones who went quiet, saves everyone to your customer list, and sends your team a morning summary.</p>
+            </details>
             </div>
-            <ol class="chat" data-chat>
-              <li class="msg in"><span><span class="sr-only">Customer: </span>Hi, is the 3-bed in Lekki still available? Can I see it this weekend?</span><time>21:14</time></li>
-              <li class="msg out"><span><span class="sr-only">Assistant: </span>Hi! Yes, it is. Are you looking to buy or rent, and what budget should I work with?</span><time>21:14</time></li>
-              <li class="msg in"><span><span class="sr-only">Customer: </span>Buy. Around ₦180m.</span><time>21:15</time></li>
-              <li class="msg out"><span><span class="sr-only">Assistant: </span>That fits. I can book you a viewing on Saturday at 11:00 or 14:00. Which works?</span><time>21:15</time></li>
-              <li class="msg in"><span><span class="sr-only">Customer: </span>11 is perfect.</span><time>21:16</time></li>
-              <li class="event"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-check" /></svg> Viewing booked: Sat 11:00, added to your calendar</li>
-              <li class="event soft"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-sun" /></svg> 08:00: lead summary sent to your team</li>
-            </ol>
-            <figcaption id="chat-cap" class="phone-cap">Example of an AI assistant handling a late-night enquiry. Illustrative.</figcaption>
-          </figure>
+            <div class="cta-row showcase-ctas">
+              <a href="#check" class="btn btn-primary" data-cta="how">Get a free audit</a>
+              <a href="#work" class="btn btn-ghost-light">See our work</a>
+            </div>
+          </div>
+
+          <div class="showcase-card" data-tabs>
+            <div class="showcase-panels">
+              <div class="showcase-panel" id="how-panel-chat" role="tabpanel" aria-labelledby="how-tab-chat" tabindex="0">
+                <!-- Illustrative conversation. Every message is real text so it reads without JS
+                     and to screen readers; main.ts only staggers their arrival. -->
+                <figure class="phone" aria-labelledby="chat-cap">
+                  <div class="phone-top">
+                    <span class="avatar" aria-hidden="true">Y</span>
+                    <span>
+                      <strong>Your business</strong>
+                      <small>AI assistant · online</small>
+                    </span>
+                  </div>
+                  <ol class="chat" data-chat>
+                    <li class="msg in"><span><span class="sr-only">Customer: </span>Hi, is the 3-bed in Lekki still available? Can I see it this weekend?</span><time>21:14</time></li>
+                    <li class="msg out"><span><span class="sr-only">Assistant: </span>Hi! Yes, it is. Are you looking to buy or rent, and what budget should I work with?</span><time>21:14</time></li>
+                    <li class="msg in"><span><span class="sr-only">Customer: </span>Buy. Around ₦180m.</span><time>21:15</time></li>
+                    <li class="msg out"><span><span class="sr-only">Assistant: </span>That fits. I can book you a viewing on Saturday at 11:00 or 14:00. Which works?</span><time>21:15</time></li>
+                    <li class="msg in"><span><span class="sr-only">Customer: </span>11 is perfect.</span><time>21:16</time></li>
+                    <li class="event"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-check" /></svg> Viewing booked: Sat 11:00, added to your calendar</li>
+                    <li class="event soft"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-sun" /></svg> 08:00: lead summary sent to your team</li>
+                  </ol>
+                  <figcaption id="chat-cap" class="phone-cap">Example of an AI assistant handling a late-night enquiry. Illustrative.</figcaption>
+                </figure>
+              </div>
+
+              <div class="showcase-panel" id="how-panel-call" role="tabpanel" aria-labelledby="how-tab-call" tabindex="0">
+                <figure class="phone mock-call" aria-labelledby="call-cap">
+                  <div class="phone-top">
+                    <span class="avatar avatar-call" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg></span>
+                    <span>
+                      <strong>Incoming call</strong>
+                      <small>AI voice agent · answered on the 2nd ring</small>
+                    </span>
+                  </div>
+                  <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <ol class="chat">
+                    <li class="msg in"><span><span class="sr-only">Caller: </span>Hi, do you have anything free for a cleaning this week?</span><time>13:05</time></li>
+                    <li class="msg out"><span><span class="sr-only">Voice agent: </span>We do. Thursday at 10:30 or Friday at 15:00. Which suits you?</span><time>13:05</time></li>
+                    <li class="msg in"><span><span class="sr-only">Caller: </span>Thursday, please.</span><time>13:06</time></li>
+                    <li class="event"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-check" /></svg> Booked: Thu 10:30, reminder set</li>
+                  </ol>
+                  <figcaption id="call-cap" class="phone-cap">Example of an AI voice agent picking up while the team is busy. Illustrative.</figcaption>
+                </figure>
+              </div>
+
+              <div class="showcase-panel" id="how-panel-summary" role="tabpanel" aria-labelledby="how-tab-summary" tabindex="0">
+                <figure class="phone mock-summary" aria-labelledby="summary-cap">
+                  <div class="phone-top">
+                    <span class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-sun" /></svg></span>
+                    <span>
+                      <strong>Morning summary</strong>
+                      <small>From your AI assistant · 08:00</small>
+                    </span>
+                  </div>
+                  <p class="summary-head">Overnight: 4 new enquiries</p>
+                  <ul class="summary-list">
+                    <li><span class="summary-what">Cleaning appointment</span><span class="tag tag-ok">Booked Thu 10:30</span></li>
+                    <li><span class="summary-what">Whitening price question</span><span class="tag tag-follow">Answered, follow-up Fri</span></li>
+                    <li><span class="summary-what">Opening hours</span><span class="tag tag-ok">Answered</span></li>
+                    <li><span class="summary-what">Urgent toothache</span><span class="tag tag-you">Passed to you</span></li>
+                  </ul>
+                  <figcaption id="summary-cap" class="phone-cap">Example of the summary your team gets each morning. Illustrative.</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div class="showcase-tabs" role="tablist" aria-label="See the assistant at work">
+              <button type="button" role="tab" id="how-tab-chat" data-label="Chat" aria-controls="how-panel-chat" aria-selected="true">Chat</button>
+              <button type="button" role="tab" id="how-tab-call" data-label="Phone call" aria-controls="how-panel-call" aria-selected="false" tabindex="-1">Phone call</button>
+              <button type="button" role="tab" id="how-tab-summary" data-label="Morning summary" aria-controls="how-panel-summary" aria-selected="false" tabindex="-1"><span class="tab-extra">Morning summary</span><span class="tab-short">Summary</span></button>
+            </div>
           </div>
         </div>
       </section>

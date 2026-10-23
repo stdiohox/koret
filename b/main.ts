@@ -180,15 +180,49 @@ if (prompt && promptInput) {
   });
 }
 
+// ---- How it works: tabs ------------------------------------------------------------------
+// WAI-ARIA tabs with automatic activation: arrow keys move and select, Home/End jump.
+$$('[data-tabs]').forEach((root) => {
+  const tabs = $$<HTMLButtonElement>('[role="tab"]', root);
+  const select = (tab: HTMLButtonElement, focus = false) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls') ?? '')?.classList.toggle('active', on);
+    });
+    if (focus) tab.focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => {
+      select(t);
+      track('ShowcaseTab', { tab: t.dataset.label ?? '' });
+    });
+    t.addEventListener('keydown', (e) => {
+      const n = tabs.length;
+      const next = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+      if (next === undefined) return;
+      e.preventDefault();
+      select(tabs[next], true);
+    });
+  });
+  select(tabs.find((t) => t.getAttribute('aria-selected') === 'true') ?? tabs[0]);
+});
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).
 if (!reduceMotion && 'IntersectionObserver' in window) {
+  // The sample chat plays its messages in once it scrolls into view.
   const chat = $('[data-chat]');
   if (chat) {
     chat.classList.add('stage');
-    const items = $$('li', chat);
-    items.forEach((li, i) => window.setTimeout(() => li.classList.add('on'), 350 + i * 650));
+    const chatIo = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      chatIo.disconnect();
+      $$('li', chat).forEach((li, i) => window.setTimeout(() => li.classList.add('on'), 200 + i * 550));
+    }, { threshold: 0.35 });
+    chatIo.observe(chat);
   }
 
   const io = new IntersectionObserver(
