@@ -938,9 +938,23 @@
         </div>
       </section>
 
-      <!-- 10. CLOSING CTA. -->
-      <section class="closing" aria-labelledby="closing-title">
-        <div class="wrap closing-inner">
+    </main>
+
+    <!-- Closing block: a looping video background holding the last CTA and the liquid-glass
+         footer (pattern from the "liquid glass footer" brief). The video only fills this
+         block, loads when it comes near the screen, and phones/Save-Data get the still. -->
+    <div class="endcap" data-endcap>
+      <div class="endcap-media" aria-hidden="true">
+        <picture>
+          <source type="image/webp" srcset="/b/footer/planet-768.webp 768w, /b/footer/planet-1280.webp 1280w" sizes="100vw" />
+          <img class="endcap-still" src="/b/footer/planet-1280.webp" alt="" width="1280" height="720" loading="lazy" decoding="async" />
+        </picture>
+        <video class="endcap-video" muted loop playsinline preload="none" data-src="/b/footer/planet-loop.mp4" data-endcap-video></video>
+        <span class="endcap-shade"></span>
+      </div>
+
+      <div class="endcap-inner">
+        <section class="closing" aria-labelledby="closing-title">
           <h2 id="closing-title">The next enquiry is already on its way. Make sure someone answers.</h2>
           <div class="cta-row">
             <a href="#check" class="btn btn-primary" data-cta="closing">Get my free Lead Leak Check</a>
@@ -949,28 +963,53 @@
               Chat on WhatsApp
             </a>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
 
-    <footer class="site-footer">
-      <div class="wrap footer-row">
-        <div>
-          <img src="/b/wordmark-light.png" alt="Koret" width="110" height="20" loading="lazy" />
-          <p>AI automation, consulting and brand building. One team.</p>
-        </div>
-        <nav aria-label="Footer">
-          <a href="#how">How it works</a>
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#faq">FAQ</a>
-          <a href="mailto:koretconsult@outlook.com">Email us</a>
-          <a href="https://www.instagram.com/koretconsult" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in a new tab)</span></a>
-          <a href="https://www.linkedin.com/company/koret-consulting/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
-        </nav>
-        <p class="copy">© <span data-year>2026</span> Koret. All rights reserved.</p>
+        <footer class="site-footer liquid-glass" data-footer>
+          <div class="foot-grid">
+            <div class="foot-brand">
+              <img src="/b/wordmark-light.png" alt="Koret" width="110" height="20" loading="lazy" />
+              <p>Koret builds AI assistants, automation and brands for businesses that live on enquiries. One team, fixed price.</p>
+            </div>
+            <nav class="foot-links" aria-label="Footer">
+              <div>
+                <h2>Explore</h2>
+                <ul>
+                  <li><a href="#how">How it works</a></li>
+                  <li><a href="#work">Work</a></li>
+                  <li><a href="#services">Services</a></li>
+                  <li><a href="#pricing">Process &amp; price</a></li>
+                  <li><a href="#faq">FAQ</a></li>
+                </ul>
+              </div>
+              <div>
+                <h2>Get started</h2>
+                <ul>
+                  <li><a href="#check">Free Lead Leak Check</a></li>
+                  <li><a href="#work">Try a live demo</a></li>
+                  <li><a href="mailto:koretconsult@outlook.com">Email us</a></li>
+                </ul>
+              </div>
+              <div>
+                <h2>Follow</h2>
+                <ul>
+                  <li><a href="https://www.instagram.com/koretconsult" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in a new tab)</span></a></li>
+                  <li><a href="https://www.linkedin.com/company/koret-consulting/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="foot-bar">
+            <p class="foot-small">© <span data-year>2026</span> Koret. All rights reserved.</p>
+            <div class="foot-social">
+              <span class="foot-small">Follow us:</span>
+              <a href="https://www.instagram.com/koretconsult" target="_blank" rel="noopener noreferrer" aria-label="Koret on Instagram (opens in a new tab)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+              <a href="https://www.linkedin.com/company/koret-consulting/" target="_blank" rel="noopener noreferrer" aria-label="Koret on LinkedIn (opens in a new tab)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+            </div>
+          </div>
+        </footer>
       </div>
-    </footer>
+    </div>
 
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
       <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5" /></symbol>

@@ -298,6 +298,38 @@ if (lc) {
   show(0);
 }
 
+// ---- Closing block: footer video and footer entrance -------------------------------------
+// The loop (2.6 MB) loads only on wider screens without Save-Data, once the block is near
+// the viewport, and pauses when it leaves. The footer fades up the first time it shows.
+const endcap = $('[data-endcap]');
+const endVideo = $<HTMLVideoElement>('[data-endcap-video]');
+const footer = $('[data-footer]');
+if (endcap && 'IntersectionObserver' in window) {
+  const wantVideo = endVideo && !reduceMotion && !saveData;
+  new IntersectionObserver(([e]) => {
+    if (!wantVideo || !endVideo) return;
+    if (e.isIntersecting) {
+      if (!endVideo.src) {
+        endVideo.addEventListener('playing', () => endVideo.classList.add('ready'), { once: true });
+        endVideo.src = endVideo.dataset.src ?? '';
+      }
+      endVideo.play().catch(() => { /* the still stays */ });
+    } else if (endVideo.src) {
+      endVideo.pause();
+    }
+  }, { rootMargin: '300px 0px' }).observe(endcap);
+  if (footer) {
+    const fio = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      footer.classList.add('in');
+      fio.disconnect();
+    }, { threshold: 0.15 });
+    fio.observe(footer);
+  }
+} else {
+  footer?.classList.add('in');
+}
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).
