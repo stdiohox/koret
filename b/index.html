@@ -573,17 +573,117 @@
         </div>
       </section>
 
-      <!-- 7. PROCESS + PRICE SIGNAL. -->
-      <section class="section tint" aria-labelledby="process-title">
+      <!-- 7. PROCESS & PRICE — pricing layout (pattern from pricing-13, rebuilt without React or
+           Motion): a pill switcher picks the service; the main card shows what it costs and
+           what is included; the side card is the process plus monthly support. Prices are
+           placeholders until the team supplies real figures: never ship invented numbers. -->
+      <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
         <div class="wrap">
-          <p class="kicker">Process &amp; price</p>
-          <h2 id="process-title">You know the price before we start, and you approve it before it goes live</h2>
-          <ol class="steps" data-reveal>
-            <li><span class="step-n" aria-hidden="true">1</span><h3>Talk</h3><p>A free 30-minute call. You tell us what's slowing you down; we tell you honestly whether we can help.</p></li>
-            <li><span class="step-n" aria-hidden="true">2</span><h3>Plan</h3><p>A clear plan and a fixed price, in writing, before any work starts. No surprise bills.</p></li>
-            <li><span class="step-n" aria-hidden="true">3</span><h3>Build</h3><p>We build and set everything up. You see it and approve it before anything goes live.</p></li>
-            <li><span class="step-n" aria-hidden="true">4</span><h3>Grow</h3><p>We watch the results and keep improving what's working, on a simple monthly retainer.</p></li>
-          </ol>
+          <div class="pricing-head">
+            <div>
+              <h2 id="pricing-title">You know the price before we start</h2>
+              <p class="pricing-sub">Every project is fixed-fee and quoted in writing, and you approve it before anything goes live. Something bigger or unusual? <a href="#check">Ask us</a></p>
+            </div>
+            <fieldset class="seg" data-plans>
+              <legend>What do you need?</legend>
+              <div class="seg-track">
+                <label class="seg-opt"><input type="radio" name="plan" value="ai" checked /><span>AI assistant</span></label>
+                <label class="seg-opt"><input type="radio" name="plan" value="consulting" /><span>Consulting</span></label>
+                <label class="seg-opt"><input type="radio" name="plan" value="brand" /><span>Brand &amp; website</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pricing-grid">
+            <div class="plan-card">
+              <div class="plan-panel" data-plan="ai">
+                <div class="plan-main">
+                  <span class="plan-badge">AI assistants &amp; automation</span>
+                  <p class="plan-desc">An assistant that answers, qualifies, books and follows up on WhatsApp, Instagram, your website and the phone.</p>
+                  <div class="plan-price">
+                    <!-- PRICE PLACEHOLDER: replace the text in data-price with the real starting price,
+                         e.g. data-price="$1,500". Leave it as-is and the dashed "price to confirm" chip shows. -->
+                    <span class="plan-from">From</span>
+                    <span class="plan-amount" data-price="" aria-live="polite"><span class="price-ph">Price to confirm</span></span>
+                    <span class="plan-unit">fixed fee, quoted in writing before work starts</span>
+                  </div>
+                  <a href="#check" class="plan-cta" data-cta="pricing-ai">Get a free audit</a>
+                </div>
+                <span class="plan-rule" aria-hidden="true"></span>
+                <ul class="plan-feats" aria-label="Included">
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>WhatsApp, Instagram and website chat</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>AI voice agent for the phone</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Every enquiry in one customer list</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Automatic reminders and follow-ups</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Built around the tools you already use</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>You approve it before it goes live</li>
+                </ul>
+              </div>
+              <div class="plan-panel" data-plan="consulting" hidden>
+                <div class="plan-main">
+                  <span class="plan-badge">Consulting</span>
+                  <p class="plan-desc">A clear, costed plan for what to automate first, before you spend anything on building.</p>
+                  <div class="plan-price">
+                    <!-- PRICE PLACEHOLDER: replace the text in data-price with the real starting price,
+                         e.g. data-price="$1,500". Leave it as-is and the dashed "price to confirm" chip shows. -->
+                    <span class="plan-from">From</span>
+                    <span class="plan-amount" data-price="" aria-live="polite"><span class="price-ph">Price to confirm</span></span>
+                    <span class="plan-unit">fixed fee, quoted in writing before work starts</span>
+                  </div>
+                  <a href="#check" class="plan-cta" data-cta="pricing-consulting">Get a free audit</a>
+                </div>
+                <span class="plan-rule" aria-hidden="true"></span>
+                <ul class="plan-feats" aria-label="Included">
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Review of your tools and processes</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>A 90-day plan: first, second, third</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>What each step costs and what it saves</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>A free 30-minute call to go through it</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Monthly check-ins after</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>No obligation to build with us</li>
+                </ul>
+              </div>
+              <div class="plan-panel" data-plan="brand" hidden>
+                <div class="plan-main">
+                  <span class="plan-badge">Brand &amp; website</span>
+                  <p class="plan-desc">Positioning, identity and a fast website, designed as one brand so customers trust you at first glance.</p>
+                  <div class="plan-price">
+                    <!-- PRICE PLACEHOLDER: replace the text in data-price with the real starting price,
+                         e.g. data-price="$1,500". Leave it as-is and the dashed "price to confirm" chip shows. -->
+                    <span class="plan-from">From</span>
+                    <span class="plan-amount" data-price="" aria-live="polite"><span class="price-ph">Price to confirm</span></span>
+                    <span class="plan-unit">fixed fee, quoted in writing before work starts</span>
+                  </div>
+                  <a href="#check" class="plan-cta" data-cta="pricing-brand">Get a free audit</a>
+                </div>
+                <span class="plan-rule" aria-hidden="true"></span>
+                <ul class="plan-feats" aria-label="Included">
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Positioning, name and voice</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Logo and visual identity</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Fast website built to get enquiries</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Booking and enquiry forms wired in</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Regular content, checked by our team</li>
+                  <li><span class="plan-check"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>You approve every page before launch</li>
+                </ul>
+              </div>
+            </div>
+
+            <aside class="proc-card" aria-labelledby="proc-title">
+              <span class="plan-badge" id="proc-title">How we work</span>
+              <ol class="proc-list">
+                <li><span class="proc-n" aria-hidden="true">1</span><div><h3>Talk</h3><p>A free 30-minute call. You tell us what is slowing you down; we tell you honestly whether we can help.</p></div></li>
+                <li><span class="proc-n" aria-hidden="true">2</span><div><h3>Plan</h3><p>A clear plan and a fixed price, in writing, before any work starts. No surprise bills.</p></div></li>
+                <li><span class="proc-n" aria-hidden="true">3</span><div><h3>Build</h3><p>We build and set everything up. You see it and approve it before anything goes live.</p></div></li>
+                <li><span class="proc-n" aria-hidden="true">4</span><div><h3>Grow</h3><p>We watch the results and keep improving what is working.</p></div></li>
+              </ol>
+              <span class="proc-rule" aria-hidden="true"></span>
+              <div class="proc-support">
+                <span class="proc-support-label">Monthly support</span>
+                <!-- PRICE PLACEHOLDER: the retainer, e.g. "$300". -->
+                <span class="plan-amount plan-amount-sm" data-retainer=""><span class="price-ph">Price to confirm</span></span>
+                <span class="plan-unit">a simple monthly retainer: monitoring, fixes and improvements</span>
+              </div>
+            </aside>
+          </div>
         </div>
       </section>
 

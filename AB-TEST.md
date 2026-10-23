@@ -75,6 +75,10 @@ captions `<track>`. The demo screenshots were taken on 2026-10-23, so re-take th
 
 ## Claims on B that the team must confirm
 
+- **Prices (Process & price section).** Each service's starting price goes in `data-price` on its
+  panel in `b/index.html` (e.g. `data-price="$1,500"`), and the retainer in `data-retainer`. Until
+  then a dashed "Price to confirm" chip shows. Do not launch with the chips showing.
+
 - **The Lead Leak Check is a real offer.** Someone at Koret has to test each prospect's reply
   speed (WhatsApp, Instagram, website) and send back a short write-up.
 - "We reply within one business day" and "We'll message you on WhatsApp": the reply has to come

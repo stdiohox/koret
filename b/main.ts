@@ -242,6 +242,39 @@ $$('[data-carousel]').forEach((root) => {
   sync();
 });
 
+// ---- Process & price: service switcher -------------------------------------------------
+// Prices live in each panel's data-price (and data-retainer); while empty, the dashed
+// "price to confirm" chip shows. A set price animates in character by character.
+function renderPrice(el: HTMLElement, value: string, animate: boolean) {
+  if (!value) return;
+  el.textContent = '';
+  [...value].forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.className = animate && !reduceMotion ? 'ch in' : 'ch';
+    s.style.animationDelay = `${i * 30}ms`;
+    s.textContent = ch;
+    el.append(s);
+  });
+  el.setAttribute('aria-label', value);
+}
+$$<HTMLElement>('[data-price], [data-retainer]').forEach((el) => renderPrice(el, el.dataset.price ?? el.dataset.retainer ?? '', false));
+
+const plans = $('[data-plans]');
+if (plans) {
+  const panels = $$<HTMLElement>('[data-plan]');
+  plans.addEventListener('change', (e) => {
+    const value = (e.target as HTMLInputElement).value;
+    panels.forEach((p) => {
+      const on = p.dataset.plan === value;
+      p.hidden = !on;
+      p.classList.toggle('enter', on);
+      const price = $<HTMLElement>('[data-price]', p);
+      if (on && price) renderPrice(price, price.dataset.price ?? '', true);
+    });
+    track('PricingTab', { plan: value });
+  });
+}
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).
