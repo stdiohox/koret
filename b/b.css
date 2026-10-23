@@ -173,7 +173,7 @@ a:hover { text-decoration-thickness: 2px; }
   position: fixed; z-index: 60; top: calc(20.8 * var(--u)); left: calc(27.8 * var(--u)); right: calc(27.8 * var(--u));
   height: calc(53.5 * var(--u)); min-height: 48px; padding: 0 calc(18 * var(--u)) 0 calc(22 * var(--u));
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  background: var(--white); border-radius: calc(4 * var(--u));
+  background: var(--white); border-radius: max(14px, calc(16 * var(--u)));
   box-shadow: 0 10px 30px -12px rgba(8, 20, 43, 0.35);
   font-family: var(--hero-font); color: var(--bar-ink);
 }
@@ -181,7 +181,7 @@ a:hover { text-decoration-thickness: 2px; }
 .topbar-cta {
   display: inline-flex; align-items: center; justify-content: center; position: relative;
   min-width: calc(115 * var(--u)); height: max(36px, calc(29 * var(--u))); padding: 0 16px;
-  border-radius: calc(3.4 * var(--u)); background: var(--cyan); color: var(--ink);
+  border-radius: 999px; background: var(--cyan); color: var(--ink);
   font-weight: 650; font-size: max(13.5px, calc(13.5 * var(--u))); text-decoration: none; white-space: nowrap;
   box-shadow: 0 calc(8 * var(--u)) calc(18 * var(--u)) calc(-6 * var(--u)) rgba(0, 170, 220, 0.7);
   transition: transform 160ms var(--ease), background-color 160ms ease;
@@ -403,11 +403,11 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Smaller screens */
 @media (max-width: 899px) {
-  .topbar { top: 10px; left: 12px; right: 12px; height: 56px; padding: 0 8px 0 14px; gap: 8px; border-radius: 6px; }
+  .topbar { top: 10px; left: 12px; right: 12px; height: 56px; padding: 0 8px 0 16px; gap: 8px; border-radius: 16px; }
   .topbar-brand { margin-right: auto; }
   .topbar-brand img { width: 96px; min-width: 0; }
   @media (max-width: 360px) { .topbar-brand img { width: 80px; } .topbar-cta { padding: 0 10px; } }
-  .topbar-cta { min-width: 0; height: 40px; padding: 0 12px; font-size: 14px; border-radius: 5px; }
+  .topbar-cta { min-width: 0; height: 40px; padding: 0 16px; font-size: 14px; border-radius: 999px; }
 
   .hero { padding: 104px 28px 72px; }
   /* Phones: still photo + bloom only (no sweep, no video, no live blur) to spare the GPU. */
