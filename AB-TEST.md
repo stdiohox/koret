@@ -11,8 +11,8 @@ every lead is tagged with the page it came from.
 | Form | 5 fields + chips, at the bottom | 3 fields (name, WhatsApp, business); optional step 2 |
 | Navigation | plain links; mobile hamburger | tubelight nav (lamp follows the section in view); fixed bottom icon bar on phones; CTA fixed in the top bar on every screen |
 | WhatsApp | none | click-to-chat buttons (once `VITE_WHATSAPP_NUMBER` is set) |
-| Hero | Mesh-gradient shader, centred headline | Full-screen alpine photo (video loop on desktop) with glowing paths converging, blueprint frame, prompt box that carries into the form |
-| Lighthouse mobile (local) | 36, LCP 6.9 s (live site) | 89, LCP 3.4 s simulated (97 / 2.6 s with the Pixel blocked); accessibility 100 |
+| Hero | Mesh-gradient shader, centred headline | Lagos lagoon at blue hour with cyan light paths meeting at one junction (8 s loop on desktop, still on phones), blueprint frame, prompt box that carries into the form |
+| Lighthouse mobile (local) | 36, LCP 6.9 s (live site) | 91, LCP 2.0 s (98 with the Pixel blocked); accessibility 100 |
 
 ## How the split works
 

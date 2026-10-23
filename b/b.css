@@ -74,8 +74,8 @@
   --header-h: 84px;
 
   /* Hero: Inter, lime sparkles, lilac placeholder. Buttons use the brand cyan with ink text
-     (9.5:1). The amber in .hero-bloom / .hero-sweep matches the current photo's
-     light paths; retune those two gradients when the hero image changes. */
+     (9.5:1). .hero-bloom / .hero-sweep are tinted to the photo's cyan light paths; retune
+     them if the hero media changes. */
   --hero-font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --bar-ink: #2e2e2e;
   --lime: #8fd61b;
@@ -256,38 +256,38 @@ a:hover { text-decoration-thickness: 2px; }
 .hero {
   position: relative; isolation: isolate; overflow: hidden; min-height: 100vh; min-height: 100svh;
   display: grid; place-items: center; color: var(--white); font-family: var(--hero-font);
-  background: #233a5c; /* sky tone under the photo while it loads */
+  background: #0b1c33; /* dusk tone under the photo while it loads */
   padding: calc(120 * var(--u)) calc(110 * var(--u)) calc(96 * var(--u));
 }
 .hero-media, .hero-media > *, .hero-still, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero-media { z-index: -1; }
-.hero-still, .hero-video { object-fit: cover; object-position: 50% 62%; }
+.hero-still, .hero-video { object-fit: cover; object-position: 50% 70%; }
 .hero-video { opacity: 0; transition: opacity 600ms ease; }
 .hero-video.ready { opacity: 1; }
-/* Amber bloom over the valleys, swelling and fading. */
+/* Cyan bloom on the junction where the light paths meet, swelling and fading. */
 .hero-bloom {
-  inset: 45% 0 0 0; height: auto; will-change: transform, opacity;
+  inset: 50% 0 0 0; height: auto; will-change: transform, opacity;
   mix-blend-mode: screen; opacity: 0.35;
-  background: radial-gradient(42% 55% at 54% 85%, rgba(255, 138, 18, 0.85), rgba(255, 110, 0, 0.25) 45%, transparent 72%);
+  background: radial-gradient(30% 60% at 50% 88%, rgba(0, 204, 255, 0.75), rgba(0, 170, 220, 0.22) 45%, transparent 72%);
   animation: bloom 4.6s ease-in-out infinite alternate;
 }
-/* Soft light band sweeping across the valley floor. */
+/* Soft light band sweeping along the lagoon road. */
 .hero-sweep {
   mix-blend-mode: screen; overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 55%, #000 75%);
-  mask-image: linear-gradient(to bottom, transparent 55%, #000 75%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 58%, #000 72%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent 58%, #000 72%, #000 92%, transparent);
 }
 .hero-sweep::before {
   content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 38%;
-  background: linear-gradient(100deg, transparent, rgba(255, 196, 120, 0.42) 45%, rgba(255, 230, 190, 0.5) 50%, rgba(255, 196, 120, 0.42) 55%, transparent);
+  background: linear-gradient(100deg, transparent, rgba(120, 230, 255, 0.32) 45%, rgba(210, 248, 255, 0.42) 50%, rgba(120, 230, 255, 0.32) 55%, transparent);
   will-change: transform;
   transform: translateX(-120%); animation: sweep 6.5s cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
-/* Dark shade behind the copy so white text holds over the bright peaks. */
+/* Dark shade behind the copy so white text holds over the bright horizon. */
 .hero-shade {
   background:
-    radial-gradient(50% 50% at 50% 50%, rgba(6, 14, 30, 0.74), rgba(6, 14, 30, 0.45) 55%, transparent 85%),
-    radial-gradient(40% 22% at 50% 80%, rgba(6, 14, 30, 0.55), transparent 75%),
+    radial-gradient(52% 46% at 50% 42%, rgba(6, 14, 30, 0.7), rgba(6, 14, 30, 0.42) 60%, transparent 88%),
+    radial-gradient(40% 22% at 50% 80%, rgba(6, 14, 30, 0.35), transparent 75%),
     linear-gradient(to bottom, rgba(6, 14, 30, 0.25), transparent 30%);
 }
 @keyframes bloom { from { opacity: 0.18; transform: scale(0.97); } to { opacity: 0.7; transform: scale(1.04); } }
@@ -377,7 +377,7 @@ a:hover { text-decoration-thickness: 2px; }
 .pa-1 { background: linear-gradient(135deg, #00419b, #00a3d9); }
 .pa-2 { background: linear-gradient(135deg, #03857a, #2fbf9f); }
 .pa-3 { background: linear-gradient(135deg, #d26300, #ff9d3a); }
-.proof p { font-size: max(13px, calc(13 * var(--u))); color: var(--white); padding: 4px 12px; border-radius: 999px; background: rgba(6, 14, 30, 0.45); text-shadow: 0 1px 10px rgba(6, 14, 30, 0.7); }
+.proof p { font-size: max(13px, calc(13 * var(--u))); color: var(--white); padding: 4px 12px; border-radius: 999px; background: rgba(6, 14, 30, 0.72); text-shadow: 0 1px 10px rgba(6, 14, 30, 0.7); }
 
 .motion-toggle {
   position: absolute; z-index: 2; right: calc(27.8 * var(--u) + 12px); bottom: 14px;
@@ -414,7 +414,7 @@ a:hover { text-decoration-thickness: 2px; }
   .hero-sweep { display: none; }
   /* The portrait crop puts bright snow behind the copy, so phones get a full-height shade. */
   .hero-shade {
-    background: linear-gradient(to bottom, rgba(6, 14, 30, 0.62), rgba(6, 14, 30, 0.7) 45%, rgba(6, 14, 30, 0.55) 78%, rgba(6, 14, 30, 0.2));
+    background: linear-gradient(to bottom, rgba(6, 14, 30, 0.45), rgba(6, 14, 30, 0.55) 45%, rgba(6, 14, 30, 0.38) 78%, rgba(6, 14, 30, 0.1));
   }
   .hero-badge { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(6, 14, 30, 0.45); }
   .frame { --x1: 12px; --y1: 78px; --y2: 44px; }
@@ -429,7 +429,8 @@ a:hover { text-decoration-thickness: 2px; }
   .hero-sub .br { display: inline; }
   .prompt { width: 100%; min-width: 0; margin-top: 24px; }
   .perks { gap: 8px 18px; margin-top: 18px; }
-  .motion-toggle { right: 20px; bottom: 10px; }
+  /* In the flow under the copy, so the fixed bottom nav can never cover it. */
+  .motion-toggle { position: relative; right: auto; bottom: auto; margin-top: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
