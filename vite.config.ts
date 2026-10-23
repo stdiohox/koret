@@ -13,4 +13,14 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    // Two pages for the A/B test: index.html is variant A (the React site), b/index.html
+    // is variant B (static HTML + one small script). middleware.ts picks which one `/` serves.
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        b: fileURLToPath(new URL('./b/index.html', import.meta.url)),
+      },
+    },
+  },
 })

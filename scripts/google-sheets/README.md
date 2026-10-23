@@ -56,5 +56,12 @@ update `VITE_FORM_ENDPOINT`.
 - **Notification emails:** change or clear `NOTIFY_EMAIL` at the top of `Code.gs`. Hitting
   Reply on a notification replies to the person who filled in the form.
 - **Spam:** a hidden field catches basic bots, and those submissions are silently dropped.
-- **Columns:** Submitted, Name, Email, Company, Services, Details, Message, WhatsApp. The form
-  leaves Details blank for the team's call notes; columns after WhatsApp belong to the team.
+- **Columns:** the script finds each column by its header text (Submitted, Name, Email, Company,
+  Services, Details, Message, WhatsApp, Variant, Lead ID, Lead channels, Enquiries per week), so
+  columns can be moved and the team can add their own anywhere. A header the script needs and
+  can't find is added once, at the far right. It never writes Details (the team's call notes).
+- **A/B test:** `Variant` says which homepage the lead came from (`A` or `B`; see `AB-TEST.md`).
+  Variant B sends three fields first and may send optional details a moment later; those fill
+  in the same row, matched on `Lead ID`.
+- **Email or WhatsApp:** a lead needs a name plus an email *or* a WhatsApp number (variant B
+  doesn't ask for email up front).

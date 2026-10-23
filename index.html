@@ -142,6 +142,8 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '1854799002550893');
       fbq('track', 'PageView');
+      // Homepage A/B test: this page is variant A (see middleware.ts).
+      fbq('trackCustom', 'VariantView', { variant: 'A' });
     </script>
     <!-- End Meta Pixel Code -->
   </head>

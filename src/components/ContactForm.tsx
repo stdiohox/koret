@@ -17,7 +17,10 @@ const CONTACT_EMAIL = 'koretconsult@outlook.com';
 declare global {
   interface Window { fbq?: (...args: unknown[]) => void }
 }
-const trackLead = () => window.fbq?.('track', 'Lead');
+// This page is variant A of the homepage A/B test (variant B is b/index.html). The tag
+// goes on the Lead event and on the sheet row so the two arms can be compared.
+const VARIANT = 'A';
+const trackLead = () => window.fbq?.('track', 'Lead', { variant: VARIANT });
 
 const services = ['AI Automation', 'Consulting', 'Brand Building', 'Not sure yet'];
 
@@ -140,7 +143,7 @@ export default function ContactForm() {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ ...payload, website: honeypot }),
+        body: JSON.stringify({ ...payload, website: honeypot, variant: VARIANT }),
       });
       // Apps Script answers 200 even when the script throws, so trust its own flag.
       const data = await res.json().catch(() => null);

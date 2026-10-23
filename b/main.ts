@@ -1,0 +1,287 @@
+// Variant B: the only script on the page. Everything it touches is already readable in the
+// HTML; this file adds the staged hero chat, reveals, the sticky mobile CTA, the two-step
+// lead form and the A/B tracking events.
+import './b.css';
+
+const VARIANT = 'B';
+// Apps Script web app URL (scripts/google-sheets). Without it the form shows an email
+// fallback rather than pretending it sent.
+const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
+// Koret's WhatsApp number in international digits, e.g. 2348012345678. Until it is set,
+// every WhatsApp button stays hidden; no number is ever guessed.
+const WHATSAPP = ((import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined) ?? '').replace(/\D/g, '');
+const CONTACT_EMAIL = 'koretconsult@outlook.com';
+const loadedAt = Date.now();
+
+declare global {
+  interface Window { fbq?: (...args: unknown[]) => void }
+}
+// Ad blockers often stop the pixel; tracking must never break the page.
+function track(event: string, data: Record<string, string> = {}, custom = true) {
+  try {
+    window.fbq?.(custom ? 'trackCustom' : 'track', event, { variant: VARIANT, ...data });
+  } catch { /* ignore */ }
+}
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel);
+const $$ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => Array.from(root.querySelectorAll<T>(sel));
+
+// ---- Year --------------------------------------------------------------------------------
+const year = $('[data-year]');
+if (year) year.textContent = String(new Date().getFullYear());
+
+// ---- CTA tracking ------------------------------------------------------------------------
+$$('[data-cta]').forEach((a) => a.addEventListener('click', () => track('CTAClick', { location: a.dataset.cta ?? '' })));
+
+// ---- WhatsApp ----------------------------------------------------------------------------
+if (WHATSAPP) {
+  $$<HTMLAnchorElement>('[data-whatsapp]').forEach((a) => {
+    const where = a.dataset.whatsapp ?? 'page';
+    const text = `Hi Koret, I'd like the free Lead Leak Check for my business. (ref B-${where})`;
+    a.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    if (!a.getAttribute('aria-label')) {
+      const note = document.createElement('span');
+      note.className = 'sr-only';
+      note.textContent = ' (opens in a new tab)';
+      a.append(note);
+    }
+    a.hidden = false;
+    a.addEventListener('click', () => {
+      track('WhatsAppClick', { location: where });
+      track('Contact', { location: where }, false);
+    });
+  });
+  $$('[data-whatsapp-inline]').forEach((el) => (el.hidden = false));
+}
+
+// ---- Reveals and the hero chat -----------------------------------------------------------
+// Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
+// simply stays visible (the CSS hides nothing without the `stage` class).
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const chat = $('[data-chat]');
+  if (chat) {
+    chat.classList.add('stage');
+    const items = $$('li', chat);
+    items.forEach((li, i) => window.setTimeout(() => li.classList.add('on'), 350 + i * 650));
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        io.unobserve(e.target);
+      }
+    }),
+    { rootMargin: '0px 0px -10% 0px' },
+  );
+  $$('[data-reveal]').forEach((el) => {
+    el.classList.add('stage');
+    io.observe(el);
+  });
+}
+
+// ---- Sticky mobile CTA -------------------------------------------------------------------
+// Shown once the hero has scrolled away, hidden again while the form itself is on screen.
+const sticky = $('[data-sticky]');
+const hero = $('.hero');
+const offer = $('#check');
+if (sticky && hero && offer && 'IntersectionObserver' in window) {
+  let heroVisible = true;
+  let offerVisible = false;
+  const sync = () => {
+    const show = !heroVisible && !offerVisible;
+    sticky.classList.toggle('show', show);
+    sticky.setAttribute('aria-hidden', String(!show));
+    $$('a', sticky).forEach((a) => (a.tabIndex = show ? 0 : -1));
+  };
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; sync(); }).observe(hero);
+  new IntersectionObserver(([e]) => { offerVisible = e.isIntersecting; sync(); }).observe(offer);
+}
+
+// ---- Lead form ---------------------------------------------------------------------------
+type Payload = Record<string, string | number>;
+
+async function send(payload: Payload): Promise<boolean> {
+  if (!ENDPOINT) return false;
+  try {
+    // text/plain keeps this a "simple" CORS request: Apps Script cannot answer a preflight.
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ ...payload, variant: VARIANT }),
+    });
+    // Apps Script returns 200 with an HTML page when it fails outside the script's own
+    // try/catch, so only an explicit { ok: true } counts as saved.
+    const data = await res.json().catch(() => null);
+    return res.ok && data?.ok === true;
+  } catch {
+    return false;
+  }
+}
+
+function newLeadId(): string {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  }
+}
+
+const form = $<HTMLFormElement>('#lead-form');
+const details = $<HTMLFormElement>('#details-form');
+const final = $('[data-final]');
+
+if (form && details && final) {
+  const leadId = newLeadId();
+  let started = false;
+  let firstName = '';
+
+  form.addEventListener('input', () => {
+    if (!started) {
+      started = true;
+      track('FormStart');
+    }
+  });
+
+  const setError = (input: HTMLInputElement, msg: string) => {
+    const err = $(`#${input.id}-err`);
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    if (err) {
+      err.textContent = msg;
+      err.hidden = !msg;
+    }
+  };
+
+  // Clearing a field's error also drops it from the summary, so the list never names a
+  // field that has already been fixed.
+  form.addEventListener('input', (e) => {
+    const t = e.target as HTMLInputElement;
+    if (t.getAttribute('aria-invalid') !== 'true') return;
+    setError(t, '');
+    const summary = $('[data-error-summary]', form);
+    summary?.querySelector(`a[href="#${t.id}"]`)?.closest('li')?.remove();
+    if (summary && !summary.querySelector('li')) summary.hidden = true;
+  });
+
+  let sending = false;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = $<HTMLInputElement>('#f-name', form)!;
+    const phone = $<HTMLInputElement>('#f-phone', form)!;
+    const company = $<HTMLInputElement>('#f-company', form)!;
+    const honeypot = $<HTMLInputElement>('#f-trap', form)!;
+    const summary = $('[data-error-summary]', form)!;
+    const fail = $('[data-fail]', form)!;
+    const button = $<HTMLButtonElement>('[data-submit]', form)!;
+
+    const digits = phone.value.replace(/\D/g, '');
+    const errors: [HTMLInputElement, string][] = [];
+    if (!name.value.trim()) errors.push([name, 'Please tell us your name.']);
+    if (digits.length < 10 || digits.length > 15) errors.push([phone, 'Enter your WhatsApp number, e.g. 0801 234 5678.']);
+    if (!company.value.trim()) errors.push([company, 'Please add your business name.']);
+
+    [name, phone, company].forEach((i) => setError(i, ''));
+    errors.forEach(([i, m]) => setError(i, m));
+    fail.hidden = true;
+
+    if (sending) return;
+    if (errors.length) {
+      summary.innerHTML = `<p>Please fix ${errors.length === 1 ? 'this' : `these ${errors.length}`}:</p><ul>${errors
+        .map(([i, m]) => `<li><a href="#${i.id}">${m}</a></li>`)
+        .join('')}</ul>`;
+      summary.hidden = false;
+      summary.focus();
+      return;
+    }
+    summary.hidden = true;
+
+    // aria-disabled rather than disabled: disabling the focused button would drop focus.
+    sending = true;
+    button.setAttribute('aria-disabled', 'true');
+    button.textContent = 'Sending…';
+    const ok = await send({
+      kind: 'lead',
+      leadId,
+      name: name.value.trim(),
+      phone: phone.value.trim(),
+      company: company.value.trim(),
+      services: 'Lead Leak Check',
+      email: '',
+      message: '',
+      website: honeypot.value,
+      elapsed: Date.now() - loadedAt,
+    });
+    sending = false;
+    button.removeAttribute('aria-disabled');
+    button.textContent = 'Get my free check';
+
+    if (!ok) {
+      const body = `Name: ${name.value}\nWhatsApp: ${phone.value}\nBusiness: ${company.value}\n\nI'd like the free Lead Leak Check.`;
+      const mail = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Lead Leak Check: ${company.value}`)}&body=${encodeURIComponent(body)}`;
+      fail.innerHTML = `That didn't go through. Please try again, or <a href="${mail}">send it by email</a> instead; your details will be filled in.`;
+      fail.hidden = false;
+      return;
+    }
+
+    track('Lead', {}, false);
+    firstName = name.value.trim().split(/\s+/)[0];
+    const thanks = $('[data-thanks]', details);
+    if (thanks && firstName) thanks.textContent = `Thanks, ${firstName}. You're in. We'll message you on WhatsApp.`;
+    form.hidden = true;
+    details.hidden = false;
+    details.focus();
+  });
+
+  const finish = () => {
+    details.hidden = true;
+    final.hidden = false;
+    $('[data-final-title]', final)?.focus();
+  };
+
+  const email = $<HTMLInputElement>('#f-email', details)!;
+  const emailErr = $('#f-email-err', details)!;
+  email.addEventListener('input', () => {
+    if (email.getAttribute('aria-invalid') !== 'true') return;
+    email.setAttribute('aria-invalid', 'false');
+    emailErr.hidden = true;
+  });
+  let sendingDetails = false;
+
+  $('[data-skip]', details)?.addEventListener('click', finish);
+
+  details.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (sendingDetails) return;
+    const value = email.value.trim();
+    if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+      emailErr.textContent = 'That email looks incomplete. Fix it or leave it blank.';
+      emailErr.hidden = false;
+      email.setAttribute('aria-invalid', 'true');
+      email.focus();
+      return;
+    }
+    const pick = (group: string) =>
+      $$<HTMLInputElement>(`[data-group="${group}"] input:checked`, details).map((i) => i.value).join(', ');
+
+    // Best effort: the lead is already saved, so a failure here doesn't block the thank-you.
+    sendingDetails = true;
+    const submit = $<HTMLButtonElement>('button[type="submit"]', details)!;
+    submit.setAttribute('aria-disabled', 'true');
+    submit.textContent = 'Sending…';
+    await send({
+      kind: 'details',
+      leadId,
+      channels: pick('channels'),
+      volume: $<HTMLSelectElement>('#f-volume', details)!.value,
+      services: pick('services'),
+      email: value,
+      message: $<HTMLTextAreaElement>('#f-message', details)!.value.trim(),
+    });
+    track('LeadDetails');
+    finish();
+  });
+}
