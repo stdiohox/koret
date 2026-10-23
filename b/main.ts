@@ -209,6 +209,39 @@ $$('[data-tabs]').forEach((root) => {
   select(tabs.find((t) => t.getAttribute('aria-selected') === 'true') ?? tabs[0]);
 });
 
+// ---- Testimonial carousel ---------------------------------------------------------------
+// Native scroll-snap does the moving (and swipe); the buttons, arrow keys and counter drive it.
+$$('[data-carousel]').forEach((root) => {
+  const track = $('[data-carousel-track]', root);
+  const prev = $<HTMLButtonElement>('[data-carousel-prev]', root);
+  const next = $<HTMLButtonElement>('[data-carousel-next]', root);
+  const count = $('[data-carousel-count]', root);
+  if (!track || !prev || !next) return;
+  const slides = $$('.tcar-slide', track);
+  const index = () => Math.round(track.scrollLeft / track.clientWidth);
+  const go = (i: number) => {
+    const n = Math.max(0, Math.min(slides.length - 1, i));
+    track.scrollTo({ left: n * track.clientWidth, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+  const sync = () => {
+    const i = index();
+    prev.disabled = i <= 0;
+    next.disabled = i >= slides.length - 1;
+    if (count) count.textContent = `${i + 1} / ${slides.length}`;
+    slides.forEach((s, k) => s.toggleAttribute('inert', k !== i));
+  };
+  prev.addEventListener('click', () => go(index() - 1));
+  next.addEventListener('click', () => go(index() + 1));
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(index() - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(index() + 1); }
+  });
+  let t = 0;
+  track.addEventListener('scroll', () => { window.clearTimeout(t); t = window.setTimeout(sync, 60); }, { passive: true });
+  window.addEventListener('resize', () => go(index()));
+  sync();
+});
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).

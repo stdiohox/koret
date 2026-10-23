@@ -403,23 +403,60 @@
       <!-- 4. PROOF — real quotes, real builds. No unsourced numbers. -->
       <section class="section" id="work" aria-labelledby="work-title">
         <div class="wrap">
-          <p class="kicker">Work</p>
-          <h2 id="work-title">What clients say after the systems go live</h2>
-          <div class="quotes" data-reveal>
-            <figure class="quote">
-              <blockquote><p>"Before Koret, our leads lived in spreadsheets and nobody knew who had been contacted. Now everything is in one place and the follow-ups happen on their own. It has taken so much stress off the team."</p></blockquote>
-              <figcaption><strong>Founder</strong>, finance education business</figcaption>
-            </figure>
-            <figure class="quote">
-              <blockquote><p>"Koret built our new school website and a portal where teachers and parents can monitor each student's progress in one place. Keeping parents in the loop is so much easier now, and everyone has been impressed with it."</p></blockquote>
-              <figcaption><strong>School administrator</strong>, school</figcaption>
-            </figure>
-            <figure class="quote">
-              <blockquote><p>"We were genuinely impressed. Koret understood what we do quickly, and the way they work made the whole project easy on our side. We finally have a website we are proud to send people to."</p></blockquote>
-              <figcaption><strong>Director</strong>, nonprofit organisation</figcaption>
-            </figure>
+          <!-- Testimonial carousel (pattern from the testimonials-carousel component, rebuilt
+               without React/Embla): CSS scroll-snap track, prev/next buttons, arrow keys and
+               swipe. Real quotes only; clients unnamed at the CEO's request, so the logo slot
+               shows the client's sector. -->
+          <div class="tcar-head">
+            <h2 id="work-title">What clients say after the systems go live</h2>
+            <p>Real projects, in their words.</p>
           </div>
-
+          <div class="tcar" role="region" aria-roledescription="carousel" aria-label="Client testimonials" data-carousel>
+            <div class="tcar-frame">
+              <ul class="tcar-track" data-carousel-track tabindex="0" aria-label="Testimonials, use the arrow keys to move">
+              <li class="tcar-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                <figure>
+                  <svg class="tcar-quote" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg>
+                  <blockquote><p>"Before Koret, our leads lived in spreadsheets and nobody knew who had been contacted. Now everything is in one place and the follow-ups happen on their own. It has taken so much stress off the team."</p></blockquote>
+                  <figcaption>
+                    <span class="pa pa-3 tcar-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+                    <strong>Founder</strong>
+                    <span>Finance education business</span>
+                  </figcaption>
+                </figure>
+              </li>
+              <li class="tcar-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                <figure>
+                  <svg class="tcar-quote" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg>
+                  <blockquote><p>"Koret built our new school website and a portal where teachers and parents can monitor each student's progress in one place. Keeping parents in the loop is so much easier now, and everyone has been impressed with it."</p></blockquote>
+                  <figcaption>
+                    <span class="pa pa-2 tcar-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9l9-4 9 4-9 4zM7 11v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg></span>
+                    <strong>School administrator</strong>
+                    <span>School</span>
+                  </figcaption>
+                </figure>
+              </li>
+              <li class="tcar-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                <figure>
+                  <svg class="tcar-quote" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg>
+                  <blockquote><p>"We were genuinely impressed. Koret understood what we do quickly, and the way they work made the whole project easy on our side. We finally have a website we are proud to send people to."</p></blockquote>
+                  <figcaption>
+                    <span class="pa pa-4 tcar-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg></span>
+                    <strong>Director</strong>
+                    <span>Nonprofit organisation</span>
+                  </figcaption>
+                </figure>
+              </li>
+              </ul>
+              <span class="tcar-fade tcar-fade-l" aria-hidden="true"></span>
+              <span class="tcar-fade tcar-fade-r" aria-hidden="true"></span>
+            </div>
+            <div class="tcar-nav">
+              <button type="button" class="tcar-btn" data-carousel-prev aria-label="Previous testimonial"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+              <span class="tcar-count" aria-hidden="true" data-carousel-count>1 / 3</span>
+              <button type="button" class="tcar-btn" data-carousel-next aria-label="Next testimonial"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+            </div>
+          </div>
 
           <figure class="feature">
             <!-- IMAGE PLACEHOLDER: replace with the voice-agent video poster, or the video itself
