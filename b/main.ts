@@ -57,6 +57,105 @@ if (WHATSAPP) {
   $$('[data-whatsapp-inline]').forEach((el) => (el.hidden = false));
 }
 
+// ---- Top bar menu (below 900px) ----------------------------------------------------------
+const menuBtn = $<HTMLButtonElement>('[data-menu]');
+const menu = $('#topbar-nav');
+if (menuBtn && menu) {
+  const setOpen = (open: boolean, returnFocus = false) => {
+    menu.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    if (open) $('a', menu)?.focus();
+    else if (returnFocus) menuBtn.focus();
+  };
+  menuBtn.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+  menu.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) setOpen(false, true);
+  });
+  document.addEventListener('click', (e) => {
+    const t = e.target as Node;
+    if (menu.classList.contains('open') && !menu.contains(t) && !menuBtn.contains(t)) setOpen(false);
+  });
+  // Tabbing out of the open menu closes it, and so does widening past the mobile layout.
+  menu.closest('header')?.addEventListener('focusout', (e) => {
+    const next = e.relatedTarget as Node | null;
+    if (menu.classList.contains('open') && next && !menu.closest('header')!.contains(next)) setOpen(false);
+  });
+  window.matchMedia('(min-width: 900px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+}
+
+// ---- Hero background motion --------------------------------------------------------------
+// The still photo is the default. The loop is only fetched when motion is allowed and the
+// visitor hasn't asked to save data; it fades in once it can play, and pauses off screen.
+const heroEl = $('.hero');
+const video = $<HTMLVideoElement>('[data-hero-video]');
+const toggle = $<HTMLButtonElement>('[data-motion-toggle]');
+// Phones also keep the still: the loop is 422 KB on what is often a metered connection.
+const saveData =
+  (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true ||
+  !window.matchMedia('(min-width: 900px)').matches;
+if (heroEl && video && toggle && !reduceMotion) {
+  let paused = false;
+  let inView = true;
+  const sync = () => {
+    heroEl.classList.toggle('paused', paused);
+    if (saveData) return;
+    if (paused || !inView) video.pause();
+    else video.play().catch(() => { /* autoplay refused: the still stays */ });
+  };
+  video.addEventListener('playing', () => video.classList.add('ready'), { once: true });
+  // Save-Data and phones keep the still photo; the CSS glow can still be paused.
+  if (!saveData) {
+    window.addEventListener('load', () => {
+      video.src = video.dataset.src ?? '';
+      sync();
+    }, { once: true });
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; sync(); }).observe(heroEl);
+  }
+  // WCAG 2.2.2: the looping background can be paused.
+  toggle.hidden = false;
+  toggle.addEventListener('click', () => {
+    paused = !paused;
+    const label = $('[data-motion-label]', toggle);
+    if (label) label.textContent = paused ? 'Play background' : 'Pause background';
+    sync();
+  });
+}
+
+// ---- Hero prompt -> Lead Leak Check form -------------------------------------------------
+// What the visitor types is carried into the form (and sent with the lead) so the first
+// thing they wrote isn't lost.
+let carried = '';
+const prompt = $<HTMLFormElement>('[data-prompt]');
+const promptInput = $<HTMLTextAreaElement>('#hero-prompt');
+if (prompt && promptInput) {
+  promptInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+      e.preventDefault();
+      prompt.requestSubmit();
+    }
+  });
+  prompt.addEventListener('submit', (e) => {
+    e.preventDefault();
+    carried = promptInput.value.trim().slice(0, 400);
+    track('HeroPrompt', { filled: carried ? 'yes' : 'no' });
+    const note = $('[data-carried]');
+    if (note) {
+      note.hidden = !carried;
+      note.innerHTML = '';
+      if (carried) {
+        const label = document.createElement('strong');
+        label.textContent = 'About your business: ';
+        note.append(label, document.createTextNode(carried));
+      }
+    }
+    $('#check')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    $<HTMLInputElement>('#f-name')?.focus({ preventScroll: true });
+  });
+}
+
 // ---- Reveals and the hero chat -----------------------------------------------------------
 // Only staged when motion is allowed and IntersectionObserver exists; otherwise everything
 // simply stays visible (the CSS hides nothing without the `stage` class).
@@ -211,7 +310,7 @@ if (form && details && final) {
       company: company.value.trim(),
       services: 'Lead Leak Check',
       email: '',
-      message: '',
+      message: carried,
       website: honeypot.value,
       elapsed: Date.now() - loadedAt,
     });

@@ -11,7 +11,8 @@ every lead is tagged with the page it came from.
 | Form | 5 fields + chips, at the bottom | 3 fields (name, WhatsApp, business); optional step 2 |
 | Mobile CTA | none after the hero | sticky bar once the hero scrolls away |
 | WhatsApp | none | click-to-chat buttons (once `VITE_WHATSAPP_NUMBER` is set) |
-| Lighthouse mobile (local) | 36, LCP 6.9 s (live site) | 92, LCP 1.4 s (100 with the Pixel blocked) |
+| Hero | Mesh-gradient shader, centred headline | Full-screen alpine photo (video loop on desktop) with glowing paths converging, blueprint frame, prompt box that carries into the form |
+| Lighthouse mobile (local) | 36, LCP 6.9 s (live site) | 89, LCP 3.4 s simulated (97 / 2.6 s with the Pixel blocked); accessibility 100 |
 
 ## How the split works
 

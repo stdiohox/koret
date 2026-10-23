@@ -74,7 +74,11 @@ function doPost(e) {
         const current = String(sheet.getRange(row, cols.services).getValue() || '');
         put('services', current ? current + ', ' + data.services : data.services);
       }
-      if (data.message) put('message', data.message);
+      if (data.message) {
+        // Variant B's hero prompt may already have put a first message on the row.
+        const current = String(sheet.getRange(row, cols.message).getValue() || '');
+        put('message', current ? current + '\n\n' + data.message : data.message);
+      }
       toNotify = Object.assign({ followUp: true }, readRow(sheet, cols, row));
       return json({ ok: true });
     }
