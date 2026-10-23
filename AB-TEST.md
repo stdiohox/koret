@@ -77,10 +77,6 @@ Each is a `<div class="ph" …>` with its size written on it. Swap it for an
 | Work → demo 1 | 1280 × 800 (16:10) | Screenshot of the real estate demo |
 | Work → demo 2 | 1280 × 800 (16:10) | Screenshot of the school demo |
 | Work → demo 3 | 1280 × 800 (16:10) | Screenshot of the bakery demo |
-| Where the money goes → featured | about 1200 × 1040 (fills the left half; 16:10 below 1024px) | Phone lighting up at night with an unanswered WhatsApp enquiry |
-| Where the money goes → card 1 | 800 × 500 (16:10) | Several chat apps with unread badges |
-| Where the money goes → card 2 | 800 × 500 (16:10) | A quiet chat thread left on "seen" |
-| Where the money goes → card 3 | 800 × 500 (16:10) | A missed-call notification on a phone |
 
 ## Claims on B that the team must confirm
 
