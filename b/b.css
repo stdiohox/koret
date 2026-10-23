@@ -73,12 +73,11 @@
   --shadow: 0 1px 2px rgba(14, 22, 38, 0.06), 0 18px 40px -18px rgba(14, 22, 38, 0.22);
   --header-h: 84px;
 
-  /* Hero (spec): Inter, amber accent, lime sparkles, lilac placeholder. Amber buttons carry
-     dark ink (7.9:1); white on #FF8A12 would be 2.3:1. */
+  /* Hero: Inter, lime sparkles, lilac placeholder. Buttons use the brand cyan with ink text
+     (9.5:1). The amber in .hero-bloom / .hero-sweep matches the current photo's
+     light paths; retune those two gradients when the hero image changes. */
   --hero-font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --bar-ink: #2e2e2e;
-  --amber: #ff8a12;
-  --amber-ink: #1a1206;
   --lime: #8fd61b;
   --prompt-ph: #6f66b3;  /* spec's #9389cf is 3.1:1 on white; same hue darkened to 5.4:1 */
 }
@@ -185,12 +184,12 @@ a:hover { text-decoration-thickness: 2px; }
 .topbar-cta {
   display: inline-flex; align-items: center; justify-content: center; position: relative;
   min-width: calc(115 * var(--u)); height: max(36px, calc(29 * var(--u))); padding: 0 16px;
-  border-radius: calc(3.4 * var(--u)); background: var(--amber); color: var(--amber-ink);
+  border-radius: calc(3.4 * var(--u)); background: var(--cyan); color: var(--ink);
   font-weight: 650; font-size: max(13.5px, calc(13.5 * var(--u))); text-decoration: none; white-space: nowrap;
-  box-shadow: 0 calc(8 * var(--u)) calc(18 * var(--u)) calc(-6 * var(--u)) rgba(255, 138, 18, 0.75);
+  box-shadow: 0 calc(8 * var(--u)) calc(18 * var(--u)) calc(-6 * var(--u)) rgba(0, 170, 220, 0.7);
   transition: transform 160ms var(--ease), background-color 160ms ease;
 }
-.topbar-cta:hover { background: #ff9d3a; }
+.topbar-cta:hover { background: var(--cyan-hover); }
 .topbar-cta:active { transform: scale(0.97); }
 .topbar-menu { display: none; }
 
@@ -290,16 +289,16 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .prompt textarea::placeholder { color: var(--prompt-ph); }
 .prompt textarea:focus-visible { outline: none; }
-.prompt:focus-within { box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px var(--amber), 0 24px 60px -20px rgba(6, 14, 30, 0.6); }
+.prompt:focus-within { box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px var(--cyan), 0 24px 60px -20px rgba(6, 14, 30, 0.6); }
 .prompt-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 calc(12 * var(--u)) calc(12 * var(--u)) calc(18 * var(--u)); }
 .prompt-send {
   flex: none;
   width: max(36px, calc(31 * var(--u))); height: max(36px, calc(31 * var(--u))); border: 0; border-radius: calc(5 * var(--u));
-  display: grid; place-items: center; background: var(--amber); color: var(--amber-ink); cursor: pointer;
+  display: grid; place-items: center; background: var(--cyan); color: var(--ink); cursor: pointer;
   transition: transform 160ms var(--ease), background-color 160ms ease;
 }
 .prompt-send svg { width: 60%; height: 60%; }
-.prompt-send:hover { background: #ff9d3a; }
+.prompt-send:hover { background: var(--cyan-hover); }
 .prompt-send:active { transform: scale(0.94); }
 .prompt .prompt-send:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .prompt-hint { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
@@ -567,7 +566,7 @@ a:hover { text-decoration-thickness: 2px; }
 .lead-form { display: grid; gap: 18px; }
 .lead-form:focus, .final:focus { outline: none; }
 .form-title { font-size: 1.5rem; }
-.carried { border-left: 3px solid var(--amber); padding: 8px 12px; background: var(--paper); border-radius: 0 10px 10px 0; color: var(--text-2); font-size: 0.9375rem; }
+.carried { border-left: 3px solid var(--cyan); padding: 8px 12px; background: var(--paper); border-radius: 0 10px 10px 0; color: var(--text-2); font-size: 0.9375rem; }
 .carried strong { color: var(--ink); }
 .form-note { color: var(--muted); font-size: 0.9375rem; margin-top: -8px; }
 .field { display: grid; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
