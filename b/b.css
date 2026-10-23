@@ -830,7 +830,7 @@ html:not(.js) .showcase-panel { padding-bottom: 28px; }
 .bento-eyebrow {
   display: inline-block; margin-bottom: 18px; padding: 3px 10px; border-radius: 999px;
   border: 1px solid #e0e3ea; background: #f3f4f7; color: #4a4f59;
-  font-family: var(--mono); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: var(--hero-font); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
 }
 .bento-head { display: flex; align-items: center; gap: 14px; }
 .bento-icon {
